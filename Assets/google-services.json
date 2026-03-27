@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "554280862625",
+    "firebase_url": "https://monsterlegendslite-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "monsterlegendslite",
+    "storage_bucket": "monsterlegendslite.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554280862625:android:2f9936c2b1d2240de401e0",
+        "android_client_info": {
+          "package_name": "com.NGDtuanh.MonsterLegendsLite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "554280862625-n9ap6rou1r1enrujomn4j1amc78vpn11.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.NGDtuanh.MonsterLegendsLite",
+            "certificate_hash": "9f9904fa33a1e61801668ded9538a35653056bda"
+          }
+        },
+        {
+          "client_id": "554280862625-kujl81gknrkl9fu526lsgcip58nk56hn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjWTh83NHhWItW6_85fNPeZnKQJnRig3A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "554280862625-kujl81gknrkl9fu526lsgcip58nk56hn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "554280862625-c3juoqk8s8lvc5v36hu19536bf3lp7e8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.NGDtuanh.MonsterLegendsLite"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

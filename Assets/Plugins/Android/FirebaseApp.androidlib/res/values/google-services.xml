@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_android_client_id,@string/default_web_client_id">
+  <string name="firebase_database_url" translatable="false">https://monsterlegendslite-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+  <string name="gcm_defaultSenderId" translatable="false">554280862625</string>
+  <string name="google_storage_bucket" translatable="false">monsterlegendslite.firebasestorage.app</string>
+  <string name="project_id" translatable="false">monsterlegendslite</string>
+  <string name="google_api_key" translatable="false">AIzaSyBjWTh83NHhWItW6_85fNPeZnKQJnRig3A</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBjWTh83NHhWItW6_85fNPeZnKQJnRig3A</string>
+  <string name="google_app_id" translatable="false">1:554280862625:android:2f9936c2b1d2240de401e0</string>
+  <string name="default_android_client_id" translatable="false">554280862625-n9ap6rou1r1enrujomn4j1amc78vpn11.apps.googleusercontent.com</string>
+  <string name="default_web_client_id" translatable="false">554280862625-kujl81gknrkl9fu526lsgcip58nk56hn.apps.googleusercontent.com</string>
+</resources>
