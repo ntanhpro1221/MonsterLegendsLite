@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6283521fa2274212b746e5ec8198458c, type: 3}
+  m_Name: Google
+  m_EditorClassIdentifier: Assembly-CSharp::NGDtuanh.Auth.GoogleAuthInput
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: WebClientId
+      Entry: 1
+      Data: 554280862625-kujl81gknrkl9fu526lsgcip58nk56hn.apps.googleusercontent.com
+    - Name: DesktopClientId
+      Entry: 1
+      Data: 554280862625-ni6rrk6rr8iifjorcbc8sdubelthgien.apps.googleusercontent.com
+    - Name: DesktopClientSecret
+      Entry: 1
+      Data: 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

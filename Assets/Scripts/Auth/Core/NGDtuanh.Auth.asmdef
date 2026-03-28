@@ -1,0 +1,16 @@
+{
+    "name": "NGDtuanh.Auth",
+    "rootNamespace": "",
+    "references": [
+        "GUID:89be24e22338a9a43b4983ee01288294"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

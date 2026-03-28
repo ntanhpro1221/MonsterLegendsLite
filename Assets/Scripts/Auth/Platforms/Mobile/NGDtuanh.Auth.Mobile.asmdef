@@ -1,0 +1,20 @@
+{
+    "name": "NGDtuanh.Auth.Mobile",
+    "rootNamespace": "",
+    "references": [
+        "GUID:945d5078725f46747959d0c759191ccb",
+        "GUID:89be24e22338a9a43b4983ee01288294"
+    ],
+    "includePlatforms": [
+        "Android",
+        "iOS"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
