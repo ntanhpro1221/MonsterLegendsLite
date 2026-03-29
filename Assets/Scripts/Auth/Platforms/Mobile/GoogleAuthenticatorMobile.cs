@@ -22,7 +22,7 @@ namespace NGDtuanh.Auth.Android {
                 Debug.Log("Recreate configuration");
             }
 
-            var user = await GoogleSignIn.DefaultInstance.SignIn();
+            var user = await GoogleSignIn.DefaultInstance.SignInAsync();
 
             return new GoogleAuthResult {
                 id_token     = user.IdToken

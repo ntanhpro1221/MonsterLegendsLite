@@ -90,7 +90,7 @@ namespace NGDtuanh.Auth {
                     Debug.Log("Recreate configuration");
                 }
             
-                var ggUser = await Google.GoogleSignIn.DefaultInstance.SignInSilently();
+                var ggUser = await Google.GoogleSignIn.DefaultInstance.SignInSilentlyAsync();
             
                 var credential = GoogleAuthProvider.GetCredential(ggUser.IdToken, null);
                 if (credential == null) {
