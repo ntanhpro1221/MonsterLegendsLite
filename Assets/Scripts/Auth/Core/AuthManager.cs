@@ -78,7 +78,7 @@ namespace NGDtuanh.Auth {
             try {
                 if (Google.GoogleSignIn.Configuration == null) {
                     Google.GoogleSignIn.Configuration = new Google.GoogleSignInConfiguration {
-                        WebClientId    = allAuthInput[AuthProvider.Google].As<GoogleAuthInput>().WebClientId
+                        ClientId    = allAuthInput[AuthProvider.Google].As<GoogleAuthInput>().WebClientId
                       , RequestIdToken = true
                       , RequestEmail   = true
                       , AdditionalScopes = new[] {
@@ -119,17 +119,6 @@ namespace NGDtuanh.Auth {
             Google.GoogleSignIn.DefaultInstance.SignOut();
             
             Debug.Log("Signed out");
-        }
-
-        [Command]
-        public void TestDisconnect() {
-            Debug.Log("Start disconnect");
-            
-            FirebaseAuth.DefaultInstance.SignOut();
-            
-            Google.GoogleSignIn.DefaultInstance.Disconnect();
-            
-            Debug.Log("Disconnected");
         }
 
         private void OnApplicationQuit() {

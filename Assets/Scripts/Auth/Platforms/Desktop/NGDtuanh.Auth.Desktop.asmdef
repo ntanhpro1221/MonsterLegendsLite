@@ -2,7 +2,8 @@
     "name": "NGDtuanh.Auth.Desktop",
     "rootNamespace": "",
     "references": [
-        "GUID:945d5078725f46747959d0c759191ccb"
+        "GUID:945d5078725f46747959d0c759191ccb",
+        "GUID:2a0340569ab0e1245a38e0d6c7b2529b"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

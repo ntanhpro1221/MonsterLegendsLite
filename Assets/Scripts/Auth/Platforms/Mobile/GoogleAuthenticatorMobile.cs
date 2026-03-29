@@ -10,7 +10,7 @@ namespace NGDtuanh.Auth.Android {
         protected override async Task<GoogleAuthResult> AuthenticateAsync(GoogleAuthInput authInput) {
             if (GoogleSignIn.Configuration == null) {
                 GoogleSignIn.Configuration = new GoogleSignInConfiguration {
-                    WebClientId    = authInput.WebClientId
+                    ClientId    = authInput.WebClientId
                   , RequestIdToken = true
                   , RequestEmail   = true
                   , AdditionalScopes = new[] {

@@ -8,14 +8,14 @@
       "hash": "38f31affdc54bf7ed0ffb8b97f3444395912a398"
     },
     "com.google.signin": {
-      "version": "https://github.com/Thaina/google-signin-unity.git#newmigration",
+      "version": "https://github.com/ntanhpro1221/google-signin-unity.git#newmigration",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.google.external-dependency-manager": "1.2.175"
       },
-      "hash": "99f82f9eb9ad367cdbaddc90550a5f359f396b45"
+      "hash": "0bcf2f7970c1a8157641201562444b456e98c702"
     },
     "com.unity.2d.animation": {
       "version": "14.0.3",
