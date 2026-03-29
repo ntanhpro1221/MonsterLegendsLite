@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firebase;
 using Firebase.Auth;
+using Firebase.Database;
+using QFSW.QC;
 using Sirenix.Serialization;
 using UnityEngine;
 
@@ -19,7 +21,7 @@ namespace NGDtuanh.Auth {
 
         public static event Action onRegisterAuthenticator;
 
-        protected override void Awake() {
+        protected override async void Awake() {
             base.Awake();
 
             IsEditor    = Application.isEditor;
@@ -27,35 +29,107 @@ namespace NGDtuanh.Auth {
             Identifier  = Application.identifier;
 
             onRegisterAuthenticator?.Invoke();
+
+            try {
+                var dependencyState = await FirebaseApp.CheckAndFixDependenciesAsync();
+                if (dependencyState != DependencyStatus.Available) {
+                    throw new Exception($"Could not resolve all Firebase dependencies. Status: [{dependencyState}]");
+                }
+
+                _ = FirebaseAuth.DefaultInstance;
+            } catch (Exception e) {
+                Debug.LogException(e);
+            }
         }
 
         public void RegisterAuthenticator(AuthProvider provider, IAuthenticator authenticator, bool isFallback) {
-            Debug.Log(authenticator.GetType().Name);
             if (isFallback && authenticators.ContainsKey(provider)) return;
             authenticators.Add(provider, authenticator);
         }
 
-        public async Task<bool> SignIn(AuthProvider provider) {
-            var dependencyState = await FirebaseApp.CheckAndFixDependenciesAsync();
-            if (dependencyState != DependencyStatus.Available) {
-                throw new Exception($"Could not resolve all Firebase dependencies. Status: [{dependencyState}]");
-            }
-            
-            _ = FirebaseAuth.DefaultInstance;
-
+        public async Task SignIn(AuthProvider provider) {
             var credential = await authenticators[provider].AuthenticateAsync(allAuthInput);
             if (credential == null) {
-                Debug.LogError("Could not authenticate user");
-                return false;
+                throw new Exception("Could not authenticate user");
             }
 
             var user = await FirebaseAuth.DefaultInstance.SignInWithCredentialAsync(credential);
             if (user == null) {
-                Debug.LogError("Could not sign in with credential");
-                return false;
+                throw new Exception("Could not sign in with credential");
             }
+        }
 
-            return true;
+        [Command]
+        public async void TestSignIn() {
+            Debug.Log("Start sign in");
+            try {
+                await SignIn(AuthProvider.Google);
+                await DBTester.Instance.TestRealtimeDatabasePing();
+            } catch (OperationCanceledException) {
+                Debug.LogError("User cancelled sign in");
+            } catch (Exception e) {
+                Debug.LogException(e);
+            }
+        }
+
+        [Command]
+        public async void TestSignInSilently() {
+            Debug.Log("Start sign in silently");
+            try {
+                if (Google.GoogleSignIn.Configuration == null) {
+                    Google.GoogleSignIn.Configuration = new Google.GoogleSignInConfiguration {
+                        WebClientId    = allAuthInput[AuthProvider.Google].As<GoogleAuthInput>().WebClientId
+                      , RequestIdToken = true
+                      , RequestEmail   = true
+                      , AdditionalScopes = new[] {
+                            "https://www.googleapis.com/auth/drive.readonly"
+                          , "https://www.googleapis.com/auth/calendar.events.readonly"
+                        }
+                    };
+            
+                    Debug.Log("Recreate configuration");
+                }
+            
+                var ggUser = await Google.GoogleSignIn.DefaultInstance.SignInSilently();
+            
+                var credential = GoogleAuthProvider.GetCredential(ggUser.IdToken, null);
+                if (credential == null) {
+                    throw new Exception("Could not authenticate user");
+                }
+            
+                var user = await FirebaseAuth.DefaultInstance.SignInWithCredentialAsync(credential);
+                if (user == null) {
+                    throw new Exception("Could not sign in with credential");
+                }
+            
+                await DBTester.Instance.TestRealtimeDatabasePing();
+            } catch (OperationCanceledException) {
+                Debug.LogError("User cancelled sign in");
+            } catch (Exception e) {
+                Debug.LogException(e);
+            }
+        }
+
+        [Command]
+        public void TestSignOut() {
+            Debug.Log("Start sign out");
+            
+            FirebaseAuth.DefaultInstance.SignOut();
+            
+            Google.GoogleSignIn.DefaultInstance.SignOut();
+            
+            Debug.Log("Signed out");
+        }
+
+        [Command]
+        public void TestDisconnect() {
+            Debug.Log("Start disconnect");
+            
+            FirebaseAuth.DefaultInstance.SignOut();
+            
+            Google.GoogleSignIn.DefaultInstance.Disconnect();
+            
+            Debug.Log("Disconnected");
         }
 
         private void OnApplicationQuit() {

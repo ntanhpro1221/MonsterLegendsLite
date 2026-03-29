@@ -2,7 +2,8 @@
     "name": "NGDtuanh.Auth",
     "rootNamespace": "",
     "references": [
-        "GUID:89be24e22338a9a43b4983ee01288294"
+        "GUID:89be24e22338a9a43b4983ee01288294",
+        "GUID:fb24642277b1db2449da7ac148ce939d"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

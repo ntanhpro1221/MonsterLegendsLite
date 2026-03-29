@@ -8,11 +8,19 @@ namespace NGDtuanh.Auth.Android {
         private static void Init() => Init(new GoogleAuthenticatorMobile());
 
         protected override async Task<GoogleAuthResult> AuthenticateAsync(GoogleAuthInput authInput) {
-            GoogleSignIn.Configuration = new GoogleSignInConfiguration {
-                WebClientId    = authInput.WebClientId
-              , RequestIdToken = true
-              , RequestEmail   = true
-            };
+            if (GoogleSignIn.Configuration == null) {
+                GoogleSignIn.Configuration = new GoogleSignInConfiguration {
+                    WebClientId    = authInput.WebClientId
+                  , RequestIdToken = true
+                  , RequestEmail   = true
+                  , AdditionalScopes = new[] {
+                        "https://www.googleapis.com/auth/drive.readonly"
+                      , "https://www.googleapis.com/auth/calendar.events.readonly"
+                    }
+                };
+                
+                Debug.Log("Recreate configuration");
+            }
 
             var user = await GoogleSignIn.DefaultInstance.SignIn();
 
