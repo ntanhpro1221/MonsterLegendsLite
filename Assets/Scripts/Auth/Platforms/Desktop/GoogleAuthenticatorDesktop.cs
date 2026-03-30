@@ -16,8 +16,7 @@ namespace NGDtuanh.Auth.Desktop {
         protected override async Task<GoogleAuthResult> AuthenticateAsync(GoogleAuthInput authInput) {
             if (GoogleSignIn.Configuration == null) {
                 GoogleSignIn.Configuration = new GoogleSignInConfiguration {
-                    ClientId    = authInput.DesktopClientId
-                  , ClientSecret   = authInput.DesktopClientSecret
+                    ClientId    = authInput.AndroidClientId
                   , RequestIdToken = true
                   , RequestEmail   = true
                   , AdditionalScopes = new[] {

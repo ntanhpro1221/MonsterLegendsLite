@@ -24,9 +24,15 @@ MonoBehaviour:
     - Name: WebClientId
       Entry: 1
       Data: 554280862625-kujl81gknrkl9fu526lsgcip58nk56hn.apps.googleusercontent.com
+    - Name: WebClientSecret
+      Entry: 6
+      Data: 
     - Name: DesktopClientId
       Entry: 1
       Data: 554280862625-ni6rrk6rr8iifjorcbc8sdubelthgien.apps.googleusercontent.com
     - Name: DesktopClientSecret
       Entry: 1
       Data: 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
+    - Name: AndroidClientId
+      Entry: 1
+      Data: 554280862625-n9ap6rou1r1enrujomn4j1amc78vpn11.apps.googleusercontent.com
