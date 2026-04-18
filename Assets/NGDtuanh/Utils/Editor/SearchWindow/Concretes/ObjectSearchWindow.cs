@@ -94,7 +94,7 @@ namespace NGDtuanh.Utils.Editor.SearchWindow {
 
             var sceneComponents = new List<Component>();
             if (rootPrefab == null) {
-                foreach (var cpn in FindObjectsByType<Component>(FindObjectsInactive.Include, FindObjectsSortMode.None)) {
+                foreach (var cpn in FindObjectsByType<Component>(FindObjectsInactive.Include)) {
                     if (!filterType.IsAssignableFrom(cpn.GetType())) continue;
                     sceneComponents.Add(cpn);
                 }

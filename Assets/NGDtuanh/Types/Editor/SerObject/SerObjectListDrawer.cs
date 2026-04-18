@@ -10,10 +10,12 @@ namespace NGDtuanh.Types.Editor {
     [DrawerPriority(DrawerPriorityLevel.WrapperPriority)]
     public class SerObjectListDrawer<TList, TItem> : OdinValueDrawer<TList> where TList : IList<TItem> {
         private Type valueType;
+        public SerializedProperty listProp;
         private bool needDrawDragDropHighlight;
 
         protected override void Initialize() {
             valueType = typeof(TItem).GenericTypeArguments[0];
+            listProp  = Property.Tree.UnitySerializedObject.FindProperty(Property.UnityPropertyPath);
         }
 
         public override bool CanDrawTypeFilter(Type type) {
@@ -25,9 +27,9 @@ namespace NGDtuanh.Types.Editor {
 
         protected override void DrawPropertyLayout(GUIContent label) {
             var trueEvtType = Event.current.type;
-            
+
             CallNextDrawer(label);
-            
+
             HandleDragDrop(trueEvtType);
 
             DrawDragDropHighlight(trueEvtType);
@@ -49,23 +51,18 @@ namespace NGDtuanh.Types.Editor {
             if (trueEvtType is EventType.DragPerform) {
                 DragAndDrop.AcceptDrag();
 
-                var newList = ValueEntry.SmartValue?.ToList() ?? new List<TItem>();
+                foreach (var obj in DragAndDrop.objectReferences) {
+                    if (!IsValidObject(obj, out var item)) continue;
 
-                foreach (var objRef in DragAndDrop.objectReferences) {
-                    if (!IsValidObject(objRef, out var item)) continue;
-
-                    newList.Add(item);
+                    int newIndex = listProp.arraySize;
+                    listProp.InsertArrayElementAtIndex(newIndex);
+                    listProp
+                        .GetArrayElementAtIndex(newIndex)
+                        .FindPropertyRelative(nameof(SerObject<Object>.value))
+                        .objectReferenceValue = item;
                 }
-
-                var newValue = typeof(TList).IsArray
-                    ? (TList)(object)newList.ToArray()
-                    : (TList)(object)newList;
                 
-                for (int i = 0; i < ValueEntry.ValueCount; i++) {
-                    ValueEntry.WeakValues[i] = newValue;
-                }
-
-                ValueEntry.ApplyChanges();
+                listProp.serializedObject.ApplyModifiedProperties();
             } else needDrawDragDropHighlight = true;
 
             evt.Use();
@@ -87,15 +84,15 @@ namespace NGDtuanh.Types.Editor {
             return IsValidObject(obj, out _);
         }
 
-        private bool IsValidObject(Object obj, out TItem item) {
+        private bool IsValidObject(Object obj, out Object item) {
             if (valueType.IsAssignableFrom(obj.GetType())) {
-                item = (TItem)Activator.CreateInstance(typeof(TItem), new object[] { obj });
+                item = obj;
                 return true;
             }
 
             if (obj is GameObject go
              && go.TryGetComponent(valueType, out var cpn)) {
-                item = (TItem)Activator.CreateInstance(typeof(TItem), new object[] { cpn });
+                item = cpn;
                 return true;
             }
 

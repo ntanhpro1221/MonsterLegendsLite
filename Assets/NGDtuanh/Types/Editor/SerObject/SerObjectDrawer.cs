@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -14,15 +15,19 @@ namespace NGDtuanh.Types.Editor {
 
         private GameObject rootPrefab;
         private bool allowSceneObjects;
+        private SerializedProperty unityValueProp;
         private InlineEditorImitator inlineEditorImitator;
         private InlineEditorAttribute inlineEditorAttr;
 
         protected override void Initialize() {
-            var prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
+            var prefabStage = Property.Tree.WeakTargets[0] is Component cpn ? PrefabStageUtility.GetPrefabStage(cpn.gameObject) : null;
+            var valueProp   = Property.Children[nameof(SerObject<TValue>.value)];
+
             rootPrefab           = prefabStage != null ? prefabStage.prefabContentsRoot : null;
             allowSceneObjects    = !EditorUtility.IsPersistent(Property.Tree.WeakTargets[0] as Object);
+            unityValueProp       = Property.Tree.UnitySerializedObject.FindProperty(valueProp.UnityPropertyPath);
             inlineEditorImitator = new InlineEditorImitator(typeof(TValue) == typeof(GameObject), wrapper => ((SerObject<TValue>)wrapper).value);
-            inlineEditorAttr     = Property.Children[nameof(SerObject<TValue>.value)].GetAttribute<InlineEditorAttribute>();
+            inlineEditorAttr     = valueProp.GetAttribute<InlineEditorAttribute>();
 
             if (inlineEditorAttr is { ExpandedHasValue: true }) Property.State.Expanded = true;
         }
@@ -33,21 +38,23 @@ namespace NGDtuanh.Types.Editor {
         }
 
         private void DrawStandardField(Rect position, GUIContent label) {
-            HandlePickButton(position, label);
+            HandlePickButton(position);
 
+            var newLabel = EditorGUI.BeginProperty(position, label, unityValueProp);
             EditorGUI.BeginChangeCheck();
 
             var newValue = SirenixEditorFields.UnityObjectField(
                 position
-              , label
+              , label == null ? null : newLabel
               , ValueEntry.SmartValue.value
               , typeof(TValue)
               , allowSceneObjects);
 
-            if (EditorGUI.EndChangeCheck()) ApplyNewValueToAllTargets(newValue as TValue);
+            if (EditorGUI.EndChangeCheck()) ApplyNewValue(newValue as TValue);
+            EditorGUI.EndProperty();
         }
 
-        private void HandlePickButton(Rect position, GUIContent label) {
+        private void HandlePickButton(Rect position) {
             var buttonRect = new Rect(position.xMax - PICK_BUTTON_WIDTH, position.y, PICK_BUTTON_WIDTH, position.height);
 
             var evt = Event.current;
@@ -59,20 +66,17 @@ namespace NGDtuanh.Types.Editor {
                 ObjectSearchWindow.Open(
                     btnRect: buttonRect
                   , title: typeof(TValue).Name
-                  , onSelected: node => ApplyNewValueToAllTargets(node.Data as TValue)
-                  , filterType:typeof(TValue)
+                  , onSelected: node => ApplyNewValue(node.Data as TValue)
+                  , filterType: typeof(TValue)
                   , rootPrefab: rootPrefab
                   , allowSceneObjects
                 );
             }
         }
 
-        private void ApplyNewValueToAllTargets(TValue newValue) {
-            for (int i = 0; i < ValueEntry.ValueCount; i++) {
-                ValueEntry.WeakValues[i] = new SerObject<TValue>(newValue);
-            }
-
-            ValueEntry.ApplyChanges();
+        private void ApplyNewValue(TValue newValue) {
+            unityValueProp.objectReferenceValue = newValue as Object;
+            unityValueProp.serializedObject.ApplyModifiedProperties();
         }
 
         public void Dispose() {

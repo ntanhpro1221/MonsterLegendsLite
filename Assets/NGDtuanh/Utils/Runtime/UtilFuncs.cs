@@ -387,15 +387,17 @@ namespace NGDtuanh.Utils {
         [Conditional("UNITY_EDITOR")]
         public void MarkDirty(Object target) {
             #if UNITY_EDITOR
-            
+
             UnityEditor.EditorUtility.SetDirty(target);
             UnityEditor.PrefabUtility.RecordPrefabInstancePropertyModifications(target);
 
-            var stage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
-            if (stage != null) {
-                UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(stage.scene);
+            if (target is not GameObject go) {
+                if (target is not Component cpn) return;
+                go = cpn.gameObject;
             }
-            
+
+            UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(go.scene);
+
             #endif
         }
 

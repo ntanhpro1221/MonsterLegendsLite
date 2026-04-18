@@ -1,87 +1,106 @@
-﻿#if UNITY_EDITOR
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using NGDtuanh.Utils.Editor.SearchWindow;
 using UnityEngine;
 using UnityEditor;
+using Object = UnityEngine.Object;
 
 namespace NGDtuanh.Utils.Editor {
     public static class ReplaceComponentTool {
-        private static          bool            _IsHandlingCommand;
-        private static          int             _TotalCommandAmount;
-        private static readonly List<Component> _HandlingComponents = new();
+        private static bool isHandlingCommand;
+        private static int totalCommandAmount;
 
+        private static readonly List<Component> handlingComponents = new();
+
+        /// <summary>
+        /// Caution: References to the old component are only replaced within the currently active scene.
+        /// </summary>
         [MenuItem("CONTEXT/Component/Replace Component")]
         public static void ReplaceComponent(MenuCommand command) {
-            if (!_IsHandlingCommand) {
-                _IsHandlingCommand  = true;
-                _TotalCommandAmount = Selection.gameObjects.Length;
+            if (!isHandlingCommand) {
+                isHandlingCommand  = true;
+                totalCommandAmount = Selection.gameObjects.Length;
             }
 
-            _HandlingComponents.Add(command.context as Component);
+            handlingComponents.Add(command.context as Component);
 
-            if (_HandlingComponents.Count < _TotalCommandAmount) return;
+            if (handlingComponents.Count < totalCommandAmount) return;
 
-            var handlingComponents = new List<Component>(_HandlingComponents);
+            var storedHandlingComponents = new List<Component>(handlingComponents);
             ComponentSearchWindow.Open(
-                new Rect(
-                    EditorWindow.focusedWindow?.position.center ?? new Vector2(Screen.width, Screen.height) / 2
-                  , default)
-              , newMonoType => _ChangeComponent(
-                    handlingComponents
-                  , newMonoType)
-              , searchText: _HandlingComponents[0].GetType().Name);
+                new(EditorWindow.focusedWindow?.position.center ?? new Vector2(Screen.width, Screen.height) / 2, default)
+              , newCpnType => ReplaceComponent(storedHandlingComponents, newCpnType)
+              , searchText: handlingComponents[0].GetType().Name);
 
-            _IsHandlingCommand = false;
-            _HandlingComponents.Clear();
+            isHandlingCommand = false;
+            handlingComponents.Clear();
         }
 
-        private static void _ChangeComponent(List<Component> handlingComponents, Type newMonoType) {
+        private static void ReplaceComponent(List<Component> components, Type newCpnType) {
+            if (components[0].GetType() == newCpnType) {
+                Debug.LogWarning($"NGDtuanh {nameof(ReplaceComponentTool)}: You are replacing {newCpnType.Name} with the same type (Action skipped)!");
+                return;
+            }
+
             Undo.IncrementCurrentGroup();
             Undo.SetCurrentGroupName("Replace Component");
 
-            foreach (var oldMono in handlingComponents) {
-                if (oldMono == null) return;
+            var refMap = new Dictionary<Component, Component>(components.Count);
 
-                var curGO = oldMono.gameObject;
+            foreach (var oldCpn in components) {
+                var oldSO = new SerializedObject(oldCpn);
+                var newSO = new SerializedObject(refMap[oldCpn] = Undo.AddComponent(oldCpn.gameObject, newCpnType));
 
-                Undo.RegisterCompleteObjectUndo(curGO, string.Empty);
-                
-                var oldSO = new SerializedObject(oldMono);
-                oldSO.Update();
-                Undo.DestroyObjectImmediate(oldMono);
-                
-                var newMono = Undo.AddComponent(curGO, newMonoType);
-                var newSO = new SerializedObject(newMono);
-                newSO.Update();
-
-                _CopySerializedObject(oldSO, newSO);
-
+                CopySerializedObject(oldSO, newSO);
                 newSO.ApplyModifiedProperties();
+            }
 
-                EditorUtility.SetDirty(curGO);
+            foreach (var cpn in Object.FindObjectsByType<Component>(FindObjectsInactive.Include)) {
+                var so = new SerializedObject(cpn);
+
+                if (!TryReplaceRefs(so, refMap)) continue;
+
+                so.ApplyModifiedProperties();
+            }
+
+            foreach (var (oldCpn, newCpn) in refMap) {
+                Undo.DestroyObjectImmediate(oldCpn);
+                UtilFuncs.Ins.MarkDirty(newCpn.gameObject);
             }
 
             Undo.CollapseUndoOperations(Undo.GetCurrentGroup());
         }
 
-        private static void _CopySerializedObject(SerializedObject source, SerializedObject target) {
+        private static void CopySerializedObject(SerializedObject source, SerializedObject target) {
             var srcProp = source.GetIterator();
 
-            if (srcProp.NextVisible(true)) {
-                do {
-                    if (srcProp.name == "m_Script") continue;
+            if (!srcProp.Next(true)) return;
 
-                    if (target.FindProperty(srcProp.name) != null) {
-                        try {
-                            target.CopyFromSerializedProperty(srcProp);
-                        } catch { }
-                    }
-                } while (srcProp.NextVisible(false));
+            do {
+                if (srcProp.name == "m_Script") continue;
+
+                if (target.FindProperty(srcProp.name) == null) continue;
+
+                try {
+                    target.CopyFromSerializedProperty(srcProp);
+                } catch { }
+            } while (srcProp.Next(false));
+        }
+
+        private static bool TryReplaceRefs(SerializedObject target, Dictionary<Component, Component> refMap) {
+            var prop    = target.GetIterator();
+            var updated = false;
+
+            while (prop.Next(true)) {
+                if (prop.propertyType != SerializedPropertyType.ObjectReference) continue;
+                if (prop.objectReferenceValue is not Component propCpnRef) continue;
+                if (!refMap.TryGetValue(propCpnRef, out var newRef)) continue;
+
+                prop.objectReferenceValue = newRef;
+                updated                   = true;
             }
+
+            return updated;
         }
     }
 }
-
-#endif
