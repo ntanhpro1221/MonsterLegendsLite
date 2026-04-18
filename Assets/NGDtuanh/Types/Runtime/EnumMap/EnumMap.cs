@@ -5,7 +5,7 @@ using System.Linq;
 using NGDtuanh.Utils;
 using UnityEngine;
 
-namespace NGDtuanh.Collections {
+namespace NGDtuanh.Types {
     [Serializable]
     [ForwardAttributesTo(nameof(_Values))]
     public class EnumMap<TKey, TValue> :

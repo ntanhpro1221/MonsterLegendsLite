@@ -2,7 +2,7 @@
 using NGDtuanh.Utils;
 using UnityEngine;
 
-namespace NGDtuanh.Collections {
+namespace NGDtuanh.Types {
     [Serializable]
     [ForwardAttributesTo(nameof(value))]
     internal class EnumMapItem<TValue> : IEquatable<TValue> {

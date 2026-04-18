@@ -1,6 +1,6 @@
 using System;
 
-namespace NGDtuanh.Collections {
+namespace NGDtuanh.Types {
     /// <summary>
     /// Just display single value.<br/>
     /// Use when your enum just have one key, and you don't want to see full <see cref="Collections"/>> display.<br/>

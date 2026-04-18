@@ -7,7 +7,7 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor;
 using UnityEngine;
 
-namespace NGDtuanh.Collections.Editor {
+namespace NGDtuanh.Types.Editor {
     public class EnumMapDrawer<TKey, TValue> : OdinValueDrawer<EnumMap<TKey, TValue>> where TKey : struct, Enum {
         private string searchText;
 

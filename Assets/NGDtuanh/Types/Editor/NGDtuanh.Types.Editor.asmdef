@@ -1,6 +1,6 @@
 {
-    "name": "NGDtuanh.Collections.Editor",
-    "rootNamespace": "NGDtuanh.Collections.Editor",
+    "name": "NGDtuanh.Types.Editor",
+    "rootNamespace": "NGDtuanh.Types.Editor",
     "references": [
         "GUID:be7950620ed931c4aae4bf81e3d71075",
         "GUID:5b4f77b41498a454899add6af1332634",

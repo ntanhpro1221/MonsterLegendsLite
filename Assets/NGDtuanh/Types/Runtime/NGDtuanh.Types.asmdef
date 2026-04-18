@@ -1,6 +1,6 @@
 {
-    "name": "NGDtuanh.Collections",
-    "rootNamespace": "NGDtuanh.Collections",
+    "name": "NGDtuanh.Types",
+    "rootNamespace": "NGDtuanh.Types",
     "references": [
         "GUID:be7950620ed931c4aae4bf81e3d71075"
     ],

@@ -3,7 +3,7 @@ using NGDtuanh.Utils;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace NGDtuanh.Collections {
+namespace NGDtuanh.Types {
     [Serializable]
     [ForwardAttributesTo(nameof(value))]
     public struct SerObject<TValue> :

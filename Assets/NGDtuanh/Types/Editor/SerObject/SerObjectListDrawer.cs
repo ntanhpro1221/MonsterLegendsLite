@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace NGDtuanh.Collections.Editor {
+namespace NGDtuanh.Types.Editor {
     [DrawerPriority(DrawerPriorityLevel.WrapperPriority)]
     public class SerObjectListDrawer<TList, TItem> : OdinValueDrawer<TList> where TList : IList<TItem> {
         private Type valueType;

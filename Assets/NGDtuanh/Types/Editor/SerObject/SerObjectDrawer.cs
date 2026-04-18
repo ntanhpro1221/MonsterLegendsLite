@@ -8,7 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace NGDtuanh.Collections.Editor {
+namespace NGDtuanh.Types.Editor {
     public class SerObjectDrawer<TValue> : OdinValueDrawer<SerObject<TValue>>, IDisposable where TValue : class {
         private const float PICK_BUTTON_WIDTH = 19;
 
