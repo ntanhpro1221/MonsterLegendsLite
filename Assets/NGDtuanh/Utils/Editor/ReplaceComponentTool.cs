@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NGDtuanh.Utils.Editor.SearchWindow;
 using UnityEngine;
 using UnityEditor;
@@ -45,17 +46,25 @@ namespace NGDtuanh.Utils.Editor {
             Undo.IncrementCurrentGroup();
             Undo.SetCurrentGroupName("Replace Component");
 
-            var refMap = new Dictionary<Component, Component>(components.Count);
+            var refMap     = new Dictionary<Component, Component>(components.Count);
+            var prefabCpns = new List<Component>();
 
             foreach (var oldCpn in components) {
                 var oldSO = new SerializedObject(oldCpn);
                 var newSO = new SerializedObject(refMap[oldCpn] = Undo.AddComponent(oldCpn.gameObject, newCpnType));
 
+                // Copy value
                 CopySerializedObject(oldSO, newSO);
                 newSO.ApplyModifiedProperties();
+
+                // Try to get components in current component's prefab
+                if (!UtilFuncs.Ins.TryGetRootPrefab(oldCpn, out var rootPrefab)) continue;
+                prefabCpns.AddRange(rootPrefab.GetComponentsInChildren<Component>(includeInactive: true));
             }
 
-            foreach (var cpn in Object.FindObjectsByType<Component>(FindObjectsInactive.Include)) {
+            // Try the best to replace reference in [all visible prefab asset] + [active scene]
+            // Get components in scene must be call after all new components were created
+            foreach (var cpn in prefabCpns.Concat(Object.FindObjectsByType<Component>(FindObjectsInactive.Include))) {
                 var so = new SerializedObject(cpn);
 
                 if (!TryReplaceRefs(so, refMap)) continue;

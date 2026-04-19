@@ -32,7 +32,7 @@ namespace NGDtuanh.Utils.Editor.SearchWindow {
         }
 
         protected override void RegisterSections() {
-            if (allowSceneObjects) AddSection("Scene", BuildSceneSection);
+            AddSection("Scene", BuildSceneSection);
             AddSection("Assets", BuildAssetsSectionAsync);
         }
 
@@ -44,7 +44,7 @@ namespace NGDtuanh.Utils.Editor.SearchWindow {
                 var allUnityTypes = TypeCache.GetTypesDerivedFrom<Object>();
                 foreach (var t in allUnityTypes) {
                     if (t.IsAbstract || t.IsInterface || t.IsGenericTypeDefinition) continue;
-                    if (TypeMatches(t, filterType)) cachedConcreteTypes.Add(t);
+                    if (TypeMatches(t)) cachedConcreteTypes.Add(t);
                 }
             } else {
                 var derivedTypes = TypeCache.GetTypesDerivedFrom(filterType);
@@ -59,27 +59,27 @@ namespace NGDtuanh.Utils.Editor.SearchWindow {
             return cachedConcreteTypes;
         }
 
-        private static bool TypeMatches(Type candidate, Type filter) {
-            if (filter == null || candidate == null) return filter == null;
-            if (filter.IsAssignableFrom(candidate)) return true;
+        private bool TypeMatches(Type candidate) {
+            if (filterType == null || candidate == null) return filterType == null;
+            if (filterType.IsAssignableFrom(candidate)) return true;
 
-            if (filter.IsGenericTypeDefinition) {
+            if (filterType.IsGenericTypeDefinition) {
                 foreach (var iface in candidate.GetInterfaces()) {
-                    if (iface.IsGenericType && iface.GetGenericTypeDefinition() == filter) return true;
+                    if (iface.IsGenericType && iface.GetGenericTypeDefinition() == filterType) return true;
                 }
                 for (var cur = candidate; cur != null && cur != typeof(object); cur = cur.BaseType) {
-                    if (cur.IsGenericType && cur.GetGenericTypeDefinition() == filter) return true;
+                    if (cur.IsGenericType && cur.GetGenericTypeDefinition() == filterType) return true;
                 }
                 return false;
             }
 
-            if (filter.IsGenericType) {
-                var def = filter.GetGenericTypeDefinition();
+            if (filterType.IsGenericType) {
+                var def = filterType.GetGenericTypeDefinition();
                 foreach (var iface in candidate.GetInterfaces()) {
-                    if (iface.IsGenericType && iface.GetGenericTypeDefinition() == def && iface == filter) return true;
+                    if (iface.IsGenericType && iface.GetGenericTypeDefinition() == def && iface == filterType) return true;
                 }
                 for (var cur = candidate; cur != null && cur != typeof(object); cur = cur.BaseType) {
-                    if (cur.IsGenericType && cur.GetGenericTypeDefinition() == def && cur == filter) return true;
+                    if (cur.IsGenericType && cur.GetGenericTypeDefinition() == def && cur == filterType) return true;
                 }
             }
 
@@ -93,13 +93,13 @@ namespace NGDtuanh.Utils.Editor.SearchWindow {
             root.AddChild(ConstructNoneNode());
 
             var sceneComponents = new List<Component>();
-            if (rootPrefab == null) {
+            if (rootPrefab != null) {
+                sceneComponents.AddRange(rootPrefab.GetComponentsInChildren(filterType, includeInactive: true));
+            } else if (allowSceneObjects) {
                 foreach (var cpn in FindObjectsByType<Component>(FindObjectsInactive.Include)) {
-                    if (!filterType.IsAssignableFrom(cpn.GetType())) continue;
+                    if (!TypeMatches(cpn.GetType())) continue;
                     sceneComponents.Add(cpn);
                 }
-            } else {
-                sceneComponents.AddRange(rootPrefab.GetComponentsInChildren(filterType, true));
             }
 
             BuildSceneTree(root, sceneComponents);
@@ -287,7 +287,7 @@ namespace NGDtuanh.Utils.Editor.SearchWindow {
                 var scriptPath = AssetDatabase.GUIDToAssetPath(guid);
                 var monoScript = AssetDatabase.LoadAssetAtPath<MonoScript>(scriptPath);
                 if (monoScript != null && monoScript.GetClass() != null
-                    && TypeMatches(monoScript.GetClass(), filterType)) {
+                    && TypeMatches(monoScript.GetClass())) {
                     scriptPaths.Add(scriptPath);
                 }
             }
@@ -318,7 +318,7 @@ namespace NGDtuanh.Utils.Editor.SearchWindow {
                 var mainType = AssetDatabase.GetMainAssetTypeAtPath(path);
                 if (mainType == null) continue;
 
-                bool mainTypeMatches = TypeMatches(mainType, filterType);
+                bool mainTypeMatches = TypeMatches(mainType);
 
                 if (mainTypeMatches) {
                     var asset = AssetDatabase.LoadMainAssetAtPath(path);
@@ -331,7 +331,7 @@ namespace NGDtuanh.Utils.Editor.SearchWindow {
                 if (!mainTypeMatches || typeof(Object).IsAssignableFrom(filterType)) {
                     var subs = AssetDatabase.LoadAllAssetRepresentationsAtPath(path);
                     foreach (var sub in subs) {
-                        if (sub != null && TypeMatches(sub.GetType(), filterType))
+                        if (sub != null && TypeMatches(sub.GetType()))
                             results.Add(new AssetMatch { Asset = sub, AssetPath = path });
                     }
                 }

@@ -5,7 +5,6 @@ using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -20,11 +19,11 @@ namespace NGDtuanh.Types.Editor {
         private InlineEditorAttribute inlineEditorAttr;
 
         protected override void Initialize() {
-            var prefabStage = Property.Tree.WeakTargets[0] is Component cpn ? PrefabStageUtility.GetPrefabStage(cpn.gameObject) : null;
-            var valueProp   = Property.Children[nameof(SerObject<TValue>.value)];
+            var targetObj = Property.Tree.WeakTargets[0] as Object;
+            var valueProp = Property.Children[nameof(SerObject<TValue>.value)];
 
-            rootPrefab           = prefabStage != null ? prefabStage.prefabContentsRoot : null;
-            allowSceneObjects    = !EditorUtility.IsPersistent(Property.Tree.WeakTargets[0] as Object);
+            rootPrefab           = UtilFuncs.Ins.GetRootPrefab(targetObj);
+            allowSceneObjects    = !EditorUtility.IsPersistent(targetObj);
             unityValueProp       = Property.Tree.UnitySerializedObject.FindProperty(valueProp.UnityPropertyPath);
             inlineEditorImitator = new InlineEditorImitator(typeof(TValue) == typeof(GameObject), wrapper => ((SerObject<TValue>)wrapper).value);
             inlineEditorAttr     = valueProp.GetAttribute<InlineEditorAttribute>();
