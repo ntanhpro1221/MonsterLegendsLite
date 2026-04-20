@@ -767,19 +767,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd29f8ea73944d1b8208475222f5613d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NGDtuanh.Auth::NGDtuanh.Auth.AuthManager
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 6e38712cca5a21a48a3e3668806cb799, type: 2}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: allAuthInput
-      Entry: 10
-      Data: 0
+  dontDestroyOnLoad: 0
+  allAuthInput: {fileID: 11400000, guid: 6e38712cca5a21a48a3e3668806cb799, type: 2}
 --- !u!4 &394720535
 Transform:
   m_ObjectHideFlags: 0
@@ -1509,15 +1498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0113910a0f4e2a9edbaad2a93d7efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AuthTester
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
+  dontDestroyOnLoad: 0
 --- !u!4 &1413236416
 Transform:
   m_ObjectHideFlags: 0

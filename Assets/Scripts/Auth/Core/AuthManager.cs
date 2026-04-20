@@ -5,12 +5,11 @@ using Firebase;
 using Firebase.Auth;
 using NGDtuanh.MonsterLegends;
 using QFSW.QC;
-using Sirenix.Serialization;
 using UnityEngine;
 
 namespace MonsterLegendsLite.Auth {
     public class AuthManager : Singleton<AuthManager> {
-        [OdinSerialize, NonSerialized]
+        [SerializeField]
         private AllAuthInput allAuthInput;
 
         private readonly Dictionary<AuthProvider, IAuthenticator> authenticators = new();
@@ -57,6 +56,8 @@ namespace MonsterLegendsLite.Auth {
             if (user == null) {
                 throw new Exception("Could not sign in with credential");
             }
+            
+            Debug.Log("Hello: " + user.DisplayName);
         }
 
         [Command]

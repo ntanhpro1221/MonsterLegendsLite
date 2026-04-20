@@ -12,58 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406b2c4f370e4accbb0f4209dbdb7062, type: 3}
   m_Name: AllAuthInput
   m_EditorClassIdentifier: Assembly-CSharp::NGDtuanh.Auth.AllAuthInput
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: 11400000, guid: a73d88ca10e4aca4288ee10c137f63cb, type: 2}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: data
-      Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[NGDtuanh.Auth.AuthProvider,
-        Assembly-CSharp],[NGDtuanh.Auth.AllAuthInput+AuthInputBaseWrapper, Assembly-CSharp]],
-        mscorlib
-    - Name: comparer
-      Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[NGDtuanh.Auth.AuthProvider,
-        Assembly-CSharp]], mscorlib
-    - Name: 
-      Entry: 12
-      Data: 0
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 
-    - Name: $k
-      Entry: 3
-      Data: 0
-    - Name: $v
-      Entry: 7
-      Data: NGDtuanh.Auth.AllAuthInput+AuthInputBaseWrapper, Assembly-CSharp
-    - Name: value
-      Entry: 10
-      Data: 0
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 13
-      Data: 
-    - Name: 
-      Entry: 8
-      Data: 
+  data:
+    _Keys: 00000000
+    _Values:
+    - value: {fileID: 11400000, guid: a73d88ca10e4aca4288ee10c137f63cb, type: 2}
+    _KeyNames:
+    - Google
+    _IsKeyChanged: 0

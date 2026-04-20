@@ -12,27 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6283521fa2274212b746e5ec8198458c, type: 3}
   m_Name: Google
   m_EditorClassIdentifier: Assembly-CSharp::NGDtuanh.Auth.GoogleAuthInput
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: WebClientId
-      Entry: 1
-      Data: 554280862625-kujl81gknrkl9fu526lsgcip58nk56hn.apps.googleusercontent.com
-    - Name: WebClientSecret
-      Entry: 6
-      Data: 
-    - Name: DesktopClientId
-      Entry: 1
-      Data: 554280862625-ni6rrk6rr8iifjorcbc8sdubelthgien.apps.googleusercontent.com
-    - Name: DesktopClientSecret
-      Entry: 1
-      Data: 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
-    - Name: AndroidClientId
-      Entry: 1
-      Data: 554280862625-n9ap6rou1r1enrujomn4j1amc78vpn11.apps.googleusercontent.com
+  <WebClientId>k__BackingField: 554280862625-kujl81gknrkl9fu526lsgcip58nk56hn.apps.googleusercontent.com
+  <WebClientSecret>k__BackingField: 
+  <DesktopClientId>k__BackingField: 554280862625-ni6rrk6rr8iifjorcbc8sdubelthgien.apps.googleusercontent.com
+  <DesktopClientSecret>k__BackingField: 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
+  <AndroidClientId>k__BackingField: 554280862625-n9ap6rou1r1enrujomn4j1amc78vpn11.apps.googleusercontent.com

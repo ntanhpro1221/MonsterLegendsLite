@@ -14,6 +14,7 @@ namespace MonsterLegendsLite.Auth {
         }
 
         public async Task<Credential> AuthenticateAsync(AllAuthInput allAuthInput) {
+            Debug.Log(allAuthInput[Provider] == null);
             var authResult = await AuthenticateAsync(allAuthInput[Provider].As<TAuthInput>());
             var credential = authResult.ToCredential();
             return credential;
