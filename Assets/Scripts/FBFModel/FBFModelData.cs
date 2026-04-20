@@ -9,5 +9,8 @@ namespace MonsterLegendsLite {
         
         [field: SerializeField, Required]
         public SpriteRenderer Sprite { get; private set; }
+        
+        [field: SerializeField, Required]
+        public Transform FlipLayer { get; private set; }
     }
 }

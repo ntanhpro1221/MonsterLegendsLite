@@ -6,5 +6,8 @@ namespace MonsterLegendsLite.Data {
     public class MonsterLocDefData {
         [Required]
         public Home_Monster PrefabHomeScene;
+
+        [Required]
+        public Battle_Monster PrefabBattleScene;
     }
 }

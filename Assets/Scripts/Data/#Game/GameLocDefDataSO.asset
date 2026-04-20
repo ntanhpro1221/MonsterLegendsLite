@@ -18,8 +18,10 @@ MonoBehaviour:
       _Values:
       - value:
           PrefabHomeScene: {fileID: 6402835627022570762, guid: 863cba64ac84b8b498159230947eba29, type: 3}
+          PrefabBattleScene: {fileID: 5617029448647903564, guid: 69122e14bd687af44b0fae53ed82b0fb, type: 3}
       - value:
           PrefabHomeScene: {fileID: 6402835627022570762, guid: 7505010fed7397049b0d24b2e3f44c30, type: 3}
+          PrefabBattleScene: {fileID: 5617029448647903564, guid: bb411ac9b9c815447a6f5def9f2a2112, type: 3}
       _KeyNames:
       - Alice
       - Bob

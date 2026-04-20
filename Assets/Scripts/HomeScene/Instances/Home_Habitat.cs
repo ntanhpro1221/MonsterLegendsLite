@@ -8,15 +8,15 @@ using UnityEngine;
 namespace MonsterLegendsLite {
     public class Home_Habitat : MonoBehaviourExt {
         [NonSerialized, ShowInInspector, ReadOnly]
-        public HabitatInsData data;
+        public HabitatInsData insData;
 
         [SerializeField, Required]
         public Transform monsterRoot;
         
         private readonly List<Home_Monster> monsters = new();
 
-        public void Initialize(HabitatInsData data) {
-            this.data = data;
+        public void Initialize(HabitatInsData insData) {
+            this.insData = insData;
         }
 
         public void AddMonster(Home_Monster monster) {
@@ -25,7 +25,7 @@ namespace MonsterLegendsLite {
             monster.TF.SetParent(monsterRoot);
             monster.TF.localPosition = Vector3.zero;
             
-            monster.StartLocalMove(data.Position, DataManager.Ins.GameDefData.Habitat[data.Id].Size);
+            monster.StartLocalMove(insData.Position, DataManager.Ins.GameDefData.Habitat[insData.Id].Size);
         }
     }
 }

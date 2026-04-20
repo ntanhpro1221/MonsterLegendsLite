@@ -18,7 +18,7 @@ namespace MonsterLegendsLite {
         }
 
         public void SetDirection(HorDirection dir) {
-            data.Sprite.flipX = dir == HorDirection.Left;
+            data.FlipLayer.localScale = new Vector3(dir == HorDirection.Left ? -1 : 1, 1, 1);
         }
     }
 }

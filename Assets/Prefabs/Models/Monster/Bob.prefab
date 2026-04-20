@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6342429793271728505, guid: 067b0d4ea1c3c76419cb3943f0a914a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8023622829914135795, guid: 067b0d4ea1c3c76419cb3943f0a914a6, type: 3}
       propertyPath: m_Name
       value: Bob
