@@ -1,6 +1,6 @@
 using Firebase.Auth;
 
-namespace NGDtuanh.Auth {
+namespace MonsterLegendsLite.Auth {
     public class GoogleAuthResult : AuthResultBase {
         public string id_token, access_token;
         

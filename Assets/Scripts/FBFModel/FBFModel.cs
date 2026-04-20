@@ -1,0 +1,24 @@
+﻿using System;
+using NGDtuanh.MonsterLegends;
+using Sirenix.OdinInspector;
+using UnityEngine;
+
+namespace MonsterLegendsLite {
+    public class FBFModel<TAnim> : FBFModel where TAnim : struct, Enum {
+        public void Play(TAnim animId) => Play(animId.ToString());
+    }
+
+    // TODO: Play anim by hash name.
+    public class FBFModel : MonoBehaviourExt {
+        [SerializeField, Required]
+        private FBFModelData data;
+
+        protected void Play(string animId) {
+            data.Animator.Play(animId);
+        }
+
+        public void SetDirection(HorDirection dir) {
+            data.Sprite.flipX = dir == HorDirection.Left;
+        }
+    }
+}

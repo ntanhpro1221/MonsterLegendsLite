@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39c359f0b8b4c7f9bd429f9db3e5d29, type: 3}
+  m_Name: UserInsDataSO
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Data.UserInsDataSO
+  Data:
+    Name: NGDtuanh
+    Level: 10
+    Exp: 1221
+    Gold: 123
+    Food: 456
+    Monsters:
+    - InsId: Test_Monster_0
+      Id: 0
+      CustomName: 
+      Level: 1
+      Habitat: Test_Habitat_0
+    - InsId: Test_Monster_1
+      Id: 1
+      CustomName: 
+      Level: 1
+      Habitat: Test_Habitat_1
+    Habitats:
+    - InsId: Test_Habitat_0
+      Id: 0
+      Position: {x: -5, y: 0}
+      CurGold: 0
+      LastGoldUpdate:
+        value: 0
+    - InsId: Test_Habitat_1
+      Id: 1
+      Position: {x: 0, y: 0}
+      CurGold: 0
+      LastGoldUpdate:
+        value: 0
+    Farms:
+    - InsId: Test_Farm_0
+      Id: 0
+      Position: {x: 0, y: -5}
+      CurFood: 0
+      LastFoodUpdate:
+        value: 0

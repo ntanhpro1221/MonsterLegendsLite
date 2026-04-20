@@ -2,9 +2,10 @@ using Firebase.Auth;
 using Firebase.Database;
 using System;
 using System.Threading.Tasks;
+using NGDtuanh.MonsterLegends;
 using UnityEngine;
 
-namespace NGDtuanh.Auth {
+namespace MonsterLegendsLite.Auth {
     public class DBTester : Singleton<DBTester> {
         private static FirebaseAuth _FirebaseService
             => FirebaseAuth.DefaultInstance;

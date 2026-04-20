@@ -2,7 +2,7 @@ using System;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace NGDtuanh.Auth {
+namespace MonsterLegendsLite.Auth {
     [CreateAssetMenu(fileName = nameof(AuthProvider.Google), menuName = AssetPath + nameof(AuthProvider.Google))]
     public class GoogleAuthInput : AuthInputBase {
         [OdinSerialize] [field: NonSerialized] public string WebClientId { get; private set; }

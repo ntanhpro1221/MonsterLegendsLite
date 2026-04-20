@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace NGDtuanh.Auth.Desktop {
+namespace MonsterLegendsLite.Auth.Desktop {
     public class GoogleAuthenticatorDesktop : GoogleAuthenticatorBase {
         [RuntimeInitializeOnLoadMethod(OnAuthenticatorInit)]
         private static void Init() => Init(new GoogleAuthenticatorDesktop(), isFallback: true);

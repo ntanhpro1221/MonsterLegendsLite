@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firebase;
 using Firebase.Auth;
-using Firebase.Database;
+using NGDtuanh.MonsterLegends;
 using QFSW.QC;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace NGDtuanh.Auth {
+namespace MonsterLegendsLite.Auth {
     public class AuthManager : Singleton<AuthManager> {
         [OdinSerialize, NonSerialized]
         private AllAuthInput allAuthInput;
@@ -64,7 +64,7 @@ namespace NGDtuanh.Auth {
             Debug.Log("Start sign in");
             try {
                 await SignIn(AuthProvider.Google);
-                await DBTester.Instance.TestRealtimeDatabasePing();
+                await DBTester.Ins.TestRealtimeDatabasePing();
             } catch (OperationCanceledException) {
                 Debug.LogError("User cancelled sign in");
             } catch (Exception e) {
@@ -102,7 +102,7 @@ namespace NGDtuanh.Auth {
                     throw new Exception("Could not sign in with credential");
                 }
             
-                await DBTester.Instance.TestRealtimeDatabasePing();
+                await DBTester.Ins.TestRealtimeDatabasePing();
             } catch (OperationCanceledException) {
                 Debug.LogError("User cancelled sign in");
             } catch (Exception e) {

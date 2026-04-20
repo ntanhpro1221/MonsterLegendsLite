@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 using UnityEngine;
 
-namespace NGDtuanh.Auth {
+namespace MonsterLegendsLite.Auth {
     [CreateAssetMenu(fileName = nameof(AllAuthInput), menuName = AuthInputBase.AssetPath + "All", order = -1)]
     public class AllAuthInput : SerializedScriptableObject {
         private struct AuthInputBaseWrapper {

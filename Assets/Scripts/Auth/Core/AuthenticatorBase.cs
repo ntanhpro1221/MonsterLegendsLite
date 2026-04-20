@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Firebase.Auth;
 using UnityEngine;
 
-namespace NGDtuanh.Auth {
+namespace MonsterLegendsLite.Auth {
     public abstract class AuthenticatorBase<TAuthResult, TAuthInput>
         : IAuthenticator
         where TAuthResult : AuthResultBase
@@ -10,7 +10,7 @@ namespace NGDtuanh.Auth {
         protected const RuntimeInitializeLoadType OnAuthenticatorInit = RuntimeInitializeLoadType.BeforeSceneLoad;
         
         protected static void Init(AuthenticatorBase<TAuthResult, TAuthInput> authenticator, bool isFallback = false) {
-            AuthManager.onRegisterAuthenticator += () => AuthManager.Instance.RegisterAuthenticator(authenticator.Provider, authenticator, isFallback);
+            AuthManager.onRegisterAuthenticator += () => AuthManager.Ins.RegisterAuthenticator(authenticator.Provider, authenticator, isFallback);
         }
 
         public async Task<Credential> AuthenticateAsync(AllAuthInput allAuthInput) {

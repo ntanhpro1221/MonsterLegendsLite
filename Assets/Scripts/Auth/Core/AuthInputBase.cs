@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-namespace NGDtuanh.Auth {
+namespace MonsterLegendsLite.Auth {
     public abstract class AuthInputBase : SerializedScriptableObject {
         public const string AssetPath = "Client Data/";
 

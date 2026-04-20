@@ -2,6 +2,9 @@
 
 namespace NGDtuanh.MonsterLegends {
     public class Singleton<T> : MonoBehaviourExt where T : MonoBehaviour {
+        [SerializeField]
+        private bool dontDestroyOnLoad;
+        
         private static T ins;
 
         public static T Ins {
@@ -18,11 +21,13 @@ namespace NGDtuanh.MonsterLegends {
         }
 
         protected virtual void Awake() {
-            if (ins == null
-             || ins == this) {
-                ins = this as T;
-                DontDestroyOnLoad(gameObject);
-            } else Destroy(gameObject);
+            if (ins != null && ins != this) {
+                Destroy(gameObject);
+                return;
+            }
+            
+            ins = this as T;
+            if (dontDestroyOnLoad) DontDestroyOnLoad(gameObject);
         }
     }
 }
