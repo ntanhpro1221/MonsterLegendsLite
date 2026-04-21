@@ -12,13 +12,13 @@ namespace NGDtuanh.Types.Editor {
         private string searchText;
 
         private InspectorProperty valuesProp;
-
-        private bool displayValueWhenSingleKey, needSyncEnumData;
+        private DisplayValueWhenSingleKeyAttribute displayValueWhenSingleKeyAttr;
+        private bool needSyncEnumData;
 
         protected override void Initialize() {
             valuesProp = Property.Children[nameof(EnumMap<TKey, TValue>._Values)];
 
-            displayValueWhenSingleKey = Property.Attributes.Any(x => x is DisplayValueWhenSingleKeyAttribute);
+            displayValueWhenSingleKeyAttr = Property.GetAttribute<DisplayValueWhenSingleKeyAttribute>();
 
             var entry     = ValueEntry.SmartValue;
             var trueNames = Enum.GetNames(typeof(TKey));
@@ -49,8 +49,9 @@ namespace NGDtuanh.Types.Editor {
         }
 
         private bool TryDrawValueWhenSingleKey(EnumMap<TKey, TValue> entry, GUIContent label) {
-            if (!displayValueWhenSingleKey || entry.Count != 1) return false;
+            if (displayValueWhenSingleKeyAttr == null || entry.Count != 1) return false;
 
+            if (!string.IsNullOrEmpty(displayValueWhenSingleKeyAttr.Label)) label.text = displayValueWhenSingleKeyAttr.Label;
             valuesProp.Children[0].Children[nameof(EnumMapItem<TValue>.value)].Draw(label);
             return true;
         }

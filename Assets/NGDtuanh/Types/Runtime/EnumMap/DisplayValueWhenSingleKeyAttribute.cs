@@ -3,8 +3,11 @@ using System;
 namespace NGDtuanh.Types {
     /// <summary>
     /// Just display single value.<br/>
-    /// Use when your enum just have one key, and you don't want to see full <see cref="Collections"/>> display.<br/>
+    /// Use when your enum just have one key, and you don't want to see full collections display.<br/>
     /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
-    public class DisplayValueWhenSingleKeyAttribute : Attribute { }
+    public class DisplayValueWhenSingleKeyAttribute : Attribute {
+        public string Label { get; private set; }
+        public DisplayValueWhenSingleKeyAttribute(string label = null) { Label = label; }
+    }
 }
