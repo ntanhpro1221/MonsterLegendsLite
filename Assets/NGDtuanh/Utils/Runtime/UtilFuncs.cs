@@ -7,6 +7,7 @@ using DG.Tweening.Core;
 using DG.Tweening.Core.Easing;
 using DG.Tweening.Plugins.Options;
 using UnityEngine;
+using UnityEngine.Events;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -185,18 +186,42 @@ namespace NGDtuanh.Utils {
 
         #region OBJECT
 
+        /// <inheritdoc cref="UnityEditor.EditorGUIUtility.PingObject(Object)"/>
+        [Conditional("UNITY_EDITOR")]
+        public void PingObject(Object obj) {
+            #if UNITY_EDITOR
+            UnityEditor.EditorGUIUtility.PingObject(obj);
+            #endif
+        }
+        
+        public string GetPath(Object obj) {
+            if (obj == null) return null;
 
-        public string GetPath(Transform trans) {
-            if (trans == null) return string.Empty;
-            string result = trans.name;
-            while ((trans = trans.parent) != null)
-                result = $"{trans.name}/{result}";
+            if (obj is Component cpn) return $"{GetPath(cpn.gameObject)}<{cpn.GetType().Name}>";
+            
+            #if UNITY_EDITOR
+            if (UnityEditor.EditorUtility.IsPersistent(obj)) return UnityEditor.AssetDatabase.GetAssetPath(obj);
+            #endif
+
+            if (obj is GameObject go) return $"{GetScenePrefixPath(go)}{GetPathTF(go.transform)}";
+
+            return $"[Unknown]/{obj.name}";
+        }
+
+        private string GetPathTF(Transform tf) {
+            if (tf == null) return string.Empty;
+            var result = tf.name;
+            while ((tf = tf.parent) != null)
+                result = $"{tf.name}/{result}";
             return result;
         }
 
-        public string GetPath(GameObject obj) => GetPath(obj?.transform);
-
-        public string GetPath(Component comp) => GetPath(comp?.transform);
+        private string GetScenePrefixPath(GameObject go) {
+            #if UNITY_EDITOR
+            if (UnityEditor.SceneManagement.PrefabStageUtility.GetPrefabStage(go) != null) return string.Empty;
+            #endif
+            return (go.scene.IsValid() ? go.scene.name : "[Unknown]") + "/";
+        }
 
         #endregion
 
@@ -434,6 +459,350 @@ namespace NGDtuanh.Utils {
             #endif
 
             return cpn;
+        }
+
+        #endregion
+        
+        #region EVENT MODIFY
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.AddPersistentListener(UnityEventBase)"/>
+        [Conditional("UNITY_EDITOR")]
+        public void AddEvent(Object holder, UnityEventBase unityEvent) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(unityEvent);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.AddPersistentListener(UnityEvent, UnityAction)"/>
+        /// <param name="unique">Remove event before add</param>
+        [Conditional("UNITY_EDITOR")]
+        public void AddEvent(Object holder, UnityEvent unityEvent, UnityAction call, bool unique = true) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            if (unique) RemoveEvent(holder, unityEvent, call);
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(unityEvent, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.AddPersistentListener{T0}(UnityEvent{T0}, UnityAction{T0})"/>
+        /// <param name="unique">Remove event before add</param>
+        [Conditional("UNITY_EDITOR")]
+        public void AddEvent<T0>(Object holder, UnityEvent<T0> unityEvent, UnityAction<T0> call, bool unique = true) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            if (unique) RemoveEvent(holder, unityEvent, call);
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(unityEvent, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.AddPersistentListener{T0,T1}(UnityEvent{T0,T1}, UnityAction{T0,T1})"/>
+        /// <param name="unique">Remove event before add</param>
+        [Conditional("UNITY_EDITOR")]
+        public void AddEvent<T0, T1>(Object holder, UnityEvent<T0, T1> unityEvent, UnityAction<T0, T1> call, bool unique = true) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            if (unique) RemoveEvent(holder, unityEvent, call);
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(unityEvent, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.AddPersistentListener{T0,T1,T2}(UnityEvent{T0,T1,T2}, UnityAction{T0,T1,T2})"/>
+        /// <param name="unique">Remove event before add</param>
+        [Conditional("UNITY_EDITOR")]
+        public void AddEvent<T0, T1, T2>(Object holder, UnityEvent<T0, T1, T2> unityEvent, UnityAction<T0, T1, T2> call, bool unique = true) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            if (unique) RemoveEvent(holder, unityEvent, call);
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(unityEvent, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.AddPersistentListener{T0,T1,T2,T3}(UnityEvent{T0,T1,T2,T3}, UnityAction{T0,T1,T2,T3})"/>
+        /// <param name="unique">Remove event before add</param>
+        [Conditional("UNITY_EDITOR")]
+        public void AddEvent<T0, T1, T2, T3>(Object holder, UnityEvent<T0, T1, T2, T3> unityEvent, UnityAction<T0, T1, T2, T3> call, bool unique = true) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            if (unique) RemoveEvent(holder, unityEvent, call);
+            UnityEditor.Events.UnityEventTools.AddPersistentListener(unityEvent, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        // ── Remove ────────────────────────────────────────────────────────────
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RemovePersistentListener(UnityEventBase, int)"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RemoveEvent(Object holder, UnityEventBase unityEvent, int index) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RemovePersistentListener(unityEvent, index);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RemovePersistentListener(UnityEventBase, UnityAction)"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RemoveEvent(Object holder, UnityEventBase unityEvent, UnityAction call) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RemovePersistentListener(unityEvent, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RemovePersistentListener{T0}(UnityEventBase, UnityAction{T0})"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RemoveEvent<T0>(Object holder, UnityEventBase unityEvent, UnityAction<T0> call) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RemovePersistentListener(unityEvent, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RemovePersistentListener{T0,T1}(UnityEventBase, UnityAction{T0,T1})"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RemoveEvent<T0, T1>(Object holder, UnityEventBase unityEvent, UnityAction<T0, T1> call) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RemovePersistentListener(unityEvent, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RemovePersistentListener{T0,T1,T2}(UnityEventBase, UnityAction{T0,T1,T2})"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RemoveEvent<T0, T1, T2>(Object holder, UnityEventBase unityEvent, UnityAction<T0, T1, T2> call) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RemovePersistentListener(unityEvent, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RemovePersistentListener{T0,T1,T2,T3}(UnityEventBase, UnityAction{T0,T1,T2,T3})"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RemoveEvent<T0, T1, T2, T3>(Object holder, UnityEventBase unityEvent, UnityAction<T0, T1, T2, T3> call) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RemovePersistentListener(unityEvent, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        // ── Register ──────────────────────────────────────────────────────────
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RegisterPersistentListener(UnityEvent, int, UnityAction)"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RegisterEvent(Object holder, UnityEvent unityEvent, int index, UnityAction call) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RegisterPersistentListener(unityEvent, index, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RegisterPersistentListener{T0}(UnityEvent{T0}, int, UnityAction{T0})"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RegisterEvent<T0>(Object holder, UnityEvent<T0> unityEvent, int index, UnityAction<T0> call) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RegisterPersistentListener(unityEvent, index, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RegisterPersistentListener{T0,T1}(UnityEvent{T0,T1}, int, UnityAction{T0,T1})"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RegisterEvent<T0, T1>(Object holder, UnityEvent<T0, T1> unityEvent, int index, UnityAction<T0, T1> call) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RegisterPersistentListener(unityEvent, index, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RegisterPersistentListener{T0,T1,T2}(UnityEvent{T0,T1,T2}, int, UnityAction{T0,T1,T2})"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RegisterEvent<T0, T1, T2>(Object holder, UnityEvent<T0, T1, T2> unityEvent, int index, UnityAction<T0, T1, T2> call) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RegisterPersistentListener(unityEvent, index, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RegisterPersistentListener{T0,T1,T2,T3}(UnityEvent{T0,T1,T2,T3}, int, UnityAction{T0,T1,T2,T3})"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RegisterEvent<T0, T1, T2, T3>(Object holder, UnityEvent<T0, T1, T2, T3> unityEvent, int index, UnityAction<T0, T1, T2, T3> call) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RegisterPersistentListener(unityEvent, index, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        // ── Unregister ────────────────────────────────────────────────────────
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.UnregisterPersistentListener(UnityEventBase, int)"/>
+        [Conditional("UNITY_EDITOR")]
+        public void UnregisterEvent(Object holder, UnityEventBase unityEvent, int index) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.UnregisterPersistentListener(unityEvent, index);
+            MarkDirty(holder);
+            #endif
+        }
+
+        // ── Void (param) ───────────────────────────────────────────────
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.AddVoidPersistentListener(UnityEventBase, UnityAction)"/>
+        /// <param name="unique">Remove event before add</param>
+        [Conditional("UNITY_EDITOR")]
+        public void AddVoidEvent(Object holder, UnityEventBase unityEvent, UnityAction call, bool unique = true) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            if (unique) RemoveEvent(holder, unityEvent, call);
+            UnityEditor.Events.UnityEventTools.AddVoidPersistentListener(unityEvent, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RegisterVoidPersistentListener(UnityEventBase, int, UnityAction)"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RegisterVoidEvent(Object holder, UnityEventBase unityEvent, int index, UnityAction call) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RegisterVoidPersistentListener(unityEvent, index, call);
+            MarkDirty(holder);
+            #endif
+        }
+
+        // ── Int (param) ────────────────────────────────────────────────
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.AddIntPersistentListener(UnityEventBase, UnityAction{int}, int)"/>
+        /// <param name="unique">Remove event before add</param>
+        [Conditional("UNITY_EDITOR")]
+        public void AddIntEvent(Object holder, UnityEventBase unityEvent, UnityAction<int> call, int argument, bool unique = true) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            if (unique) RemoveEvent(holder, unityEvent, call);
+            UnityEditor.Events.UnityEventTools.AddIntPersistentListener(unityEvent, call, argument);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RegisterIntPersistentListener(UnityEventBase, int, UnityAction{int}, int)"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RegisterIntEvent(Object holder, UnityEventBase unityEvent, int index, UnityAction<int> call, int argument) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RegisterIntPersistentListener(unityEvent, index, call, argument);
+            MarkDirty(holder);
+            #endif
+        }
+
+        // ── Float (param) ──────────────────────────────────────────────
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.AddFloatPersistentListener(UnityEventBase, UnityAction{float}, float)"/>
+        /// <param name="unique">Remove event before add</param>
+        [Conditional("UNITY_EDITOR")]
+        public void AddFloatEvent(Object holder, UnityEventBase unityEvent, UnityAction<float> call, float argument, bool unique = true) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            if (unique) RemoveEvent(holder, unityEvent, call);
+            UnityEditor.Events.UnityEventTools.AddFloatPersistentListener(unityEvent, call, argument);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RegisterFloatPersistentListener(UnityEventBase, int, UnityAction{float}, float)"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RegisterFloatEvent(Object holder, UnityEventBase unityEvent, int index, UnityAction<float> call, float argument) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RegisterFloatPersistentListener(unityEvent, index, call, argument);
+            MarkDirty(holder);
+            #endif
+        }
+
+        // ── Bool (param) ───────────────────────────────────────────────
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.AddBoolPersistentListener(UnityEventBase, UnityAction{bool}, bool)"/>
+        /// <param name="unique">Remove event before add</param>
+        [Conditional("UNITY_EDITOR")]
+        public void AddBoolEvent(Object holder, UnityEventBase unityEvent, UnityAction<bool> call, bool argument, bool unique = true) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            if (unique) RemoveEvent(holder, unityEvent, call);
+            UnityEditor.Events.UnityEventTools.AddBoolPersistentListener(unityEvent, call, argument);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RegisterBoolPersistentListener(UnityEventBase, int, UnityAction{bool}, bool)"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RegisterBoolEvent(Object holder, UnityEventBase unityEvent, int index, UnityAction<bool> call, bool argument) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RegisterBoolPersistentListener(unityEvent, index, call, argument);
+            MarkDirty(holder);
+            #endif
+        }
+
+        // ── String (param) ─────────────────────────────────────────────
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.AddStringPersistentListener(UnityEventBase, UnityAction{string}, string)"/>
+        /// <param name="unique">Remove event before add</param>
+        [Conditional("UNITY_EDITOR")]
+        public void AddStringEvent(Object holder, UnityEventBase unityEvent, UnityAction<string> call, string argument, bool unique = true) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            if (unique) RemoveEvent(holder, unityEvent, call);
+            UnityEditor.Events.UnityEventTools.AddStringPersistentListener(unityEvent, call, argument);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RegisterStringPersistentListener(UnityEventBase, int, UnityAction{string}, string)"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RegisterStringEvent(Object holder, UnityEventBase unityEvent, int index, UnityAction<string> call, string argument) {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RegisterStringPersistentListener(unityEvent, index, call, argument);
+            MarkDirty(holder);
+            #endif
+        }
+
+        // ── Object (param) ─────────────────────────────────────────────
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.AddObjectPersistentListener{T}(UnityEventBase, UnityAction{T}, T)"/>
+        /// <param name="unique">Remove event before add</param>
+        [Conditional("UNITY_EDITOR")]
+        public void AddObjectEvent<T>(Object holder, UnityEventBase unityEvent, UnityAction<T> call, T argument, bool unique = true) where T : Object {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            if (unique) RemoveEvent(holder, unityEvent, call);
+            UnityEditor.Events.UnityEventTools.AddObjectPersistentListener(unityEvent, call, argument);
+            MarkDirty(holder);
+            #endif
+        }
+
+        /// <inheritdoc cref="UnityEditor.Events.UnityEventTools.RegisterObjectPersistentListener{T}(UnityEventBase, int, UnityAction{T}, T)"/>
+        [Conditional("UNITY_EDITOR")]
+        public void RegisterObjectEvent<T>(Object holder, UnityEventBase unityEvent, int index, UnityAction<T> call, T argument) where T : Object {
+            #if UNITY_EDITOR
+            RecordForUndo(holder);
+            UnityEditor.Events.UnityEventTools.RegisterObjectPersistentListener(unityEvent, index, call, argument);
+            MarkDirty(holder);
+            #endif
         }
 
         #endregion
