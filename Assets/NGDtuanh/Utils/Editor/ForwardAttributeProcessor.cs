@@ -5,12 +5,12 @@ using System.Reflection;
 using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
-using UnityEngine;
 
 namespace NGDtuanh.Utils.Editor {
     public sealed class ForwardAttributeProcessor : OdinAttributeProcessor {
         private IEnumerable<Type> DefaultForwardableAttributes { get; } = new[] {
             typeof(InlineEditorAttribute)
+          , typeof(RequiredAttribute)
         };
 
         private ForwardAttributesToAttribute GetForwardingInfo(Type type) {

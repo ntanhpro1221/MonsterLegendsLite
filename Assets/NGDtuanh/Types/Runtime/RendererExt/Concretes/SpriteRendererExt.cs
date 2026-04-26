@@ -1,7 +1,6 @@
 using UnityEngine;
 
 namespace NGDtuanh.Types {
-    [ExecuteAlways]
     public class SpriteRendererExt : RendererExt<SpriteRenderer> {
         #region RENDERER PROPERTIES
 

@@ -3,7 +3,6 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace NGDtuanh.Types {
-    [ExecuteAlways]
     public class SpriteMaskExt : RendererExt<SpriteMask> {
         #region RENDERER PROPERTIES
 

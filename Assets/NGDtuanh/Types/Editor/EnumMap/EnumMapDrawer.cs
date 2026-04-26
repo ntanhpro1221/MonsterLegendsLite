@@ -8,7 +8,9 @@ using UnityEditor;
 using UnityEngine;
 
 namespace NGDtuanh.Types.Editor {
-    public class EnumMapDrawer<TKey, TValue> : OdinValueDrawer<EnumMap<TKey, TValue>> where TKey : struct, Enum {
+    public class EnumMapDrawer<TEnumMap, TKey, TValue> : OdinValueDrawer<TEnumMap> 
+        where TEnumMap : EnumMap<TKey, TValue>, new()
+        where TKey : struct, Enum {
         private string searchText;
 
         private InspectorProperty valuesProp;
@@ -117,7 +119,7 @@ namespace NGDtuanh.Types.Editor {
 
         private void SyncEnumKey() {
             var oldEntry = ValueEntry.SmartValue;
-            var newEntry = new EnumMap<TKey, TValue>();
+            var newEntry = new TEnumMap();
 
             for (int i = 0; i < newEntry.Count; ++i) {
                 for (int j = 0; j < oldEntry.Count; ++j) {

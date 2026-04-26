@@ -2,7 +2,6 @@ using NGDtuanh.Utils;
 using UnityEngine;
 
 namespace NGDtuanh.Types {
-    [ExecuteAlways]
     public class SpriteMaskAnchorer : RendererAnchorer<SpriteMask> {
         protected override Matrix4x4 GetTargetL2WMatrix() {
             if (Target == null) return Matrix4x4.identity;

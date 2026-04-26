@@ -5,6 +5,6 @@
       , Speed
       , Atk
       , GoldPerMin
-      , FoodCost
+      , FoodCost // Is exp
     }
 }

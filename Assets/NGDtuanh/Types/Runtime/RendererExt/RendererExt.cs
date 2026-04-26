@@ -4,6 +4,7 @@ using System.Diagnostics;
 using NGDtuanh.Utils;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Debug = UnityEngine.Debug;
 
 namespace NGDtuanh.Types {
     [ExecuteAlways]
@@ -46,7 +47,7 @@ namespace NGDtuanh.Types {
             }
         }
 
-        private void Reset_CreateRenderer() {
+        private void Reset() {
             if (null == Rdr
              && null == (Rdr = TF.Find(nameof(Renderer))?.GetComponent<TRenderer>())) {
                 CreateRenderer();
@@ -161,7 +162,8 @@ namespace NGDtuanh.Types {
         #endregion
 
         private void OnEnable() {
-            if (!Application.isEditor) UpdateRdrPosFromPivot();
+            if (utils.IsPlaying(this)) UpdateRdrPosFromPivot();
+            else TryBlockRdrTransEditor();
         }
 
         [Button]
@@ -222,13 +224,6 @@ namespace NGDtuanh.Types {
             }
 
             #endif
-        }
-        
-        private void Reset() {
-            Reset_CreateRenderer();
-            
-            TryBlockRdrTransEditor();
-            UpdateRdrPosFromPivot();
         }
     }
 }

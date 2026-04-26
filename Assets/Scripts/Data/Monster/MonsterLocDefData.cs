@@ -9,5 +9,8 @@ namespace MonsterLegendsLite.Data {
 
         [Required]
         public Battle_Monster PrefabBattleScene;
+
+        [Required]
+        public MonsterDetail_Monster PrefabMonsterDetailScene;
     }
 }

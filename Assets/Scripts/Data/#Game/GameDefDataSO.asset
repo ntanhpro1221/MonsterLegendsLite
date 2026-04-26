@@ -21,107 +21,396 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    MonsterRank:
+      _Keys: 0000000001000000020000000300000004000000
+      _Values:
+      - value:
+          Name: Common
+          Description: Common Rank
+          MaxLevel: 60
+      - value:
+          Name: Uncommon
+          Description: Uncommon Rank
+          MaxLevel: 70
+      - value:
+          Name: Rare
+          Description: Rare Rank
+          MaxLevel: 80
+      - value:
+          Name: Epic
+          Description: Epic Rank
+          MaxLevel: 90
+      - value:
+          Name: Legendary
+          Description: Legendary Rank
+          MaxLevel: 100
+      _KeyNames:
+      - Common
+      - Uncommon
+      - Rare
+      - Epic
+      - Legendary
+      _IsKeyChanged: 0
     Monster:
       _Keys: 0000000001000000
       _Values:
       - value:
-          Name: 
-          Description: 
+          Name: Alice
+          Description: Possessing a mane of white-hot hellfire and more than just
+            a sting in his tail - the Firesaur is a creature of mythic awesomeness!
+            The Firesaur will make fast work of anyone foolish enough to challenge
+            him.
           StatsBase:
-            HP: 0
-            MP: 0
-            Speed: 0
-            Atk: 0
-            GoldPerMin: 0
-            FoodCost: 0
+            _Keys: 000000000100000002000000030000000400000005000000
+            _Values:
+            - value: 100
+            - value: 150
+            - value: 30
+            - value: 25
+            - value: 45
+            - value: 55
+            _KeyNames:
+            - HP
+            - MP
+            - Speed
+            - Atk
+            - GoldPerMin
+            - FoodCost
+            _IsKeyChanged: 0
           StatsGrowth:
-            HP:
-              serializedVersion: 2
-              m_Curve: []
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 4
-            MP:
-              serializedVersion: 2
-              m_Curve: []
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 4
-            Speed:
-              serializedVersion: 2
-              m_Curve: []
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 4
-            Atk:
-              serializedVersion: 2
-              m_Curve: []
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 4
-            GoldPerMin:
-              serializedVersion: 2
-              m_Curve: []
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 4
-            FoodCost:
-              serializedVersion: 2
-              m_Curve: []
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 4
+            _Keys: 000000000100000002000000030000000400000005000000
+            _Values:
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 0
+                  outSlope: 0
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 0
+                  inSlope: 0
+                  outSlope: 0
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            _KeyNames:
+            - HP
+            - MP
+            - Speed
+            - Atk
+            - GoldPerMin
+            - FoodCost
+            _IsKeyChanged: 0
           Rank: 0
-          Cost: 0
+          Cost: 100
       - value:
-          Name: 
-          Description: 
+          Name: Bob
+          Description: Hello, i am Bob <3
           StatsBase:
-            HP: 0
-            MP: 0
-            Speed: 0
-            Atk: 0
-            GoldPerMin: 0
-            FoodCost: 0
+            _Keys: 000000000100000002000000030000000400000005000000
+            _Values:
+            - value: 80
+            - value: 140
+            - value: 30
+            - value: 35
+            - value: 35
+            - value: 55
+            _KeyNames:
+            - HP
+            - MP
+            - Speed
+            - Atk
+            - GoldPerMin
+            - FoodCost
+            _IsKeyChanged: 0
           StatsGrowth:
-            HP:
-              serializedVersion: 2
-              m_Curve: []
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 4
-            MP:
-              serializedVersion: 2
-              m_Curve: []
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 4
-            Speed:
-              serializedVersion: 2
-              m_Curve: []
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 4
-            Atk:
-              serializedVersion: 2
-              m_Curve: []
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 4
-            GoldPerMin:
-              serializedVersion: 2
-              m_Curve: []
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 4
-            FoodCost:
-              serializedVersion: 2
-              m_Curve: []
-              m_PreInfinity: 2
-              m_PostInfinity: 2
-              m_RotationOrder: 4
-          Rank: 0
-          Cost: 0
+            _Keys: 000000000100000002000000030000000400000005000000
+            _Values:
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 0
+                  outSlope: 0
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 0
+                  inSlope: 0
+                  outSlope: 0
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            _KeyNames:
+            - HP
+            - MP
+            - Speed
+            - Atk
+            - GoldPerMin
+            - FoodCost
+            _IsKeyChanged: 0
+          Rank: 1
+          Cost: 200
       _KeyNames:
       - Alice
       - Bob

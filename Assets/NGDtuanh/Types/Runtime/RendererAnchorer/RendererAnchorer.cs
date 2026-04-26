@@ -11,7 +11,9 @@ namespace NGDtuanh.Types {
         #region PROPERTIES
 
         [SerializeField]
-        private bool disableOnAwake = true;
+        private bool disableOnFirstEnable = true;
+        
+        private bool executedDisableOnFirstEnable;
 
         [SerializeField, OnValueChanged(nameof(UpdatePosFromAnchor)), Required]
         private TRenderer target;
@@ -79,12 +81,16 @@ namespace NGDtuanh.Types {
 
         #endregion
 
-        private void Awake() {
-            if (!Application.isEditor && disableOnAwake) enabled = false;
-        }
-
         private void OnEnable() {
-            if (!Application.isEditor) UpdatePosFromAnchor();
+            if (utils.IsPlaying(this)) {
+                UpdatePosFromAnchor();
+
+                if (!executedDisableOnFirstEnable) {
+                    executedDisableOnFirstEnable = true;
+
+                    if (disableOnFirstEnable) enabled = false;
+                }
+            }
         }
 
         [Button, ShowIf("@" + nameof(Target) + "!=null")]
@@ -111,10 +117,6 @@ namespace NGDtuanh.Types {
             RecordForUndo(TF);
             TF.position = newPos;
             MarkDirty(TF);
-        }
-
-        private void Reset() {
-            UpdatePosFromAnchor();
         }
     }
 }

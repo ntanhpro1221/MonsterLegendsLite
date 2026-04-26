@@ -13,15 +13,37 @@ MonoBehaviour:
   m_Name: GameLocDefDataSO
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Data.GameLocDefDataSO
   Data:
+    MonsterRank:
+      _Keys: 0000000001000000020000000300000004000000
+      _Values:
+      - value:
+          Icon: {fileID: 21300000, guid: 5361aa061fdf85c48a76dff794220949, type: 3}
+      - value:
+          Icon: {fileID: 21300000, guid: 2d452fdaee1963643a649b71c0a57b02, type: 3}
+      - value:
+          Icon: {fileID: 21300000, guid: a8baa5fd412c99d4f90fc7356a6fa9f7, type: 3}
+      - value:
+          Icon: {fileID: 21300000, guid: 6f55cedf5a084bd408e0cd5ca2b995dc, type: 3}
+      - value:
+          Icon: {fileID: 21300000, guid: 4e4fd4f9b1a313343b05c9080015931f, type: 3}
+      _KeyNames:
+      - Common
+      - Uncommon
+      - Rare
+      - Epic
+      - Legendary
+      _IsKeyChanged: 0
     Monster:
       _Keys: 0000000001000000
       _Values:
       - value:
           PrefabHomeScene: {fileID: 6402835627022570762, guid: 863cba64ac84b8b498159230947eba29, type: 3}
           PrefabBattleScene: {fileID: 5617029448647903564, guid: 69122e14bd687af44b0fae53ed82b0fb, type: 3}
+          PrefabMonsterDetailScene: {fileID: 4143326979605218392, guid: 5dd0248666dab8c409e4ed97ddf27867, type: 3}
       - value:
           PrefabHomeScene: {fileID: 6402835627022570762, guid: 7505010fed7397049b0d24b2e3f44c30, type: 3}
           PrefabBattleScene: {fileID: 5617029448647903564, guid: bb411ac9b9c815447a6f5def9f2a2112, type: 3}
+          PrefabMonsterDetailScene: {fileID: 1289948885566199047, guid: e487147471a89f64aa0ed799c8779228, type: 3}
       _KeyNames:
       - Alice
       - Bob

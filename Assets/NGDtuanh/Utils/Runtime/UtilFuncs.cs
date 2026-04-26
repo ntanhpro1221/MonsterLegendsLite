@@ -186,6 +186,25 @@ namespace NGDtuanh.Utils {
 
         #region OBJECT
 
+        /// <returns>True if <see cref="go"/> is actually in playing mode.<br/>(some case like: open prefab stage when in playing mode)</returns>
+        public bool IsPlaying(GameObject go) {
+            #if UNITY_EDITOR
+            return
+                !UnityEditor.EditorUtility.IsPersistent(go)
+             && null == UnityEditor.SceneManagement.PrefabStageUtility.GetPrefabStage(go)
+             && Application.isPlaying;
+            #endif
+            
+            #pragma warning disable CS0162 // Unreachable code detected
+            return true;
+            #pragma warning restore CS0162 // Unreachable code detected
+        }
+
+        /// <inheritdoc cref="IsPlaying(GameObject)"/>
+        public bool IsPlaying(Component cpn) {
+            return IsPlaying(cpn.gameObject);
+        }
+
         /// <inheritdoc cref="UnityEditor.EditorGUIUtility.PingObject(Object)"/>
         [Conditional("UNITY_EDITOR")]
         public void PingObject(Object obj) {
@@ -193,12 +212,12 @@ namespace NGDtuanh.Utils {
             UnityEditor.EditorGUIUtility.PingObject(obj);
             #endif
         }
-        
+
         public string GetPath(Object obj) {
             if (obj == null) return null;
 
             if (obj is Component cpn) return $"{GetPath(cpn.gameObject)}<{cpn.GetType().Name}>";
-            
+
             #if UNITY_EDITOR
             if (UnityEditor.EditorUtility.IsPersistent(obj)) return UnityEditor.AssetDatabase.GetAssetPath(obj);
             #endif
@@ -206,6 +225,13 @@ namespace NGDtuanh.Utils {
             if (obj is GameObject go) return $"{GetScenePrefixPath(go)}{GetPathTF(go.transform)}";
 
             return $"[Unknown]/{obj.name}";
+
+            static string GetScenePrefixPath(GameObject go) {
+                #if UNITY_EDITOR
+                if (UnityEditor.SceneManagement.PrefabStageUtility.GetPrefabStage(go) != null) return string.Empty;
+                #endif
+                return (go.scene.IsValid() ? go.scene.name : "[Unknown]") + "/";
+            }
         }
 
         private string GetPathTF(Transform tf) {
@@ -214,13 +240,6 @@ namespace NGDtuanh.Utils {
             while ((tf = tf.parent) != null)
                 result = $"{tf.name}/{result}";
             return result;
-        }
-
-        private string GetScenePrefixPath(GameObject go) {
-            #if UNITY_EDITOR
-            if (UnityEditor.SceneManagement.PrefabStageUtility.GetPrefabStage(go) != null) return string.Empty;
-            #endif
-            return (go.scene.IsValid() ? go.scene.name : "[Unknown]") + "/";
         }
 
         #endregion
