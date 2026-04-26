@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 using MonsterLegendsLite.Data;
-using NGDtuanh.MonsterLegends;
+using NGDtuanh.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

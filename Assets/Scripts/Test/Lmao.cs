@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using NGDtuanh.MonsterLegends;
+using NGDtuanh.MonsterLegendsLite;
 using NGDtuanh.Types;
 
 namespace MonsterLegendsLite {

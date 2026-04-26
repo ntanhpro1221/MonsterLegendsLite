@@ -414,6 +414,7 @@ namespace NGDtuanh.Utils {
             #if UNITY_EDITOR
 
             UnityEditor.EditorUtility.SetDirty(target);
+
             UnityEditor.PrefabUtility.RecordPrefabInstancePropertyModifications(target);
 
             if (target is not GameObject go) {
@@ -421,7 +422,10 @@ namespace NGDtuanh.Utils {
                 go = cpn.gameObject;
             }
 
-            UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(go.scene);
+            try {
+                UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(go.scene);
+            } catch { // Target is in current playing scene
+            }
 
             #endif
         }

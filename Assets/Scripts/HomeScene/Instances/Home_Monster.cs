@@ -2,7 +2,7 @@
 using System.Collections;
 using DG.Tweening;
 using MonsterLegendsLite.Data;
-using NGDtuanh.MonsterLegends;
+using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

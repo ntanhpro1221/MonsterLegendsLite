@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NGDtuanh.MonsterLegends {
+namespace NGDtuanh.MonsterLegendsLite {
     public static class WaitForSecondCache {
         private static readonly Dictionary<float, WaitForSeconds> cache = new();
 

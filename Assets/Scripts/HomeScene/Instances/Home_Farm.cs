@@ -1,5 +1,5 @@
 using System;
-using NGDtuanh.MonsterLegends;
+using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 
 namespace MonsterLegendsLite {

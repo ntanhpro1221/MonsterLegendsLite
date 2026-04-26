@@ -1,4 +1,4 @@
-using NGDtuanh.MonsterLegends;
+using NGDtuanh.MonsterLegendsLite;
 
 namespace MonsterLegendsLite {
     public class NewCpn : MonoBehaviourExt, ITest {

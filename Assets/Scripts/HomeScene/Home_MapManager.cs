@@ -1,4 +1,4 @@
-﻿using NGDtuanh.MonsterLegends;
+﻿using NGDtuanh.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

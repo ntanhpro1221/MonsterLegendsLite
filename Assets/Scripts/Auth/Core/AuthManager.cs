@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Firebase;
 using Firebase.Auth;
-using NGDtuanh.MonsterLegends;
+using NGDtuanh.Types;
 using QFSW.QC;
 using UnityEngine;
 

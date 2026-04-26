@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MonsterLegendsLite.Data;
-using NGDtuanh.MonsterLegends;
+using NGDtuanh.MonsterLegendsLite;
 
 namespace MonsterLegendsLite {
     public class Battle_TurnManager : MonoBehaviourExt {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MonsterLegendsLite.Data;
-using NGDtuanh.MonsterLegends;
+using NGDtuanh.MonsterLegendsLite;
 
 namespace MonsterLegendsLite {
     public abstract class Battle_SkillSelector : MonoBehaviourExt {

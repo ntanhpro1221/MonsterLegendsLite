@@ -2,7 +2,7 @@ using Firebase.Auth;
 using Firebase.Database;
 using System;
 using System.Threading.Tasks;
-using NGDtuanh.MonsterLegends;
+using NGDtuanh.Types;
 using UnityEngine;
 
 namespace MonsterLegendsLite.Auth {
