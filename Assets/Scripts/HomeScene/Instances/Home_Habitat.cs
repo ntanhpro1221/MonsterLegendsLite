@@ -13,6 +13,8 @@ namespace MonsterLegendsLite {
         public Transform monsterRoot;
         
         private readonly List<Home_Monster> monsters = new();
+        
+        public IReadOnlyList<Home_Monster> Monsters => monsters;
 
         public void Initialize(HabitatInsData insData) {
             base.Initialize(insData.InsId);

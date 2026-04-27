@@ -9,13 +9,13 @@ using UnityEngine;
 namespace MonsterLegendsLite {
     public class Home_Monster : MonoBehaviourExt {
         [NonSerialized, ShowInInspector, ReadOnly]
-        public string insId;
+        public MonsterInsData insData;
 
         [SerializeField, Required]
         private MonsterModel model;
 
-        public void Initialize(string insId) {
-            this.insId = insId;
+        public void Initialize(MonsterInsData insData) {
+            this.insData = insData;
         }
 
         public void StartLocalMove(Vector2Int pos, Vector2Int size) {
@@ -40,6 +40,10 @@ namespace MonsterLegendsLite {
                 
                 yield return WaitForSecondCache.Get(utils.RandomInside(DataManager.Ins.GameDefData.Home_MonsterIdleTime));
             }
+        }
+
+        private void OnDestroy() {
+            TF.DOKill();
         }
     }
 }

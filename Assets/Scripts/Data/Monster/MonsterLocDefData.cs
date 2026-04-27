@@ -1,9 +1,13 @@
 using System;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace MonsterLegendsLite.Data {
     [Serializable]
     public class MonsterLocDefData {
+        [Required]
+        public Sprite Avatar; 
+        
         [Required]
         public Home_Monster PrefabHomeScene;
 

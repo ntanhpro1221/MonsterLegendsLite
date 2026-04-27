@@ -2,6 +2,7 @@ using MonsterLegendsLite.Data;
 using NGDtuanh.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MonsterLegendsLite {
     public class MonsterDetail_SceneManager : Singleton<MonsterDetail_SceneManager> {
@@ -48,6 +49,10 @@ namespace MonsterLegendsLite {
             uiMonster.SetLevel(monster.insData.Level, DataManager.Ins.GameDefData.MonsterRank[monster.defData.Rank].MaxLevel);
             uiMonster.SetExp(100, monster.CalculateStats()[MonsterStatId.FoodCost]);
             uiMonster.SetFoodRequired(monster.CalculateStats()[MonsterStatId.FoodCost]);
+        }
+
+        public void BackToHomeScene() {
+            SceneManager.LoadScene("HomeScene");
         }
     }
 }

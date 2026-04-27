@@ -207,6 +207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 61800496}
   - component: {fileID: 61800497}
+  - component: {fileID: 61800499}
   - component: {fileID: 61800498}
   m_Layer: 5
   m_Name: Body_Info
@@ -292,6 +293,18 @@ MonoBehaviour:
     - FoodCost
     _IsKeyChanged: 0
   descriptionTxt: {fileID: 1387262726}
+--- !u!114 &61800499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61800495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84508567d30145c2a3faca320d020fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.RebuildLayoutFixer
 --- !u!1 &83732974
 GameObject:
   m_ObjectHideFlags: 0
@@ -747,6 +760,7 @@ GameObject:
   m_Component:
   - component: {fileID: 284865502}
   - component: {fileID: 284865503}
+  - component: {fileID: 284865504}
   m_Layer: 5
   m_Name: Stats
   m_TagString: Untagged
@@ -804,6 +818,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &284865504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284865501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84508567d30145c2a3faca320d020fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.RebuildLayoutFixer
 --- !u!1 &325025334
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,6 +1270,7 @@ GameObject:
   - component: {fileID: 372372059}
   - component: {fileID: 372372058}
   - component: {fileID: 372372057}
+  - component: {fileID: 372372060}
   m_Layer: 5
   m_Name: FeedBtn
   m_TagString: Untagged
@@ -1357,6 +1384,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &372372060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 372372055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84508567d30145c2a3faca320d020fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.RebuildLayoutFixer
 --- !u!1 &419528197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,7 +1634,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 984775780751918001, guid: 6036dc2ae5c267144821eca2f5987cb5, type: 3}
       propertyPath: m_Name
-      value: Alice
+      value: Illustrator
+      objectReference: {fileID: 0}
+    - target: {fileID: 984775780751918001, guid: 6036dc2ae5c267144821eca2f5987cb5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6847894612774267217, guid: 6036dc2ae5c267144821eca2f5987cb5, type: 3}
       propertyPath: m_LocalScale.x
@@ -2249,6 +2292,7 @@ GameObject:
   - component: {fileID: 816200508}
   - component: {fileID: 816200509}
   - component: {fileID: 816200510}
+  - component: {fileID: 816200511}
   m_Layer: 5
   m_Name: Header
   m_TagString: Untagged
@@ -2318,6 +2362,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &816200511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816200507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84508567d30145c2a3faca320d020fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.RebuildLayoutFixer
 --- !u!224 &819138489 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8459766682280575411, guid: eb3ac6359c21ab545b01fba4207a7163, type: 3}
@@ -2419,7 +2475,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 821678108}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1670419959}
+        m_TargetAssemblyTypeName: MonsterLegendsLite.MonsterDetail_SceneManager,
+          Assembly-CSharp
+        m_MethodName: BackToHomeScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &821678108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5312,6 +5381,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2050299111}
   - component: {fileID: 2050299112}
+  - component: {fileID: 2050299114}
   - component: {fileID: 2050299113}
   m_Layer: 5
   m_Name: Monster
@@ -5398,6 +5468,18 @@ MonoBehaviour:
   expTxt: {fileID: 2118199300}
   feedBtn: {fileID: 372372059}
   feedBtnTxt: {fileID: 327687494}
+--- !u!114 &2050299114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050299110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84508567d30145c2a3faca320d020fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.RebuildLayoutFixer
 --- !u!1001 &2058286088
 PrefabInstance:
   m_ObjectHideFlags: 0

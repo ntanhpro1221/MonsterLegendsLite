@@ -8,5 +8,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SignInScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/HomeScene.unity
+    guid: dc534eeb92af181489aec7cd159f160d
+  - enabled: 1
+    path: Assets/Scenes/MonsterDetailScene.unity
+    guid: cf2b7fcc2a8bf1b4491b8d105b40808a
+  - enabled: 1
+    path: Assets/Scenes/BattleScene.unity
+    guid: 57afa2d47277745478a36e34d4e0a79b
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

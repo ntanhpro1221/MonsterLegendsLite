@@ -22,12 +22,12 @@ MonoBehaviour:
     - InsId: Test_Monster_0
       Id: 0
       CustomName: 
-      Level: 1
+      Level: 2
       Habitat: Test_Habitat_0
     - InsId: Test_Monster_1
       Id: 1
       CustomName: 
-      Level: 1
+      Level: 5
       Habitat: Test_Habitat_1
     Habitats:
     - InsId: Test_Habitat_0

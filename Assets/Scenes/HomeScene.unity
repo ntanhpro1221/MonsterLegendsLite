@@ -5384,6 +5384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.BootloaderHomeScene
   dontDestroyOnLoad: 0
+  prefabMonsterDetailBootData: {fileID: 6140053765397883564, guid: b73d3bc0ac189c441bb3798513881e4d, type: 3}
   uiBuildingInfo: {fileID: 1369693847}
   habitatRoot: {fileID: 894350261}
   farmRoot: {fileID: 1505531061}
@@ -5412,6 +5413,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1746055119}
   - component: {fileID: 1746055120}
+  - component: {fileID: 1746055121}
   m_Layer: 5
   m_Name: TopRight
   m_TagString: Untagged
@@ -5467,6 +5469,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 1
+--- !u!114 &1746055121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746055118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84508567d30145c2a3faca320d020fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.RebuildLayoutFixer
 --- !u!1 &2028123811
 GameObject:
   m_ObjectHideFlags: 0

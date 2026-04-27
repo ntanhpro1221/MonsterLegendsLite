@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Home_UI_HabitatInfo
   shared: {fileID: 2587797309806473331}
+  prefabMonsterInfoBtn: {fileID: 2640752832706295285, guid: f72f2ac1d33301f4184367827bb6a23b, type: 3}
 --- !u!1001 &4510920421858512003
 PrefabInstance:
   m_ObjectHideFlags: 0

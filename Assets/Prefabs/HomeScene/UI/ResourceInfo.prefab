@@ -357,6 +357,7 @@ GameObject:
   - component: {fileID: 8322308514983588797}
   - component: {fileID: 6412822016345542352}
   - component: {fileID: 4248844106002366163}
+  - component: {fileID: 7199851851365289459}
   m_Layer: 5
   m_Name: ResourceInfo
   m_TagString: Untagged
@@ -464,6 +465,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &7199851851365289459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7770806168981226828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84508567d30145c2a3faca320d020fca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.RebuildLayoutFixer
 --- !u!1 &8264375544458775069
 GameObject:
   m_ObjectHideFlags: 0

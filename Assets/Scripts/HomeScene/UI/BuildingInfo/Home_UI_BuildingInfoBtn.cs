@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace MonsterLegendsLite {
@@ -17,5 +18,22 @@ namespace MonsterLegendsLite {
 
         [SerializeField, Required]
         private TextMeshProUGUI infoTxt;
+
+        public void SetCallback(UnityAction callback) {
+            button.onClick.RemoveAllListeners();
+            button.onClick.AddListener(callback);
+        }
+
+        public void SetIcon(Sprite icon) {
+            iconImg.sprite = icon;
+        }
+
+        public void SetTitle(string title) {
+            titleTxt.text = title;
+        }
+
+        public void SetInfo(string info) {
+            infoTxt.text = info;
+        }
     }
 }

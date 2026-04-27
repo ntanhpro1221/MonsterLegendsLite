@@ -58,6 +58,12 @@ namespace NGDtuanh.Types {
             SetDirty();
         }
 
+        protected override void Start() {
+            base.Start();
+
+            utils.DelayedCall_Frame(this, 1, SetDirty);
+        }
+
         #if UNITY_EDITOR
         protected override void Reset() {
             base.Reset();

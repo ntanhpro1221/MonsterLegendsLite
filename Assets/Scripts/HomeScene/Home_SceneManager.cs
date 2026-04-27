@@ -3,16 +3,20 @@ using MonsterLegendsLite.Data;
 using NGDtuanh.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MonsterLegendsLite {
     public class Home_SceneManager : Singleton<Home_SceneManager> {
+        [SerializeField]
+        private MonsterDetail_BootData prefabMonsterDetailBootData;
+        
         [SerializeField, Required]
         private Home_UI_BuildingInfoManager uiBuildingInfo;
         
         [SerializeField, Required]
         private Transform habitatRoot, farmRoot;
 
-        private readonly Dictionary<string, Home_Monster> monster = new();
+        private readonly Dictionary<string, Home_Monster> monsters = new();
         private readonly Dictionary<string, Home_Habitat> habitats = new();
         private readonly Dictionary<string, Home_Farm> farms = new();
         
@@ -40,9 +44,9 @@ namespace MonsterLegendsLite {
             foreach (var insData in userIns.Monsters) {
                 var habitat = habitats[insData.Habitat];
                 var ins = Instantiate(gameLocDef.Monster[insData.Id].PrefabHomeScene);
-                monster.Add(insData.InsId, ins);
+                monsters.Add(insData.InsId, ins);
 
-                ins.Initialize(insData.InsId);
+                ins.Initialize(insData);
                 habitat.AddMonster(ins);
             }
             
@@ -62,6 +66,11 @@ namespace MonsterLegendsLite {
 
         public void OnClicked_Void() {
             uiBuildingInfo.HideCurInfo();
+        }
+
+        public void ViewMonsterDetail(string insId) {
+            Instantiate(prefabMonsterDetailBootData).SetData(monsters[insId].insData);
+            SceneManager.LoadScene("MonsterDetailScene");
         }
     }
 }
