@@ -13,11 +13,13 @@ namespace MonsterLegendsLite.Data {
 
         public MonsterStats<int> CalculateStats(MonsterInsData insData) {
             MonsterStats<int> result = new();
-            foreach (var key in result.Keys) {
-                result[key] = StatsBase[key] + Mathf.FloorToInt(StatsGrowth[key].Evaluate(insData.Level));
-            }
+            foreach (var key in result.Keys) result[key] = CalculateStat(insData, key);
 
             return result;
+        }
+        
+        public int CalculateStat(MonsterInsData insData, MonsterStatId statId) {
+            return StatsBase[statId] + Mathf.FloorToInt(StatsGrowth[statId].Evaluate(insData.Level));
         }
     }
 }

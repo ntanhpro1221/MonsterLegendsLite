@@ -20,7 +20,9 @@ namespace MonsterLegendsLite {
         private readonly Dictionary<string, Home_Habitat> habitats = new();
         private readonly Dictionary<string, Home_Farm> farms = new();
         
+        public IReadOnlyDictionary<string, Home_Monster> Monsters => monsters;
         public IReadOnlyDictionary<string, Home_Habitat> Habitats => habitats;
+        public IReadOnlyDictionary<string, Home_Farm> Farms => farms;
 
         private void Start() {
             BuildMap();
@@ -55,7 +57,7 @@ namespace MonsterLegendsLite {
                 var ins = Instantiate(gameLocDef.Farm[insData.Id].PrefabHomeScene, farmRoot);
                 farms.Add(insData.InsId, ins);
 
-                ins.Initialize(insData.InsId);
+                ins.Initialize(insData);
                 ins.TF.position = map.GetWorldPos(insData.Position);
             }
         }

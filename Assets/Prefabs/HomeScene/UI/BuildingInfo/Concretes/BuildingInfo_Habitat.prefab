@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Home_UI_HabitatInfo
   shared: {fileID: 2587797309806473331}
+  collectBtn: {fileID: 1743264026747023438}
   prefabMonsterInfoBtn: {fileID: 2640752832706295285, guid: f72f2ac1d33301f4184367827bb6a23b, type: 3}
 --- !u!1001 &4510920421858512003
 PrefabInstance:
@@ -324,6 +325,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d9c7b820e7d5124785f7a07e4be114a, type: 3}
+--- !u!114 &1743264026747023438 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2786412449817410765, guid: 1d9c7b820e7d5124785f7a07e4be114a, type: 3}
+  m_PrefabInstance: {fileID: 4510920421858512003}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b07b814b73f483a8695bf6a14fbe5f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Home_UI_BuildingInfoBtn
 --- !u!224 &2208589724256523652 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2322870726397122823, guid: 1d9c7b820e7d5124785f7a07e4be114a, type: 3}

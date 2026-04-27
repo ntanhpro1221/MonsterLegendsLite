@@ -436,20 +436,20 @@ MonoBehaviour:
       _Keys: 000000000100000002000000
       _Values:
       - value:
-          Name: 
-          Description: 
-          MaxFood: 0
-          FoodPerMin: 0
+          Name: Sony
+          Description: Sony Farm
+          MaxFood: 200000000
+          FoodPerMin: 120
       - value:
-          Name: 
-          Description: 
-          MaxFood: 0
-          FoodPerMin: 0
+          Name: Apple
+          Description: Apple Farm
+          MaxFood: 200000000
+          FoodPerMin: 120
       - value:
-          Name: 
-          Description: 
-          MaxFood: 0
-          FoodPerMin: 0
+          Name: Samsung
+          Description: Samsung Farm
+          MaxFood: 200000000
+          FoodPerMin: 120
       _KeyNames:
       - Sony
       - Apple

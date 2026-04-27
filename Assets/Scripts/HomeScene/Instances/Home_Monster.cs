@@ -18,6 +18,10 @@ namespace MonsterLegendsLite {
             this.insData = insData;
         }
 
+        public int GetGPM() {
+            return DataManager.Ins.GameDefData.Monster[insData.Id].CalculateStat(insData, MonsterStatId.GoldPerMin);
+        }
+
         public void StartLocalMove(Vector2Int pos, Vector2Int size) {
             StopCoroutine(nameof(IELocalMove));
             StartCoroutine(IELocalMove(pos, size));

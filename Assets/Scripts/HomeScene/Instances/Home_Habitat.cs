@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MonsterLegendsLite.Data;
+using NGDtuanh.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -29,6 +30,17 @@ namespace MonsterLegendsLite {
             monster.TF.localPosition = Vector3.zero;
             
             monster.StartLocalMove(insData.Position, DataManager.Ins.GameDefData.Habitat[insData.Id].Size);
+        }
+
+        public long CalculateCurTotalGold() {
+            float result = insData.CurGold;
+            float minutes = SerTimestamp.DeltaMinutes(SerTimestamp.GetCurTimestamp(), insData.LastGoldUpdate);
+
+            foreach (var monster in Monsters) {
+                result += minutes * monster.GetGPM();
+            }
+            
+            return (long)(result);
         }
     }
 }

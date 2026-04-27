@@ -6,6 +6,9 @@ using UnityEngine.UI;
 namespace MonsterLegendsLite {
     public class Home_UI_HabitatInfo : Home_UI_BuildingInfo {
         [SerializeField]
+        private Home_UI_BuildingInfoBtn collectBtn;
+        
+        [SerializeField]
         private Home_UI_BuildingInfoBtn prefabMonsterInfoBtn;
 
         private readonly List<Home_UI_BuildingInfoBtn> availableMonsterBtns = new(4);
@@ -42,7 +45,17 @@ namespace MonsterLegendsLite {
                 button.SetInfo(monster.insData.Level.ToString());
             }
             
+            UpdateTotalGold();
+            
             LayoutRebuilder.ForceRebuildLayoutImmediate(RectTF);
+        }
+
+        public void Update() {
+            UpdateTotalGold();
+        }
+
+        private void UpdateTotalGold() {
+            collectBtn.SetInfo(Home_SceneManager.Ins.Habitats[CurTargetId].CalculateCurTotalGold().ToString());
         }
     }
 }

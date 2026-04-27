@@ -35,17 +35,17 @@ MonoBehaviour:
       Position: {x: -5, y: 0}
       CurGold: 0
       LastGoldUpdate:
-        value: 0
+        value: 1777299717
     - InsId: Test_Habitat_1
       Id: 1
       Position: {x: 0, y: 0}
       CurGold: 0
       LastGoldUpdate:
-        value: 0
+        value: 1777299717
     Farms:
     - InsId: Test_Farm_0
       Id: 0
       Position: {x: 0, y: -5}
       CurFood: 0
       LastFoodUpdate:
-        value: 0
+        value: 1777299717

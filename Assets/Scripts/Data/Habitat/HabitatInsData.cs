@@ -8,7 +8,7 @@ namespace MonsterLegendsLite.Data {
         public string InsId;
         public HabitatId Id;
         public Vector2Int Position;
-        public int CurGold;
+        public long CurGold;
         public SerTimestamp LastGoldUpdate;
     }
 }

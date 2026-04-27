@@ -8,7 +8,7 @@ namespace MonsterLegendsLite.Data {
         public string InsId;
         public FarmId Id;
         public Vector2Int Position;
-        public int CurFood;
+        public long CurFood;
         public SerTimestamp LastFoodUpdate;
     }
 }
