@@ -9,6 +9,9 @@ namespace NGDtuanh.Utils {
         private Transform tf;
         public Transform TF => tf != null ? tf : tf = transform;
 
+        private RectTransform rectTF;
+        public RectTransform RectTF => rectTF != null ? rectTF : rectTF = GetComponent<RectTransform>();
+
         [Conditional("UNITY_EDITOR")] protected void RecordForUndo(Object target = null) => utils.RecordForUndo(target == null ? this : target);
 
         [Conditional("UNITY_EDITOR")] protected void RecordForUndo(params Object[] targets) => utils.RecordForUndo(targets);

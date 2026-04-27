@@ -152,19 +152,52 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5934395132994122099, guid: b5288382412868c4f901bb48cb8c9cb0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8231891395927904013, guid: b5288382412868c4f901bb48cb8c9cb0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5033120481255660228}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5181053068756150904, guid: b5288382412868c4f901bb48cb8c9cb0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7993738859727320708}
   m_SourcePrefab: {fileID: 100100000, guid: b5288382412868c4f901bb48cb8c9cb0, type: 3}
+--- !u!1 &2055027573654308313 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5181053068756150904, guid: b5288382412868c4f901bb48cb8c9cb0, type: 3}
+  m_PrefabInstance: {fileID: 6584861753742733217}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7993738859727320708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055027573654308313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61803aa913a0434a9d0f2de4cfea3b7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Home_UI_FarmInfo
+  shared: {fileID: 6589798911053028051}
 --- !u!224 &2981292227722256556 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8231891395927904013, guid: b5288382412868c4f901bb48cb8c9cb0, type: 3}
   m_PrefabInstance: {fileID: 6584861753742733217}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6589798911053028051 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4938810751612274, guid: b5288382412868c4f901bb48cb8c9cb0, type: 3}
+  m_PrefabInstance: {fileID: 6584861753742733217}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055027573654308313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30800b5d1e4d4cbf93d8caec6bea7f55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Home_UI_BuildingInfo
 --- !u!1001 &7342348397848904643
 PrefabInstance:
   m_ObjectHideFlags: 0

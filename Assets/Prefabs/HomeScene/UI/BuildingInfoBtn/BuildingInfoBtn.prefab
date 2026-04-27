@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 2322870726397122823}
   - component: {fileID: 3924515193776094465}
   - component: {fileID: 6606472813440124822}
+  - component: {fileID: 2786412449817410765}
   m_Layer: 5
   m_Name: BuildingInfoBtn
   m_TagString: Untagged
@@ -452,6 +453,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
   m_AspectMode: 2
   m_AspectRatio: 1
+--- !u!114 &2786412449817410765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5320062225495518194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b07b814b73f483a8695bf6a14fbe5f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Home_UI_BuildingInfoBtn
+  button: {fileID: 3924515193776094465}
+  iconImg: {fileID: 6299237567459507952}
+  titleTxt: {fileID: 6028427790404618065}
+  infoTxt: {fileID: 8142597685045729982}
 --- !u!1 &5331376374478185185
 GameObject:
   m_ObjectHideFlags: 0

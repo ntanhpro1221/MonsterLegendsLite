@@ -7,6 +7,9 @@ using UnityEngine;
 namespace MonsterLegendsLite {
     public class Home_SceneManager : Singleton<Home_SceneManager> {
         [SerializeField, Required]
+        private Home_UI_BuildingInfoManager uiBuildingInfo;
+        
+        [SerializeField, Required]
         private Transform habitatRoot, farmRoot;
 
         private readonly Dictionary<string, Home_Monster> monster = new();
@@ -51,6 +54,14 @@ namespace MonsterLegendsLite {
                 ins.Initialize(insData.InsId);
                 ins.TF.position = map.GetWorldPos(insData.Position);
             }
+        }
+
+        public void OnClicked_Building(Home_Building building) {
+            uiBuildingInfo.ShowInfoFor(building);
+        }
+
+        public void OnClicked_Void() {
+            uiBuildingInfo.HideCurInfo();
         }
     }
 }

@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using MonsterLegendsLite.Data;
-using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace MonsterLegendsLite {
-    public class Home_Habitat : MonoBehaviourExt {
+    public class Home_Habitat : Home_Building {
         [NonSerialized, ShowInInspector, ReadOnly]
         public HabitatInsData insData;
 
@@ -16,6 +15,8 @@ namespace MonsterLegendsLite {
         private readonly List<Home_Monster> monsters = new();
 
         public void Initialize(HabitatInsData insData) {
+            base.Initialize(insData.InsId);
+            
             this.insData = insData;
         }
 
