@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace MonsterLegendsLite {
-    public class Home_SceneManager : Singleton<Home_SceneManager> {
+    public class Home_SceneManager : SceneSingleton<Home_SceneManager> {
         [SerializeField]
         private MonsterDetail_BootData prefabMonsterDetailBootData;
         

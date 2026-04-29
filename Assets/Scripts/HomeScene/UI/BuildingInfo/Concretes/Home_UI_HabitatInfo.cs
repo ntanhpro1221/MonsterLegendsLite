@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using MonsterLegendsLite.Data;
+using NGDtuanh.MonsterLegendsLite;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,30 @@ namespace MonsterLegendsLite {
 
             var habitat = (Home_Habitat)building;
             
+            LoadCollectBtn(habitat);
+            LoadMonsterBtns(habitat);
+            
+            LayoutRebuilder.ForceRebuildLayoutImmediate(RectTF);
+        }
+
+        private void LoadCollectBtn(Home_Habitat habitat) {
+            UpdateTotalGold();
+            
+            collectBtn.SetCallback(() => {
+                var gold = habitat.CalculateCurTotalGold();
+                if (gold <= 0) return;
+                
+                DataManager.Ins.UpdateData_CollectGold(habitat);
+
+                FloatingTextManager.Ins.ShowAtWorld(FloatingTextId.GoldChange, habitat.TF.position).SetTextChange(gold);
+                
+                UpdateTotalGold();
+                
+                EventDispatcher.PostEvent(EventId.UserGoldChanged);
+            });
+        }
+
+        private void LoadMonsterBtns(Home_Habitat habitat) {
             foreach (var usingMonsterBtn in usingMonsterBtns) {
                 availableMonsterBtns.Add(usingMonsterBtn);
                 usingMonsterBtn.gameObject.SetActive(false);
@@ -36,26 +61,22 @@ namespace MonsterLegendsLite {
 
                 usingMonsterBtns.Add(button);
                 
-                var monsterDefData = DataManager.Ins.GameDefData.Monster[monster.insData.Id];
+                var monsterDefData    = DataManager.Ins.GameDefData.Monster[monster.insData.Id];
                 var monsterLocDefData = DataManager.Ins.GameLocDefData.Monster[monster.insData.Id];
                 
                 button.SetCallback(() => Home_SceneManager.Ins.ViewMonsterDetail(monster.insData.InsId));
                 button.SetIcon(monsterLocDefData.Avatar);
                 button.SetTitle(monsterDefData.Name);
-                button.SetInfo(monster.insData.Level.ToString());
+                button.SetInfo(utils.ToStrResource(monster.insData.Level));
             }
-            
-            UpdateTotalGold();
-            
-            LayoutRebuilder.ForceRebuildLayoutImmediate(RectTF);
         }
-
+        
         public void Update() {
             UpdateTotalGold();
         }
 
         private void UpdateTotalGold() {
-            collectBtn.SetInfo(Home_SceneManager.Ins.Habitats[CurTargetId].CalculateCurTotalGold().ToString());
+            collectBtn.SetInfo(utils.ToStrResource(Home_SceneManager.Ins.Habitats[CurTargetId].CalculateCurTotalGold()));
         }
     }
 }

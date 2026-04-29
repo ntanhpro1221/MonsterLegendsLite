@@ -358,6 +358,7 @@ GameObject:
   - component: {fileID: 6412822016345542352}
   - component: {fileID: 4248844106002366163}
   - component: {fileID: 7199851851365289459}
+  - component: {fileID: 4479118665892867819}
   m_Layer: 5
   m_Name: ResourceInfo
   m_TagString: Untagged
@@ -477,6 +478,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84508567d30145c2a3faca320d020fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.RebuildLayoutFixer
+--- !u!114 &4479118665892867819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7770806168981226828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e949b70a33d48e2be972e367db67bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.UI.Home_UI_ResourceInfoData
+  text: {fileID: 1760428424174820720}
+  button: {fileID: 2562272494945894542}
 --- !u!1 &8264375544458775069
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,7 +558,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8aa5e7fb1a4d08c4e8369f6d3426278e, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -566,4 +581,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
   m_AspectMode: 2
-  m_AspectRatio: 1.1153846
+  m_AspectRatio: 1

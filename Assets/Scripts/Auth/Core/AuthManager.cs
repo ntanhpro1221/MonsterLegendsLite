@@ -20,8 +20,8 @@ namespace MonsterLegendsLite.Auth {
 
         public static event Action onRegisterAuthenticator;
 
-        protected override async void Awake() {
-            base.Awake();
+        protected override async void Initialize() {
+            base.Initialize();
 
             IsEditor    = Application.isEditor;
             ProductName = Application.productName;

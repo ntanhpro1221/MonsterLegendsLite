@@ -8,6 +8,7 @@ namespace MonsterLegendsLite.Data {
         public MonsterId Id;
         public string CustomName;
         public int Level;
+        public int Exp;
         public string Habitat;
         public List<int> SkillIds;
     }

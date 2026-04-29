@@ -16,36 +16,40 @@ MonoBehaviour:
     Name: NGDtuanh
     Level: 10
     Exp: 1221
-    Gold: 123
-    Food: 456
+    Gold: 23898
+    Food: 3671
     Monsters:
     - InsId: Test_Monster_0
       Id: 0
       CustomName: 
       Level: 2
+      Exp: 0
       Habitat: Test_Habitat_0
+      SkillIds: 
     - InsId: Test_Monster_1
       Id: 1
       CustomName: 
       Level: 5
+      Exp: 0
       Habitat: Test_Habitat_1
+      SkillIds: 
     Habitats:
     - InsId: Test_Habitat_0
       Id: 0
       Position: {x: -5, y: 0}
       CurGold: 0
       LastGoldUpdate:
-        value: 1777299717
+        value: 1777482670
     - InsId: Test_Habitat_1
       Id: 1
       Position: {x: 0, y: 0}
       CurGold: 0
       LastGoldUpdate:
-        value: 1777299717
+        value: 1777482683
     Farms:
     - InsId: Test_Farm_0
       Id: 0
       Position: {x: 0, y: -5}
       CurFood: 0
       LastFoodUpdate:
-        value: 1777299717
+        value: 1777482687

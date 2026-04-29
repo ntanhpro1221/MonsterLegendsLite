@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace MonsterLegendsLite {
-    public class Battle_SceneManager : Singleton<Battle_SceneManager> {
+    public class Battle_SceneManager : SceneSingleton<Battle_SceneManager> {
         [SerializeField, Required]
         private Battle_UserSkillSelector userSkillSelector;
 

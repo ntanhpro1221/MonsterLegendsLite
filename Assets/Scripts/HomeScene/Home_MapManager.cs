@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace MonsterLegendsLite {
-    public class Home_MapManager : Singleton<Home_MapManager> {
+    public class Home_MapManager : SceneSingleton<Home_MapManager> {
         [SerializeField, Required]
         private Grid grid;
 

@@ -52,7 +52,7 @@ namespace MonsterLegendsLite {
         }
 
         public void SetFoodRequired(int foodRequired) {
-            feedBtnTxt.text = $"FEED {foodRequired.ToString()}";
+            feedBtnTxt.text = $"FEED {utils.ToStrResource(foodRequired)}";
         }
     }
 }

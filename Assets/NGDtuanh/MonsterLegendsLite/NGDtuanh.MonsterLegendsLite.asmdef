@@ -3,7 +3,10 @@
     "rootNamespace": "NGDtuanh.MonsterLegendsLite",
     "references": [
         "GUID:be7950620ed931c4aae4bf81e3d71075",
-        "GUID:5a7049af32b040c4e84a250ba84578a7"
+        "GUID:5a7049af32b040c4e84a250ba84578a7",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:9a40d9a01254a2645840b2918ae54018",
+        "GUID:3ad48891bd788b845b92e80c422547e8"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

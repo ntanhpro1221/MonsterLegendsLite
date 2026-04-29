@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace MonsterLegendsLite {
-    public class MonsterDetail_SceneManager : Singleton<MonsterDetail_SceneManager> {
+    public class MonsterDetail_SceneManager : SceneSingleton<MonsterDetail_SceneManager> {
         [SerializeField, Required]
         private MonsterDetail_UI_Info uiInfo;
         
