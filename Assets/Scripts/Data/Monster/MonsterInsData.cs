@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace MonsterLegendsLite.Data {
     [Serializable]
@@ -8,5 +9,6 @@ namespace MonsterLegendsLite.Data {
         public string CustomName;
         public int Level;
         public string Habitat;
+        public List<int> SkillIds;
     }
 }

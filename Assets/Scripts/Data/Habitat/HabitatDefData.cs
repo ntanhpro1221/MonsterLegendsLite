@@ -6,6 +6,7 @@ namespace MonsterLegendsLite.Data {
     public class HabitatDefData {
         public string Name;
         public string Description;
+        public int Capacity;
         public int MaxGold;
         public Vector2Int Size;
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace MonsterLegendsLite.Data {
@@ -8,6 +9,8 @@ namespace MonsterLegendsLite.Data {
         public string Description;
         public MonsterStats<int> StatsBase;
         public MonsterStats<AnimationCurve> StatsGrowth;
+        public List<MonsterSkillData> Skills;
+        public List<ElementId> Element;
         public MonsterRankId Rank;
         public int Cost;
 

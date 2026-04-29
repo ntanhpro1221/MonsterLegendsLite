@@ -5,9 +5,12 @@ namespace MonsterLegendsLite.Data {
     public class MonsterSkillData {
         public string Name;
         public string Description;
-        public int UnlockAtLevel;
-        public float AtkPercent;
-        public int MPRequired;
+        public ElementId Element;
+        public MonsterSkillTargetId Target;
+        public int PowerRate;
+        public int Accuracy;
+        public int MPCost;
         public int Cooldown;
+        public int UnlockAtLevel;
     }
 }

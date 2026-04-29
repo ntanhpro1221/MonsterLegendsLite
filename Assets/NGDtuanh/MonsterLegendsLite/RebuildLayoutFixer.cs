@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace MonsterLegendsLite {
+namespace NGDtuanh.MonsterLegendsLite {
     [RequireComponent(typeof(RectTransform))]
     public class RebuildLayoutFixer : MonoBehaviour {
         private void Update() {
