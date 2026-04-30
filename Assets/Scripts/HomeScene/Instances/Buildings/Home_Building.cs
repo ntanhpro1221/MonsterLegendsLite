@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -16,28 +17,35 @@ namespace MonsterLegendsLite {
         private int pntId;
         private Vector2 pntDownOffset;
 
+        public event Action<bool> onPlaceableChanged;
+
         public T To<T>() where T : Home_Building {
             return (T)this;
         }
-        
+
         protected virtual void Initialize(string insId) {
             InsId = insId;
 
-            SharedData.selectOutline.size = GetSizeData();
+            var size = GetSizeData();
+            SharedData.selectOutline.size = size;
+            SharedData.validPlaceSpr.size = size;
+            SharedData.invalidPlaceSpr.size = size;
             foreach (var arrowAnchor in SharedData.arrowAnchors) arrowAnchor.UpdatePosFromAnchor();
-            
-            SharedData.outlineWrapper.gameObject.SetActive(false);
+
+            SharedData.selectWrapper.gameObject.SetActive(false);
+
+            SetVisibleValidPlace(false);
         }
 
         public void OnSelect() {
             isSelected = true; 
-            SharedData.outlineWrapper.gameObject.SetActive(true);
+            SharedData.selectWrapper.gameObject.SetActive(true);
             SharedData.sortingGroup.sortingOrder = SharedData.orderOnSelected;
         }
         
         public void OnDeselect() {
             isSelected = false; 
-            SharedData.outlineWrapper.gameObject.SetActive(false);
+            SharedData.selectWrapper.gameObject.SetActive(false);
             SharedData.sortingGroup.sortingOrder = 0;
         }
         
@@ -63,6 +71,7 @@ namespace MonsterLegendsLite {
         }
         
         public void OnPointerMove(PointerEventData eventData) {
+            if (isPntMoved) return;
             if (!isPntDown) return;
             if (pntId != eventData.pointerId) return;
             
@@ -76,10 +85,21 @@ namespace MonsterLegendsLite {
                     var expectedPos    = (Vector2)Home_SceneManager.Ins.Cam.ScreenToWorldPoint(utils.GetPointerPos(pntId)) - pntDownOffset;
                     var nearestTilePos = Home_MapManager.Ins.GetNearestTilePos(expectedPos);
                     TF.position = Home_MapManager.Ins.GetWorldPos(nearestTilePos);
+
+                    var isPlaceable = Home_MapManager.Ins.IsPlaceable(this);
+                    SharedData.validPlaceSpr.enabled   = isPlaceable;
+                    SharedData.invalidPlaceSpr.enabled = !isPlaceable;
+                    
+                    onPlaceableChanged?.Invoke(isPlaceable);
                 }
 
                 yield return null;
             }
+        }
+
+        public void SetVisibleValidPlace(bool isOn) {
+            SharedData.validPlaceSpr.gameObject.SetActive(isOn); 
+            SharedData.invalidPlaceSpr.gameObject.SetActive(isOn); 
         }
 
         public void ResetPos() {
@@ -90,8 +110,8 @@ namespace MonsterLegendsLite {
             SavePos(Home_MapManager.Ins.GetNearestTilePos(TF.position));
         }
 
-        protected abstract Vector2Int GetSizeData();
-        protected abstract Vector2Int GetPosData();
+        public abstract Vector2Int GetSizeData();
+        public abstract Vector2Int GetPosData();
         protected abstract void SavePos(Vector2Int tilePos);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using NGDtuanh.MonsterLegendsLite;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace MonsterLegendsLite {
@@ -19,7 +20,27 @@ namespace MonsterLegendsLite {
                 CurTarget.SaveCurPos();
                 
                 Home_SceneManager.Ins.ForceShowBuildingInfo(CurTarget);
+                
+                EventDispatcher.PostEvent(EventId.HomeMapChanged);
             });
+
+            CurTarget.onPlaceableChanged += OnTargetIsPlaceableChanged;
+            
+            Home_MapManager.Ins.SetVisibleGrid(true);
+            CurTarget.SetVisibleValidPlace(true);
+        }
+
+        public override void UnloadInfo() {
+            CurTarget.onPlaceableChanged -= OnTargetIsPlaceableChanged;
+            
+            Home_MapManager.Ins.SetVisibleGrid(false);
+            CurTarget.SetVisibleValidPlace(false);
+            
+            base.UnloadInfo();
+        }
+
+        private void OnTargetIsPlaceableChanged(bool isPlaceable) {
+            confirmBtn.SetInteractable(isPlaceable);
         }
     }
 }

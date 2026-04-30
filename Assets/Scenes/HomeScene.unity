@@ -4608,7 +4608,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba64ae312d3b48bf92d15e103b380b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Home_MapManager
-  grid: {fileID: 1067106970}
+  tileMap: {fileID: 37677291}
+  tileRenderer: {fileID: 37677292}
 --- !u!4 &1067106972
 Transform:
   m_ObjectHideFlags: 0
@@ -4845,11 +4846,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1210739249769825090, guid: c5f37fa847ce26442b0b118e58495464, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1210739249769825090, guid: c5f37fa847ce26442b0b118e58495464, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1210739249769825090, guid: c5f37fa847ce26442b0b118e58495464, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4857,15 +4858,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1210739249769825090, guid: c5f37fa847ce26442b0b118e58495464, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 55
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1210739249769825090, guid: c5f37fa847ce26442b0b118e58495464, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 214.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1210739249769825090, guid: c5f37fa847ce26442b0b118e58495464, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -27.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3229864814244224532, guid: c5f37fa847ce26442b0b118e58495464, type: 3}
       propertyPath: m_Pivot.x
@@ -5599,11 +5600,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1210739249769825090, guid: ce2c0563c3fcaef4ab35730392b14479, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1210739249769825090, guid: ce2c0563c3fcaef4ab35730392b14479, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1210739249769825090, guid: ce2c0563c3fcaef4ab35730392b14479, type: 3}
       propertyPath: m_SizeDelta.x
@@ -5611,15 +5612,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1210739249769825090, guid: ce2c0563c3fcaef4ab35730392b14479, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 55
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1210739249769825090, guid: ce2c0563c3fcaef4ab35730392b14479, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 214.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1210739249769825090, guid: ce2c0563c3fcaef4ab35730392b14479, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -27.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3229864814244224532, guid: ce2c0563c3fcaef4ab35730392b14479, type: 3}
       propertyPath: m_Pivot.x

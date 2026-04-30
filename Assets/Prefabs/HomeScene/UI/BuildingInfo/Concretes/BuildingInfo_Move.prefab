@@ -297,7 +297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4908424276570605491, guid: 1d9c7b820e7d5124785f7a07e4be114a, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -30
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 4908424276570605491, guid: 1d9c7b820e7d5124785f7a07e4be114a, type: 3}
       propertyPath: m_SizeDelta.y
@@ -317,12 +317,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6083855705331358698, guid: 1d9c7b820e7d5124785f7a07e4be114a, type: 3}
       propertyPath: m_AspectRatio
-      value: 1.2666667
+      value: 0.8333333
       objectReference: {fileID: 0}
     - target: {fileID: 6299237567459507952, guid: 1d9c7b820e7d5124785f7a07e4be114a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 02c5a83e912931244a68283688db1b6d, type: 3}
+      objectReference: {fileID: 21300000, guid: 8faf349c492c5144f9c7db266aa16a3b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -454,12 +454,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6083855705331358698, guid: 1d9c7b820e7d5124785f7a07e4be114a, type: 3}
       propertyPath: m_AspectRatio
-      value: 0.8181818
+      value: 0.96
       objectReference: {fileID: 0}
     - target: {fileID: 6299237567459507952, guid: 1d9c7b820e7d5124785f7a07e4be114a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 4f8017813492ddc4fa42cf0141adf5be, type: 3}
+      objectReference: {fileID: 21300000, guid: dfbb95e8501dcc74fa0d6e12d2020bf4, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

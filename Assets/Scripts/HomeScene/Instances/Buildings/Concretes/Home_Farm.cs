@@ -17,12 +17,12 @@ namespace MonsterLegendsLite {
         public long CalculateCurTotalFood() {
             return DataManager.Ins.GameDefData.Farm[insData.Id].CalculateFood(insData);
         }
-        
-        protected override Vector2Int GetSizeData() {
+
+        public override Vector2Int GetSizeData() {
             return DataManager.Ins.GameDefData.Farm[insData.Id].Size;
         }
 
-        protected override Vector2Int GetPosData() {
+        public override Vector2Int GetPosData() {
             return insData.Position;
         }
         

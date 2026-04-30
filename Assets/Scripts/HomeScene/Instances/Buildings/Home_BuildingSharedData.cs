@@ -13,7 +13,7 @@ namespace MonsterLegendsLite {
         public int orderOnSelected;
         
         [SerializeField, Required]
-        public Transform outlineWrapper;
+        public Transform selectWrapper;
         
         [SerializeField, Required]
         public SpriteRenderer selectOutline;
@@ -22,6 +22,6 @@ namespace MonsterLegendsLite {
         public SpriteRendererAnchorer[] arrowAnchors;
 
         [SerializeField, Required]
-        public SpriteRenderer validPlaceImg, invalidPlaceImg;
+        public SpriteRenderer validPlaceSpr, invalidPlaceSpr;
     }
 }
