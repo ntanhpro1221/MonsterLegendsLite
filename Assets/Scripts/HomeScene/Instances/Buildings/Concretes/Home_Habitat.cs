@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace MonsterLegendsLite {
     public class Home_Habitat : Home_Building {
-        [NonSerialized, ShowInInspector, ReadOnly]
+        [NonSerialized, ShowInInspector, ReadOnly, PropertyOrder(-99)]
         public HabitatInsData insData;
 
         [SerializeField, Required]
@@ -18,9 +18,9 @@ namespace MonsterLegendsLite {
         public IReadOnlyList<Home_Monster> Monsters => monsters;
 
         public void Initialize(HabitatInsData insData) {
-            base.Initialize(insData.InsId);
-            
             this.insData = insData;
+            
+            base.Initialize(insData.InsId);
         }
 
         public void AddMonster(Home_Monster monster) {
@@ -29,7 +29,7 @@ namespace MonsterLegendsLite {
             monster.TF.SetParent(monsterRoot);
             monster.TF.localPosition = Vector3.zero;
             
-            monster.StartLocalMove(insData.Position, DataManager.Ins.GameDefData.Habitat[insData.Id].Size);
+            monster.StartLocalMove(DataManager.Ins.GameDefData.Habitat[insData.Id].Size);
         }
 
         public long CalculateCurTotalGold() {
@@ -41,6 +41,18 @@ namespace MonsterLegendsLite {
             }
             
             return (long)(result);
+        }
+        
+        protected override Vector2Int GetSizeData() {
+            return DataManager.Ins.GameDefData.Habitat[insData.Id].Size;
+        }
+
+        protected override Vector2Int GetPosData() {
+            return insData.Position;
+        }
+        
+        protected override void SavePos(Vector2Int tilePos) {
+            DataManager.Ins.UpdateData_MoveHabitat(insData, tilePos);
         }
     }
 }

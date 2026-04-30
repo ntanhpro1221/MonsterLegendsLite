@@ -22,26 +22,27 @@ namespace MonsterLegendsLite {
             return DataManager.Ins.GameDefData.Monster[insData.Id].CalculateStat(insData, MonsterStatId.GoldPerMin);
         }
 
-        public void StartLocalMove(Vector2Int pos, Vector2Int size) {
+        public void StartLocalMove(Vector2Int size) {
             StopCoroutine(nameof(IELocalMove));
-            StartCoroutine(IELocalMove(pos, size));
+            StartCoroutine(IELocalMove(size));
         }
 
-        private IEnumerator IELocalMove(Vector2Int pos, Vector2Int size) {
+        private IEnumerator IELocalMove(Vector2Int size) {
             while (true) {
-                var locTarget = TF.parent.InverseTransformPoint(Home_MapManager.Ins.RandomPointInHabitat(pos, size));
-                var duration  = Vector2.Distance(TF.localPosition, locTarget) / DataManager.Ins.GameDefData.Home_MonsterSpeed;
+                var habitatPos = Home_MapManager.Ins.GetNearestTilePos(Home_SceneManager.Ins.Habitats[insData.Habitat].TF.position);
+                var locTarget  = TF.parent.InverseTransformPoint(Home_MapManager.Ins.RandomPointInHabitat(habitatPos, size));
+                var duration   = Vector2.Distance(TF.localPosition, locTarget) / DataManager.Ins.GameDefData.Home_MonsterSpeed;
 
                 model.SetDirection(TF.localPosition.x < locTarget.x ? HorDirection.Right : HorDirection.Left);
                 model.Play(MonsterAnimId.Walk);
-                
+
                 yield return TF
                     .DOLocalMove(locTarget, duration)
                     .SetEase(Ease.Linear)
                     .WaitForCompletion();
-                
+
                 model.Play(MonsterAnimId.Idle);
-                
+
                 yield return WaitForSecondCache.Get(utils.RandomInside(DataManager.Ins.GameDefData.Home_MonsterIdleTime));
             }
         }

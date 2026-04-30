@@ -11,6 +11,10 @@ namespace MonsterLegendsLite {
             return grid.GetCellCenterWorld(new Vector3Int(tilePos.x, tilePos.y, 0));
         }
 
+        public Vector2Int GetNearestTilePos(Vector2 worldPos) {
+            return (Vector2Int)grid.WorldToCell(worldPos);
+        }
+
         public Vector2 RandomPointInHabitat(Vector2Int pos, Vector2Int size) {
             return grid.LocalToWorld(grid.CellToLocalInterpolated(new Vector3(
                 pos.x + Random.Range(0, size.x)

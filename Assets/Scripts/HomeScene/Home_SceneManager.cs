@@ -14,7 +14,7 @@ namespace MonsterLegendsLite {
         private Home_UI_BuildingInfoManager uiBuildingInfo;
         
         [SerializeField, Required]
-        private Transform habitatRoot, farmRoot;
+        private Transform buildingRoot;
 
         private readonly Dictionary<string, Home_Monster> monsters = new();
         private readonly Dictionary<string, Home_Habitat> habitats = new();
@@ -23,6 +23,9 @@ namespace MonsterLegendsLite {
         public IReadOnlyDictionary<string, Home_Monster> Monsters => monsters;
         public IReadOnlyDictionary<string, Home_Habitat> Habitats => habitats;
         public IReadOnlyDictionary<string, Home_Farm> Farms => farms;
+
+        private Camera cam;
+        public Camera Cam => cam != null ? cam : cam = Camera.main;
 
         private void Start() {
             BuildMap();
@@ -35,7 +38,7 @@ namespace MonsterLegendsLite {
 
             // Spawn habitats
             foreach (var insData in userIns.Habitats) {
-                var ins = Instantiate(gameLocDef.Habitat[insData.Id].PrefabHomeScene, habitatRoot);
+                var ins = Instantiate(gameLocDef.Habitat[insData.Id].PrefabHomeScene, buildingRoot);
                 habitats.Add(insData.InsId, ins);
 
                 ins.Initialize(insData);
@@ -54,7 +57,7 @@ namespace MonsterLegendsLite {
             
             // Spawn farms
             foreach (var insData in userIns.Farms) {
-                var ins = Instantiate(gameLocDef.Farm[insData.Id].PrefabHomeScene, farmRoot);
+                var ins = Instantiate(gameLocDef.Farm[insData.Id].PrefabHomeScene, buildingRoot);
                 farms.Add(insData.InsId, ins);
 
                 ins.Initialize(insData);
@@ -63,11 +66,19 @@ namespace MonsterLegendsLite {
         }
 
         public void OnClicked_Building(Home_Building building) {
-            uiBuildingInfo.ShowInfoFor(building);
+            uiBuildingInfo.ShowInfoFor(building, hideMoveInfo: false);
+        }
+        
+        public void OnMove_Building(Home_Building building) {
+            uiBuildingInfo.ShowMoveInfoFor(building);
         }
 
         public void OnClicked_Void() {
-            uiBuildingInfo.HideCurInfo();
+            uiBuildingInfo.TryHideCurInfo();
+        }
+
+        public void ForceShowBuildingInfo(Home_Building building) {
+            uiBuildingInfo.ShowInfoFor(building, hideMoveInfo: true);
         }
 
         public void ViewMonsterDetail(string insId) {

@@ -13,6 +13,19 @@ MonoBehaviour:
   m_Name: GameLocDefDataSO
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Data.GameLocDefDataSO
   Data:
+    Element:
+      _Keys: 0000000001000000
+      _Values:
+      - value:
+          Icon: {fileID: 0}
+          SkillButton: {fileID: 0}
+      - value:
+          Icon: {fileID: 0}
+          SkillButton: {fileID: 0}
+      _KeyNames:
+      - Fire
+      - Thunder
+      _IsKeyChanged: 0
     MonsterRank:
       _Keys: 0000000001000000020000000300000004000000
       _Values:
@@ -54,9 +67,9 @@ MonoBehaviour:
       _Keys: 0000000001000000
       _Values:
       - value:
-          PrefabHomeScene: {fileID: 4534607845955467226, guid: dc3f53e68855ea744b7ae2c6fe00281c, type: 3}
+          PrefabHomeScene: {fileID: 2516894608579519234, guid: dc3f53e68855ea744b7ae2c6fe00281c, type: 3}
       - value:
-          PrefabHomeScene: {fileID: 4534607845955467226, guid: 9f2aef516c8826f498f3056cc012db9d, type: 3}
+          PrefabHomeScene: {fileID: 2516894608579519234, guid: 4a0f1616c2685a648a3d2d9bbadf8569, type: 3}
       _KeyNames:
       - Fire
       - Thunder
@@ -65,13 +78,13 @@ MonoBehaviour:
       _Keys: 000000000100000002000000
       _Values:
       - value:
-          PrefabHomeScene: {fileID: 6973579183253180688, guid: 31667ad9a1f57774e897c2eeb70845c4, type: 3}
+          PrefabHomeScene: {fileID: 6407261728970852085, guid: 374d9eb44fc559444ad7ab221da6851f, type: 3}
       - value:
-          PrefabHomeScene: {fileID: 6973579183253180688, guid: 374d9eb44fc559444ad7ab221da6851f, type: 3}
+          PrefabHomeScene: {fileID: 6407261728970852085, guid: 0f582d0cab9538f4e9fcd510615a5d20, type: 3}
       - value:
-          PrefabHomeScene: {fileID: 6973579183253180688, guid: aa8ae7619e6493a48b3b2d46d36f1479, type: 3}
+          PrefabHomeScene: {fileID: 6407261728970852085, guid: 2bfb37a4a4d0b0b459e73e7dcd902d9f, type: 3}
       _KeyNames:
-      - Sony
       - Apple
       - Samsung
+      - Sony
       _IsKeyChanged: 0

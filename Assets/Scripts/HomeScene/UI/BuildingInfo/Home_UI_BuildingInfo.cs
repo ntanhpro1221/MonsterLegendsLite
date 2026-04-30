@@ -7,10 +7,14 @@ namespace MonsterLegendsLite {
         [SerializeField, Required]
         private Home_UI_BuildingInfoSharedData shared;
 
-        public string CurTargetId { get; private set; }
+        public Home_Building CurTarget { get; private set; }
 
         public virtual void LoadInfoFor(Home_Building building) {
-            CurTargetId = building.InsId;
+            CurTarget = building;
+        }
+
+        public virtual void UnloadInfo() {
+            CurTarget = null;
         }
     }
 }

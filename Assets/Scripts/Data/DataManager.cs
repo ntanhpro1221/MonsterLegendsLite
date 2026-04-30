@@ -44,5 +44,13 @@ namespace MonsterLegendsLite.Data {
             monster.Level = newLevel;
             monster.Exp   = newExp;
         }
+
+        public void UpdateData_MoveHabitat(HabitatInsData habitat, Vector2Int newPos) {
+            habitat.Position = newPos;
+        }
+        
+        public void UpdateData_MoveFarm(FarmInsData farm, Vector2Int newPos) {
+            farm.Position = newPos;
+        }
     }
 }

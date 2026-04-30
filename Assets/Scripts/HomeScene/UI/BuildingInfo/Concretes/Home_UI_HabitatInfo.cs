@@ -76,7 +76,7 @@ namespace MonsterLegendsLite {
         }
 
         private void UpdateTotalGold() {
-            collectBtn.SetInfo(utils.ToStrResource(Home_SceneManager.Ins.Habitats[CurTargetId].CalculateCurTotalGold()));
+            collectBtn.SetInfo(utils.ToStrResource(CurTarget.To<Home_Habitat>().CalculateCurTotalGold()));
         }
     }
 }

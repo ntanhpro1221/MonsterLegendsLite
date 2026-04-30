@@ -1,7 +1,7 @@
 namespace MonsterLegendsLite.Data {
     public enum FarmId {
-        Sony
-      , Apple
+        Apple
       , Samsung
+      , Sony
     }
 }

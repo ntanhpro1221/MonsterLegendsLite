@@ -21,6 +21,19 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    Element:
+      _Keys: 0000000001000000
+      _Values:
+      - value:
+          Name: 
+          Description: 
+      - value:
+          Name: 
+          Description: 
+      _KeyNames:
+      - Fire
+      - Thunder
+      _IsKeyChanged: 0
     MonsterRank:
       _Keys: 0000000001000000020000000300000004000000
       _Values:
@@ -232,6 +245,8 @@ MonoBehaviour:
             - GoldPerMin
             - FoodCost
             _IsKeyChanged: 0
+          Skills: []
+          Element: 
           Rank: 0
           Cost: 100
       - value:
@@ -409,6 +424,8 @@ MonoBehaviour:
             - GoldPerMin
             - FoodCost
             _IsKeyChanged: 0
+          Skills: []
+          Element: 
           Rank: 1
           Cost: 200
       _KeyNames:
@@ -421,11 +438,13 @@ MonoBehaviour:
       - value:
           Name: Fire
           Description: Fire habitat
+          Capacity: 0
           MaxGold: 999
           Size: {x: 4, y: 4}
       - value:
           Name: Thunder
           Description: Thunder habitat
+          Capacity: 0
           MaxGold: 999
           Size: {x: 4, y: 4}
       _KeyNames:
@@ -436,24 +455,27 @@ MonoBehaviour:
       _Keys: 000000000100000002000000
       _Values:
       - value:
-          Name: Sony
-          Description: Sony Farm
-          MaxFood: 200000000
-          FoodPerMin: 120
-      - value:
           Name: Apple
           Description: Apple Farm
           MaxFood: 200000000
           FoodPerMin: 120
+          Size: {x: 4, y: 4}
       - value:
           Name: Samsung
           Description: Samsung Farm
           MaxFood: 200000000
           FoodPerMin: 120
+          Size: {x: 4, y: 4}
+      - value:
+          Name: Sony
+          Description: Sony Farm
+          MaxFood: 200000000
+          FoodPerMin: 120
+          Size: {x: 4, y: 4}
       _KeyNames:
-      - Sony
       - Apple
       - Samsung
+      - Sony
       _IsKeyChanged: 0
     Home_MonsterSpeed: 1
     Home_MonsterIdleTime: {x: 0.5, y: 5}

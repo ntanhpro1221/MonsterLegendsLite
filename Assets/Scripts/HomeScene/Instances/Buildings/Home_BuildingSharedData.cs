@@ -1,0 +1,27 @@
+﻿using NGDtuanh.MonsterLegendsLite;
+using NGDtuanh.Types;
+using Sirenix.OdinInspector;
+using UnityEngine;
+using UnityEngine.Rendering;
+
+namespace MonsterLegendsLite {
+    public class Home_BuildingSharedData : MonoBehaviourExt {
+        [SerializeField, Required]
+        public SortingGroup sortingGroup;
+
+        [SerializeField]
+        public int orderOnSelected;
+        
+        [SerializeField, Required]
+        public Transform outlineWrapper;
+        
+        [SerializeField, Required]
+        public SpriteRenderer selectOutline;
+
+        [SerializeField, Required]
+        public SpriteRendererAnchorer[] arrowAnchors;
+
+        [SerializeField, Required]
+        public SpriteRenderer validPlaceImg, invalidPlaceImg;
+    }
+}
