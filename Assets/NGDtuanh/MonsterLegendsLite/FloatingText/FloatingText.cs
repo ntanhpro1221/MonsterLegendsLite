@@ -78,5 +78,10 @@ namespace NGDtuanh.MonsterLegendsLite {
                 yield return null;
             }
         }
+
+        private void OnDestroy() {
+            floatLayer.DOKill();
+            canvasGroup.DOKill();
+        }
     }
 }

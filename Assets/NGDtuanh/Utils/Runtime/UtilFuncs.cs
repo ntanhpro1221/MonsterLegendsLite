@@ -8,6 +8,7 @@ using DG.Tweening.Core.Easing;
 using DG.Tweening.Plugins.Options;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -180,6 +181,18 @@ namespace NGDtuanh.Utils {
             }
 
             return result;
+        }
+
+        public void SetAlpha(SpriteRenderer sprite, float alpha) {
+            var color = sprite.color;
+            color.a = alpha;
+            sprite.color = color;
+        }
+        
+        public void SetAlpha(Image image, float alpha) {
+            var color = image.color;
+            color.a      = alpha;
+            image.color = color;
         }
         
         #endregion

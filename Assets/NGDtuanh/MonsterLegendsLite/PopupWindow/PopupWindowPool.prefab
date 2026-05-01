@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29705ef734fa4496bb1f811c0419d416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NGDtuanh.MonsterLegendsLite::NGDtuanh.MonsterLegendsLite.PopupWindowPool
-  blurLayer: {fileID: 2968935793833509325}
+  blurLayer: {fileID: 8284676024381871467}
   prefabs:
     _Keys: 0000000001000000
     _Values:
@@ -70,7 +70,6 @@ GameObject:
   - component: {fileID: 3987305092553236113}
   - component: {fileID: 4086240090600460886}
   - component: {fileID: 8284676024381871467}
-  - component: {fileID: 2968935793833509325}
   m_Layer: 5
   m_Name: BlurLayer
   m_TagString: Untagged
@@ -112,7 +111,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5749526359772493275}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -135,15 +134,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!225 &2968935793833509325
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5749526359772493275}
-  m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0

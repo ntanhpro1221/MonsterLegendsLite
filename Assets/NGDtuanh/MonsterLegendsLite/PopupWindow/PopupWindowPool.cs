@@ -4,22 +4,28 @@ using NGDtuanh.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.UI;
 
 namespace NGDtuanh.MonsterLegendsLite {
     [RequireComponent(typeof(RectTransform))]
     public class PopupWindowPool : SceneSingleton<PopupWindowPool> {
         [SerializeField, Required]
-        private CanvasGroup blurLayer;
+        private Image blurLayer;
         
         [SerializeField, Required]
         private EnumMap<PopupWindowId, PopupWindow> prefabs;
 
         private readonly EnumMap<PopupWindowId, ObjectPool<PopupWindow>> pools = new();
 
+        private float blurLayerAlpha;
         private uint activeWindowCnt;
 
         protected override void Initialize() {
             base.Initialize();
+
+            blurLayer.enabled = false;
+            blurLayerAlpha = blurLayer.color.a;
+            utils.SetAlpha(blurLayer, 0);
 
             foreach (var key in pools.Keys) {
                 pools[key] = new(
@@ -52,7 +58,9 @@ namespace NGDtuanh.MonsterLegendsLite {
 
         private void SetVisibleBlurLayer(bool active) {
             blurLayer.DOKill();
-            blurLayer.DOFade(active ? 1 : 0, PopupWindow.SHOW_HIDE_DURATION);
+            var tween = blurLayer.DOFade(active ? blurLayerAlpha : 0, PopupWindow.SHOW_HIDE_DURATION);
+            if (active) blurLayer.enabled = true;
+            else tween.OnComplete(() => blurLayer.enabled = false);
         }
     }
 }
