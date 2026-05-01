@@ -92,5 +92,9 @@ namespace MonsterLegendsLite.Data {
                 return Ins.GameDefData.Farm[farm.Id].CalculateFood(farm);
             }
         }
+
+        public void UpdateData_MonsterCustomName(MonsterInsData monster, string newName) {
+            monster.CustomName = newName;
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace MonsterLegendsLite.Data {
         public MonsterStats<int> StatsBase;
         public MonsterStats<AnimationCurve> StatsGrowth;
         public List<MonsterSkillData> Skills;
-        public List<ElementId> Element;
+        public List<ElementId> Elements;
         public MonsterRankId Rank;
         public int Cost;
 

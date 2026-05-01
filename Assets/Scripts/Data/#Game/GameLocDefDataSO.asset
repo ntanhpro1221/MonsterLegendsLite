@@ -17,11 +17,13 @@ MonoBehaviour:
       _Keys: 0000000001000000
       _Values:
       - value:
-          Icon: {fileID: 0}
-          SkillButton: {fileID: 0}
+          Icon: {fileID: 21300000, guid: fa41e6d9182108147af88c98e0a5fcaa, type: 3}
+          SkillButtonBG: {fileID: 21300000, guid: c1062e814b04846418045c16455bfd98, type: 3}
+          ElementButton: {fileID: 21300000, guid: a19aa3e64592789469a30a279a2c47d7, type: 3}
       - value:
-          Icon: {fileID: 0}
-          SkillButton: {fileID: 0}
+          Icon: {fileID: 21300000, guid: dd9204b8fed09b64297d3886190edfaa, type: 3}
+          SkillButtonBG: {fileID: 21300000, guid: a83f320eb02b0fe4c8e8738ca0485659, type: 3}
+          ElementButton: {fileID: 21300000, guid: 650e185755bc2634d9fb1e5e90fc1a3b, type: 3}
       _KeyNames:
       - Fire
       - Thunder

@@ -25,11 +25,11 @@ MonoBehaviour:
       _Keys: 0000000001000000
       _Values:
       - value:
-          Name: 
-          Description: 
+          Name: Fire
+          Description: Breath of fire
       - value:
-          Name: 
-          Description: 
+          Name: Thunder
+          Description: Speed of lightning
       _KeyNames:
       - Fire
       - Thunder
@@ -246,7 +246,7 @@ MonoBehaviour:
             - FoodCost
             _IsKeyChanged: 0
           Skills: []
-          Element: 
+          Elements: 00000000
           Rank: 0
           Cost: 100
       - value:
@@ -425,7 +425,7 @@ MonoBehaviour:
             - FoodCost
             _IsKeyChanged: 0
           Skills: []
-          Element: 
+          Elements: 0100000000000000
           Rank: 1
           Cost: 200
       _KeyNames:

@@ -1,4 +1,5 @@
-﻿using NGDtuanh.MonsterLegendsLite;
+﻿using System;
+using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -41,6 +42,11 @@ namespace MonsterLegendsLite {
             customNameInput.text = customName;
         }
 
+        public void SetCustomNameChangedCallback(Action<string> callback) {
+            customNameInput.onValueChanged.RemoveAllListeners();
+            customNameInput.onValueChanged.AddListener(new(callback));
+        }
+        
         public void SetName(string name) {
             nameTxt.text = name;
         }

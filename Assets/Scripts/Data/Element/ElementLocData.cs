@@ -9,6 +9,9 @@ namespace MonsterLegendsLite.Data {
         public Sprite Icon;
 
         [Required]
-        public Sprite SkillButton;
+        public Sprite SkillButtonBG;
+        
+        [Required]
+        public Sprite ElementButton;
     }
 }

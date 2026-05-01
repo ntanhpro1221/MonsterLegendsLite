@@ -1,3 +1,4 @@
+using System.Linq;
 using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
 using NGDtuanh.Types;
@@ -53,12 +54,15 @@ namespace MonsterLegendsLite {
 
         private void UpdateUI_Info() {
             uiInfo.SetStats(monster.CalculateStats());
+            uiInfo.SetElements(monster.defData.Elements.Select(i => DataManager.Ins.GameLocDefData.Element[i].ElementButton).ToList());
+            uiInfo.SetRevenue(monster.CalculateStat(MonsterStatId.GoldPerMin));
             uiInfo.SetDescription(monster.defData.Description);
         }
 
         private void UpdateUI_Monster() {
             uiMonster.SetRankIcon(DataManager.Ins.GameLocDefData.MonsterRank[monster.defData.Rank].Icon);
             uiMonster.SetCustomName(monster.insData.CustomName);
+            uiMonster.SetCustomNameChangedCallback(static newName => DataManager.Ins.UpdateData_MonsterCustomName(Ins.monster.insData, newName));
             uiMonster.SetName(monster.defData.Name);
             uiMonster.SetLevel(monster.insData.Level, DataManager.Ins.GameDefData.MonsterRank[monster.defData.Rank].MaxLevel);
 
