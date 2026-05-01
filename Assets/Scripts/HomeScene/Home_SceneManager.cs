@@ -37,9 +37,9 @@ namespace MonsterLegendsLite {
             
             LoadBootDataThenDelete();
             
-            EventDispatcher.RegisterEvent(EventId.UserMonsterListChanged, RebuildHabitats, this, -100);
-            EventDispatcher.RegisterEvent(EventId.UserHabitatListChanged, RebuildMonsters, this, -100);
-            EventDispatcher.RegisterEvent(EventId.UserFarmListChanged, RebuildFarms, this, -100);
+            EventDispatcher.RegisterEvent(EventId.UserMonsterListChanged, RebuildHabitats, this, 100);
+            EventDispatcher.RegisterEvent(EventId.UserHabitatListChanged, RebuildMonsters, this, 100);
+            EventDispatcher.RegisterEvent(EventId.UserFarmListChanged, RebuildFarms, this, 100);
         }
 
         private void OnDestroy() {
