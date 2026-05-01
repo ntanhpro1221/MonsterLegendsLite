@@ -118,5 +118,14 @@ namespace MonsterLegendsLite.Data {
 
             monster.Habitat = newHabitat.InsId;
         }
+
+        public void UpdateData_SellMonster(MonsterInsData monster, out int sellValue) {
+            sellValue = (int)(GameDefData.Monster[monster.Id].Cost * Ins.GameDefData.MonsterSellValueRatio);
+            
+            UpdateData_HabitatLastGoldUpdate(UserInsData.Habitats.Find(i => i.InsId == monster.Habitat));
+
+            UserInsData.Gold += sellValue;
+            UserInsData.Monsters.Remove(monster);
+        }
     }
 }

@@ -24,5 +24,9 @@ namespace MonsterLegendsLite.Data {
         public int CalculateStat(MonsterInsData insData, MonsterStatId statId) {
             return StatsBase[statId] + Mathf.FloorToInt(StatsGrowth[statId].Evaluate(insData.Level));
         }
+
+        public string GetCustomNameIfPossible(MonsterInsData insData) {
+            return string.IsNullOrWhiteSpace(insData.CustomName) ? Name : insData.CustomName;
+        }
     }
 }

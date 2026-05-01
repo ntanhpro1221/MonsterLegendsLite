@@ -45,5 +45,9 @@ namespace NGDtuanh.MonsterLegendsLite {
             btn.onClick.RemoveAllListeners();
             btn.onClick.AddListener(new(callback));
         }
+
+        private void OnDestroy() {
+            SharedData.canvasGroup.DOKill();
+        }
     }
 }

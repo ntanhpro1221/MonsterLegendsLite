@@ -706,7 +706,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5181053068756150904, guid: 3302ce8603883da4ba59868700774b0e, type: 3}
       propertyPath: m_Name
-      value: MoveMonsterInfo
+      value: Info_MoveMonster
       objectReference: {fileID: 0}
     - target: {fileID: 8231891395927904013, guid: 3302ce8603883da4ba59868700774b0e, type: 3}
       propertyPath: m_Pivot.x

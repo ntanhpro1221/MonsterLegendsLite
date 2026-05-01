@@ -16,6 +16,19 @@ namespace MonsterLegendsLite {
 
         public void Initialize(MonsterInsData insData) {
             this.insData = insData;
+            
+            EventDispatcher.RegisterEvent(EventId.UserMonsterListChanged, DestroyIfNotExistInDatabase, this);
+        }
+
+        private void OnDestroy() {
+            TF.DOKill();
+            
+            EventDispatcher.UnregisterEvent(EventId.UserMonsterListChanged, DestroyIfNotExistInDatabase, this);
+        }
+
+        private void DestroyIfNotExistInDatabase() {
+            if (DataManager.Ins.UserInsData.Monsters.Contains(insData)) return;
+            Destroy(this);
         }
 
         public int GetGPM() {
@@ -45,10 +58,6 @@ namespace MonsterLegendsLite {
 
                 yield return WaitForSecondCache.Get(utils.RandomInside(DataManager.Ins.GameDefData.Home_MonsterIdleTime));
             }
-        }
-
-        private void OnDestroy() {
-            TF.DOKill();
         }
     }
 }

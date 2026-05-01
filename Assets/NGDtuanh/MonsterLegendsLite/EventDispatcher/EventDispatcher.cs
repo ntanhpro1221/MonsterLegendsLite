@@ -5,33 +5,38 @@ using Object = UnityEngine.Object;
 
 namespace NGDtuanh.MonsterLegendsLite {
     public static class EventDispatcher {
-        private static readonly EnumMap<EventId, List<(Object, Action)>> events = new();
+        private static readonly EnumMap<EventId, List<(Object, Action, int)>> events = new();
 
-        private static List<(Object author, Action callback)> GetEvent(EventId id) {
+        private static List<(Object author, Action callback, int priority)> GetEvent(EventId id) {
             return events[id] ??= new();
         }
 
-        public static void RegisterEvent(EventId id, Action callback, Object author) {
-            GetEvent(id).Add((author, callback));
+        public static void RegisterEvent(EventId id, Action callback, Object author, int priority = 0) {
+            var targetEvents = GetEvent(id);
+            targetEvents.Add((author, callback, priority));
+            targetEvents.Sort(static (a, b) => a.priority.CompareTo(b.priority));
         }
 
         public static void UnregisterEvent(EventId id, Action callback, Object author) {
-            for (int i = GetEvent(id).Count - 1; i >= 0; --i) {
-                if (GetEvent(id)[i].author != author) continue;
-                if (GetEvent(id)[i].callback != callback) continue;
-                GetEvent(id).RemoveAt(i);
+            var targetEvents = GetEvent(id);
+            
+            for (int i = targetEvents.Count - 1; i >= 0; --i) {
+                if (targetEvents[i].author != author) continue;
+                if (targetEvents[i].callback != callback) continue;
+                targetEvents.RemoveAt(i);
                 break;
             }
         }
 
         public static void PostEvent(EventId id) {
-            for (int i = GetEvent(id).Count - 1; i >= 0; --i) {
-                if (GetEvent(id)[i].author == null) {
-                    GetEvent(id).RemoveAt(i);
-                    continue;
-                }
-                GetEvent(id)[i].callback?.Invoke();
-            }
+            var targetEvents = GetEvent(id);
+
+            for (int i = targetEvents.Count - 1; i >= 0; --i)
+                if (targetEvents[i].author == null)
+                    targetEvents.RemoveAt(i);
+
+            foreach (var targetEvent in targetEvents.ToArray())
+                targetEvent.callback?.Invoke();
         }
     }
 }

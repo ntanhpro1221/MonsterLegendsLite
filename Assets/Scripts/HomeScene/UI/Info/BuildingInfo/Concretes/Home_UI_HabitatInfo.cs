@@ -12,6 +12,9 @@ namespace MonsterLegendsLite {
         [SerializeField]
         private Home_UI_InfoBtn prefabMonsterInfoBtn;
 
+        [SerializeField]
+        private int limitMonsterNameLength;
+
         private readonly List<Home_UI_InfoBtn> availableMonsterBtns = new(4);
 
         private readonly List<Home_UI_InfoBtn> usingMonsterBtns = new(4);
@@ -66,11 +69,17 @@ namespace MonsterLegendsLite {
                 
                 button.SetCallback(() => Home_SceneManager.Ins.ViewMonsterDetail(monster.insData.InsId));
                 button.SetIcon(monsterLocDefData.Avatar);
-                button.SetTitle(monsterDefData.Name);
+                button.SetTitle(LimitNameLength(monsterDefData.GetCustomNameIfPossible(monster.insData)));
                 button.SetInfo(utils.ToStrResource(monster.insData.Level));
             }
         }
-        
+
+        private string LimitNameLength(string name) {
+            return name.Length > limitMonsterNameLength
+                ? $"{name[..(limitMonsterNameLength - 2)]}..."
+                : name;
+        }
+
         public void Update() {
             UpdateTotalGold();
         }

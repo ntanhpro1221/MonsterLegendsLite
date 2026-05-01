@@ -2,8 +2,11 @@
     public enum EventId {
         UserGoldChanged
       , UserFoodChanged
+      , UserMonsterListChanged
+      , UserHabitatListChanged
+      , UserFarmListChanged
       , HomeMapChanged
-      , HomeMonsterMoved
+      , HomeMonsterPlaceChanged
       , MonsterFeedInMonsterDetail
       , MonsterLevelChangedInMonsterDetail
     }

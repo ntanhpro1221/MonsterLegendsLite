@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
 using NGDtuanh.Types;
@@ -35,50 +36,99 @@ namespace MonsterLegendsLite {
             BuildMap();
             
             LoadBootDataThenDelete();
+            
+            EventDispatcher.RegisterEvent(EventId.UserMonsterListChanged, RebuildHabitats, this, -100);
+            EventDispatcher.RegisterEvent(EventId.UserHabitatListChanged, RebuildMonsters, this, -100);
+            EventDispatcher.RegisterEvent(EventId.UserFarmListChanged, RebuildFarms, this, -100);
+        }
+
+        private void OnDestroy() {
+            EventDispatcher.UnregisterEvent(EventId.UserMonsterListChanged, RebuildHabitats, this);
+            EventDispatcher.UnregisterEvent(EventId.UserHabitatListChanged, RebuildMonsters, this);
+            EventDispatcher.UnregisterEvent(EventId.UserFarmListChanged, RebuildFarms, this);
         }
 
         private void LoadBootDataThenDelete() {
             var bootData = Home_BootData.Ins;
             if (bootData == null) return;
 
-            if (bootData.moveMonster != null) {
-                StartMoveMonster(Monsters[bootData.moveMonster.InsId]);
-            }
+            if (bootData.moveMonster != null) StartMoveMonster(Monsters[bootData.moveMonster.InsId]);
+            
+            if (bootData.floatingGold != null) FloatingTextPool.Ins.ShowAtCenterScreen(FloatingTextId.GoldChange).SetTextChange(bootData.floatingGold.Value);
             
             Destroy(bootData.gameObject);
         }
 
         private void BuildMap() {
+            RebuildHabitats();
+            RebuildFarms();
+            
+            RebuildMonsters();
+        }
+
+        private void RebuildHabitats() {
             var map        = Home_MapManager.Ins;
             var gameLocDef = DataManager.Ins.GameLocDefData;
-            var userIns    = DataManager.Ins.UserInsData;
+            
+            // Remove
+            foreach (var (key, _) in habitats.Where(static i =>
+                i.Value == null
+             || !DataManager.Ins.UserInsData.Habitats.Contains(i.Value.insData)))
+                habitats.Remove(key);
 
-            // Spawn habitats
-            foreach (var insData in userIns.Habitats) {
-                var ins = Instantiate(gameLocDef.Habitat[insData.Id].PrefabHomeScene, buildingRoot);
-                habitats.Add(insData.InsId, ins);
+            // Add
+            foreach (var habitat in DataManager.Ins.UserInsData.Habitats) {
+                if (habitats.ContainsKey(habitat.InsId)) continue;
+                
+                var ins = Instantiate(gameLocDef.Habitat[habitat.Id].PrefabHomeScene, buildingRoot);
+                habitats.Add(habitat.InsId, ins);
 
-                ins.Initialize(insData);
-                ins.TF.position = map.GetWorldPos(insData.Position);
+                ins.Initialize(habitat);
+                ins.TF.position = map.GetWorldPos(habitat.Position);
             }
+        }
+        
+        private void RebuildFarms() {
+            var map        = Home_MapManager.Ins;
+            var gameLocDef = DataManager.Ins.GameLocDefData;
+            
+            // Remove
+            foreach (var (key, _) in farms.Where(static i =>
+                i.Value == null
+             || !DataManager.Ins.UserInsData.Farms.Contains(i.Value.insData)))
+                farms.Remove(key);
 
-            // Spawn monsters
-            foreach (var insData in userIns.Monsters) {
-                var habitat = habitats[insData.Habitat];
-                var ins     = Instantiate(gameLocDef.Monster[insData.Id].PrefabHomeScene);
-                monsters.Add(insData.InsId, ins);
+            // Add
+            foreach (var farm in DataManager.Ins.UserInsData.Farms) {
+                if (farms.ContainsKey(farm.InsId)) continue;
+                
+                var ins = Instantiate(gameLocDef.Farm[farm.Id].PrefabHomeScene, buildingRoot);
+                farms.Add(farm.InsId, ins);
 
-                ins.Initialize(insData);
+                ins.Initialize(farm);
+                ins.TF.position = map.GetWorldPos(farm.Position);
+            }
+        }
+        
+        private void RebuildMonsters() {
+            var gameLocDef = DataManager.Ins.GameLocDefData;
+            
+            // Remove
+            foreach (var (key, _) in monsters.Where(static i =>
+                i.Value == null
+             || !DataManager.Ins.UserInsData.Monsters.Contains(i.Value.insData)))
+                monsters.Remove(key);
+
+            // Add
+            foreach (var monster in DataManager.Ins.UserInsData.Monsters) {
+                if (monsters.ContainsKey(monster.InsId)) continue;
+                
+                var habitat = habitats[monster.Habitat];
+                var ins     = Instantiate(gameLocDef.Monster[monster.Id].PrefabHomeScene);
+                monsters.Add(monster.InsId, ins);
+
+                ins.Initialize(monster);
                 habitat.AddMonster(ins);
-            }
-
-            // Spawn farms
-            foreach (var insData in userIns.Farms) {
-                var ins = Instantiate(gameLocDef.Farm[insData.Id].PrefabHomeScene, buildingRoot);
-                farms.Add(insData.InsId, ins);
-
-                ins.Initialize(insData);
-                ins.TF.position = map.GetWorldPos(insData.Position);
             }
         }
 
@@ -116,7 +166,7 @@ namespace MonsterLegendsLite {
                 
                 ForceShowBuildingInfo(toHabitat);
                 
-                EventDispatcher.PostEvent(EventId.HomeMonsterMoved);
+                EventDispatcher.PostEvent(EventId.HomeMonsterPlaceChanged);
             }
             
             foreach (var habitat in habitats.Values) habitat.SetVisibleMoveMonsterArrow(false);

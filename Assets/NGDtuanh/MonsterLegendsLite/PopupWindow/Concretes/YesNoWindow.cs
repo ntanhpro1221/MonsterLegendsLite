@@ -18,12 +18,12 @@ namespace NGDtuanh.MonsterLegendsLite {
         [SerializeField, Required]
         private TextMeshProUGUI noTxt;
 
-        public static YesNoWindow Show(string title, string content, string yesText, string noText, Action onYes = null, Action onNo = null, Action onClose = null) {
-            var window = (YesNoWindow)PopupWindowPool.Ins.Show(PopupWindowId.Notification, title, content, onClose);
+        public static YesNoWindow Show(string title, string content, string yesText = "Yes", string noText = "No", Action yesCallback = null, Action noCallback = null, Action onClose = null) {
+            var window = (YesNoWindow)PopupWindowPool.Ins.Show(PopupWindowId.YesNo, title, content, onClose);
             window.yesTxt.text = yesText;
             window.noTxt.text = noText;
-            window.SetCallbackTo(window.yesBtn, onYes, appendClose: true);
-            window.SetCallbackTo(window.noBtn, onNo, appendClose: true);
+            window.SetCallbackTo(window.yesBtn, yesCallback, appendClose: true);
+            window.SetCallbackTo(window.noBtn, noCallback, appendClose: true);
             return window;
         }
 

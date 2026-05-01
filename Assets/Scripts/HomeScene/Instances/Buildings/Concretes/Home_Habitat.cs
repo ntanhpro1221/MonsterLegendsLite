@@ -33,11 +33,20 @@ namespace MonsterLegendsLite {
             SetVisibleMoveMonsterArrow(false);
             moveMonsterArrowAnchorer.UpdatePosFromAnchor();
             
-            EventDispatcher.RegisterEvent(EventId.HomeMonsterMoved, RebuildMonsterList, this);
+            EventDispatcher.RegisterEvent(EventId.HomeMonsterPlaceChanged, RebuildMonsterList, this);
+            EventDispatcher.RegisterEvent(EventId.UserMonsterListChanged, RebuildMonsterList, this);
+            EventDispatcher.RegisterEvent(EventId.UserHabitatListChanged, DestroyIfNotExistInDatabase, this);
         }
 
         private void OnDestroy() {
-            EventDispatcher.UnregisterEvent(EventId.HomeMonsterMoved, RebuildMonsterList, this);
+            EventDispatcher.UnregisterEvent(EventId.HomeMonsterPlaceChanged, RebuildMonsterList, this);
+            EventDispatcher.UnregisterEvent(EventId.UserMonsterListChanged, RebuildMonsterList, this);
+            EventDispatcher.UnregisterEvent(EventId.UserHabitatListChanged, DestroyIfNotExistInDatabase, this);
+        }
+        
+        private void DestroyIfNotExistInDatabase() {
+            if (DataManager.Ins.UserInsData.Habitats.Contains(insData)) return;
+            Destroy(this);
         }
 
         private void RebuildMonsterList() {

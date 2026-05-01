@@ -852,6 +852,7 @@ MonoBehaviour:
   shared: {fileID: 6778359175029416513}
   collectBtn: {fileID: 6451096542401480361}
   prefabMonsterInfoBtn: {fileID: 2640752832706295285, guid: f72f2ac1d33301f4184367827bb6a23b, type: 3}
+  limitMonsterNameLength: 10
 --- !u!114 &6778359175029416513 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6599489859027654105, guid: 1d363e9b8845701439d9c690717d1a38, type: 3}

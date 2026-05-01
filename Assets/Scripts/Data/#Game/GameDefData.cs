@@ -13,6 +13,8 @@ namespace MonsterLegendsLite.Data {
         public EnumMap<ElementId, HabitatDefData> Habitat;
         public EnumMap<FarmId, FarmDefData> Farm;
 
+        public float MonsterSellValueRatio;
+        
         [FoldoutGroup("Home Scene")]
         public float Home_MonsterSpeed;
 

@@ -1,5 +1,6 @@
 using System;
 using MonsterLegendsLite.Data;
+using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -12,6 +13,17 @@ namespace MonsterLegendsLite {
             this.insData = insData;
             
             base.Initialize(insData.InsId);
+            
+            EventDispatcher.RegisterEvent(EventId.UserFarmListChanged, DestroyIfNotExistInDatabase, this);
+        }
+        
+        private void OnDestroy() {
+            EventDispatcher.UnregisterEvent(EventId.UserFarmListChanged, DestroyIfNotExistInDatabase, this);
+        }
+        
+        private void DestroyIfNotExistInDatabase() {
+            if (DataManager.Ins.UserInsData.Farms.Contains(insData)) return;
+            Destroy(this);
         }
 
         public long CalculateCurTotalFood() {

@@ -61,12 +61,28 @@ namespace MonsterLegendsLite {
                 if (!DataManager.Ins.IsAnyHabitatCanAcceptNewMonster(Ins.monster.insData)) {
                     NotificationWindow.Show(
                         title: "NO VALID HABITAT"
-                      , content: "You dont have any habitat that can accept this monster");
+                      , content: $"You dont have any habitat that can accept {Ins.monster.defData.GetCustomNameIfPossible(Ins.monster.insData)}");
                     return;
                 }
-                
+
                 Home_BootData.InsAutoSpawn.SetData_MoveMonster(Ins.monster.insData);
                 Ins.BackToHomeScene();
+            });
+            uiInfo.SetSellBtnCallback(static () => {
+                var sellValue = (int)(Ins.monster.defData.Cost * DataManager.Ins.GameDefData.MonsterSellValueRatio);
+
+                YesNoWindow.Show(
+                    title: "SELL MONSTER"
+                  , content: $"Are you sure you want to sell {Ins.monster.defData.GetCustomNameIfPossible(Ins.monster.insData)} for {sellValue} Gold?"
+                  , yesCallback: static () => {
+                        DataManager.Ins.UpdateData_SellMonster(Ins.monster.insData, out var sellValue);
+
+                        EventDispatcher.PostEvent(EventId.UserGoldChanged);
+                        EventDispatcher.PostEvent(EventId.UserMonsterListChanged);
+
+                        Home_BootData.InsAutoSpawn.SetData_FloatingGold(sellValue);
+                        Ins.BackToHomeScene();
+                    });
             });
         }
 

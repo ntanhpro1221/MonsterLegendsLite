@@ -479,5 +479,6 @@ MonoBehaviour:
       - Samsung
       - Sony
       _IsKeyChanged: 0
+    MonsterSellValueRatio: 0.7
     Home_MonsterSpeed: 1
     Home_MonsterIdleTime: {x: 0.5, y: 5}

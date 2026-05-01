@@ -48,6 +48,10 @@ namespace NGDtuanh.MonsterLegendsLite {
             return text;
         }
 
+        public FloatingText ShowAtCenterScreen(FloatingTextId id) {
+            return ShowAtScreen(id, new Vector2(Screen.width / 2f, Screen.height / 2f));
+        }
+
         public FloatingText ShowAtScreen(FloatingTextId id, Vector2 screenPos) {
             pools[id].Get(out var text);
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
