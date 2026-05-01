@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using MonsterLegendsLite.Data;
+using NGDtuanh.MonsterLegendsLite;
 using NGDtuanh.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -7,11 +8,8 @@ using UnityEngine.SceneManagement;
 
 namespace MonsterLegendsLite {
     public class Home_SceneManager : SceneSingleton<Home_SceneManager> {
-        [SerializeField]
-        private MonsterDetail_BootData prefabMonsterDetailBootData;
-
         [SerializeField, Required]
-        private Home_UI_BuildingInfoManager uiBuildingInfo;
+        private Home_UI_InfoManager uiInfo;
 
         [SerializeField, Required]
         private Transform buildingRoot;
@@ -27,9 +25,27 @@ namespace MonsterLegendsLite {
         private Camera cam;
         public Camera Cam => cam != null ? cam : cam = Camera.main;
 
+        private Home_Monster movingMonster;
+
         protected override void Initialize() {
             base.Initialize();
+            
+            uiInfo.Initialize();
+            
             BuildMap();
+            
+            LoadBootDataThenDelete();
+        }
+
+        private void LoadBootDataThenDelete() {
+            var bootData = Home_BootData.Ins;
+            if (bootData == null) return;
+
+            if (bootData.moveMonster != null) {
+                StartMoveMonster(Monsters[bootData.moveMonster.InsId]);
+            }
+            
+            Destroy(bootData.gameObject);
         }
 
         private void BuildMap() {
@@ -67,23 +83,48 @@ namespace MonsterLegendsLite {
         }
 
         public void OnClicked_Building(Home_Building building) {
-            uiBuildingInfo.ShowInfoFor(building, hideMoveInfo: false);
+            if (movingMonster != null) {
+                if (building is Home_Habitat habitat
+                 && habitat.IsCanAcceptNewMonster(movingMonster))
+                    ConfirmMoveMonster(habitat);
+            } else uiInfo.ShowBuildingInfoFor(building, hideAllCurrentInfo: false);
         }
 
         public void OnMove_Building(Home_Building building) {
-            uiBuildingInfo.ShowMoveInfoFor(building);
+            uiInfo.ShowMoveBuildingInfoFor(building);
         }
 
         public void OnClicked_Void() {
-            uiBuildingInfo.TryHideCurInfo();
+            uiInfo.TryHideCurBuildingInfo();
         }
 
         public void ForceShowBuildingInfo(Home_Building building) {
-            uiBuildingInfo.ShowInfoFor(building, hideMoveInfo: true);
+            uiInfo.ShowBuildingInfoFor(building, hideAllCurrentInfo: true);
+        }
+
+        private void StartMoveMonster(Home_Monster target) {
+            movingMonster = target;
+            
+            foreach (var habitat in habitats.Values) habitat.SetVisibleMoveMonsterArrow(habitat.IsCanAcceptNewMonster(target));
+            uiInfo.ShowMoveMonsterInfo(target);
+        }
+
+        public void ConfirmMoveMonster(Home_Habitat toHabitat) {
+            if (toHabitat == null) uiInfo.TryHideMoveMonsterInfo();
+            else {
+                DataManager.Ins.UpdateData_MoveMonster(movingMonster.insData, toHabitat.insData);
+                
+                ForceShowBuildingInfo(toHabitat);
+                
+                EventDispatcher.PostEvent(EventId.HomeMonsterMoved);
+            }
+            
+            foreach (var habitat in habitats.Values) habitat.SetVisibleMoveMonsterArrow(false);
+            movingMonster = null;
         }
 
         public void ViewMonsterDetail(string insId) {
-            Instantiate(prefabMonsterDetailBootData).SetData(monsters[insId].insData);
+            MonsterDetail_BootData.InsAutoSpawn.SetData(monsters[insId].insData);
             SceneManager.LoadScene("MonsterDetailScene");
         }
 

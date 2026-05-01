@@ -49,14 +49,25 @@ namespace MonsterLegendsLite {
 
             monster = ins;
             
-            Destroy(bootData);
+            Destroy(bootData.gameObject);
         }
 
         private void UpdateUI_Info() {
             uiInfo.SetStats(monster.CalculateStats());
-            uiInfo.SetElements(monster.defData.Elements.Select(i => DataManager.Ins.GameLocDefData.Element[i].ElementButton).ToList());
+            uiInfo.SetElements(monster.defData.Elements.Select(static i => DataManager.Ins.GameLocDefData.Element[i].ElementButton).ToList());
             uiInfo.SetRevenue(monster.CalculateStat(MonsterStatId.GoldPerMin));
             uiInfo.SetDescription(monster.defData.Description);
+            uiInfo.SetMoveBtnCallback(static () => {
+                if (!DataManager.Ins.IsAnyHabitatCanAcceptNewMonster(Ins.monster.insData)) {
+                    NotificationWindow.Show(
+                        title: "NO VALID HABITAT"
+                      , content: "You dont have any habitat that can accept this monster");
+                    return;
+                }
+                
+                Home_BootData.InsAutoSpawn.SetData_MoveMonster(Ins.monster.insData);
+                Ins.BackToHomeScene();
+            });
         }
 
         private void UpdateUI_Monster() {

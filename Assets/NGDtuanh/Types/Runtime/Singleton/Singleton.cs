@@ -9,11 +9,17 @@ namespace NGDtuanh.Types {
             get {
                 if (ins == null) {
                     ins = FindAnyObjectByType<T>(FindObjectsInactive.Include);
-                    if (ins == null) {
-                        ins = new GameObject($"{typeof(T).Name} (Singleton)").AddComponent<T>();
-                        Debug.LogWarning($"Creating new singleton {typeof(T).Name}. This is unexpected and not a best practice.");
-                    }
+                    if (ins != null) ins.TryInitialize();
+                }
 
+                return ins;
+            }
+        }
+
+        public static T InsAutoSpawn {
+            get {
+                if (Ins == null) {
+                    ins = new GameObject($"{typeof(T).Name} (Singleton)").AddComponent<T>();
                     ins.TryInitialize(); // Called even when creating a new GameObject, because a child class may hide the Awake method.
                 }
 

@@ -5,6 +5,7 @@ using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace MonsterLegendsLite {
@@ -41,6 +42,16 @@ namespace MonsterLegendsLite {
 
         public void SetDescription(string description) {
             descriptionTxt.text = description;
+        }
+
+        public void SetMoveBtnCallback(UnityAction callback) {
+            moveBtn.onClick.RemoveAllListeners();
+            moveBtn.onClick.AddListener(callback);
+        }
+        
+        public void SetSellBtnCallback(UnityAction callback) {
+            sellBtn.onClick.RemoveAllListeners();
+            sellBtn.onClick.AddListener(callback);
         }
     }
 }

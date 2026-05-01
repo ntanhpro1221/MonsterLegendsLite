@@ -16,40 +16,46 @@ MonoBehaviour:
     Name: NGDtuanh
     Level: 10
     Exp: 1221
-    Gold: 100
-    Food: 100
+    Gold: 1180718
+    Food: 30480
     Monsters:
     - InsId: Test_Monster_0
       Id: 0
-      CustomName: 
-      Level: 3
-      Exp: 1
+      CustomName: My lovely Alice
+      Level: 8
+      Exp: 6
       Habitat: Test_Habitat_0
       SkillIds: 
     - InsId: Test_Monster_1
       Id: 1
-      CustomName: 
-      Level: 36
-      Exp: 1859
-      Habitat: Test_Habitat_1
+      CustomName: Bob's custom na
+      Level: 41
+      Exp: 2114
+      Habitat: Test_Habitat_2
       SkillIds: 
     Habitats:
     - InsId: Test_Habitat_0
       Id: 0
       Position: {x: -5, y: 0}
-      CurGold: 578979
+      CurGold: 0
       LastGoldUpdate:
-        value: 1777624461
+        value: 1777649228
     - InsId: Test_Habitat_1
       Id: 1
       Position: {x: 0, y: 0}
-      CurGold: 354
+      CurGold: 2000
       LastGoldUpdate:
-        value: 1777631731
+        value: 1777649611
+    - InsId: Test_Habitat_2
+      Id: 0
+      Position: {x: -5, y: -5}
+      CurGold: 0
+      LastGoldUpdate:
+        value: 1777649611
     Farms:
     - InsId: Test_Farm_0
       Id: 0
       Position: {x: 0, y: -5}
       CurFood: 0
       LastFoodUpdate:
-        value: 1777623436
+        value: 1777649234

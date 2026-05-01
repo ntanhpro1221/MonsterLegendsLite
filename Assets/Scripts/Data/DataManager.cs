@@ -1,4 +1,6 @@
-﻿using NGDtuanh.Types;
+﻿using System;
+using System.Linq;
+using NGDtuanh.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -20,29 +22,40 @@ namespace MonsterLegendsLite.Data {
 
         public UserInsData UserInsData => userInsDataSO.Data;
 
+        public bool IsAnyHabitatCanAcceptNewMonster(MonsterInsData target) {
+            foreach (var habitat in UserInsData.Habitats) {
+                if (habitat.InsId == target.Habitat) continue;
+                if (!GameDefData.Monster[target.Id].Elements.Contains(GameDefData.Habitat[habitat.Id].Element)) continue;
+                if (GameDefData.Habitat[habitat.Id].Capacity <= UserInsData.Monsters.Count(i => i.Habitat == habitat.InsId)) continue;
+                return true;
+            }
+
+            return false;
+        }
+
         public void UpdateData_CollectGold(HabitatInsData habitat) {
             UpdateData_HabitatLastGoldUpdate(habitat);
 
             userInsDataSO.Data.Gold += habitat.CurGold;
-            habitat.CurGold = 0;
+            habitat.CurGold         =  0;
         }
 
         public void UpdateData_CollectFood(FarmInsData farm) {
             UpdateData_FarmLastFoodUpdate(farm);
-            
+
             userInsDataSO.Data.Food += farm.CurFood;
-            farm.CurFood = 0;
+            farm.CurFood            =  0;
         }
 
         public void UpdateData_FeedMonster(MonsterInsData monster, int feedAmount, out bool levelChanged) {
             UpdateData_AddExpMonster(monster, feedAmount, out levelChanged);
-            
+
             userInsDataSO.Data.Food -= feedAmount;
         }
 
         public void UpdateData_AddExpMonster(MonsterInsData monster, int expAmount, out bool levelChanged) {
             UpdateData_HabitatLastGoldUpdate(UserInsData.Habitats.Find(i => i.InsId == monster.Habitat));
-            
+
             var defData = GameDefData.Monster[monster.Id];
             levelChanged = false;
             while (expAmount > 0) {
@@ -62,7 +75,7 @@ namespace MonsterLegendsLite.Data {
         public void UpdateData_MoveHabitat(HabitatInsData habitat, Vector2Int newPos) {
             habitat.Position = newPos;
         }
-        
+
         public void UpdateData_MoveFarm(FarmInsData farm, Vector2Int newPos) {
             farm.Position = newPos;
         }
@@ -80,7 +93,7 @@ namespace MonsterLegendsLite.Data {
                     result += minutes * Ins.GameDefData.Monster[monster.Id].CalculateStat(monster, MonsterStatId.GoldPerMin);
                 }
 
-                return (long)(result);
+                return Math.Min(Ins.GameDefData.Habitat[habitat.Id].MaxGold, (long)(result));
             }
         }
 
@@ -95,6 +108,15 @@ namespace MonsterLegendsLite.Data {
 
         public void UpdateData_MonsterCustomName(MonsterInsData monster, string newName) {
             monster.CustomName = newName;
+        }
+
+        public void UpdateData_MoveMonster(MonsterInsData monster, HabitatInsData newHabitat) {
+            var oldHabitat = UserInsData.Habitats.Find(i => i.InsId == monster.Habitat);
+
+            UpdateData_HabitatLastGoldUpdate(oldHabitat);
+            UpdateData_HabitatLastGoldUpdate(newHabitat);
+
+            monster.Habitat = newHabitat.InsId;
         }
     }
 }

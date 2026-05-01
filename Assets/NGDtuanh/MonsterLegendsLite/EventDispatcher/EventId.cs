@@ -3,6 +3,7 @@
         UserGoldChanged
       , UserFoodChanged
       , HomeMapChanged
+      , HomeMonsterMoved
       , MonsterFeedInMonsterDetail
       , MonsterLevelChangedInMonsterDetail
     }

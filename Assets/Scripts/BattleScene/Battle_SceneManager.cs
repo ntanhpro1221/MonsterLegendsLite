@@ -37,7 +37,7 @@ namespace MonsterLegendsLite {
             SpawnMonsters(bootData.teamLeft, slotsLeft, teamLeft, HorDirection.Right);
             SpawnMonsters(bootData.teamRight, slotsRight, teamRight, HorDirection.Left);
 
-            Destroy(bootData);
+            Destroy(bootData.gameObject);
 
             void SpawnMonsters(
                 List<MonsterInsData> insData

@@ -438,14 +438,16 @@ MonoBehaviour:
       - value:
           Name: Fire
           Description: Fire habitat
-          Capacity: 0
-          MaxGold: 999
+          Element: 0
+          Capacity: 1
+          MaxGold: 2000
           Size: {x: 4, y: 4}
       - value:
           Name: Thunder
           Description: Thunder habitat
-          Capacity: 0
-          MaxGold: 999
+          Element: 1
+          Capacity: 1
+          MaxGold: 2000
           Size: {x: 4, y: 4}
       _KeyNames:
       - Fire
@@ -457,19 +459,19 @@ MonoBehaviour:
       - value:
           Name: Apple
           Description: Apple Farm
-          MaxFood: 200000000
+          MaxFood: 2000
           FoodPerMin: 120
           Size: {x: 4, y: 4}
       - value:
           Name: Samsung
           Description: Samsung Farm
-          MaxFood: 200000000
+          MaxFood: 2000
           FoodPerMin: 120
           Size: {x: 4, y: 4}
       - value:
           Name: Sony
           Description: Sony Farm
-          MaxFood: 200000000
+          MaxFood: 2000
           FoodPerMin: 120
           Size: {x: 4, y: 4}
       _KeyNames:
