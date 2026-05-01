@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6721918048019602736}
   - component: {fileID: 6207224100914668185}
   m_Layer: 5
-  m_Name: FloatingTextManager
+  m_Name: FloatingTextPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

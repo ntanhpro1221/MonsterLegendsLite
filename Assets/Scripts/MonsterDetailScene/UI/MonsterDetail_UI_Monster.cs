@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace MonsterLegendsLite {
@@ -23,12 +24,14 @@ namespace MonsterLegendsLite {
 
         [SerializeField, Required]
         private TextMeshProUGUI expTxt;
+        
+        [SerializeField, Required]
+        private TextMeshProUGUI feedBtnTxt;
 
         [SerializeField, Required]
         private Button feedBtn;
         
-        [SerializeField, Required]
-        private TextMeshProUGUI feedBtnTxt;
+        public RectTransform FeedBtnRect => (RectTransform)feedBtn.transform;
 
         public void SetRankIcon(Sprite icon) {
             rankIconImg.sprite = icon;
@@ -51,8 +54,13 @@ namespace MonsterLegendsLite {
             expFillerImg.fillAmount = (float)curExp / requiredExp;
         }
 
-        public void SetFoodRequired(int foodRequired) {
-            feedBtnTxt.text = $"FEED {utils.ToStrResource(foodRequired)}";
+        public void SetFeedAmount(int feedAmount) {
+            feedBtnTxt.text = $"FEED {utils.ToStrResource(feedAmount)}";
+        }
+
+        public void SetFeedCallback(UnityAction callback) {
+            feedBtn.onClick.RemoveAllListeners();
+            feedBtn.onClick.AddListener(callback);
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 namespace NGDtuanh.MonsterLegendsLite {
     [RequireComponent(typeof(RectTransform))]
-    public class FloatingTextManager : SceneSingleton<FloatingTextManager> {
+    public class FloatingTextPool : SceneSingleton<FloatingTextPool> {
         [SerializeField, Required]
         private EnumMap<FloatingTextId, FloatingText> prefabs;
 

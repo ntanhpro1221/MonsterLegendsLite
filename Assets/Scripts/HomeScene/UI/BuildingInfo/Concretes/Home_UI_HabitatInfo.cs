@@ -34,9 +34,9 @@ namespace MonsterLegendsLite {
                 var gold = habitat.CalculateCurTotalGold();
                 if (gold <= 0) return;
                 
-                DataManager.Ins.UpdateData_CollectGold(habitat);
+                DataManager.Ins.UpdateData_CollectGold(habitat.insData);
 
-                FloatingTextManager.Ins.ShowAtWorld(FloatingTextId.GoldChange, habitat.TF.position).SetTextChange(gold);
+                FloatingTextPool.Ins.ShowAtWorld(FloatingTextId.GoldChange, habitat.TF.position).SetTextChange(gold);
                 
                 UpdateTotalGold();
                 

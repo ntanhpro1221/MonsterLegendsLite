@@ -22,9 +22,9 @@ namespace MonsterLegendsLite {
                 var food = farm.CalculateCurTotalFood();
                 if (food <= 0) return;
                 
-                DataManager.Ins.UpdateData_CollectFood(farm);
+                DataManager.Ins.UpdateData_CollectFood(farm.insData);
 
-                FloatingTextManager.Ins.ShowAtWorld(FloatingTextId.FoodChange, farm.TF.position).SetTextChange(food);
+                FloatingTextPool.Ins.ShowAtWorld(FloatingTextId.FoodChange, farm.TF.position).SetTextChange(food);
                 
                 UpdateTotalFood();
                 

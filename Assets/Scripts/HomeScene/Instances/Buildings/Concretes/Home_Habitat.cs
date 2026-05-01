@@ -36,9 +36,7 @@ namespace MonsterLegendsLite {
             float result = insData.CurGold;
             float minutes = SerTimestamp.DeltaMinutes(SerTimestamp.GetCurTimestamp(), insData.LastGoldUpdate);
 
-            foreach (var monster in Monsters) {
-                result += minutes * monster.GetGPM();
-            }
+            foreach (var monster in Monsters) result += minutes * monster.GetGPM();
             
             return (long)(result);
         }
