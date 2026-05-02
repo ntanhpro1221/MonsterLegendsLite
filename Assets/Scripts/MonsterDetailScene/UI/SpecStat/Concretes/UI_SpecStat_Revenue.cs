@@ -2,8 +2,8 @@
 using TMPro;
 using UnityEngine;
 
-namespace MonsterLegendsLite.Concretes {
-    public class UI_Revenue : UI_SpecStat {
+namespace MonsterLegendsLite {
+    public class UI_SpecStat_Revenue : UI_SpecStat {
         [SerializeField, Required]
         private TextMeshProUGUI revenueTxt;
 

@@ -2,28 +2,8 @@
 using UnityEngine;
 
 namespace MonsterLegendsLite {
-    public class Home_UI_Info : MonoBehaviourExt {
-        public Object CurWeakTarget { get; private set; }
-
-        public virtual void LoadInfoFor(Object building) {
-            CurWeakTarget = building;
-        }
-
-        public virtual void UnloadInfo() {
-            CurWeakTarget = null;
-        }
-
-        public void TrySelectTarget() {
-            if (CurWeakTarget is ISelectableTarget selectableTarget) selectableTarget.OnSelect();
-        }
-        
-        public void TryDeselectTarget() {
-            if (CurWeakTarget is ISelectableTarget selectableTarget) selectableTarget.OnDeselect();
-        }
-    }
-
     public class Home_UI_Info<TTarget> : Home_UI_Info where TTarget : Object {
-        public TTarget CurTarget => CurWeakTarget == null ? null : (TTarget)CurWeakTarget;
+        public TTarget CurTarget => CurTargetWeak == null ? null : (TTarget)CurTargetWeak;
 
         public sealed override void LoadInfoFor(Object building) {
             base.LoadInfoFor(building);
@@ -31,5 +11,25 @@ namespace MonsterLegendsLite {
         }
 
         protected virtual void LoadInfoFor(TTarget building) { }
+    }
+    
+    public class Home_UI_Info : MonoBehaviourExt {
+        public Object CurTargetWeak { get; private set; }
+
+        public virtual void LoadInfoFor(Object building) {
+            CurTargetWeak = building;
+        }
+
+        public virtual void UnloadInfo() {
+            CurTargetWeak = null;
+        }
+
+        public void TrySelectTarget() {
+            if (CurTargetWeak is ISelectableTarget selectableTarget) selectableTarget.OnSelect();
+        }
+        
+        public void TryDeselectTarget() {
+            if (CurTargetWeak is ISelectableTarget selectableTarget) selectableTarget.OnDeselect();
+        }
     }
 }

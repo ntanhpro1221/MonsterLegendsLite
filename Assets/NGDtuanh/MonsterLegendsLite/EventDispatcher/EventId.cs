@@ -3,6 +3,7 @@
         UserGoldChanged
       , UserFoodChanged
       , UserMonsterListChanged
+      , UserBuildingListChanged
       , UserHabitatListChanged
       , UserFarmListChanged
       , HomeMapChanged

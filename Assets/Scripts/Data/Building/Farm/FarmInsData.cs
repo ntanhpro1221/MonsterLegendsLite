@@ -1,13 +1,10 @@
 using System;
 using NGDtuanh.Types;
-using UnityEngine;
 
 namespace MonsterLegendsLite.Data {
     [Serializable]
-    public class FarmInsData {
-        public string InsId;
+    public class FarmInsData : BuildingInsData {
         public FarmId Id;
-        public Vector2Int Position;
         public long CurFood;
         public SerTimestamp LastFoodUpdate;
     }

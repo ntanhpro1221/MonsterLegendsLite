@@ -3,8 +3,8 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace MonsterLegendsLite.Concretes {
-    public class UI_Elements : UI_SpecStat {
+namespace MonsterLegendsLite {
+    public class UI_SpecStat_Elements : UI_SpecStat {
         [SerializeField, Required]
         public Image prefabElement;
         
@@ -14,7 +14,7 @@ namespace MonsterLegendsLite.Concretes {
         private readonly List<Image> availableElements = new(1);
         private readonly List<Image> usingElements = new(1);
 
-        public void SetElements(List<Sprite> elementSprites) {
+        public void SetElements(params Sprite[] elementSprites) {
             if (prefabElement.transform.parent == elementRoot) prefabElement.gameObject.SetActive(false);
             foreach (var element in usingElements) {
                 element.gameObject.SetActive(false);

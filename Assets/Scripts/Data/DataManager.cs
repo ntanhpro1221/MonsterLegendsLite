@@ -33,6 +33,24 @@ namespace MonsterLegendsLite.Data {
             return false;
         }
 
+        public BuildingDefData GetBuildingDefData(BuildingInsData insData) {
+            return insData switch {
+                FarmInsData farm       => GameDefData.Farm[farm.Id]
+              , HabitatInsData habitat => GameDefData.Habitat[habitat.Id]
+
+              , _ => throw new Exception($"Unknown {nameof(BuildingInsData)} type: {insData.GetType().Name}")
+            };
+        }
+
+        public bool IsHaveBuilding(BuildingInsData insData) {
+            return insData switch {
+                FarmInsData farm       => UserInsData.Farms.Contains(farm)
+              , HabitatInsData habitat => UserInsData.Habitats.Contains(habitat)
+
+              , _ => throw new Exception($"Unknown {nameof(BuildingInsData)} type: {insData.GetType().Name}")
+            };
+        }
+
         public void UpdateData_CollectGold(HabitatInsData habitat) {
             UpdateData_HabitatLastGoldUpdate(habitat);
 
@@ -72,12 +90,8 @@ namespace MonsterLegendsLite.Data {
             }
         }
 
-        public void UpdateData_MoveHabitat(HabitatInsData habitat, Vector2Int newPos) {
-            habitat.Position = newPos;
-        }
-
-        public void UpdateData_MoveFarm(FarmInsData farm, Vector2Int newPos) {
-            farm.Position = newPos;
+        public void UpdateData_MoveBuilding(BuildingInsData building, Vector2Int newPos) {
+            building.Position = newPos;
         }
 
         public void UpdateData_HabitatLastGoldUpdate(HabitatInsData habitat) {
@@ -119,13 +133,22 @@ namespace MonsterLegendsLite.Data {
             monster.Habitat = newHabitat.InsId;
         }
 
-        public void UpdateData_SellMonster(MonsterInsData monster, out int sellValue) {
-            sellValue = (int)(GameDefData.Monster[monster.Id].Cost * Ins.GameDefData.MonsterSellValueRatio);
-            
+        public void UpdateData_SellMonster(MonsterInsData monster) {
             UpdateData_HabitatLastGoldUpdate(UserInsData.Habitats.Find(i => i.InsId == monster.Habitat));
 
-            UserInsData.Gold += sellValue;
+            UserInsData.Gold += (int)(GameDefData.Monster[monster.Id].Cost * Ins.GameDefData.SellRatio_Monster);
             UserInsData.Monsters.Remove(monster);
+        }
+
+        public void UpdateData_SellBuilding(BuildingInsData building) {
+            switch (building) {
+                case FarmInsData farm:       UserInsData.Farms.Remove(farm); break;
+                case HabitatInsData habitat: UserInsData.Habitats.Remove(habitat); break;
+
+                default: throw new Exception($"Unknown building type {building.GetType().Name}");
+            }
+
+            UserInsData.Gold += (int)(GetBuildingDefData(building).Cost * Ins.GameDefData.SellRatio_Building);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
 using NGDtuanh.Types;
 using Sirenix.OdinInspector;
@@ -31,13 +32,13 @@ namespace MonsterLegendsLite {
         private void OnMapChanged() {
             usedTiles.Clear();
             foreach (var building in Home_SceneManager.Ins.IEBuildings())
-            foreach (var point in IEAllCell(building.GetPosData(), building.GetSizeData()))
+            foreach (var point in IEAllCell(building.InsDataWeak.Position, DataManager.Ins.GetBuildingDefData(building.InsDataWeak).Size))
                 usedTiles.Add(point, building);
         }
 
         public bool IsPlaceable(Home_Building building) {
             var pos  = GetNearestTilePos(building.TF.position);
-            var size = building.GetSizeData();
+            var size = DataManager.Ins.GetBuildingDefData(building.InsDataWeak).Size;
 
             foreach (var point in IEAllCell(pos, size)) {
                 if (!tileMap.HasTile((Vector3Int)point)) return false;

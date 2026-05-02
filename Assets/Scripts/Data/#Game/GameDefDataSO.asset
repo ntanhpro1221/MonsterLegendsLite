@@ -438,17 +438,19 @@ MonoBehaviour:
       - value:
           Name: Fire
           Description: Fire habitat
+          Size: {x: 4, y: 4}
+          Cost: 2000
           Element: 0
           Capacity: 1
           MaxGold: 2000
-          Size: {x: 4, y: 4}
       - value:
           Name: Thunder
           Description: Thunder habitat
+          Size: {x: 4, y: 4}
+          Cost: 2000
           Element: 1
           Capacity: 1
           MaxGold: 2000
-          Size: {x: 4, y: 4}
       _KeyNames:
       - Fire
       - Thunder
@@ -459,26 +461,30 @@ MonoBehaviour:
       - value:
           Name: Apple
           Description: Apple Farm
+          Size: {x: 4, y: 4}
+          Cost: 2000
           MaxFood: 2000
           FoodPerMin: 120
-          Size: {x: 4, y: 4}
       - value:
           Name: Samsung
           Description: Samsung Farm
+          Size: {x: 4, y: 4}
+          Cost: 2000
           MaxFood: 2000
           FoodPerMin: 120
-          Size: {x: 4, y: 4}
       - value:
           Name: Sony
           Description: Sony Farm
+          Size: {x: 4, y: 4}
+          Cost: 2000
           MaxFood: 2000
           FoodPerMin: 120
-          Size: {x: 4, y: 4}
       _KeyNames:
       - Apple
       - Samsung
       - Sony
       _IsKeyChanged: 0
-    MonsterSellValueRatio: 0.7
+    SellRatio_Monster: 0.7
+    SellRatio_Building: 0.7
     Home_MonsterSpeed: 1
     Home_MonsterIdleTime: {x: 0.5, y: 5}

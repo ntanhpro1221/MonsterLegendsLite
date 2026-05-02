@@ -54,7 +54,7 @@ namespace MonsterLegendsLite {
 
         private void UpdateUI_Info() {
             uiInfo.SetStats(monster.CalculateStats());
-            uiInfo.SetElements(monster.defData.Elements.Select(static i => DataManager.Ins.GameLocDefData.Element[i].ElementButton).ToList());
+            uiInfo.SetElements(monster.defData.Elements.Select(static i => DataManager.Ins.GameLocDefData.Element[i].ElementButton).ToArray());
             uiInfo.SetRevenue(monster.CalculateStat(MonsterStatId.GoldPerMin));
             uiInfo.SetDescription(monster.defData.Description);
             uiInfo.SetMoveBtnCallback(static () => {
@@ -69,17 +69,17 @@ namespace MonsterLegendsLite {
                 Ins.BackToHomeScene();
             });
             uiInfo.SetSellBtnCallback(static () => {
-                var sellValue = (int)(Ins.monster.defData.Cost * DataManager.Ins.GameDefData.MonsterSellValueRatio);
+                var sellValue = (int)(Ins.monster.defData.Cost * DataManager.Ins.GameDefData.SellRatio_Monster);
 
                 YesNoWindow.Show(
                     title: "SELL MONSTER"
-                  , content: $"Are you sure you want to sell {Ins.monster.defData.GetCustomNameIfPossible(Ins.monster.insData)} for {sellValue} Gold?"
-                  , yesCallback: static () => {
-                        DataManager.Ins.UpdateData_SellMonster(Ins.monster.insData, out var sellValue);
+                  , content: $"Are you sure you want to sell {Ins.monster.defData.GetCustomNameIfPossible(Ins.monster.insData)} for {sellValue} gold?"
+                  , yesCallback: () => {
+                        DataManager.Ins.UpdateData_SellMonster(Ins.monster.insData);
 
                         EventDispatcher.PostEvent(EventId.UserGoldChanged);
                         EventDispatcher.PostEvent(EventId.UserMonsterListChanged);
-
+                        
                         Home_BootData.InsAutoSpawn.SetData_FloatingGold(sellValue);
                         Ins.BackToHomeScene();
                     });

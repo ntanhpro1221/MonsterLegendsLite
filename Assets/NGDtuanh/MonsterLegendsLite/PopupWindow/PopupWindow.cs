@@ -13,10 +13,6 @@ namespace NGDtuanh.MonsterLegendsLite {
 
         private Action<PopupWindow> onClose;
 
-        protected static PopupWindow Show(string title, string content, Action onClose = null) {
-            return PopupWindowPool.Ins.Show(PopupWindowId.Notification, title, content, onClose);
-        }
-
         internal PopupWindow Initialize(string title, string content, Action<PopupWindow> onClose) {
             SharedData.canvasGroup.blocksRaycasts = true;
 
@@ -33,7 +29,11 @@ namespace NGDtuanh.MonsterLegendsLite {
             return this;
         }
 
-        private void Close() {
+        private void OnDestroy() {
+            SharedData.canvasGroup.DOKill();
+        }
+
+        protected void Close() {
             SharedData.canvasGroup.blocksRaycasts = false;
 
             SharedData.canvasGroup.DOKill();
@@ -44,10 +44,6 @@ namespace NGDtuanh.MonsterLegendsLite {
             if (appendClose) callback += Close;
             btn.onClick.RemoveAllListeners();
             btn.onClick.AddListener(new(callback));
-        }
-
-        private void OnDestroy() {
-            SharedData.canvasGroup.DOKill();
         }
     }
 }

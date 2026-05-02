@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using MonsterLegendsLite.Concretes;
-using MonsterLegendsLite.Data;
+﻿using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -14,10 +12,10 @@ namespace MonsterLegendsLite {
         private MonsterStats<TextMeshProUGUI> statsTxt; 
         
         [SerializeField, Required]
-        private UI_Elements elements;
+        private UI_SpecStat_Elements elements;
         
         [SerializeField, Required]
-        private UI_Revenue revenue;
+        private UI_SpecStat_Revenue revenue;
 
         [SerializeField, Required]
         private TextMeshProUGUI descriptionTxt;
@@ -32,7 +30,7 @@ namespace MonsterLegendsLite {
             }
         }
 
-        public void SetElements(List<Sprite> elementSprites) {
+        public void SetElements(params Sprite[] elementSprites) {
             elements.SetElements(elementSprites);
         }
         

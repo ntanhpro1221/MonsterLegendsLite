@@ -37,12 +37,14 @@ namespace MonsterLegendsLite {
             
             LoadBootDataThenDelete();
             
+            EventDispatcher.RegisterEvent(EventId.UserBuildingListChanged, RebuildBuildings, this, 100);
             EventDispatcher.RegisterEvent(EventId.UserMonsterListChanged, RebuildHabitats, this, 100);
             EventDispatcher.RegisterEvent(EventId.UserHabitatListChanged, RebuildMonsters, this, 100);
             EventDispatcher.RegisterEvent(EventId.UserFarmListChanged, RebuildFarms, this, 100);
         }
 
         private void OnDestroy() {
+            EventDispatcher.UnregisterEvent(EventId.UserBuildingListChanged, RebuildBuildings, this);
             EventDispatcher.UnregisterEvent(EventId.UserMonsterListChanged, RebuildHabitats, this);
             EventDispatcher.UnregisterEvent(EventId.UserHabitatListChanged, RebuildMonsters, this);
             EventDispatcher.UnregisterEvent(EventId.UserFarmListChanged, RebuildFarms, this);
@@ -60,12 +62,16 @@ namespace MonsterLegendsLite {
         }
 
         private void BuildMap() {
-            RebuildHabitats();
-            RebuildFarms();
+            RebuildBuildings();
             
             RebuildMonsters();
         }
 
+        private void RebuildBuildings() {
+            RebuildHabitats();
+            RebuildFarms();
+        }
+        
         private void RebuildHabitats() {
             var map        = Home_MapManager.Ins;
             var gameLocDef = DataManager.Ins.GameLocDefData;
@@ -73,7 +79,7 @@ namespace MonsterLegendsLite {
             // Remove
             foreach (var (key, _) in habitats.Where(static i =>
                 i.Value == null
-             || !DataManager.Ins.UserInsData.Habitats.Contains(i.Value.insData)))
+             || !DataManager.Ins.UserInsData.Habitats.Contains(i.Value.InsData)).ToList())
                 habitats.Remove(key);
 
             // Add
@@ -95,7 +101,7 @@ namespace MonsterLegendsLite {
             // Remove
             foreach (var (key, _) in farms.Where(static i =>
                 i.Value == null
-             || !DataManager.Ins.UserInsData.Farms.Contains(i.Value.insData)))
+             || !DataManager.Ins.UserInsData.Farms.Contains(i.Value.InsDataWeak)).ToList())
                 farms.Remove(key);
 
             // Add
@@ -116,7 +122,7 @@ namespace MonsterLegendsLite {
             // Remove
             foreach (var (key, _) in monsters.Where(static i =>
                 i.Value == null
-             || !DataManager.Ins.UserInsData.Monsters.Contains(i.Value.insData)))
+             || !DataManager.Ins.UserInsData.Monsters.Contains(i.Value.InsData)).ToList())
                 monsters.Remove(key);
 
             // Add
@@ -147,6 +153,10 @@ namespace MonsterLegendsLite {
         public void OnClicked_Void() {
             uiInfo.TryHideCurBuildingInfo();
         }
+        
+        public void TryHideCurBuildingInfo() {
+            uiInfo.TryHideCurBuildingInfo();
+        }
 
         public void ForceShowBuildingInfo(Home_Building building) {
             uiInfo.ShowBuildingInfoFor(building, hideAllCurrentInfo: true);
@@ -162,7 +172,7 @@ namespace MonsterLegendsLite {
         public void ConfirmMoveMonster(Home_Habitat toHabitat) {
             if (toHabitat == null) uiInfo.TryHideMoveMonsterInfo();
             else {
-                DataManager.Ins.UpdateData_MoveMonster(movingMonster.insData, toHabitat.insData);
+                DataManager.Ins.UpdateData_MoveMonster(movingMonster.InsData, toHabitat.InsData);
                 
                 ForceShowBuildingInfo(toHabitat);
                 
@@ -174,7 +184,7 @@ namespace MonsterLegendsLite {
         }
 
         public void ViewMonsterDetail(string insId) {
-            MonsterDetail_BootData.InsAutoSpawn.SetData(monsters[insId].insData);
+            MonsterDetail_BootData.InsAutoSpawn.SetData(monsters[insId].InsData);
             SceneManager.LoadScene("MonsterDetailScene");
         }
 

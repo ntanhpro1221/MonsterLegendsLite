@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using DG.Tweening;
 using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
@@ -8,14 +7,14 @@ using UnityEngine;
 
 namespace MonsterLegendsLite {
     public class Home_Monster : MonoBehaviourExt {
-        [NonSerialized, ShowInInspector, ReadOnly]
-        public MonsterInsData insData;
+        [ShowInInspector, ReadOnly, PropertyOrder(-100)]
+        public MonsterInsData InsData { get; private set; }
 
         [SerializeField, Required]
         private MonsterModel model;
 
         public void Initialize(MonsterInsData insData) {
-            this.insData = insData;
+            InsData = insData;
             
             EventDispatcher.RegisterEvent(EventId.UserMonsterListChanged, DestroyIfNotExistInDatabase, this);
         }
@@ -27,12 +26,12 @@ namespace MonsterLegendsLite {
         }
 
         private void DestroyIfNotExistInDatabase() {
-            if (DataManager.Ins.UserInsData.Monsters.Contains(insData)) return;
-            Destroy(this);
+            if (DataManager.Ins.UserInsData.Monsters.Contains(InsData)) return;
+            Destroy(gameObject);
         }
 
         public int GetGPM() {
-            return DataManager.Ins.GameDefData.Monster[insData.Id].CalculateStat(insData, MonsterStatId.GoldPerMin);
+            return DataManager.Ins.GameDefData.Monster[InsData.Id].CalculateStat(InsData, MonsterStatId.GoldPerMin);
         }
 
         public void StartLocalMove(Vector2Int size) {
@@ -42,7 +41,7 @@ namespace MonsterLegendsLite {
 
         private IEnumerator IELocalMove(Vector2Int size) {
             while (true) {
-                var habitatPos = Home_MapManager.Ins.GetNearestTilePos(Home_SceneManager.Ins.Habitats[insData.Habitat].TF.position);
+                var habitatPos = Home_MapManager.Ins.GetNearestTilePos(Home_SceneManager.Ins.Habitats[InsData.Habitat].TF.position);
                 var locTarget  = TF.parent.InverseTransformPoint(Home_MapManager.Ins.RandomPointInHabitat(habitatPos, size));
                 var duration   = Vector2.Distance(TF.localPosition, locTarget) / DataManager.Ins.GameDefData.Home_MonsterSpeed;
 

@@ -1,12 +1,24 @@
 ﻿using System;
 using System.Collections;
+using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace MonsterLegendsLite {
-    public abstract class Home_Building
+    public class Home_Building<TBuildingInsData> : Home_Building where TBuildingInsData : BuildingInsData {
+        public TBuildingInsData InsData => (TBuildingInsData)InsDataWeak;
+
+        public sealed override void Initialize(BuildingInsData insData) {
+            base.Initialize(insData);
+            Initialize(InsData);
+        }
+
+        protected virtual void Initialize(TBuildingInsData insData) { }
+    }
+    
+    public class Home_Building
         : MonoBehaviourExt
         , ISelectableTarget
         , IPointerClickHandler
@@ -14,7 +26,7 @@ namespace MonsterLegendsLite {
         , IPointerUpHandler
         , IPointerMoveHandler {
         [ShowInInspector, ReadOnly, PropertyOrder(-100)]
-        public virtual string InsId { get; protected set; }
+        public BuildingInsData InsDataWeak { get; private set; }
 
         [field: SerializeField, Required]
         protected Home_BuildingSharedData SharedData { get; private set; }
@@ -29,10 +41,10 @@ namespace MonsterLegendsLite {
             return (T)this;
         }
 
-        protected virtual void Initialize(string insId) {
-            InsId = insId;
+        public virtual void Initialize(BuildingInsData insData) {
+            this.InsDataWeak = insData;
 
-            var size = GetSizeData();
+            var size = DataManager.Ins.GetBuildingDefData(insData).Size;
             SharedData.selectOutline.size   = size;
             SharedData.validPlaceSpr.size   = size;
             SharedData.invalidPlaceSpr.size = size;
@@ -41,8 +53,19 @@ namespace MonsterLegendsLite {
             SharedData.selectWrapper.gameObject.SetActive(false);
 
             SetVisibleValidPlace(false);
+            
+            EventDispatcher.RegisterEvent(EventId.UserBuildingListChanged, DestroyIfNotExistInDatabase, this);
         }
 
+        private void OnDestroy() {
+            EventDispatcher.UnregisterEvent(EventId.UserBuildingListChanged, DestroyIfNotExistInDatabase, this);
+        }
+
+        private void DestroyIfNotExistInDatabase() {
+            if (DataManager.Ins.IsHaveBuilding(InsDataWeak)) return;
+            Destroy(gameObject);
+        }
+        
         public void OnSelect() {
             isSelected = true;
             SharedData.selectWrapper.gameObject.SetActive(true);
@@ -109,15 +132,11 @@ namespace MonsterLegendsLite {
         }
 
         public void ResetPos() {
-            TF.position = Home_MapManager.Ins.GetWorldPos(GetPosData());
+            TF.position = Home_MapManager.Ins.GetWorldPos(InsDataWeak.Position);
         }
 
         public void SaveCurPos() {
-            SavePos(Home_MapManager.Ins.GetNearestTilePos(TF.position));
+            DataManager.Ins.UpdateData_MoveBuilding(InsDataWeak, Home_MapManager.Ins.GetNearestTilePos(TF.position));
         }
-
-        public abstract Vector2Int GetSizeData();
-        public abstract Vector2Int GetPosData();
-        protected abstract void SavePos(Vector2Int tilePos);
     }
 }

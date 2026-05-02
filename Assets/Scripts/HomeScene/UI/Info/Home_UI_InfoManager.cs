@@ -102,7 +102,7 @@ namespace MonsterLegendsLite {
         }
         
         private void TryHideInfo(Home_UI_Info info, bool immediately) {
-            if (info == null || info.CurWeakTarget == null) return;
+            if (info == null || info.CurTargetWeak == null) return;
 
             if (immediately) {
                 var fakeHideInfo = Instantiate(info, info.RectTF.parent);

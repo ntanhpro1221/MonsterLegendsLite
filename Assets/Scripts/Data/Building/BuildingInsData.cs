@@ -1,14 +1,14 @@
 ﻿using System;
-using NGDtuanh.Types;
 using UnityEngine;
 
 namespace MonsterLegendsLite.Data {
     [Serializable]
-    public class HabitatInsData {
+    public class BuildingInsData {
         public string InsId;
-        public ElementId Id;
         public Vector2Int Position;
-        public long CurGold;
-        public SerTimestamp LastGoldUpdate;
+
+        public T To<T>() where T : BuildingInsData {
+            return (T)this;
+        }
     }
 }

@@ -37,7 +37,7 @@ namespace MonsterLegendsLite {
                 var gold = habitat.CalculateCurTotalGold();
                 if (gold <= 0) return;
                 
-                DataManager.Ins.UpdateData_CollectGold(habitat.insData);
+                DataManager.Ins.UpdateData_CollectGold(habitat.InsData);
 
                 FloatingTextPool.Ins.ShowAtWorld(FloatingTextId.GoldChange, habitat.TF.position).SetTextChange(gold);
                 
@@ -64,13 +64,13 @@ namespace MonsterLegendsLite {
 
                 usingMonsterBtns.Add(button);
                 
-                var monsterDefData    = DataManager.Ins.GameDefData.Monster[monster.insData.Id];
-                var monsterLocDefData = DataManager.Ins.GameLocDefData.Monster[monster.insData.Id];
+                var monsterDefData    = DataManager.Ins.GameDefData.Monster[monster.InsData.Id];
+                var monsterLocDefData = DataManager.Ins.GameLocDefData.Monster[monster.InsData.Id];
                 
-                button.SetCallback(() => Home_SceneManager.Ins.ViewMonsterDetail(monster.insData.InsId));
+                button.SetCallback(() => Home_SceneManager.Ins.ViewMonsterDetail(monster.InsData.InsId));
                 button.SetIcon(monsterLocDefData.Avatar);
-                button.SetTitle(LimitNameLength(monsterDefData.GetCustomNameIfPossible(monster.insData)));
-                button.SetInfo(utils.ToStrResource(monster.insData.Level));
+                button.SetTitle(LimitNameLength(monsterDefData.GetCustomNameIfPossible(monster.InsData)));
+                button.SetInfo(utils.ToStrResource(monster.InsData.Level));
             }
         }
 

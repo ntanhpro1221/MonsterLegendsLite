@@ -19,7 +19,7 @@ namespace NGDtuanh.MonsterLegendsLite {
         private TextMeshProUGUI noTxt;
 
         public static YesNoWindow Show(string title, string content, string yesText = "Yes", string noText = "No", Action yesCallback = null, Action noCallback = null, Action onClose = null) {
-            var window = (YesNoWindow)PopupWindowPool.Ins.Show(PopupWindowId.YesNo, title, content, onClose);
+            var window = PopupWindowPool.Ins.Show<YesNoWindow>(PopupWindowId.YesNo, title, content, onClose);
             window.yesTxt.text = yesText;
             window.noTxt.text = noText;
             window.SetCallbackTo(window.yesBtn, yesCallback, appendClose: true);
