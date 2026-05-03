@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using TMPro;

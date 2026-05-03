@@ -78,19 +78,19 @@ namespace MonsterLegendsLite {
             static void StartBuyFarm(FarmId id) {
                 var ins = Instantiate(DataManager.Ins.GameLocDefData.Farm[id].PrefabHomeScene, Ins.buildingRoot);
 
-                ins.Initialize(FarmInsData.Create(id), isBuySample: true);
+                ins.Initialize(new FarmInsData(id), isBuySample: true);
             }
 
             static void StartBuyHabitat(ElementId id) {
                 var ins = Instantiate(DataManager.Ins.GameLocDefData.Habitat[id].PrefabHomeScene, Ins.buildingRoot);
 
-                ins.Initialize(HabitatInsData.Create(id), isBuySample: true);
+                ins.Initialize(new HabitatInsData(id), isBuySample: true);
             }
 
             static void StartBuyMonster(MonsterId id) {
                 var ins = Instantiate(DataManager.Ins.GameLocDefData.Monster[id].PrefabHomeScene);
 
-                ins.Initialize(MonsterInsData.Create(id), isBuySample: true);
+                ins.Initialize(new MonsterInsData(id), isBuySample: true);
 
                 StartMoveMonster(ins);
             }

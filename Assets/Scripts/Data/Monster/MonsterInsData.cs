@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using Sirenix.OdinInspector;
 
 namespace MonsterLegendsLite.Data {
     [Serializable]
@@ -10,12 +10,25 @@ namespace MonsterLegendsLite.Data {
         public int Level;
         public int Exp;
         public string Habitat;
-        public List<int> SkillIds;
+        public MonsterSkillList SkillList;
 
-        public static MonsterInsData Create(MonsterId id) => new() {
-            InsId = "Monster_" + Guid.NewGuid()
-          , Id    = id
-          , Level = 1
-        };
+        public MonsterInsData(MonsterId id) {
+            OnInit();
+            Id = id;
+        }
+
+        [OnInspectorInit]
+        private void OnInit() {
+            if (string.IsNullOrEmpty(InsId)) InsId = "Monster_" + Guid.NewGuid();
+
+            if (Level == 0) Level = 1;
+
+            if ((SkillList ??= new()).IsAllEqual(0)) SkillList.WithAll(-1).With(0, 0);
+        }
+
+        public MonsterSkillData GetSkill(int slotId, MonsterDefData defData) {
+            if (SkillList[slotId] < 0) return null;
+            return defData.Skills[SkillList[slotId]];
+        }
     }
 }

@@ -1,4 +1,6 @@
 using System;
+using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace NGDtuanh.Types {
     /// <summary>
@@ -6,7 +8,13 @@ namespace NGDtuanh.Types {
     /// </summary>
     [Serializable]
     public struct SerTimestamp {
-        public long value;
+        [SerializeField]
+        internal long value;
+
+        [OnInspectorInit]
+        private void OnInit() {
+            if (value == 0) value = Now().value;
+        }
 
         public static SerTimestamp Now() {
             return new() { value = DateTimeOffset.UtcNow.ToUnixTimeSeconds() };

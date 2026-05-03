@@ -9,10 +9,16 @@ using UnityEngine.SceneManagement;
 namespace MonsterLegendsLite {
     public class MonsterDetail_SceneManager : SceneSingleton<MonsterDetail_SceneManager> {
         [SerializeField, Required]
+        private NewSkillAvailableWindow newSkillAvailableWindowPrefab;
+        
+        [SerializeField, Required]
         private Canvas canvas;
         
         [SerializeField, Required]
         private MonsterDetail_UI_Info uiInfo;
+
+        [SerializeField, Required]
+        private MonsterDetail_UI_Skill uiSkill;
         
         [SerializeField, Required]
         private MonsterDetail_UI_Monster uiMonster;
@@ -29,15 +35,20 @@ namespace MonsterLegendsLite {
             LoadBootDataThenDelete();
 
             UpdateUI_Info();
+            UpdateUI_Skill();
             UpdateUI_Monster();
 
+            EventDispatcher.RegisterEvent(EventId.MonsterLevelChangedInMonsterDetail, TryNotifyNewWindowAvailable, this);
             EventDispatcher.RegisterEvent(EventId.MonsterLevelChangedInMonsterDetail, UpdateUI_Info, this);
             EventDispatcher.RegisterEvent(EventId.MonsterFeedInMonsterDetail, UpdateUI_Monster, this);
+            EventDispatcher.RegisterEvent(EventId.MonsterSkillListChanged, UpdateUI_Skill, this);
         }
 
         private void OnDestroy() {
+            EventDispatcher.UnregisterEvent(EventId.MonsterLevelChangedInMonsterDetail, TryNotifyNewWindowAvailable, this);
             EventDispatcher.UnregisterEvent(EventId.MonsterLevelChangedInMonsterDetail, UpdateUI_Info, this);
             EventDispatcher.UnregisterEvent(EventId.MonsterFeedInMonsterDetail, UpdateUI_Monster, this);
+            EventDispatcher.UnregisterEvent(EventId.MonsterSkillListChanged, UpdateUI_Skill, this);
         }
 
         private void LoadBootDataThenDelete() {
@@ -50,6 +61,16 @@ namespace MonsterLegendsLite {
             monster = ins;
             
             Destroy(bootData.gameObject);
+        }
+
+        private void TryNotifyNewWindowAvailable() {
+            foreach (var skill in monster.defData.Skills) {
+                if (skill.UnlockAtLevel != monster.insData.Level) continue;
+                NewSkillAvailableWindow.Show(
+                    newSkillAvailableWindowPrefab
+                  , skill
+                  , DataManager.Ins.GameLocDefData.Element[skill.Element].ElementButton);
+            }
         }
 
         private void UpdateUI_Info() {
@@ -86,6 +107,10 @@ namespace MonsterLegendsLite {
             });
         }
 
+        private void UpdateUI_Skill() {
+            uiSkill.SetData(monster.insData);
+        }
+        
         private void UpdateUI_Monster() {
             uiMonster.SetRankIcon(DataManager.Ins.GameLocDefData.MonsterRank[monster.defData.Rank].Icon);
             uiMonster.SetCustomName(monster.insData.CustomName);

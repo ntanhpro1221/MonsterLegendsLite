@@ -17,35 +17,43 @@ MonoBehaviour:
     Level: 10
     Exp: 1221
     Gold: 1192722
-    Food: 32196
+    Food: 1148247
     Monsters:
-    - InsId: Test_Monster_1
-      Id: 1
-      CustomName: Bob's custom na
-      Level: 41
-      Exp: 2114
-      Habitat: Test_Habitat_1
-      SkillIds: 
-    - InsId: Test_Monster_0
+    - InsId: Monster_0
       Id: 0
       CustomName: 
-      Level: 4
-      Exp: 0
+      Level: 1
+      Exp: 44
       Habitat: Test_Habitat_0
-      SkillIds: 
+      SkillList:
+        skill_0: 0
+        skill_1: -1
+        skill_2: -1
+        skill_3: -1
+    - InsId: Monster_1
+      Id: 1
+      CustomName: Bob's custom name
+      Level: 44
+      Exp: 2114
+      Habitat: Test_Habitat_1
+      SkillList:
+        skill_0: 0
+        skill_1: -1
+        skill_2: -1
+        skill_3: -1
     Habitats:
     - InsId: Test_Habitat_0
       Position: {x: -5, y: 0}
       Id: 0
-      CurGold: 0
+      CurGold: 2000
       LastGoldUpdate:
-        value: 1777708803
+        value: 1777828030
     - InsId: Test_Habitat_1
       Position: {x: 0, y: 0}
       Id: 1
       CurGold: 2000
       LastGoldUpdate:
-        value: 1777650011
+        value: 1777825876
     Farms:
     - InsId: Test_Farm_0
       Position: {x: 0, y: -5}

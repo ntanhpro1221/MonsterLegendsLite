@@ -9,6 +9,7 @@ namespace MonsterLegendsLite.Data {
         public UserDefData User;
         public EnumMap<ElementId, ElementData> Element;
         public EnumMap<MonsterRankId, MonsterRankData> MonsterRank;
+        public EnumMap<MonsterSkillTargetId, MonsterSkillTargetData> MonsterSkillTarget;
         public EnumMap<MonsterId, MonsterDefData> Monster;
         public EnumMap<ElementId, HabitatDefData> Habitat;
         public EnumMap<FarmId, FarmDefData> Farm;

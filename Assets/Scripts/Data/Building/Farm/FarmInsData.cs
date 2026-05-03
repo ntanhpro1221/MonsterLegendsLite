@@ -1,5 +1,6 @@
 using System;
 using NGDtuanh.Types;
+using Sirenix.OdinInspector;
 
 namespace MonsterLegendsLite.Data {
     [Serializable]
@@ -8,9 +9,14 @@ namespace MonsterLegendsLite.Data {
         public long CurFood;
         public SerTimestamp LastFoodUpdate;
 
-        public static FarmInsData Create(FarmId id) => new() {
-            InsId = "Farm_" + Guid.NewGuid()
-          , Id    = id
-        };
+        public FarmInsData(FarmId id) {
+            OnInit();
+            Id = id;
+        }
+
+        [OnInspectorInit]
+        private void OnInit() {
+            if (string.IsNullOrEmpty(InsId)) InsId = "Farm_" + Guid.NewGuid();
+        }
     }
 }

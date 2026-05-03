@@ -1,5 +1,6 @@
 ﻿using System;
 using NGDtuanh.Types;
+using Sirenix.OdinInspector;
 
 namespace MonsterLegendsLite.Data {
     [Serializable]
@@ -8,9 +9,14 @@ namespace MonsterLegendsLite.Data {
         public long CurGold;
         public SerTimestamp LastGoldUpdate;
 
-        public static HabitatInsData Create(ElementId id) => new() {
-            InsId = "Habitat_" + Guid.NewGuid()
-          , Id    = id
-        };
+        public HabitatInsData(ElementId id) {
+            OnInit();
+            Id = id;
+        }
+
+        [OnInspectorInit]
+        private void OnInit() {
+            if (string.IsNullOrEmpty(InsId)) InsId = "Habitat_" + Guid.NewGuid();
+        }
     }
 }

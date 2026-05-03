@@ -154,8 +154,8 @@ namespace MonsterLegendsLite.Data {
         public void UpdateData_BuyMonster(MonsterId id, HabitatInsData habitat, out int cost, out string insId) {
             UpdateData_HabitatLastGoldUpdate(habitat);
 
-            var insData = MonsterInsData.Create(id);
-            insId = insData.InsId;
+            var insData = new MonsterInsData(id);
+            insId           = insData.InsId;
             insData.Habitat = habitat.InsId;
             UserInsData.Monsters.Add(insData);
 
@@ -164,8 +164,8 @@ namespace MonsterLegendsLite.Data {
         }
 
         public void UpdateData_BuyFarm(FarmId id, Vector2Int pos, out int cost, out string insId) {
-            var insData = FarmInsData.Create(id);
-            insId = insData.InsId;
+            var insData = new FarmInsData(id);
+            insId                  = insData.InsId;
             insData.Position       = pos;
             insData.LastFoodUpdate = SerTimestamp.Now();
             UserInsData.Farms.Add(insData);
@@ -175,14 +175,18 @@ namespace MonsterLegendsLite.Data {
         }
 
         public void UpdateData_BuyHabitat(ElementId id, Vector2Int pos, out int cost, out string insId) {
-            var insData = HabitatInsData.Create(id);
-            insId = insData.InsId;
+            var insData = new HabitatInsData(id);
+            insId                  = insData.InsId;
             insData.Position       = pos;
             insData.LastGoldUpdate = SerTimestamp.Now();
             UserInsData.Habitats.Add(insData);
 
             cost             =  GameDefData.Habitat[id].Cost;
             UserInsData.Gold -= cost;
+        }
+
+        public void UpdateData_MonsterSkill(MonsterInsData monster, int slotId, int skillId) {
+            monster.SkillList[slotId] = skillId;
         }
     }
 }

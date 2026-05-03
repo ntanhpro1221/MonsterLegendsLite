@@ -10,5 +10,6 @@
       , HomeMonsterPlaceChanged
       , MonsterFeedInMonsterDetail
       , MonsterLevelChangedInMonsterDetail
+      , MonsterSkillListChanged
     }
 }

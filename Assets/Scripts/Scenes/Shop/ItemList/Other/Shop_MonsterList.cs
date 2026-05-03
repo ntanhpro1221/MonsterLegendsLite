@@ -16,7 +16,7 @@ namespace MonsterLegendsLite {
         }
 
         protected override bool IsCanBuy(IShopItemData data, IShopItemLocData locData, out string blockReason) {
-            if (!DataManager.Ins.IsAnyHabitatCanAcceptNewMonster(MonsterInsData.Create(DataManager.Ins.GameDefData.Monster.First(i => i.Value == data).Key))) {
+            if (!DataManager.Ins.IsAnyHabitatCanAcceptNewMonster(new MonsterInsData(DataManager.Ins.GameDefData.Monster.First(i => i.Value == data).Key))) {
                 blockReason = $"You dont have any habitat that can accept {data.Name}";
                 return false;
             }

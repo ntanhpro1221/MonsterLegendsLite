@@ -64,6 +64,27 @@ MonoBehaviour:
       - Epic
       - Legendary
       _IsKeyChanged: 0
+    MonsterSkillTarget:
+      _Keys: 00000000010000000200000003000000
+      _Values:
+      - value:
+          Name: Single Enemy
+          Description: Target Single Enemy
+      - value:
+          Name: Multiple Enemies
+          Description: Target Multiple Enemies
+      - value:
+          Name: Single Ally
+          Description: Target Single Ally
+      - value:
+          Name: Multiple Allies
+          Description: Target Multiple Allies
+      _KeyNames:
+      - SingleEnemy
+      - MultipleEnemies
+      - SingleAlly
+      - MultipleAllies
+      _IsKeyChanged: 0
     Monster:
       _Keys: 0000000001000000
       _Values:
@@ -245,7 +266,54 @@ MonoBehaviour:
             - GoldPerMin
             - FoodCost
             _IsKeyChanged: 0
-          Skills: []
+          Skills:
+          - Name: Ember Strike
+            Description: Hurls a small fireball at a single enemy.
+            Element: 0
+            Target: 0
+            PowerRate: 35
+            Accuracy: 95
+            MPCost: 10
+            Cooldown: 0
+            UnlockAtLevel: 1
+          - Name: Flame Burst
+            Description: Releases a burst of flames hitting all enemies.
+            Element: 0
+            Target: 1
+            PowerRate: 55
+            Accuracy: 85
+            MPCost: 25
+            Cooldown: 1
+            UnlockAtLevel: 5
+          - Name: Inferno
+            Description: Unleashes a massive inferno on all enemies.
+            Element: 0
+            Target: 1
+            PowerRate: 80
+            Accuracy: 70
+            MPCost: 40
+            Cooldown: 3
+            UnlockAtLevel: 10
+          - Name: Warmth
+            Description: Wraps a single ally in soothing flames, restoring their
+              will to fight.
+            Element: 0
+            Target: 2
+            PowerRate: 40
+            Accuracy: 100
+            MPCost: 20
+            Cooldown: 2
+            UnlockAtLevel: 15
+          - Name: Blazing Aura
+            Description: Envelops all allies in a blazing aura, empowering the entire
+              team.
+            Element: 0
+            Target: 3
+            PowerRate: 30
+            Accuracy: 100
+            MPCost: 35
+            Cooldown: 3
+            UnlockAtLevel: 20
           Elements: 00000000
           Rank: 0
           Cost: 100
@@ -424,7 +492,53 @@ MonoBehaviour:
             - GoldPerMin
             - FoodCost
             _IsKeyChanged: 0
-          Skills: []
+          Skills:
+          - Name: Static Spark
+            Description: Zaps a single enemy with a quick jolt of electricity.
+            Element: 1
+            Target: 0
+            PowerRate: 35
+            Accuracy: 95
+            MPCost: 10
+            Cooldown: 0
+            UnlockAtLevel: 1
+          - Name: Thunder Clap
+            Description: Slams all enemies with a deafening thunderclap.
+            Element: 1
+            Target: 1
+            PowerRate: 50
+            Accuracy: 85
+            MPCost: 25
+            Cooldown: 1
+            UnlockAtLevel: 5
+          - Name: Scorched Circuit
+            Description: Combines fire and lightning to fry a single enemy.
+            Element: 0
+            Target: 0
+            PowerRate: 75
+            Accuracy: 80
+            MPCost: 30
+            Cooldown: 2
+            UnlockAtLevel: 10
+          - Name: Storm Pyre
+            Description: Summons a storm of fire and lightning hitting all enemies.
+            Element: 1
+            Target: 1
+            PowerRate: 85
+            Accuracy: 70
+            MPCost: 45
+            Cooldown: 3
+            UnlockAtLevel: 15
+          - Name: Galvanic Inferno
+            Description: Unleashes a catastrophic fusion of fire and thunder upon
+              all enemies.
+            Element: 0
+            Target: 1
+            PowerRate: 100
+            Accuracy: 65
+            MPCost: 60
+            Cooldown: 4
+            UnlockAtLevel: 20
           Elements: 0100000000000000
           Rank: 1
           Cost: 200
