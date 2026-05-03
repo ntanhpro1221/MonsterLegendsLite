@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MonsterLegendsLite.Data {
     [Serializable]
     public class MonsterRankLocData {
-        [Required]
+        [Required, PreviewField]
         public Sprite Icon;
     }
 }

@@ -4187,6 +4187,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1670419957}
+    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NavToShopScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MonsterLegendsLite.Home_SceneManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3952893912356509257, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
       propertyPath: m_AspectRatio
       value: 1.0515463

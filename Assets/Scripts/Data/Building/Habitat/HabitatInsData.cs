@@ -7,5 +7,10 @@ namespace MonsterLegendsLite.Data {
         public ElementId Id;
         public long CurGold;
         public SerTimestamp LastGoldUpdate;
+
+        public static HabitatInsData Create(ElementId id) => new() {
+            InsId = "Habitat_" + Guid.NewGuid()
+          , Id    = id
+        };
     }
 }

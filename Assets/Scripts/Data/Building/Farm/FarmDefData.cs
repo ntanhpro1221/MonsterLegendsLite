@@ -8,7 +8,7 @@ namespace MonsterLegendsLite.Data {
         public int FoodPerMin;
 
         public long CalculateFood(FarmInsData insData) {
-            var deltaFood = FoodPerMin * SerTimestamp.DeltaMinutes(SerTimestamp.GetCurTimestamp(), insData.LastFoodUpdate);
+            var deltaFood = FoodPerMin * SerTimestamp.DeltaMinutes(SerTimestamp.Now(), insData.LastFoodUpdate);
             return Math.Min(MaxFood, insData.CurFood + (long)deltaFood);
         }
     }

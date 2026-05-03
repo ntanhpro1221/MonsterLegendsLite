@@ -8,7 +8,7 @@ namespace NGDtuanh.Types {
     public struct SerTimestamp {
         public long value;
 
-        public static SerTimestamp GetCurTimestamp() {
+        public static SerTimestamp Now() {
             return new() { value = DateTimeOffset.UtcNow.ToUnixTimeSeconds() };
         }
 

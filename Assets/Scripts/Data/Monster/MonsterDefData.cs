@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MonsterLegendsLite.Data {
     [Serializable]
-    public class MonsterDefData {
+    public class MonsterDefData : IShopItemData {
         public string Name;
         public string Description;
         public MonsterStats<int> StatsBase;
@@ -28,5 +28,9 @@ namespace MonsterLegendsLite.Data {
         public string GetCustomNameIfPossible(MonsterInsData insData) {
             return string.IsNullOrWhiteSpace(insData.CustomName) ? Name : insData.CustomName;
         }
+
+        string IShopItemData.Name => Name;
+        string IShopItemData.Description => Description;
+        int IShopItemData.Cost => Cost;
     }
 }

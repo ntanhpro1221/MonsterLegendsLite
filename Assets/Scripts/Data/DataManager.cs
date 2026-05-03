@@ -96,11 +96,11 @@ namespace MonsterLegendsLite.Data {
 
         public void UpdateData_HabitatLastGoldUpdate(HabitatInsData habitat) {
             habitat.CurGold        = CalculateCurTotalGold(habitat);
-            habitat.LastGoldUpdate = SerTimestamp.GetCurTimestamp();
+            habitat.LastGoldUpdate = SerTimestamp.Now();
 
             static long CalculateCurTotalGold(HabitatInsData habitat) {
                 float result  = habitat.CurGold;
-                float minutes = SerTimestamp.DeltaMinutes(SerTimestamp.GetCurTimestamp(), habitat.LastGoldUpdate);
+                float minutes = SerTimestamp.DeltaMinutes(SerTimestamp.Now(), habitat.LastGoldUpdate);
 
                 foreach (var monster in Ins.UserInsData.Monsters) {
                     if (monster.Habitat != habitat.InsId) continue;
@@ -113,7 +113,7 @@ namespace MonsterLegendsLite.Data {
 
         public void UpdateData_FarmLastFoodUpdate(FarmInsData farm) {
             farm.CurFood        = CalculateCurTotalFood(farm);
-            farm.LastFoodUpdate = SerTimestamp.GetCurTimestamp();
+            farm.LastFoodUpdate = SerTimestamp.Now();
 
             static long CalculateCurTotalFood(FarmInsData farm) {
                 return Ins.GameDefData.Farm[farm.Id].CalculateFood(farm);
@@ -149,6 +149,40 @@ namespace MonsterLegendsLite.Data {
             }
 
             UserInsData.Gold += (int)(GetBuildingDefData(building).Cost * Ins.GameDefData.SellRatio_Building);
+        }
+
+        public void UpdateData_BuyMonster(MonsterId id, HabitatInsData habitat, out int cost, out string insId) {
+            UpdateData_HabitatLastGoldUpdate(habitat);
+
+            var insData = MonsterInsData.Create(id);
+            insId = insData.InsId;
+            insData.Habitat = habitat.InsId;
+            UserInsData.Monsters.Add(insData);
+
+            cost             =  GameDefData.Monster[id].Cost;
+            UserInsData.Gold -= cost;
+        }
+
+        public void UpdateData_BuyFarm(FarmId id, Vector2Int pos, out int cost, out string insId) {
+            var insData = FarmInsData.Create(id);
+            insId = insData.InsId;
+            insData.Position       = pos;
+            insData.LastFoodUpdate = SerTimestamp.Now();
+            UserInsData.Farms.Add(insData);
+
+            cost             =  GameDefData.Farm[id].Cost;
+            UserInsData.Gold -= cost;
+        }
+
+        public void UpdateData_BuyHabitat(ElementId id, Vector2Int pos, out int cost, out string insId) {
+            var insData = HabitatInsData.Create(id);
+            insId = insData.InsId;
+            insData.Position       = pos;
+            insData.LastGoldUpdate = SerTimestamp.Now();
+            UserInsData.Habitats.Add(insData);
+
+            cost             =  GameDefData.Habitat[id].Cost;
+            UserInsData.Gold -= cost;
         }
     }
 }

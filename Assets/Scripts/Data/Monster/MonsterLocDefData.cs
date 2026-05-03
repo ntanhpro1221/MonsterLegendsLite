@@ -4,9 +4,12 @@ using UnityEngine;
 
 namespace MonsterLegendsLite.Data {
     [Serializable]
-    public class MonsterLocDefData {
-        [Required]
+    public class MonsterLocDefData : IShopItemLocData {
+        [Required, PreviewField]
         public Sprite Avatar; 
+        
+        [Required, PreviewField]
+        public Sprite ShopAvatar; 
         
         [Required]
         public Home_Monster PrefabHomeScene;
@@ -16,5 +19,7 @@ namespace MonsterLegendsLite.Data {
 
         [Required]
         public MonsterDetail_Monster PrefabMonsterDetailScene;
+
+        Sprite IShopItemLocData.ShopAvatar => ShopAvatar;
     }
 }

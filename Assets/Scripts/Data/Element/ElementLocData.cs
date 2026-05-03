@@ -5,13 +5,13 @@ using UnityEngine;
 namespace MonsterLegendsLite.Data {
     [Serializable]
     public class ElementLocData {
-        [Required]
+        [Required, PreviewField]
         public Sprite Icon;
 
-        [Required]
+        [Required, PreviewField]
         public Sprite SkillButtonBG;
         
-        [Required]
+        [Required, PreviewField]
         public Sprite ElementButton;
     }
 }

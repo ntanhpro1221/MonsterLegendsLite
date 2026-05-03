@@ -1,0 +1,230 @@
+using System.Collections.Generic;
+using System.Linq;
+using MonsterLegendsLite.Data;
+using NGDtuanh.MonsterLegendsLite;
+using NGDtuanh.Types;
+using Sirenix.OdinInspector;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace MonsterLegendsLite {
+    public class Home_SceneManager : SceneSingleton<Home_SceneManager> {
+        [SerializeField, Required]
+        private Home_UI_InfoManager uiInfo;
+
+        [SerializeField, Required]
+        private Transform buildingRoot;
+
+        private readonly Dictionary<string, Home_Monster> monsters = new();
+        private readonly Dictionary<string, Home_Habitat> habitats = new();
+        private readonly Dictionary<string, Home_Farm> farms = new();
+
+        public IReadOnlyDictionary<string, Home_Monster> Monsters => monsters;
+        public IReadOnlyDictionary<string, Home_Habitat> Habitats => habitats;
+        public IReadOnlyDictionary<string, Home_Farm> Farms => farms;
+
+        private Camera cam;
+        public Camera Cam => cam != null ? cam : cam = Camera.main;
+
+        private Home_Monster movingMonster;
+
+        protected override void Initialize() {
+            base.Initialize();
+            
+            uiInfo.Initialize();
+            
+            BuildMap();
+            
+            EventDispatcher.RegisterEvent(EventId.UserBuildingListChanged, RebuildBuildings, this, 100);
+            EventDispatcher.RegisterEvent(EventId.UserHabitatListChanged, RebuildHabitats, this, 100);
+            EventDispatcher.RegisterEvent(EventId.UserMonsterListChanged, RebuildMonsters, this, 100);
+            EventDispatcher.RegisterEvent(EventId.UserFarmListChanged, RebuildFarms, this, 100);
+        }
+
+        private void OnDestroy() {
+            EventDispatcher.UnregisterEvent(EventId.UserBuildingListChanged, RebuildBuildings, this);
+            EventDispatcher.UnregisterEvent(EventId.UserHabitatListChanged, RebuildHabitats, this);
+            EventDispatcher.UnregisterEvent(EventId.UserMonsterListChanged, RebuildMonsters, this);
+            EventDispatcher.UnregisterEvent(EventId.UserFarmListChanged, RebuildFarms, this);
+        }
+
+        private void Start() {
+            LoadBootDataThenDelete();
+        }
+
+        private void LoadBootDataThenDelete() {
+            var bootData = Home_BootData.Ins;
+            if (bootData == null) return;
+
+            if (bootData.MoveMonster != null) StartMoveMonster(Monsters[bootData.MoveMonster.InsId]);
+            
+            if (bootData.FloatingGold != null) FloatingTextPool.Ins.ShowAtCenterScreen(FloatingTextId.GoldChange).SetTextChange(bootData.FloatingGold.Value);
+            
+            if (bootData.BuyFarm != null) StartBuyFarm(bootData.BuyFarm.Value);
+            
+            if (bootData.BuyHabitat != null) StartBuyHabitat(bootData.BuyHabitat.Value);
+            
+            if (bootData.BuyMonster != null) StartBuyMonster(bootData.BuyMonster.Value);
+            
+            Destroy(bootData.gameObject);
+
+            static void StartMoveMonster(Home_Monster target) {
+                Ins.movingMonster = target;
+            
+                foreach (var habitat in Ins.habitats.Values) habitat.SetVisibleMoveMonsterArrow(habitat.IsCanAcceptNewMonster(target));
+                Ins.uiInfo.ShowMoveMonsterInfo(target);
+            }
+
+            static void StartBuyFarm(FarmId id) {
+                var ins = Instantiate(DataManager.Ins.GameLocDefData.Farm[id].PrefabHomeScene, Ins.buildingRoot);
+
+                ins.Initialize(FarmInsData.Create(id), isBuySample: true);
+            }
+
+            static void StartBuyHabitat(ElementId id) {
+                var ins = Instantiate(DataManager.Ins.GameLocDefData.Habitat[id].PrefabHomeScene, Ins.buildingRoot);
+
+                ins.Initialize(HabitatInsData.Create(id), isBuySample: true);
+            }
+
+            static void StartBuyMonster(MonsterId id) {
+                var ins = Instantiate(DataManager.Ins.GameLocDefData.Monster[id].PrefabHomeScene);
+
+                ins.Initialize(MonsterInsData.Create(id), isBuySample: true);
+
+                StartMoveMonster(ins);
+            }
+        }
+
+        private void BuildMap() {
+            RebuildBuildings();
+            
+            RebuildMonsters();
+        }
+
+        private void RebuildBuildings() {
+            RebuildFarms();
+            RebuildHabitats();
+        }
+        
+        private void RebuildFarms() {
+            var map        = Home_MapManager.Ins;
+            var gameLocDef = DataManager.Ins.GameLocDefData;
+            
+            // Remove
+            foreach (var (key, _) in farms.Where(static i =>
+                i.Value == null
+             || !DataManager.Ins.UserInsData.Farms.Contains(i.Value.InsDataWeak)).ToList())
+                farms.Remove(key);
+
+            // Add
+            foreach (var farm in DataManager.Ins.UserInsData.Farms) {
+                if (farms.ContainsKey(farm.InsId)) continue;
+                
+                var ins = Instantiate(gameLocDef.Farm[farm.Id].PrefabHomeScene, buildingRoot);
+                farms.Add(farm.InsId, ins);
+
+                ins.Initialize(farm, isBuySample: false);
+                ins.TF.position = map.GetWorldPos(farm.Position);
+            }
+        }
+        
+        private void RebuildHabitats() {
+            var map        = Home_MapManager.Ins;
+            var gameLocDef = DataManager.Ins.GameLocDefData;
+            
+            // Remove
+            foreach (var (key, _) in habitats.Where(static i =>
+                i.Value == null
+             || !DataManager.Ins.UserInsData.Habitats.Contains(i.Value.InsData)).ToList())
+                habitats.Remove(key);
+
+            // Add
+            foreach (var habitat in DataManager.Ins.UserInsData.Habitats) {
+                if (habitats.ContainsKey(habitat.InsId)) continue;
+                
+                var ins = Instantiate(gameLocDef.Habitat[habitat.Id].PrefabHomeScene, buildingRoot);
+                habitats.Add(habitat.InsId, ins);
+
+                ins.Initialize(habitat, isBuySample: false);
+                ins.TF.position = map.GetWorldPos(habitat.Position);
+            }
+        }
+        
+        private void RebuildMonsters() {
+            var gameLocDef = DataManager.Ins.GameLocDefData;
+            
+            // Remove
+            foreach (var (key, _) in monsters.Where(static i =>
+                i.Value == null
+             || !DataManager.Ins.UserInsData.Monsters.Contains(i.Value.InsData)).ToList())
+                monsters.Remove(key);
+
+            // Add
+            foreach (var monster in DataManager.Ins.UserInsData.Monsters) {
+                if (monsters.ContainsKey(monster.InsId)) continue;
+                
+                var habitat = habitats[monster.Habitat];
+                var ins     = Instantiate(gameLocDef.Monster[monster.Id].PrefabHomeScene);
+                monsters.Add(monster.InsId, ins);
+
+                ins.Initialize(monster, isBuySample: false);
+                habitat.AddMonster(ins);
+            }
+        }
+
+        public void OnClicked_Building(Home_Building building) {
+            if (movingMonster != null) {
+                if (building is Home_Habitat habitat
+                 && habitat.IsCanAcceptNewMonster(movingMonster))
+                    ConfirmMoveMonster(habitat);
+            } else uiInfo.ShowBuildingInfoFor(building, hideAllCurrentInfo: false);
+        }
+
+        public void OnMove_Building(Home_Building building) {
+            uiInfo.ShowMoveBuildingInfoFor(building);
+        }
+
+        public void OnClicked_Void() {
+            uiInfo.TryHideCurBuildingInfo();
+        }
+        
+        public void TryHideCurBuildingInfo() {
+            uiInfo.TryHideCurBuildingInfo();
+        }
+
+        public void TryHideMoveBuildingInfo() {
+            uiInfo.TryHideMoveBuildingInfo();
+        }
+        
+        public void TryHideMoveMonsterInfo() {
+            uiInfo.TryHideMoveMonsterInfo();
+        }
+
+        public void ForceShowBuildingInfo(Home_Building building) {
+            uiInfo.ShowBuildingInfoFor(building, hideAllCurrentInfo: true);
+        }
+
+        public void ConfirmMoveMonster(Home_Habitat toHabitat) {
+            if (toHabitat == null) movingMonster.OnMoveDiscarded();
+            else movingMonster.OnMoveConfirmed(toHabitat);
+            
+            foreach (var habitat in habitats.Values) habitat.SetVisibleMoveMonsterArrow(false);
+            movingMonster = null;
+        }
+
+        public void ViewMonsterDetail(string insId) {
+            MonsterDetail_BootData.InsAutoSpawn.SetData(monsters[insId].InsData);
+            SceneManager.LoadScene("MonsterDetailScene");
+        }
+
+        public void NavToShopScene() {
+            SceneManager.LoadScene("ShopScene");
+        }
+
+        public IEnumerable<Home_Building> IEBuildings() {
+            foreach (var item in habitats.Values) yield return item;
+            foreach (var item in farms.Values) yield return item;
+        }
+    }
+}

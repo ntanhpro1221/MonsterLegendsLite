@@ -11,5 +11,11 @@ namespace MonsterLegendsLite.Data {
         public int Exp;
         public string Habitat;
         public List<int> SkillIds;
+
+        public static MonsterInsData Create(MonsterId id) => new() {
+            InsId = "Monster_" + Guid.NewGuid()
+          , Id    = id
+          , Level = 1
+        };
     }
 }
