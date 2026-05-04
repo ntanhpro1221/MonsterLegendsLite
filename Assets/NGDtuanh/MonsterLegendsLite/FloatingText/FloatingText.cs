@@ -64,7 +64,7 @@ namespace NGDtuanh.MonsterLegendsLite {
             onCompleted?.Invoke(this);
         }
 
-        internal IEnumerator IEPinToWorldPos(Vector2 worldPos, Canvas canvas, Camera cam) {
+        internal IEnumerator IEPinToWorldPos(Vector3 worldPos, Canvas canvas, Camera cam) {
             var parent = (RectTransform)RectTF.parent;
             var locPos = default(Vector2);
 

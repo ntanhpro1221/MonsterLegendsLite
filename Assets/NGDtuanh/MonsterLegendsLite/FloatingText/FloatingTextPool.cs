@@ -42,7 +42,7 @@ namespace NGDtuanh.MonsterLegendsLite {
             obj.gameObject.SetActive(false);
         }
 
-        public FloatingText ShowAtWorld(FloatingTextId id, Vector2 worldPos) {
+        public FloatingText ShowAtWorld(FloatingTextId id, Vector3 worldPos) {
             var text = ShowAtScreen(id, CachedCam.WorldToScreenPoint(worldPos));
             text.StartCoroutine(text.IEPinToWorldPos(worldPos, canvas, CachedCam));
             return text;

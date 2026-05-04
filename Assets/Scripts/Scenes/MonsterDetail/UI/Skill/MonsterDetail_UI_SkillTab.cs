@@ -31,8 +31,7 @@ namespace MonsterLegendsLite {
         }
 
         public void SetTurnOnCallback(UnityAction callback) {
-            toggle.onValueChanged.RemoveAllListeners();
-            toggle.onValueChanged.AddListener(isOn => {
+            utils.SetListener(toggle.onValueChanged, isOn => {
                 if (isOn) callback?.Invoke();
             });
         }

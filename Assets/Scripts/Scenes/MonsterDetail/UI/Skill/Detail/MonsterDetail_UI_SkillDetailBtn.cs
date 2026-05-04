@@ -18,8 +18,7 @@ namespace MonsterLegendsLite {
             canvasGroup.alpha = interactable ? 1 : alphaNonInteractable;
             button.enabled = interactable;
             
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(callback);
+            utils.SetListener(button, callback);
         }
     }
 }

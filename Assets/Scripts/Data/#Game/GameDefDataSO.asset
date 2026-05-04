@@ -22,7 +22,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
     Element:
-      _Keys: 0000000001000000
+      _Keys: 00000000010000000200000003000000
       _Values:
       - value:
           Name: Fire
@@ -30,9 +30,17 @@ MonoBehaviour:
       - value:
           Name: Thunder
           Description: Speed of lightning
+      - value:
+          Name: Dark
+          Description: Dark element
+      - value:
+          Name: Water
+          Description: Water element
       _KeyNames:
       - Fire
       - Thunder
+      - Dark
+      - Water
       _IsKeyChanged: 0
     MonsterRank:
       _Keys: 0000000001000000020000000300000004000000
@@ -86,7 +94,7 @@ MonoBehaviour:
       - MultipleAllies
       _IsKeyChanged: 0
     Monster:
-      _Keys: 0000000001000000
+      _Keys: 000000000100000002000000
       _Values:
       - value:
           Name: Alice
@@ -542,12 +550,237 @@ MonoBehaviour:
           Elements: 0100000000000000
           Rank: 1
           Cost: 200
+      - value:
+          Name: Monkey
+          Description: A child of nature
+          StatsBase:
+            _Keys: 000000000100000002000000030000000400000005000000
+            _Values:
+            - value: 80
+            - value: 140
+            - value: 30
+            - value: 35
+            - value: 35
+            - value: 55
+            _KeyNames:
+            - HP
+            - MP
+            - Speed
+            - Atk
+            - GoldPerMin
+            - FoodCost
+            _IsKeyChanged: 0
+          StatsGrowth:
+            _Keys: 000000000100000002000000030000000400000005000000
+            _Values:
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 0
+                  outSlope: 0
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 0
+                  inSlope: 0
+                  outSlope: 0
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            - value:
+                serializedVersion: 2
+                m_Curve:
+                - serializedVersion: 3
+                  time: 0
+                  value: 0
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0
+                  outWeight: 0.33333334
+                - serializedVersion: 3
+                  time: 100
+                  value: 10000
+                  inSlope: 100
+                  outSlope: 100
+                  tangentMode: 34
+                  weightedMode: 0
+                  inWeight: 0.33333334
+                  outWeight: 0
+                m_PreInfinity: 2
+                m_PostInfinity: 2
+                m_RotationOrder: 4
+            _KeyNames:
+            - HP
+            - MP
+            - Speed
+            - Atk
+            - GoldPerMin
+            - FoodCost
+            _IsKeyChanged: 0
+          Skills:
+          - Name: Shadow Slash
+            Description: Slash the enemy with dark energy.
+            Element: 2
+            Target: 0
+            PowerRate: 80
+            Accuracy: 95
+            MPCost: 10
+            Cooldown: 0
+            UnlockAtLevel: 1
+          - Name: Tidal Wave
+            Description: Summon a wave to strike all enemies.
+            Element: 3
+            Target: 1
+            PowerRate: 60
+            Accuracy: 90
+            MPCost: 20
+            Cooldown: 1
+            UnlockAtLevel: 5
+          - Name: Cursed Void
+            Description: Open a void of darkness to consume a foe.
+            Element: 2
+            Target: 0
+            PowerRate: 100
+            Accuracy: 85
+            MPCost: 30
+            Cooldown: 2
+            UnlockAtLevel: 10
+          - Name: Abyssal Flood
+            Description: Unleash the abyss to drown all enemies.
+            Element: 3
+            Target: 1
+            PowerRate: 90
+            Accuracy: 80
+            MPCost: 40
+            Cooldown: 3
+            UnlockAtLevel: 15
+          - Name: Soul Devour
+            Description: Devour the soul of an enemy with pure darkness.
+            Element: 2
+            Target: 0
+            PowerRate: 100
+            Accuracy: 75
+            MPCost: 60
+            Cooldown: 4
+            UnlockAtLevel: 20
+          Elements: 0200000003000000
+          Rank: 3
+          Cost: 500
       _KeyNames:
       - Alice
       - Bob
+      - Monkey
       _IsKeyChanged: 0
     Habitat:
-      _Keys: 0000000001000000
+      _Keys: 00000000010000000200000003000000
       _Values:
       - value:
           Name: Fire
@@ -565,9 +798,27 @@ MonoBehaviour:
           Element: 1
           Capacity: 1
           MaxGold: 2000
+      - value:
+          Name: Dark
+          Description: Dark Habitat
+          Size: {x: 4, y: 4}
+          Cost: 3000
+          Element: 2
+          Capacity: 1
+          MaxGold: 20000
+      - value:
+          Name: Water
+          Description: Water Habitat
+          Size: {x: 4, y: 4}
+          Cost: 4000
+          Element: 3
+          Capacity: 1
+          MaxGold: 50000
       _KeyNames:
       - Fire
       - Thunder
+      - Dark
+      - Water
       _IsKeyChanged: 0
     Farm:
       _Keys: 000000000100000002000000

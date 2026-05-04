@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using NGDtuanh.Utils;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -11,17 +12,26 @@ namespace MonsterLegendsLite.Data {
         private void OnInit() {
             if (IsAllEqual(0)) ResetAll();
         }
-        
+
         [Button]
         private void ResetAll() {
             WithAll(-1).With(0, 0);
         }
     }
-    
+
+    [ForwardAttributesTo(
+        nameof(skill_0)
+      , nameof(skill_1)
+      , nameof(skill_2)
+      , nameof(skill_3))]
     [Serializable]
     public class MonsterSkillList<T> : IReadOnlyList<T> {
         [SerializeField]
-        private T skill_0, skill_1, skill_2, skill_3;
+        private T 
+            skill_0
+          , skill_1
+          , skill_2
+          , skill_3;
 
         public int Count => 4;
 

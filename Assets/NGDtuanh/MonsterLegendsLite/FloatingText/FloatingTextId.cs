@@ -1,7 +1,9 @@
 ﻿namespace NGDtuanh.MonsterLegendsLite {
     public enum FloatingTextId {
-        DamageNormal
-      , FoodChange
+        FoodChange
       , GoldChange
+      , Heal
+      , ManaChange
+      , TakeDamageNormal
     }
 }

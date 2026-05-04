@@ -81,7 +81,7 @@ namespace MonsterLegendsLite {
                 var locTarget  = TF.parent.InverseTransformPoint(Home_MapManager.Ins.RandomPointInHabitat(habitatPos, size));
                 var duration   = Vector2.Distance(TF.localPosition, locTarget) / DataManager.Ins.GameDefData.Home_MonsterSpeed;
 
-                model.SetDirection(TF.localPosition.x < locTarget.x ? HorDirection.Right : HorDirection.Left);
+                model.LookAt(locTarget.x);
                 model.Play(MonsterAnimId.Walk);
 
                 yield return TF

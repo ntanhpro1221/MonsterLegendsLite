@@ -43,13 +43,11 @@ namespace MonsterLegendsLite {
         }
 
         public void SetMoveBtnCallback(UnityAction callback) {
-            moveBtn.onClick.RemoveAllListeners();
-            moveBtn.onClick.AddListener(callback);
+            utils.SetListener(moveBtn, callback);
         }
         
         public void SetSellBtnCallback(UnityAction callback) {
-            sellBtn.onClick.RemoveAllListeners();
-            sellBtn.onClick.AddListener(callback);
+            utils.SetListener(sellBtn, callback);
         }
     }
 }

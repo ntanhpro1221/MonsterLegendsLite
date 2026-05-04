@@ -1,0 +1,35 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using MonsterLegendsLite.Data;
+using NGDtuanh.MonsterLegendsLite;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace MonsterLegendsLite {
+    public class Battle_BootDataTest : Battle_BootData {
+        [SerializeField]
+        private List<string> teamLeftInsId, teamRightInsId;
+
+        protected override void Initialize() {
+            base.Initialize();
+
+            SetData(
+                exitWarning: "Are you sure you want to exit this battle?"
+              , onExit: NavToHomeScene
+              , onBattleEnd: isWin => NotificationWindow.Show(
+                    title: isWin ? "WIN" : "LOSE"
+                  , content: isWin ? "You are win" : "You are lose"
+                  , onClose: NavToHomeScene)
+              , teamLeft: ToInsDataList(teamLeftInsId)
+              , teamRight: ToInsDataList(teamRightInsId));
+        }
+
+        private List<MonsterInsData> ToInsDataList(List<string> insIdList) {
+            return insIdList.Select(id => DataManager.Ins.UserInsData.Monsters.First(monster => monster.InsId == id)).ToList();
+        }
+
+        private void NavToHomeScene() {
+            SceneManager.LoadScene("HomeScene");
+        }
+    }
+}

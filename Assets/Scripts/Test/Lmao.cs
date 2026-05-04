@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using NGDtuanh.MonsterLegendsLite;
-using NGDtuanh.Types;
+﻿using NGDtuanh.MonsterLegendsLite;
 
 namespace MonsterLegendsLite {
     public class Lmao : MonoBehaviourExt {

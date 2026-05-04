@@ -2,9 +2,9 @@ namespace MonsterLegendsLite.Data {
     public enum ElementId {
         Fire
       , Thunder
-        // , Dark
+      , Dark
+      , Water
         // , Light
-        // , Water
         // , Magic
         // , Metal
     }

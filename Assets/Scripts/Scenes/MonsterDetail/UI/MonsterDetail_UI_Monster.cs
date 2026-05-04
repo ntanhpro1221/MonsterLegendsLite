@@ -43,9 +43,8 @@ namespace MonsterLegendsLite {
             customNameInput.text = customName;
         }
 
-        public void SetCustomNameChangedCallback(Action<string> callback) {
-            customNameInput.onValueChanged.RemoveAllListeners();
-            customNameInput.onValueChanged.AddListener(new(callback));
+        public void SetCustomNameChangedCallback(UnityAction<string> callback) {
+            utils.SetListener(customNameInput.onValueChanged, callback);
         }
         
         public void SetName(string name) {
@@ -66,8 +65,7 @@ namespace MonsterLegendsLite {
         }
 
         public void SetFeedCallback(UnityAction callback) {
-            feedBtn.onClick.RemoveAllListeners();
-            feedBtn.onClick.AddListener(callback);
+            utils.SetListener(feedBtn, callback);
         }
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Data.GameLocDefDataSO
   Data:
     Element:
-      _Keys: 0000000001000000
+      _Keys: 00000000010000000200000003000000
       _Values:
       - value:
           Icon: {fileID: 21300000, guid: fa41e6d9182108147af88c98e0a5fcaa, type: 3}
@@ -24,9 +24,19 @@ MonoBehaviour:
           Icon: {fileID: 21300000, guid: dd9204b8fed09b64297d3886190edfaa, type: 3}
           SkillButtonBG: {fileID: 21300000, guid: a83f320eb02b0fe4c8e8738ca0485659, type: 3}
           ElementButton: {fileID: 21300000, guid: 650e185755bc2634d9fb1e5e90fc1a3b, type: 3}
+      - value:
+          Icon: {fileID: 21300000, guid: fef62bbd4412aef4685526af880ed759, type: 3}
+          SkillButtonBG: {fileID: 21300000, guid: f0be567128031614d96dce9a68927b19, type: 3}
+          ElementButton: {fileID: 21300000, guid: bf1a07f44b459c545876a33b2e761e13, type: 3}
+      - value:
+          Icon: {fileID: 21300000, guid: 429d99e3cffd9b9418792f42fa215e26, type: 3}
+          SkillButtonBG: {fileID: 21300000, guid: 004ccd9b74e602f40876495069e3407e, type: 3}
+          ElementButton: {fileID: 21300000, guid: 650e185755bc2634d9fb1e5e90fc1a3b, type: 3}
       _KeyNames:
       - Fire
       - Thunder
+      - Dark
+      - Water
       _IsKeyChanged: 0
     MonsterRank:
       _Keys: 0000000001000000020000000300000004000000
@@ -49,7 +59,7 @@ MonoBehaviour:
       - Legendary
       _IsKeyChanged: 0
     Monster:
-      _Keys: 0000000001000000
+      _Keys: 000000000100000002000000
       _Values:
       - value:
           Avatar: {fileID: 21300000, guid: 8293a35d32923a549a4ab59c3df8d4bf, type: 3}
@@ -63,12 +73,19 @@ MonoBehaviour:
           PrefabHomeScene: {fileID: 6402835627022570762, guid: 7505010fed7397049b0d24b2e3f44c30, type: 3}
           PrefabBattleScene: {fileID: 5617029448647903564, guid: bb411ac9b9c815447a6f5def9f2a2112, type: 3}
           PrefabMonsterDetailScene: {fileID: 1289948885566199047, guid: e487147471a89f64aa0ed799c8779228, type: 3}
+      - value:
+          Avatar: {fileID: 21300000, guid: e1fc52fc99db8d64597c06f1407a4ffb, type: 3}
+          ShopAvatar: {fileID: -5866907569906753163, guid: b07a64bdc0c158f4b81a03a9bb258b95, type: 3}
+          PrefabHomeScene: {fileID: 6402835627022570762, guid: b748e1e9d6148ba448eea77db2859382, type: 3}
+          PrefabBattleScene: {fileID: 5617029448647903564, guid: 73cee7215ad34de46a3627e7ec97b9c4, type: 3}
+          PrefabMonsterDetailScene: {fileID: 1289948885566199047, guid: 33632bfac48bb3f419dbeacd707444eb, type: 3}
       _KeyNames:
       - Alice
       - Bob
+      - Monkey
       _IsKeyChanged: 0
     Habitat:
-      _Keys: 0000000001000000
+      _Keys: 00000000010000000200000003000000
       _Values:
       - value:
           ShopAvatar: {fileID: 21300000, guid: 6f54fd0aa3c13e04a969107efd48a97d, type: 3}
@@ -76,9 +93,17 @@ MonoBehaviour:
       - value:
           ShopAvatar: {fileID: 21300000, guid: 23a77d0554668fe4d9993a0703f60b41, type: 3}
           PrefabHomeScene: {fileID: 2516894608579519234, guid: 4a0f1616c2685a648a3d2d9bbadf8569, type: 3}
+      - value:
+          ShopAvatar: {fileID: 21300000, guid: 0a1f6111dc84f7143982e283bbd76006, type: 3}
+          PrefabHomeScene: {fileID: 2516894608579519234, guid: 5bb6c3eb890a0144189ef2827317fda7, type: 3}
+      - value:
+          ShopAvatar: {fileID: 21300000, guid: b2e31ff78bd7f3c40a8baf21b85c8f2d, type: 3}
+          PrefabHomeScene: {fileID: 2516894608579519234, guid: 487a24b1545c3a94ca97aabc3ec517d0, type: 3}
       _KeyNames:
       - Fire
       - Thunder
+      - Dark
+      - Water
       _IsKeyChanged: 0
     Farm:
       _Keys: 000000000100000002000000

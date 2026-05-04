@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2125222889323288079, guid: d634b3da4f20a474798328c0f3a7cf41, type: 3}
       propertyPath: m_Name
-      value: Apple
+      value: Samsung
       objectReference: {fileID: 0}
     - target: {fileID: 3047570757427283917, guid: d634b3da4f20a474798328c0f3a7cf41, type: 3}
       propertyPath: m_LocalPosition.x

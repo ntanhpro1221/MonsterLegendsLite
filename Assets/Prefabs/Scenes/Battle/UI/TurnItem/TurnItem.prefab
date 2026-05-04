@@ -516,6 +516,7 @@ GameObject:
   - component: {fileID: 6021376541855906312}
   - component: {fileID: 6131045677544110056}
   - component: {fileID: 948005882890597701}
+  - component: {fileID: 8828535269306835467}
   m_Layer: 5
   m_Name: TurnItem
   m_TagString: Untagged
@@ -557,7 +558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
   m_IgnoreLayout: 0
   m_MinWidth: -1
-  m_MinHeight: 0
+  m_MinHeight: 67
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
@@ -577,3 +578,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
   m_AspectMode: 2
   m_AspectRatio: 1
+--- !u!114 &8828535269306835467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8379433794366133835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 372b812082be4238a990357c9d4a1828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Battle_UI_Turn
+  offsetLayer: {fileID: 4278329388264187361}
+  layoutElement: {fileID: 6131045677544110056}
+  avatar: {fileID: 9184626558070700815}
+  ally:
+    outline: {fileID: 7005365209273820233}
+    outlineGlow: {fileID: 6522380503739448732}
+  enemy:
+    outline: {fileID: 3782673472537468426}
+    outlineGlow: {fileID: 2895320796497479245}

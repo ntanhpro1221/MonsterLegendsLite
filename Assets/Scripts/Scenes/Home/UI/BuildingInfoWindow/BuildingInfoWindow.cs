@@ -20,8 +20,7 @@ namespace MonsterLegendsLite {
               , onClose: null);
 
             var sellValue = (int)(defData.Cost * DataManager.Ins.GameDefData.SellRatio_Building);
-            window.SharedData_Building.SellBtn.onClick.RemoveAllListeners();
-            window.SharedData_Building.SellBtn.onClick.AddListener(() => {
+            window.utils.SetListener(window.SharedData_Building.SellBtn, () => {
                 if (!window.IsCanSell(target, out var blockReason)) {
                     NotificationWindow.Show(
                         title: $"SELL {buildingNameUC}"

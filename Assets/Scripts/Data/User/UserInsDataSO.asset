@@ -16,7 +16,7 @@ MonoBehaviour:
     Name: NGDtuanh
     Level: 10
     Exp: 1221
-    Gold: 1192722
+    Gold: 1180422
     Food: 1148247
     Monsters:
     - InsId: Monster_0
@@ -27,15 +27,59 @@ MonoBehaviour:
       Habitat: Test_Habitat_0
       SkillList:
         skill_0: 0
-        skill_1: -1
-        skill_2: -1
-        skill_3: -1
+        skill_1: 1
+        skill_2: 2
+        skill_3: 3
     - InsId: Monster_1
       Id: 1
       CustomName: Bob's custom name
-      Level: 44
-      Exp: 2114
+      Level: 3
+      Exp: 1
       Habitat: Test_Habitat_1
+      SkillList:
+        skill_0: 0
+        skill_1: -1
+        skill_2: -1
+        skill_3: -1
+    - InsId: Monster_2
+      Id: 2
+      CustomName: 
+      Level: 1
+      Exp: 0
+      Habitat: Habitat_202972fa-cf12-4439-8325-4ea1d76250b9
+      SkillList:
+        skill_0: 0
+        skill_1: -1
+        skill_2: -1
+        skill_3: -1
+    - InsId: Monster_3
+      Id: 0
+      CustomName: 
+      Level: 1
+      Exp: 0
+      Habitat: Habitat_8678d796-ad91-46e3-b062-21ebb2280aad
+      SkillList:
+        skill_0: 0
+        skill_1: -1
+        skill_2: -1
+        skill_3: -1
+    - InsId: Monster_4
+      Id: 1
+      CustomName: 
+      Level: 1
+      Exp: 0
+      Habitat: Habitat_83544cbc-865f-45ee-b3b5-b9a2e8655006
+      SkillList:
+        skill_0: 0
+        skill_1: -1
+        skill_2: -1
+        skill_3: -1
+    - InsId: Monster_5
+      Id: 2
+      CustomName: 
+      Level: 1
+      Exp: 0
+      Habitat: Habitat_9319483a-c986-4468-859f-ba92188f1bad
       SkillList:
         skill_0: 0
         skill_1: -1
@@ -54,6 +98,30 @@ MonoBehaviour:
       CurGold: 2000
       LastGoldUpdate:
         value: 1777825876
+    - InsId: Habitat_9319483a-c986-4468-859f-ba92188f1bad
+      Position: {x: -4, y: -4}
+      Id: 2
+      CurGold: 0
+      LastGoldUpdate:
+        value: 1777894435
+    - InsId: Habitat_202972fa-cf12-4439-8325-4ea1d76250b9
+      Position: {x: -13, y: -4}
+      Id: 3
+      CurGold: 0
+      LastGoldUpdate:
+        value: 1777890996
+    - InsId: Habitat_8678d796-ad91-46e3-b062-21ebb2280aad
+      Position: {x: 4, y: -7}
+      Id: 0
+      CurGold: 0
+      LastGoldUpdate:
+        value: 1777894426
+    - InsId: Habitat_83544cbc-865f-45ee-b3b5-b9a2e8655006
+      Position: {x: -3, y: -12}
+      Id: 1
+      CurGold: 0
+      LastGoldUpdate:
+        value: 1777894431
     Farms:
     - InsId: Test_Farm_0
       Position: {x: 0, y: -5}

@@ -26,8 +26,7 @@ namespace MonsterLegendsLite {
         private TextMeshProUGUI infoTxt;
 
         public void SetCallback(UnityAction callback) {
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(callback);
+            utils.SetListener(button, callback);
         }
 
         public void SetInteractable(bool interactable) {
