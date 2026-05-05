@@ -8,9 +8,6 @@ namespace MonsterLegendsLite {
     public class Home_BuildingSharedData : MonoBehaviourExt {
         [SerializeField, Required]
         public SortingGroup sortingGroup;
-
-        [SerializeField]
-        public int orderOnSelected;
         
         [SerializeField, Required]
         public Transform selectWrapper;

@@ -1,7 +1,7 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace NGDtuanh.MonsterLegendsLite {
@@ -11,9 +11,19 @@ namespace NGDtuanh.MonsterLegendsLite {
         [field: SerializeField, Required]
         public PopupWindowSharedData SharedData { get; private set; }
 
-        private Action<PopupWindow> onClose;
+        private UnityAction<PopupWindow> onDoneClose;
 
-        internal PopupWindow Initialize(string title, string content, Action<PopupWindow> onClose) {
+        protected internal virtual void Initialize() {
+            utils.SetListener(SharedData.closeBtn, () => Close(null));
+        }
+
+        internal PopupWindow Show(
+            string title
+          , string content
+          , UnityAction<PopupWindow> onDoneClose) {
+            gameObject.SetActive(true);
+            RectTF.SetAsLastSibling();
+
             SharedData.canvasGroup.blocksRaycasts = true;
 
             SharedData.canvasGroup.alpha = 0;
@@ -22,28 +32,30 @@ namespace NGDtuanh.MonsterLegendsLite {
 
             SharedData.title.text   = title;
             SharedData.content.text = content;
-            this.onClose            = onClose;
-
-            SetCallbackTo(SharedData.closeBtn, null, appendClose: true);
+            this.onDoneClose        = onDoneClose;
 
             return this;
+        }
+
+        protected void Close(UnityAction onDoneClose) {
+            SharedData.canvasGroup.blocksRaycasts = false;
+
+            SharedData.canvasGroup.DOKill();
+            SharedData.canvasGroup.DOFade(0, SHOW_HIDE_DURATION).OnComplete(() => {
+                gameObject.SetActive(false);
+                this.onDoneClose?.Invoke(this);
+                onDoneClose?.Invoke();
+            });
         }
 
         private void OnDestroy() {
             SharedData.canvasGroup.DOKill();
         }
 
-        protected void Close() {
-            SharedData.canvasGroup.blocksRaycasts = false;
-
-            SharedData.canvasGroup.DOKill();
-            SharedData.canvasGroup.DOFade(0, SHOW_HIDE_DURATION).OnComplete(() => onClose?.Invoke(this));
-        }
-
-        protected void SetCallbackTo(Button btn, Action callback, bool appendClose) {
-            if (appendClose) callback += Close;
-            btn.onClick.RemoveAllListeners();
-            btn.onClick.AddListener(new(callback));
+        protected void SetCallbackTo(Button btn, UnityAction callback, bool afterClose) {
+            utils.SetListener(btn, afterClose
+                ? () => Close(callback)
+                : callback);
         }
     }
 }

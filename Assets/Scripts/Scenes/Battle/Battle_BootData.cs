@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using MonsterLegendsLite.Data;
 using NGDtuanh.Types;
+using UnityEngine.Events;
 
 namespace MonsterLegendsLite {
     public class Battle_BootData : Singleton<Battle_BootData> {
         public delegate void OnBattleEnd(bool isWin);
 
         public string exitWarning;
-        public Action onExit;
+        public UnityAction onExit;
         public OnBattleEnd onBattleEnd;
         private List<MonsterInsData> teamLeft, teamRight;
 
@@ -17,7 +18,7 @@ namespace MonsterLegendsLite {
 
         public void SetData(
             string exitWarning
-          , Action onExit
+          , UnityAction onExit
           , OnBattleEnd onBattleEnd
           , List<MonsterInsData> teamLeft
           , List<MonsterInsData> teamRight) {

@@ -812,7 +812,7 @@ MonoBehaviour:
           Size: {x: 4, y: 4}
           Cost: 4000
           Element: 3
-          Capacity: 1
+          Capacity: 2
           MaxGold: 50000
       _KeyNames:
       - Fire

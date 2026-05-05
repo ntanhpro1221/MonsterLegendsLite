@@ -59,7 +59,11 @@ namespace MonsterLegendsLite {
         }
 
         public Vector2 GetWorldPos(Vector2Int tilePos) {
-            return tileMap.GetCellCenterWorld(new Vector3Int(tilePos.x, tilePos.y, 0));
+            return tileMap.GetCellCenterWorld(new(tilePos.x, tilePos.y));
+        }
+        
+        public Vector2 GetWorldPosInterpolated(Vector2 tilePos) {
+            return tileMap.LocalToWorld(tileMap.CellToLocalInterpolated(tilePos));
         }
 
         public Vector2Int GetNearestTilePos(Vector2 worldPos) {
@@ -67,10 +71,15 @@ namespace MonsterLegendsLite {
         }
 
         public Vector2 RandomPointInHabitat(Vector2Int pos, Vector2Int size) {
-            return tileMap.LocalToWorld(tileMap.CellToLocalInterpolated(new Vector3(
+            return GetWorldPosInterpolated(new(
                 pos.x + Random.Range(0, size.x)
-              , pos.y + Random.Range(0, size.y)
-              , 0)));
+              , pos.y + Random.Range(0, size.y)));
+        }
+
+        public Vector2 GetHabitatRangeY(Vector2Int pos, Vector2Int size) {
+            return new Vector2(
+                GetWorldPosInterpolated(pos).y
+              , GetWorldPosInterpolated(pos + size).y);
         }
     }
 }

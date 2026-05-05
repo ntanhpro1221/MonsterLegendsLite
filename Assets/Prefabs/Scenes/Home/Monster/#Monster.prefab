@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Home_Monster
   model: {fileID: 1065088894828065787}
+  sortingGroup: {fileID: 5267951383405264144}
 --- !u!210 &5267951383405264144
 SortingGroup:
   m_ObjectHideFlags: 0

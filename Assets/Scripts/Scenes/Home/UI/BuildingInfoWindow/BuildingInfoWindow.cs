@@ -1,5 +1,4 @@
-﻿using System;
-using MonsterLegendsLite.Data;
+﻿using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -9,7 +8,10 @@ namespace MonsterLegendsLite {
         [field: SerializeField, Required]
         protected BuildingInfoWindowSharedData SharedData_Building { get; private set; }
         
-        protected static TBuildingInfoWindow Show<TBuildingInfoWindow>(BuildingInsData target, TBuildingInfoWindow prefab) where TBuildingInfoWindow : BuildingInfoWindow {
+        protected static TBuildingInfoWindow Show<TBuildingInfoWindow>(
+            BuildingInsData target
+          , TBuildingInfoWindow prefab) 
+            where TBuildingInfoWindow : BuildingInfoWindow {
             var defData        = DataManager.Ins.GetBuildingDefData(target);
             var buildingName   = prefab.GetBuildingName(target);
             var buildingNameUC = buildingName.ToUpper();
@@ -17,7 +19,7 @@ namespace MonsterLegendsLite {
                 prefab: prefab
               , title: buildingNameUC
               , content: defData.Description
-              , onClose: null);
+              , onDoneClose: null);
 
             var sellValue = (int)(defData.Cost * DataManager.Ins.GameDefData.SellRatio_Building);
             window.utils.SetListener(window.SharedData_Building.SellBtn, () => {
@@ -40,7 +42,7 @@ namespace MonsterLegendsLite {
                         
                         FloatingTextPool.Ins.ShowAtCenterScreen(FloatingTextId.GoldChange).SetTextChange(sellValue);
 
-                        window.Close();
+                        window.Close(null);
                     });
             });
 

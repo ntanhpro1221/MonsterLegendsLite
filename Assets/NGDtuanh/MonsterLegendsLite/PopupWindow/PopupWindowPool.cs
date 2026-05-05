@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NGDtuanh.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Pool;
 
 namespace NGDtuanh.MonsterLegendsLite {
@@ -15,36 +15,36 @@ namespace NGDtuanh.MonsterLegendsLite {
 
         private ObjectPool<PopupWindow> GetPool(PopupWindow prefab) {
             if (pools.TryGetValue(prefab, out var result)) return result;
-            return pools[prefab] = new(
-                createFunc: () => CreateFunc(prefab)
-              , actionOnGet: ActionOnGet
-              , actionOnRelease: ActionOnRelease);
+            return pools[prefab] = new(() => CreateFunc(prefab));
         }
 
         private PopupWindow CreateFunc(PopupWindow prefab) {
-            return Instantiate(prefab, TF);
+            var window = Instantiate(prefab, TF);
+            window.Initialize();
+            return window;
         }
 
-        private void ActionOnGet(PopupWindow obj) {
-            obj.gameObject.SetActive(true);
-            obj.RectTF.SetAsLastSibling();
+        internal TPopupWindow Show<TPopupWindow>(
+            PopupWindowId id
+          , string title
+          , string content
+          , UnityAction onDoneClose) 
+            where TPopupWindow : PopupWindow {
+            return Show((TPopupWindow)prefabs[id], title, content, onDoneClose);
         }
 
-        private void ActionOnRelease(PopupWindow obj) {
-            obj.gameObject.SetActive(false);
-        }
-
-        internal TPopupWindow Show<TPopupWindow>(PopupWindowId id, string title, string content, Action onClose) where TPopupWindow : PopupWindow {
-            return Show((TPopupWindow)prefabs[id], title, content, onClose);
-        }
-
-        public TPopupWindow Show<TPopupWindow>(TPopupWindow prefab, string title, string content, Action onClose) where TPopupWindow : PopupWindow {
+        public TPopupWindow Show<TPopupWindow>(
+            TPopupWindow prefab
+          , string title
+          , string content
+          , UnityAction onDoneClose) 
+            where TPopupWindow : PopupWindow {
             var pool        = GetPool(prefab);
-            var wrapOnClose = new Action<PopupWindow>(pool.Release);
+            var wrapOnClose = new UnityAction<PopupWindow>(pool.Release);
 
-            if (onClose != null) wrapOnClose += _ => onClose.Invoke();
+            if (onDoneClose != null) wrapOnClose += _ => onDoneClose.Invoke();
 
-            return (TPopupWindow)pool.Get().Initialize(title, content, wrapOnClose);
+            return (TPopupWindow)pool.Get().Show(title, content, wrapOnClose);
         }
     }
 }

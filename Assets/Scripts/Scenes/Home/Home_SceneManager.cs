@@ -39,6 +39,7 @@ namespace MonsterLegendsLite {
             EventDispatcher.RegisterEvent(EventId.UserHabitatListChanged, RebuildHabitats, this, 100);
             EventDispatcher.RegisterEvent(EventId.UserMonsterListChanged, RebuildMonsters, this, 100);
             EventDispatcher.RegisterEvent(EventId.UserFarmListChanged, RebuildFarms, this, 100);
+            EventDispatcher.RegisterEvent(EventId.HomeMapChanged, SortAllBuildings, this);
         }
 
         private void OnDestroy() {
@@ -46,6 +47,7 @@ namespace MonsterLegendsLite {
             EventDispatcher.UnregisterEvent(EventId.UserHabitatListChanged, RebuildHabitats, this);
             EventDispatcher.UnregisterEvent(EventId.UserMonsterListChanged, RebuildMonsters, this);
             EventDispatcher.UnregisterEvent(EventId.UserFarmListChanged, RebuildFarms, this);
+            EventDispatcher.UnregisterEvent(EventId.HomeMapChanged, SortAllBuildings, this);
         }
 
         private void Start() {
@@ -105,6 +107,8 @@ namespace MonsterLegendsLite {
         private void RebuildBuildings() {
             RebuildFarms();
             RebuildHabitats();
+            
+            SortAllBuildings();
         }
         
         private void RebuildFarms() {
@@ -149,6 +153,12 @@ namespace MonsterLegendsLite {
                 ins.Initialize(habitat, isBuySample: false);
                 ins.TF.position = map.GetWorldPos(habitat.Position);
             }
+        }
+
+        private void SortAllBuildings() {
+            var order = short.MinValue;
+            foreach (var building in IEBuildings().OrderBy(static i => -i.TF.position.y))
+                building.SetIdleSortingOrder(order++);
         }
         
         private void RebuildMonsters() {
@@ -220,6 +230,10 @@ namespace MonsterLegendsLite {
 
         public void NavToShopScene() {
             SceneManager.LoadScene("ShopScene");
+        }
+
+        public void TestNavBattleScene() {
+            SceneManager.LoadScene("BattleScene");
         }
 
         public IEnumerable<Home_Building> IEBuildings() {

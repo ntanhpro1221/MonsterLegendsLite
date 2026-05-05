@@ -38,14 +38,14 @@ namespace MonsterLegendsLite {
             UpdateUI_Skill();
             UpdateUI_Monster();
 
-            EventDispatcher.RegisterEvent(EventId.MonsterLevelChangedInMonsterDetail, TryNotifyNewWindowAvailable, this);
+            EventDispatcher.RegisterEvent(EventId.MonsterLevelChangedInMonsterDetail, CheckNewSkillAvailable, this);
             EventDispatcher.RegisterEvent(EventId.MonsterLevelChangedInMonsterDetail, UpdateUI_Info, this);
             EventDispatcher.RegisterEvent(EventId.MonsterFeedInMonsterDetail, UpdateUI_Monster, this);
             EventDispatcher.RegisterEvent(EventId.MonsterSkillListChanged, UpdateUI_Skill, this);
         }
 
         private void OnDestroy() {
-            EventDispatcher.UnregisterEvent(EventId.MonsterLevelChangedInMonsterDetail, TryNotifyNewWindowAvailable, this);
+            EventDispatcher.UnregisterEvent(EventId.MonsterLevelChangedInMonsterDetail, CheckNewSkillAvailable, this);
             EventDispatcher.UnregisterEvent(EventId.MonsterLevelChangedInMonsterDetail, UpdateUI_Info, this);
             EventDispatcher.UnregisterEvent(EventId.MonsterFeedInMonsterDetail, UpdateUI_Monster, this);
             EventDispatcher.UnregisterEvent(EventId.MonsterSkillListChanged, UpdateUI_Skill, this);
@@ -63,7 +63,7 @@ namespace MonsterLegendsLite {
             Destroy(bootData.gameObject);
         }
 
-        private void TryNotifyNewWindowAvailable() {
+        private void CheckNewSkillAvailable() {
             foreach (var skill in monster.defData.Skills) {
                 if (skill.UnlockAtLevel != monster.insData.Level) continue;
                 NewSkillAvailableWindow.Show(

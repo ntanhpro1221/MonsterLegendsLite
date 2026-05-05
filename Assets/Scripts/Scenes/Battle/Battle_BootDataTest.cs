@@ -19,7 +19,7 @@ namespace MonsterLegendsLite {
               , onBattleEnd: isWin => NotificationWindow.Show(
                     title: isWin ? "WIN" : "LOSE"
                   , content: isWin ? "You are win" : "You are lose"
-                  , onClose: NavToHomeScene)
+                  , onDoneClose: NavToHomeScene)
               , teamLeft: ToInsDataList(teamLeftInsId)
               , teamRight: ToInsDataList(teamRightInsId));
         }

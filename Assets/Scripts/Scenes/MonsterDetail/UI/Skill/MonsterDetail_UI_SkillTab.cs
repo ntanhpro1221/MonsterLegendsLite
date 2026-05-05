@@ -16,6 +16,14 @@ namespace MonsterLegendsLite {
         [SerializeField, Required]
         private TextMeshProUGUI nameTxt;
 
+        private UnityAction turnOnCallback;
+
+        private void Awake() {
+            toggle.onValueChanged.AddListener(isOn => {
+                if (isOn) turnOnCallback?.Invoke();
+            });
+        }
+
         public void TurnOn() {
             toggle.isOn = false;
             toggle.isOn = true;
@@ -31,9 +39,7 @@ namespace MonsterLegendsLite {
         }
 
         public void SetTurnOnCallback(UnityAction callback) {
-            utils.SetListener(toggle.onValueChanged, isOn => {
-                if (isOn) callback?.Invoke();
-            });
+            turnOnCallback = callback;
         }
     }
 }

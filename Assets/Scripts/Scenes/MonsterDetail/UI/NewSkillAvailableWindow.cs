@@ -13,7 +13,7 @@ namespace MonsterLegendsLite {
                 prefab: prefab
               , title: "NEW SKILL AVAILABLE"
               , content: null
-              , onClose: null);
+              , onDoneClose: null);
 
             window.skillDetail.SetAllData(data, element);
 

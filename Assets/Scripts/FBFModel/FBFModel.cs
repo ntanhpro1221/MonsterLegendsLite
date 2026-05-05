@@ -35,8 +35,8 @@ namespace MonsterLegendsLite {
             return data.Animator.runtimeAnimatorController.animationClips.First(i => i.name == animId).length;
         }
 
-        public void LookAt(float x) {
-            CurDir = TF.position.x < x ? HorDirection.Right : HorDirection.Left;
+        public void LookAt(float globalX) {
+            CurDir = TF.position.x < globalX ? HorDirection.Right : HorDirection.Left;
         }
     }
 }

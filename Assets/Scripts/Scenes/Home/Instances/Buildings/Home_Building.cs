@@ -36,6 +36,7 @@ namespace MonsterLegendsLite {
         private bool isSelected, isPntDown, isPntMoved;
         private int pntId;
         private Vector2 pntDownOffset;
+        private int idleSortingOrder;
 
         public event Action<bool> onPlaceableChanged;
 
@@ -75,18 +76,26 @@ namespace MonsterLegendsLite {
             if (DataManager.Ins.IsHaveBuilding(InsDataWeak)) return;
             Destroy(gameObject);
         }
-        
+
+        public void SetIdleSortingOrder(int order) {
+            SharedData.sortingGroup.sortingOrder = idleSortingOrder = order;
+        }
+
         public void OnSelect() {
             isSelected = true;
             SharedData.selectWrapper.gameObject.SetActive(true);
-            SharedData.sortingGroup.sortingOrder = SharedData.orderOnSelected;
+
+            SharedData.sortingGroup.sortingOrder = short.MaxValue;
+
             TF.position = utils.With(TF.position, UtilFuncs.VecAxis.Z, -1);
         }
 
         public void OnDeselect() {
             isSelected = false;
             SharedData.selectWrapper.gameObject.SetActive(false);
-            SharedData.sortingGroup.sortingOrder = 0;
+
+            SharedData.sortingGroup.sortingOrder = idleSortingOrder;
+
             TF.position = utils.With(TF.position, UtilFuncs.VecAxis.Z, 0);
         }
 
