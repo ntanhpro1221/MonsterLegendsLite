@@ -11,5 +11,6 @@
       , MonsterFeedInMonsterDetail
       , MonsterLevelChangedInMonsterDetail
       , MonsterSkillListChanged
+      , AnyUserEloChanged
     }
 }

@@ -7,10 +7,8 @@ namespace MonsterLegendsLite.UI {
         [SerializeField]
         private EventId refreshEvent;
 
-        [SerializeField, Required]
-        private Home_UI_ResourceInfoData data;
-
-        protected Home_UI_ResourceInfoData Data => data;
+        [field: SerializeField, Required]
+        protected Home_UI_ResourceInfoData SharedData { get; private set; }
         
         private void Awake() {
             EventDispatcher.RegisterEvent(refreshEvent, Refresh, this);

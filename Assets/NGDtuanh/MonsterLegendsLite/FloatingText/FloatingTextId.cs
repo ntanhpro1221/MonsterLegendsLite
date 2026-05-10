@@ -5,5 +5,6 @@
       , Heal
       , ManaChange
       , TakeDamageNormal
+      , EloChanged
     }
 }

@@ -24,7 +24,7 @@ namespace MonsterLegendsLite {
         [SerializeField, Required]
         private MonsterSkillList<MonsterDetail_UI_SkillTab> tabs;
 
-        public void SetData(MonsterInsData insData) {
+        public void SetAllData(MonsterInsData insData) {
             var defData        = DataManager.Ins.GameDefData.Monster[insData.Id];
             var elementLocData = DataManager.Ins.GameLocDefData.Element;
 

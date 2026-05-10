@@ -232,8 +232,8 @@ namespace MonsterLegendsLite {
             SceneManager.LoadScene("ShopScene");
         }
 
-        public void TestNavBattleScene() {
-            SceneManager.LoadScene("BattleScene");
+        public void TestNavArenaScene() {
+            SceneManager.LoadScene("ArenaScene");
         }
 
         public IEnumerable<Home_Building> IEBuildings() {

@@ -28,7 +28,9 @@ namespace MonsterLegendsLite {
 
         private readonly Dictionary<string, Battle_Monster> teamLeft = new(), teamRight = new();
 
-        private void Start() {
+        protected override void Initialize() {
+            base.Initialize();
+            
             LoadBootDataThenDelete();
 
             uiTurnManager.Initialize(teamLeft, teamRight);

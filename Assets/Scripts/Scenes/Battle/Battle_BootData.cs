@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MonsterLegendsLite.Data;
 using NGDtuanh.Types;
 using UnityEngine.Events;

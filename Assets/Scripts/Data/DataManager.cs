@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NGDtuanh.Types;
 using Sirenix.OdinInspector;
@@ -48,6 +49,28 @@ namespace MonsterLegendsLite.Data {
               , HabitatInsData habitat => UserInsData.Habitats.Contains(habitat)
 
               , _ => throw new Exception($"Unknown {nameof(BuildingInsData)} type: {insData.GetType().Name}")
+            };
+        }
+
+        public IReadOnlyList<UserInsData> GetUserListTest() {
+            return new[] {
+                UserInsData
+              , new() {
+                    Name = "Beast Master"
+                  , Elo  = 152
+                }
+              , new() {
+                    Name = "Shadow Hunter"
+                  , Elo  = 110
+                }
+              , new() {
+                    Name = "Fire Dragon 99"
+                  , Elo  = 75
+                }
+              , new() {
+                    Name = "Slime Rider"
+                  , Elo  = 34
+                }
             };
         }
 
@@ -187,6 +210,23 @@ namespace MonsterLegendsLite.Data {
 
         public void UpdateData_MonsterSkill(MonsterInsData monster, int slotId, int skillId) {
             monster.SkillList[slotId] = skillId;
+        }
+
+        public void UpdateData_ArenaTeamAttack(MonsterTeamSlots<string> newTeam) {
+            for (int i = 0; i < newTeam.Count; ++i) UserInsData.ArenaTeamAttack[i] = newTeam[i];
+        }
+        
+        public void UpdateData_ArenaTeamDefense(MonsterTeamSlots<string> newTeam) {
+            for (int i = 0; i < newTeam.Count; ++i) UserInsData.ArenaTeamDefense[i] = newTeam[i];
+        }
+        
+        public void UpdateData_AdventureTeam(MonsterTeamSlots<string> newTeam) {
+            for (int i = 0; i < newTeam.Count; ++i) UserInsData.AdventureTeam[i] = newTeam[i];
+        }
+
+        public void UpdateData_EloAfterBattleTest(UserInsData winner, UserInsData loser, int winnerDeltaElo, int loserDeltaElo) {
+            winner.Elo += winnerDeltaElo;
+            loser.Elo += loserDeltaElo;
         }
     }
 }

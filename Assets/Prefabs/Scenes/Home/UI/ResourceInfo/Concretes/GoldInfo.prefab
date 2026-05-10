@@ -217,4 +217,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.UI.Home_UI_GoldInfo
   refreshEvent: 0
-  data: {fileID: 3019996239181740974}
+  <SharedData>k__BackingField: {fileID: 3019996239181740974}

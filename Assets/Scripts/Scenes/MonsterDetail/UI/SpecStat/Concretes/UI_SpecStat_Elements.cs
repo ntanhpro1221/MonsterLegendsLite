@@ -6,10 +6,10 @@ using UnityEngine.UI;
 namespace MonsterLegendsLite {
     public class UI_SpecStat_Elements : UI_SpecStat {
         [SerializeField, Required]
-        public Image prefabElement;
+        private Image prefabElement;
         
         [SerializeField, Required]
-        public RectTransform elementRoot;
+        private RectTransform elementRoot;
 
         private readonly List<Image> availableElements = new(1);
         private readonly List<Image> usingElements = new(1);

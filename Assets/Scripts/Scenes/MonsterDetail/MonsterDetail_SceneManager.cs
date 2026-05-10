@@ -108,7 +108,7 @@ namespace MonsterLegendsLite {
         }
 
         private void UpdateUI_Skill() {
-            uiSkill.SetData(monster.insData);
+            uiSkill.SetAllData(monster.insData);
         }
         
         private void UpdateUI_Monster() {
