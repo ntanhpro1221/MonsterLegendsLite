@@ -284,7 +284,7 @@ namespace MonsterLegendsLite.Data {
 
             levelUp = false;
             while (UserInsData.Level < GameDefData.User.MaxLevel) {
-                int expCost = (int)GameDefData.User.ExpCost.Evaluate(UserInsData.Level);
+                var expCost = GameDefData.User.CalcExpCost(UserInsData.Level);
                 if (UserInsData.Exp < expCost) break;
 
                 levelUp           =  true;

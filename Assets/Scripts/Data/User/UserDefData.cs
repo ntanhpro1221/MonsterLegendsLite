@@ -6,5 +6,9 @@ namespace MonsterLegendsLite.Data {
     public class UserDefData {
         public int MaxLevel;
         public AnimationCurve ExpCost;
+
+        public int CalcExpCost(int level) {
+            return (int)ExpCost.Evaluate(level);
+        }
     }
 }

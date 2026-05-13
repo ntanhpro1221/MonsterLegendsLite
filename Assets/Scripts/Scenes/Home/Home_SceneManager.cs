@@ -21,6 +21,9 @@ namespace MonsterLegendsLite {
 
         [SerializeField, Required]
         private Button settingsBtn;
+
+        [SerializeField, Required]
+        private Home_UI_UserLevel uiUserLevel;
         
         [SerializeField, Required]
         private Home_UI_InfoManager uiInfo;
@@ -54,6 +57,7 @@ namespace MonsterLegendsLite {
                 prefab: prefabSettingsWindow
             ));
             
+            uiUserLevel.Initialize();
             uiInfo.Initialize();
             
             BuildMap();
