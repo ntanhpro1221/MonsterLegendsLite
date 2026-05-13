@@ -24,7 +24,7 @@ namespace MonsterLegendsLite.Data {
         public MonsterTeamSlots<MonsterInsData> GetAdventureTeamData() => GetTeamIns(AdventureTeam);
 
         public MonsterTeamSlots<MonsterInsData> GetTeamIns(IEnumerable<string> team) {
-            return new MonsterTeamSlots<MonsterInsData>().WithAll(team.Select(id => Monsters.First(monster => monster.InsId == id)));
+            return new MonsterTeamSlots<MonsterInsData>().WithAll(team.Select(id => Monsters.FirstOrDefault(monster => monster.InsId == id)));
         }
     }
 }

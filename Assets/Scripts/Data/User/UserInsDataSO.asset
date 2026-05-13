@@ -132,13 +132,13 @@ MonoBehaviour:
       LastFoodUpdate:
         value: 1777783851
     ArenaTeamAttack:
-      item_0: 
-      item_1: 
-      item_2: 
+      item_0: Monster_0
+      item_1: Monster_2
+      item_2: Monster_4
     ArenaTeamDefense:
-      item_0: 
-      item_1: 
-      item_2: 
+      item_0: Monster_1
+      item_1: Monster_3
+      item_2: Monster_5
     AdventureTeam:
       item_0: Monster_0
       item_1: Monster_1

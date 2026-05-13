@@ -5880,6 +5880,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02954e612fbc40fbbf39aab9d6a81447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.BootloaderHomeScene
+  prefabChoosePlayModeWindow: {fileID: -5202360213591054236, guid: 589b203229120114e98e57425a30a90a, type: 3}
+  playBtn: {fileID: 9080019974243398088}
   uiInfo: {fileID: 1369693847}
   buildingRoot: {fileID: 1109369680}
 --- !u!4 &1670419958
@@ -6788,34 +6790,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1670419957}
-    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TestNavArenaScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MonsterLegendsLite.Home_SceneManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 4095963187099286189, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -6846,6 +6820,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1260402825953996505, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
   m_PrefabInstance: {fileID: 9080019974243398086}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9080019974243398088 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3340512394487073022, guid: 714e3bb05c8cd594f93be12f51ffe08b, type: 3}
+  m_PrefabInstance: {fileID: 9080019974243398086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

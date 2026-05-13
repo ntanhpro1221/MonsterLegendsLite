@@ -6,9 +6,16 @@ using NGDtuanh.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace MonsterLegendsLite {
     public class Home_SceneManager : SceneSingleton<Home_SceneManager> {
+        [SerializeField, Required]
+        private ChoosePlayModeWindow prefabChoosePlayModeWindow;
+        
+        [SerializeField, Required]
+        private Button playBtn;
+        
         [SerializeField, Required]
         private Home_UI_InfoManager uiInfo;
 
@@ -30,6 +37,12 @@ namespace MonsterLegendsLite {
 
         protected override void Initialize() {
             base.Initialize();
+
+            UtilFuncs.Ins.SetListener(playBtn, () => ChoosePlayModeWindow.Show(
+                prefab: prefabChoosePlayModeWindow
+              , navArenaScene: NavArenaScene
+              , navAdventureScene: NavAdventureScene)
+            );
             
             uiInfo.Initialize();
             
@@ -232,8 +245,12 @@ namespace MonsterLegendsLite {
             SceneManager.LoadScene("ShopScene");
         }
 
-        public void TestNavArenaScene() {
+        public void NavArenaScene() {
             SceneManager.LoadScene("ArenaScene");
+        }
+
+        public void NavAdventureScene() {
+            SceneManager.LoadScene("AdventureScene");
         }
 
         public IEnumerable<Home_Building> IEBuildings() {
