@@ -4651,7 +4651,7 @@ GameObject:
   - component: {fileID: 1018735026}
   - component: {fileID: 1018735025}
   m_Layer: 5
-  m_Name: Setting
+  m_Name: Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5882,6 +5882,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.BootloaderHomeScene
   prefabChoosePlayModeWindow: {fileID: -5202360213591054236, guid: 589b203229120114e98e57425a30a90a, type: 3}
   playBtn: {fileID: 9080019974243398088}
+  prefabSettingsWindow: {fileID: 8892318065390253290, guid: 4eb7a47b5408bda49a0f5bdc05b7841a, type: 3}
+  settingsBtn: {fileID: 1018735025}
   uiInfo: {fileID: 1369693847}
   buildingRoot: {fileID: 1109369680}
 --- !u!4 &1670419958

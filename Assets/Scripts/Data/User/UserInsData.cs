@@ -12,6 +12,9 @@ namespace MonsterLegendsLite.Data {
         public long Gold;
         public long Food;
         public int CurAdventureLevel;
+        public bool Music;
+        public bool Sound;
+        public bool Vibrant;
         public List<MonsterInsData> Monsters;
         public List<HabitatInsData> Habitats;
         public List<FarmInsData> Farms;

@@ -294,5 +294,29 @@ namespace MonsterLegendsLite.Data {
             
             SaveAllSO();
         }
+
+        public void UpdateData_UserName(string name) {
+            UserInsData.Name = name;
+            
+            SaveAllSO();
+        }
+
+        public void UpdateData_UserMusic(bool isOn) {
+            UserInsData.Music = isOn;
+            
+            SaveAllSO();
+        }
+
+        public void UpdateData_UserSound(bool isOn) {
+            UserInsData.Sound = isOn;
+            
+            SaveAllSO();
+        }
+
+        public void UpdateData_UserVibrant(bool isOn) {
+            UserInsData.Vibrant = isOn;
+            
+            SaveAllSO();
+        }
     }
 }

@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: UserInsDataSO
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Data.UserInsDataSO
   Data:
-    Name: NGDtuanh
+    Name: 'Nguyeenx Duy Tuaasn Anh '
     Level: 10
     Exp: 5721
     Elo: 0
     Gold: 1195422
     Food: 1157247
     CurAdventureLevel: 3
+    Music: 1
+    Sound: 0
+    Vibrant: 0
     Monsters:
     - InsId: Monster_0
       Id: 0

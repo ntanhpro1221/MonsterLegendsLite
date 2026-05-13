@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 namespace NGDtuanh.Types {
     public class ToggleExt : Toggle {
+        public ToggleEvent onValueChangedRevert = new ToggleEvent();
+        
         [SerializeField]
         internal Graphic targetGraphic_Off, targetGraphic_On;
 
@@ -18,6 +20,8 @@ namespace NGDtuanh.Types {
 
         private void OnValueChanged(bool isOn) {
             if (utils.IsPlaying(this)) OnValueChanged_Runtime(isOn);
+            
+            onValueChangedRevert.Invoke(!isOn);
         }
 
         protected virtual void OnValueChanged_Runtime(bool isOn) {

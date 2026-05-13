@@ -17,6 +17,12 @@ namespace MonsterLegendsLite {
         private Button playBtn;
         
         [SerializeField, Required]
+        private SettingsWindow prefabSettingsWindow;
+
+        [SerializeField, Required]
+        private Button settingsBtn;
+        
+        [SerializeField, Required]
         private Home_UI_InfoManager uiInfo;
 
         [SerializeField, Required]
@@ -41,8 +47,12 @@ namespace MonsterLegendsLite {
             UtilFuncs.Ins.SetListener(playBtn, () => ChoosePlayModeWindow.Show(
                 prefab: prefabChoosePlayModeWindow
               , navArenaScene: NavArenaScene
-              , navAdventureScene: NavAdventureScene)
-            );
+              , navAdventureScene: NavAdventureScene
+            ));
+
+            UtilFuncs.Ins.SetListener(settingsBtn, () => SettingsWindow.Show(
+                prefab: prefabSettingsWindow
+            ));
             
             uiInfo.Initialize();
             
