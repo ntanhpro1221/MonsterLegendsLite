@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using MonsterLegendsLite.Data;
+﻿using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -11,11 +10,8 @@ namespace MonsterLegendsLite {
 
         public void Initialize() {
             var data = GetListData();
-            var userMonsters = DataManager.Ins.UserInsData.Monsters;
             for (int i = 0; i < SharedData.Slots.Count; ++i)
-                SetupSlot(
-                    SharedData.Slots[i]
-                  , userMonsters.FirstOrDefault(monster => monster.InsId == data[i]));
+                SetupSlot(SharedData.Slots[i], data[i]);
         }
 
         private void SetupSlot(Arena_MonsterSlot slot, MonsterInsData monster) {
@@ -27,7 +23,8 @@ namespace MonsterLegendsLite {
                   , onSelected: selectedMonster => {
                         SetupSlot(slot, selectedMonster);
                         OnListChanged();
-                    });
+                    }
+                  , GetListData());
             });
         }
 
@@ -40,7 +37,7 @@ namespace MonsterLegendsLite {
             return result;
         }
 
-        protected abstract MonsterTeamSlots<string> GetListData();
+        protected abstract MonsterTeamSlots<MonsterInsData> GetListData();
         protected abstract void OnListChanged();
     }
 }

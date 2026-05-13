@@ -20,6 +20,9 @@ namespace MonsterLegendsLite.Data {
         [Required]
         public MonsterDetail_Monster PrefabMonsterDetailScene;
 
+        [Required]
+        public Adventure_Monster PrefabMonsterAdventureScene;
+
         Sprite IShopItemLocData.ShopAvatar => ShopAvatar;
     }
 }

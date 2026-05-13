@@ -15,14 +15,16 @@ MonoBehaviour:
   Data:
     Name: NGDtuanh
     Level: 10
-    Exp: 1221
-    Gold: 1180422
-    Food: 1148247
+    Exp: 5721
+    Elo: 0
+    Gold: 1195422
+    Food: 1157247
+    CurAdventureLevel: 3
     Monsters:
     - InsId: Monster_0
       Id: 0
       CustomName: 
-      Level: 1
+      Level: 56
       Exp: 44
       Habitat: Test_Habitat_0
       SkillList:
@@ -129,3 +131,15 @@ MonoBehaviour:
       CurFood: 0
       LastFoodUpdate:
         value: 1777783851
+    ArenaTeamAttack:
+      item_0: 
+      item_1: 
+      item_2: 
+    ArenaTeamDefense:
+      item_0: 
+      item_1: 
+      item_2: 
+    AdventureTeam:
+      item_0: Monster_0
+      item_1: Monster_1
+      item_2: Monster_2

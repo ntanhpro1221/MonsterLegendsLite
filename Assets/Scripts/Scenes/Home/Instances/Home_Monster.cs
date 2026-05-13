@@ -42,7 +42,7 @@ namespace MonsterLegendsLite {
         }
 
         public int GetGPM() {
-            return DataManager.Ins.GameDefData.Monster[InsData.Id].CalculateStat(InsData, MonsterStatId.GoldPerMin);
+            return DataManager.Ins.GameDefData.Monsters[InsData.Id].CalculateStat(InsData, MonsterStatId.GoldPerMin);
         }
 
         public void StartLocalMove(Vector2Int size) {

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace MonsterLegendsLite {
     public class Home_Farm : Home_Building<FarmInsData> {
         public long CalculateCurTotalFood() {
-            return DataManager.Ins.GameDefData.Farm[InsData.Id].CalculateFood(InsData);
+            return DataManager.Ins.GameDefData.Farms[InsData.Id].CalculateFood(InsData);
         }
 
         protected override void UpdateData_BuyBuilding(Vector2Int pos, out int cost, out string insId) {

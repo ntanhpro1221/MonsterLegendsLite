@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameLocDefDataSO
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Data.GameLocDefDataSO
   Data:
-    Element:
+    Elements:
       _Keys: 00000000010000000200000003000000
       _Values:
       - value:
@@ -38,7 +38,7 @@ MonoBehaviour:
       - Dark
       - Water
       _IsKeyChanged: 0
-    MonsterRank:
+    MonsterRanks:
       _Keys: 0000000001000000020000000300000004000000
       _Values:
       - value:
@@ -58,7 +58,7 @@ MonoBehaviour:
       - Epic
       - Legendary
       _IsKeyChanged: 0
-    Monster:
+    Monsters:
       _Keys: 000000000100000002000000
       _Values:
       - value:
@@ -67,24 +67,27 @@ MonoBehaviour:
           PrefabHomeScene: {fileID: 6402835627022570762, guid: 863cba64ac84b8b498159230947eba29, type: 3}
           PrefabBattleScene: {fileID: 5617029448647903564, guid: 69122e14bd687af44b0fae53ed82b0fb, type: 3}
           PrefabMonsterDetailScene: {fileID: 4143326979605218392, guid: 5dd0248666dab8c409e4ed97ddf27867, type: 3}
+          PrefabMonsterAdventureScene: {fileID: 9209725248779069641, guid: 456ba4366cb166446bb0de1a8baad63a, type: 3}
       - value:
           Avatar: {fileID: 21300000, guid: c08b3e98e8589f74eb476e0fe9aa9be6, type: 3}
           ShopAvatar: {fileID: 4985661822188112777, guid: 891690f106b55134b81bfe941ba357b1, type: 3}
           PrefabHomeScene: {fileID: 6402835627022570762, guid: 7505010fed7397049b0d24b2e3f44c30, type: 3}
           PrefabBattleScene: {fileID: 5617029448647903564, guid: bb411ac9b9c815447a6f5def9f2a2112, type: 3}
           PrefabMonsterDetailScene: {fileID: 1289948885566199047, guid: e487147471a89f64aa0ed799c8779228, type: 3}
+          PrefabMonsterAdventureScene: {fileID: 9209725248779069641, guid: e4907b9d73340a145ae8ff6b77c7b909, type: 3}
       - value:
           Avatar: {fileID: 21300000, guid: e1fc52fc99db8d64597c06f1407a4ffb, type: 3}
           ShopAvatar: {fileID: -5866907569906753163, guid: b07a64bdc0c158f4b81a03a9bb258b95, type: 3}
           PrefabHomeScene: {fileID: 6402835627022570762, guid: b748e1e9d6148ba448eea77db2859382, type: 3}
           PrefabBattleScene: {fileID: 5617029448647903564, guid: 73cee7215ad34de46a3627e7ec97b9c4, type: 3}
           PrefabMonsterDetailScene: {fileID: 1289948885566199047, guid: 33632bfac48bb3f419dbeacd707444eb, type: 3}
+          PrefabMonsterAdventureScene: {fileID: 9209725248779069641, guid: ca16d051deb83fe4f829014af5fe15bd, type: 3}
       _KeyNames:
       - Alice
       - Bob
       - Monkey
       _IsKeyChanged: 0
-    Habitat:
+    Habitats:
       _Keys: 00000000010000000200000003000000
       _Values:
       - value:
@@ -105,7 +108,7 @@ MonoBehaviour:
       - Dark
       - Water
       _IsKeyChanged: 0
-    Farm:
+    Farms:
       _Keys: 000000000100000002000000
       _Values:
       - value:

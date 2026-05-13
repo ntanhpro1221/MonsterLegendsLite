@@ -62,7 +62,7 @@ namespace MonsterLegendsLite {
               , Dictionary<string, Battle_Monster> resultHolder
               , HorDirection faceDir) {
                 for (int i = 0; i < insData.Count && i < slots.Count; i++) {
-                    var ins = Instantiate(gameLocDef.Monster[insData[i].Id].PrefabBattleScene, slots[i]);
+                    var ins = Instantiate(gameLocDef.Monsters[insData[i].Id].PrefabBattleScene, slots[i]);
                     resultHolder.Add(insData[i].InsId, ins);
 
                     ins.Initialize(insData[i], faceDir);

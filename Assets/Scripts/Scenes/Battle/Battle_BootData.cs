@@ -10,7 +10,7 @@ namespace MonsterLegendsLite {
         public string exitWarning;
         public UnityAction onExit;
         public OnBattleEnd onBattleEnd;
-        private List<MonsterInsData> teamLeft, teamRight;
+        private MonsterTeamSlots<MonsterInsData> teamLeft, teamRight;
 
         public IReadOnlyList<MonsterInsData> TeamLeft => teamLeft;
         public IReadOnlyList<MonsterInsData> TeamRight => teamRight;
@@ -19,13 +19,13 @@ namespace MonsterLegendsLite {
             string exitWarning
           , UnityAction onExit
           , OnBattleEnd onBattleEnd
-          , List<MonsterInsData> teamLeft
-          , List<MonsterInsData> teamRight) {
+          , MonsterTeamSlots<MonsterInsData> teamLeft
+          , MonsterTeamSlots<MonsterInsData> teamRight) {
             this.exitWarning = exitWarning;
             this.onExit      = onExit;
             this.onBattleEnd = onBattleEnd;
-            this.teamLeft    = new(teamLeft);
-            this.teamRight   = new(teamRight);
+            this.teamLeft    = new MonsterTeamSlots<MonsterInsData>().WithAll(teamLeft);
+            this.teamRight   = new MonsterTeamSlots<MonsterInsData>().WithAll(teamRight);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,6 +8,8 @@ using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace NGDtuanh.MonsterLegendsLite {
     public class UtilFuncs : NGDtuanh.Utils.UtilFuncs {
+        public static readonly UtilFuncs Ins = new();
+        
         protected override WaitForSeconds GetWaitForSeconds(float second) => WaitForSecondCache.Get(second);
 
         public string ToStrResource(long num) {
@@ -33,6 +36,16 @@ namespace NGDtuanh.MonsterLegendsLite {
         public void SetListener<T>(UnityEvent<T> target, UnityAction<T> callback) {
             target.RemoveAllListeners();
             target.AddListener(callback);
+        }
+
+        [Conditional("UNITY_EDITOR")]
+        public void SaveSO(params ScriptableObject[] targets) {
+            #if UNITY_EDITOR
+
+            foreach (var target in targets) UnityEditor.EditorUtility.SetDirty(target);
+            UnityEditor.AssetDatabase.SaveAssets();
+
+            #endif
         }
     }
 }

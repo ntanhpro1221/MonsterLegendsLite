@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using NGDtuanh.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -7,20 +8,24 @@ namespace MonsterLegendsLite.Data {
     [Serializable]
     public class GameDefData {
         public UserDefData User;
-        public EnumMap<ElementId, ElementData> Element;
-        public EnumMap<MonsterRankId, MonsterRankData> MonsterRank;
-        public EnumMap<MonsterSkillTargetId, MonsterSkillTargetData> MonsterSkillTarget;
-        public EnumMap<MonsterId, MonsterDefData> Monster;
-        public EnumMap<ElementId, HabitatDefData> Habitat;
-        public EnumMap<FarmId, FarmDefData> Farm;
+        public EnumMap<ElementId, ElementData> Elements;
+        public EnumMap<MonsterRankId, MonsterRankData> MonsterRanks;
+        public EnumMap<MonsterSkillTargetId, MonsterSkillTargetData> MonsterSkillTargets;
+        public EnumMap<MonsterId, MonsterDefData> Monsters;
+        public EnumMap<ElementId, HabitatDefData> Habitats;
+        public EnumMap<FarmId, FarmDefData> Farms;
+        public List<AdventureLevelData> AdventureLevels;
 
+        [FoldoutGroup("Constants")]
         public float SellRatio_Monster;
+        
+        [FoldoutGroup("Constants")]
         public float SellRatio_Building;
         
-        [FoldoutGroup("Home Scene")]
+        [FoldoutGroup("Constants")]
         public float Home_MonsterSpeed;
 
-        [FoldoutGroup("Home Scene")]
+        [FoldoutGroup("Constants")]
         public Vector2 Home_MonsterIdleTime;
     }
 }

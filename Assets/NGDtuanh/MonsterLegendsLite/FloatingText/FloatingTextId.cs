@@ -6,5 +6,6 @@
       , ManaChange
       , TakeDamageNormal
       , EloChanged
+      , ExpChanged
     }
 }

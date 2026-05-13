@@ -9,7 +9,7 @@ namespace MonsterLegendsLite.Data {
       , nameof(item_1)
       , nameof(item_2))]
     [Serializable]
-    public class MonsterTeamSlots<T> : FixedList<MonsterSkillList<T>, T> {
+    public class MonsterTeamSlots<T> : FixedList<MonsterTeamSlots<T>, T> {
         [SerializeField]
         private T
             item_0

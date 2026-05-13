@@ -11,6 +11,7 @@ namespace NGDtuanh.Utils.Editor {
         private IEnumerable<Type> DefaultForwardableAttributes { get; } = new[] {
             typeof(InlineEditorAttribute)
           , typeof(RequiredAttribute)
+          , typeof(PreviewFieldAttribute)
         };
 
         private ForwardAttributesToAttribute GetForwardingInfo(Type type) {

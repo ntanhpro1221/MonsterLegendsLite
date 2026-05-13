@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NGDtuanh.MonsterLegendsLite;
 using NGDtuanh.Types;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -23,11 +24,18 @@ namespace MonsterLegendsLite.Data {
 
         public UserInsData UserInsData => userInsDataSO.Data;
 
+        private void SaveAllSO() {
+            UtilFuncs.Ins.SaveSO(
+                gameDefDataSO
+              , gameLocDefDataSO
+              , userInsDataSO);
+        }
+
         public bool IsAnyHabitatCanAcceptNewMonster(MonsterInsData target) {
             foreach (var habitat in UserInsData.Habitats) {
                 if (habitat.InsId == target.Habitat) continue;
-                if (!GameDefData.Monster[target.Id].Elements.Contains(GameDefData.Habitat[habitat.Id].Element)) continue;
-                if (GameDefData.Habitat[habitat.Id].Capacity <= UserInsData.Monsters.Count(i => i.Habitat == habitat.InsId)) continue;
+                if (!GameDefData.Monsters[target.Id].Elements.Contains(GameDefData.Habitats[habitat.Id].Element)) continue;
+                if (GameDefData.Habitats[habitat.Id].Capacity <= UserInsData.Monsters.Count(i => i.Habitat == habitat.InsId)) continue;
                 return true;
             }
 
@@ -36,8 +44,8 @@ namespace MonsterLegendsLite.Data {
 
         public BuildingDefData GetBuildingDefData(BuildingInsData insData) {
             return insData switch {
-                FarmInsData farm       => GameDefData.Farm[farm.Id]
-              , HabitatInsData habitat => GameDefData.Habitat[habitat.Id]
+                FarmInsData farm       => GameDefData.Farms[farm.Id]
+              , HabitatInsData habitat => GameDefData.Habitats[habitat.Id]
 
               , _ => throw new Exception($"Unknown {nameof(BuildingInsData)} type: {insData.GetType().Name}")
             };
@@ -79,6 +87,8 @@ namespace MonsterLegendsLite.Data {
 
             userInsDataSO.Data.Gold += habitat.CurGold;
             habitat.CurGold         =  0;
+            
+            SaveAllSO();
         }
 
         public void UpdateData_CollectFood(FarmInsData farm) {
@@ -86,18 +96,22 @@ namespace MonsterLegendsLite.Data {
 
             userInsDataSO.Data.Food += farm.CurFood;
             farm.CurFood            =  0;
+            
+            SaveAllSO();
         }
 
         public void UpdateData_FeedMonster(MonsterInsData monster, int feedAmount, out bool levelChanged) {
             UpdateData_AddExpMonster(monster, feedAmount, out levelChanged);
 
             userInsDataSO.Data.Food -= feedAmount;
+            
+            SaveAllSO();
         }
 
         public void UpdateData_AddExpMonster(MonsterInsData monster, int expAmount, out bool levelChanged) {
             UpdateData_HabitatLastGoldUpdate(UserInsData.Habitats.Find(i => i.InsId == monster.Habitat));
 
-            var defData = GameDefData.Monster[monster.Id];
+            var defData = GameDefData.Monsters[monster.Id];
             levelChanged = false;
             while (expAmount > 0) {
                 var requiredExp = defData.CalculateStat(monster, MonsterStatId.FoodCost) - monster.Exp;
@@ -111,10 +125,14 @@ namespace MonsterLegendsLite.Data {
                 ++monster.Level;
                 levelChanged = true;
             }
+            
+            SaveAllSO();
         }
 
         public void UpdateData_MoveBuilding(BuildingInsData building, Vector2Int newPos) {
             building.Position = newPos;
+            
+            SaveAllSO();
         }
 
         public void UpdateData_HabitatLastGoldUpdate(HabitatInsData habitat) {
@@ -127,11 +145,13 @@ namespace MonsterLegendsLite.Data {
 
                 foreach (var monster in Ins.UserInsData.Monsters) {
                     if (monster.Habitat != habitat.InsId) continue;
-                    result += minutes * Ins.GameDefData.Monster[monster.Id].CalculateStat(monster, MonsterStatId.GoldPerMin);
+                    result += minutes * Ins.GameDefData.Monsters[monster.Id].CalculateStat(monster, MonsterStatId.GoldPerMin);
                 }
 
-                return Math.Min(Ins.GameDefData.Habitat[habitat.Id].MaxGold, (long)(result));
+                return Math.Min(Ins.GameDefData.Habitats[habitat.Id].MaxGold, (long)(result));
             }
+            
+            SaveAllSO();
         }
 
         public void UpdateData_FarmLastFoodUpdate(FarmInsData farm) {
@@ -139,12 +159,16 @@ namespace MonsterLegendsLite.Data {
             farm.LastFoodUpdate = SerTimestamp.Now();
 
             static long CalculateCurTotalFood(FarmInsData farm) {
-                return Ins.GameDefData.Farm[farm.Id].CalculateFood(farm);
+                return Ins.GameDefData.Farms[farm.Id].CalculateFood(farm);
             }
+            
+            SaveAllSO();
         }
 
         public void UpdateData_MonsterCustomName(MonsterInsData monster, string newName) {
             monster.CustomName = newName;
+            
+            SaveAllSO();
         }
 
         public void UpdateData_MoveMonster(MonsterInsData monster, HabitatInsData newHabitat) {
@@ -154,13 +178,17 @@ namespace MonsterLegendsLite.Data {
             UpdateData_HabitatLastGoldUpdate(newHabitat);
 
             monster.Habitat = newHabitat.InsId;
+            
+            SaveAllSO();
         }
 
         public void UpdateData_SellMonster(MonsterInsData monster) {
             UpdateData_HabitatLastGoldUpdate(UserInsData.Habitats.Find(i => i.InsId == monster.Habitat));
 
-            UserInsData.Gold += (int)(GameDefData.Monster[monster.Id].Cost * Ins.GameDefData.SellRatio_Monster);
+            UserInsData.Gold += (int)(GameDefData.Monsters[monster.Id].Cost * Ins.GameDefData.SellRatio_Monster);
             UserInsData.Monsters.Remove(monster);
+            
+            SaveAllSO();
         }
 
         public void UpdateData_SellBuilding(BuildingInsData building) {
@@ -172,6 +200,8 @@ namespace MonsterLegendsLite.Data {
             }
 
             UserInsData.Gold += (int)(GetBuildingDefData(building).Cost * Ins.GameDefData.SellRatio_Building);
+            
+            SaveAllSO();
         }
 
         public void UpdateData_BuyMonster(MonsterId id, HabitatInsData habitat, out int cost, out string insId) {
@@ -182,8 +212,10 @@ namespace MonsterLegendsLite.Data {
             insData.Habitat = habitat.InsId;
             UserInsData.Monsters.Add(insData);
 
-            cost             =  GameDefData.Monster[id].Cost;
+            cost             =  GameDefData.Monsters[id].Cost;
             UserInsData.Gold -= cost;
+            
+            SaveAllSO();
         }
 
         public void UpdateData_BuyFarm(FarmId id, Vector2Int pos, out int cost, out string insId) {
@@ -193,8 +225,10 @@ namespace MonsterLegendsLite.Data {
             insData.LastFoodUpdate = SerTimestamp.Now();
             UserInsData.Farms.Add(insData);
 
-            cost             =  GameDefData.Farm[id].Cost;
+            cost             =  GameDefData.Farms[id].Cost;
             UserInsData.Gold -= cost;
+            
+            SaveAllSO();
         }
 
         public void UpdateData_BuyHabitat(ElementId id, Vector2Int pos, out int cost, out string insId) {
@@ -204,29 +238,61 @@ namespace MonsterLegendsLite.Data {
             insData.LastGoldUpdate = SerTimestamp.Now();
             UserInsData.Habitats.Add(insData);
 
-            cost             =  GameDefData.Habitat[id].Cost;
+            cost             =  GameDefData.Habitats[id].Cost;
             UserInsData.Gold -= cost;
+            
+            SaveAllSO();
         }
 
         public void UpdateData_MonsterSkill(MonsterInsData monster, int slotId, int skillId) {
             monster.SkillList[slotId] = skillId;
+            
+            SaveAllSO();
         }
 
         public void UpdateData_ArenaTeamAttack(MonsterTeamSlots<string> newTeam) {
             for (int i = 0; i < newTeam.Count; ++i) UserInsData.ArenaTeamAttack[i] = newTeam[i];
+            
+            SaveAllSO();
         }
-        
+
         public void UpdateData_ArenaTeamDefense(MonsterTeamSlots<string> newTeam) {
             for (int i = 0; i < newTeam.Count; ++i) UserInsData.ArenaTeamDefense[i] = newTeam[i];
+            
+            SaveAllSO();
         }
-        
+
         public void UpdateData_AdventureTeam(MonsterTeamSlots<string> newTeam) {
             for (int i = 0; i < newTeam.Count; ++i) UserInsData.AdventureTeam[i] = newTeam[i];
+            
+            SaveAllSO();
         }
 
         public void UpdateData_EloAfterBattleTest(UserInsData winner, UserInsData loser, int winnerDeltaElo, int loserDeltaElo) {
             winner.Elo += winnerDeltaElo;
-            loser.Elo += loserDeltaElo;
+            loser.Elo  += loserDeltaElo;
+            
+            SaveAllSO();
+        }
+
+        public void UpdateData_DefeatBattleEnd(AdventureLevelData levelData, int levelIndex, out bool levelUp) {
+            UserInsData.Exp  += levelData.RewardExp;
+            UserInsData.Gold += levelData.RewardGold;
+            UserInsData.Food += levelData.RewardFood;
+
+            if (levelIndex >= UserInsData.CurAdventureLevel) UserInsData.CurAdventureLevel = levelIndex + 1;
+
+            levelUp = false;
+            while (UserInsData.Level < GameDefData.User.MaxLevel) {
+                int expCost = (int)GameDefData.User.ExpCost.Evaluate(UserInsData.Level);
+                if (UserInsData.Exp < expCost) break;
+
+                levelUp           =  true;
+                UserInsData.Exp   -= expCost;
+                UserInsData.Level += 1;
+            }
+            
+            SaveAllSO();
         }
     }
 }

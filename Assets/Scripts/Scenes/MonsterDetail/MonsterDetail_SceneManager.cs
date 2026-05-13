@@ -55,7 +55,7 @@ namespace MonsterLegendsLite {
             var bootData   = MonsterDetail_BootData.Ins;
             var gameLocDef = DataManager.Ins.GameLocDefData;
 
-            var ins = Instantiate(gameLocDef.Monster[bootData.Monster.Id].PrefabMonsterDetailScene, monsterSlot);
+            var ins = Instantiate(gameLocDef.Monsters[bootData.Monster.Id].PrefabMonsterDetailScene, monsterSlot);
             ins.Initialize(bootData.Monster);
 
             monster = ins;
@@ -69,13 +69,13 @@ namespace MonsterLegendsLite {
                 NewSkillAvailableWindow.Show(
                     newSkillAvailableWindowPrefab
                   , skill
-                  , DataManager.Ins.GameLocDefData.Element[skill.Element].ElementButton);
+                  , DataManager.Ins.GameLocDefData.Elements[skill.Element].ElementButton);
             }
         }
 
         private void UpdateUI_Info() {
             uiInfo.SetStats(monster.CalculateStats());
-            uiInfo.SetElements(monster.defData.Elements.Select(static i => DataManager.Ins.GameLocDefData.Element[i].ElementButton).ToArray());
+            uiInfo.SetElements(monster.defData.Elements.Select(static i => DataManager.Ins.GameLocDefData.Elements[i].ElementButton).ToArray());
             uiInfo.SetRevenue(monster.CalculateStat(MonsterStatId.GoldPerMin));
             uiInfo.SetDescription(monster.defData.Description);
             uiInfo.SetMoveBtnCallback(static () => {
@@ -112,11 +112,11 @@ namespace MonsterLegendsLite {
         }
         
         private void UpdateUI_Monster() {
-            uiMonster.SetRankIcon(DataManager.Ins.GameLocDefData.MonsterRank[monster.defData.Rank].Icon);
+            uiMonster.SetRankIcon(DataManager.Ins.GameLocDefData.MonsterRanks[monster.defData.Rank].Icon);
             uiMonster.SetCustomName(monster.insData.CustomName);
             uiMonster.SetCustomNameChangedCallback(static newName => DataManager.Ins.UpdateData_MonsterCustomName(Ins.monster.insData, newName));
             uiMonster.SetName(monster.defData.Name);
-            uiMonster.SetLevel(monster.insData.Level, DataManager.Ins.GameDefData.MonsterRank[monster.defData.Rank].MaxLevel);
+            uiMonster.SetLevel(monster.insData.Level, DataManager.Ins.GameDefData.MonsterRanks[monster.defData.Rank].MaxLevel);
 
             var foodCost     = monster.CalculateStat(MonsterStatId.FoodCost);
             var foodCostDiv4 = Mathf.CeilToInt(foodCost / 4f);

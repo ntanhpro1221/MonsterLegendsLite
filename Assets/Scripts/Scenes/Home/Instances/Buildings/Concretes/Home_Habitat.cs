@@ -57,14 +57,14 @@ namespace MonsterLegendsLite {
             monster.TF.SetParent(monsterRoot);
             monster.TF.localPosition = Vector3.zero;
             
-            monster.StartLocalMove(DataManager.Ins.GameDefData.Habitat[InsData.Id].Size);
+            monster.StartLocalMove(DataManager.Ins.GameDefData.Habitats[InsData.Id].Size);
         }
 
         public bool IsCanAcceptNewMonster(Home_Monster target) {
             var gameDefData = DataManager.Ins.GameDefData;
             return
-                gameDefData.Habitat[InsData.Id].Capacity > monsters.Count
-             && gameDefData.Monster[target.InsData.Id].Elements.Contains(gameDefData.Habitat[InsData.Id].Element)
+                gameDefData.Habitats[InsData.Id].Capacity > monsters.Count
+             && gameDefData.Monsters[target.InsData.Id].Elements.Contains(gameDefData.Habitats[InsData.Id].Element)
              && !monsters.Contains(target);
         }
 
@@ -78,7 +78,7 @@ namespace MonsterLegendsLite {
 
             foreach (var monster in Monsters) result += minutes * monster.GetGPM();
             
-            return Math.Min(DataManager.Ins.GameDefData.Habitat[InsData.Id].MaxGold, (long)(result));
+            return Math.Min(DataManager.Ins.GameDefData.Habitats[InsData.Id].MaxGold, (long)(result));
         }
 
         protected override void UpdateData_BuyBuilding(Vector2Int pos, out int cost, out string insId) {

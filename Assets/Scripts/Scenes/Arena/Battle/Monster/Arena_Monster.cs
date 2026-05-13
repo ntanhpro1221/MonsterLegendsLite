@@ -13,10 +13,10 @@ namespace MonsterLegendsLite {
             SharedData.ContentRoot.SetActive(insData != null);
             if (insData == null) return;
             
-            var defData        = DataManager.Ins.GameDefData.Monster[insData.Id];
-            var locDefData     = DataManager.Ins.GameLocDefData.Monster[insData.Id];
-            var rankLocData    = DataManager.Ins.GameLocDefData.MonsterRank[defData.Rank];
-            var elementLocData = DataManager.Ins.GameLocDefData.Element;
+            var defData        = DataManager.Ins.GameDefData.Monsters[insData.Id];
+            var locDefData     = DataManager.Ins.GameLocDefData.Monsters[insData.Id];
+            var rankLocData    = DataManager.Ins.GameLocDefData.MonsterRanks[defData.Rank];
+            var elementLocData = DataManager.Ins.GameLocDefData.Elements;
 
             SetCustomName(defData.GetCustomNameIfPossible(insData));
             SetName(defData.Name);

@@ -14,14 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Data.GameDefDataSO
   Data:
     User:
-      MaxLevel: 0
+      MaxLevel: 100
       ExpCost:
         serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 1
+          value: 1000
+          inSlope: 2
+          outSlope: 1000
+          tangentMode: 69
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 100
+          value: 100000
+          inSlope: 1000
+          outSlope: 0
+          tangentMode: 69
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    Element:
+    Elements:
       _Keys: 00000000010000000200000003000000
       _Values:
       - value:
@@ -42,7 +60,7 @@ MonoBehaviour:
       - Dark
       - Water
       _IsKeyChanged: 0
-    MonsterRank:
+    MonsterRanks:
       _Keys: 0000000001000000020000000300000004000000
       _Values:
       - value:
@@ -72,7 +90,7 @@ MonoBehaviour:
       - Epic
       - Legendary
       _IsKeyChanged: 0
-    MonsterSkillTarget:
+    MonsterSkillTargets:
       _Keys: 00000000010000000200000003000000
       _Values:
       - value:
@@ -93,7 +111,7 @@ MonoBehaviour:
       - SingleAlly
       - MultipleAllies
       _IsKeyChanged: 0
-    Monster:
+    Monsters:
       _Keys: 000000000100000002000000
       _Values:
       - value:
@@ -779,7 +797,7 @@ MonoBehaviour:
       - Bob
       - Monkey
       _IsKeyChanged: 0
-    Habitat:
+    Habitats:
       _Keys: 00000000010000000200000003000000
       _Values:
       - value:
@@ -820,7 +838,7 @@ MonoBehaviour:
       - Dark
       - Water
       _IsKeyChanged: 0
-    Farm:
+    Farms:
       _Keys: 000000000100000002000000
       _Values:
       - value:
@@ -849,6 +867,1237 @@ MonoBehaviour:
       - Samsung
       - Sony
       _IsKeyChanged: 0
+    AdventureLevels:
+    - Name: Level 1
+      RewardGold: 3500
+      RewardFood: 2000
+      RewardExp: 1000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv1_0
+          Id: 0
+          CustomName: Moonlight Warden
+          Level: 1
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: -1
+            skill_2: -1
+            skill_3: -1
+        item_1:
+          InsId: Monster_Adventure_Lv1_1
+          Id: 2
+          CustomName: Lightning Assassin
+          Level: 1
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: -1
+            skill_2: -1
+            skill_3: -1
+        item_2:
+          InsId: Monster_Adventure_Lv1_2
+          Id: 2
+          CustomName: Hades' Emissary
+          Level: 1
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: -1
+            skill_2: -1
+            skill_3: -1
+    - Name: Level 2
+      RewardGold: 5000
+      RewardFood: 3000
+      RewardExp: 1500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv2_0
+          Id: 2
+          CustomName: Jungle Sovereign
+          Level: 2
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: -1
+            skill_2: -1
+            skill_3: -1
+        item_1:
+          InsId: Monster_Adventure_Lv2_1
+          Id: 1
+          CustomName: Ancient Behemoth
+          Level: 2
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: -1
+            skill_2: -1
+            skill_3: -1
+        item_2:
+          InsId: Monster_Adventure_Lv2_2
+          Id: 1
+          CustomName: Storm Bringer
+          Level: 2
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: -1
+            skill_2: -1
+            skill_3: -1
+    - Name: Level 3
+      RewardGold: 6500
+      RewardFood: 4000
+      RewardExp: 2000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv3_0
+          Id: 0
+          CustomName: Demon Vanguard
+          Level: 4
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: -1
+            skill_2: -1
+            skill_3: -1
+        item_1:
+          InsId: Monster_Adventure_Lv3_1
+          Id: 1
+          CustomName: Unseen Stalker
+          Level: 4
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: -1
+            skill_2: -1
+            skill_3: -1
+        item_2:
+          InsId: Monster_Adventure_Lv3_2
+          Id: 1
+          CustomName: Angel of Death
+          Level: 4
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: -1
+            skill_2: -1
+            skill_3: -1
+    - Name: Level 4
+      RewardGold: 8000
+      RewardFood: 5000
+      RewardExp: 2500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv4_0
+          Id: 0
+          CustomName: Flame Warlord
+          Level: 6
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 1
+            skill_1: 0
+            skill_2: -1
+            skill_3: -1
+        item_1:
+          InsId: Monster_Adventure_Lv4_1
+          Id: 0
+          CustomName: Final Adjudicator
+          Level: 6
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 1
+            skill_2: -1
+            skill_3: -1
+        item_2:
+          InsId: Monster_Adventure_Lv4_2
+          Id: 0
+          CustomName: Storm Bringer
+          Level: 6
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 1
+            skill_1: 0
+            skill_2: -1
+            skill_3: -1
+    - Name: Level 5
+      RewardGold: 9500
+      RewardFood: 6000
+      RewardExp: 3000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv5_0
+          Id: 0
+          CustomName: Flame Warlord
+          Level: 8
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 1
+            skill_2: -1
+            skill_3: -1
+        item_1:
+          InsId: Monster_Adventure_Lv5_1
+          Id: 2
+          CustomName: Earthbreaker Dragon
+          Level: 8
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 1
+            skill_2: -1
+            skill_3: -1
+        item_2:
+          InsId: Monster_Adventure_Lv5_2
+          Id: 2
+          CustomName: Spirit Plunderer
+          Level: 8
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 1
+            skill_2: -1
+            skill_3: -1
+    - Name: Level 6
+      RewardGold: 11000
+      RewardFood: 7000
+      RewardExp: 3500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv6_0
+          Id: 1
+          CustomName: Abyssal Warlock
+          Level: 10
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 2
+            skill_1: 0
+            skill_2: 1
+            skill_3: -1
+        item_1:
+          InsId: Monster_Adventure_Lv6_1
+          Id: 1
+          CustomName: Demon Vanguard
+          Level: 10
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 2
+            skill_1: 1
+            skill_2: 0
+            skill_3: -1
+        item_2:
+          InsId: Monster_Adventure_Lv6_2
+          Id: 1
+          CustomName: Dire Werewolf
+          Level: 10
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 1
+            skill_2: 2
+            skill_3: -1
+    - Name: Level 7
+      RewardGold: 12500
+      RewardFood: 8000
+      RewardExp: 4000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv7_0
+          Id: 2
+          CustomName: Angel of Death
+          Level: 12
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 2
+            skill_2: 1
+            skill_3: -1
+        item_1:
+          InsId: Monster_Adventure_Lv7_1
+          Id: 1
+          CustomName: Forest Predator
+          Level: 12
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 2
+            skill_1: 1
+            skill_2: 0
+            skill_3: -1
+        item_2:
+          InsId: Monster_Adventure_Lv7_2
+          Id: 2
+          CustomName: Dire Werewolf
+          Level: 12
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 1
+            skill_1: 2
+            skill_2: 0
+            skill_3: -1
+    - Name: Level 8
+      RewardGold: 14000
+      RewardFood: 9000
+      RewardExp: 4500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv8_0
+          Id: 1
+          CustomName: Hades' Emissary
+          Level: 14
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 2
+            skill_1: 1
+            skill_2: 0
+            skill_3: -1
+        item_1:
+          InsId: Monster_Adventure_Lv8_1
+          Id: 0
+          CustomName: Demon Sovereign
+          Level: 14
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 2
+            skill_2: 1
+            skill_3: -1
+        item_2:
+          InsId: Monster_Adventure_Lv8_2
+          Id: 2
+          CustomName: Deep Sea Leviathan
+          Level: 14
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 2
+            skill_1: 0
+            skill_2: 1
+            skill_3: -1
+    - Name: Level 9
+      RewardGold: 15500
+      RewardFood: 10000
+      RewardExp: 5000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv9_0
+          Id: 0
+          CustomName: Crimson Phoenix
+          Level: 16
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 0
+            skill_2: 1
+            skill_3: 2
+        item_1:
+          InsId: Monster_Adventure_Lv9_1
+          Id: 2
+          CustomName: Nightfall Assassin
+          Level: 16
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 2
+            skill_2: 1
+            skill_3: 0
+        item_2:
+          InsId: Monster_Adventure_Lv9_2
+          Id: 2
+          CustomName: Magma Colossus
+          Level: 16
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 2
+            skill_2: 1
+            skill_3: 0
+    - Name: Level 10
+      RewardGold: 17000
+      RewardFood: 11000
+      RewardExp: 5500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv10_0
+          Id: 0
+          CustomName: Unseen Stalker
+          Level: 18
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 3
+            skill_2: 1
+            skill_3: 2
+        item_1:
+          InsId: Monster_Adventure_Lv10_1
+          Id: 2
+          CustomName: God King
+          Level: 18
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 2
+            skill_1: 1
+            skill_2: 0
+            skill_3: 3
+        item_2:
+          InsId: Monster_Adventure_Lv10_2
+          Id: 2
+          CustomName: Demon Vanguard
+          Level: 18
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 2
+            skill_2: 3
+            skill_3: 1
+    - Name: Level 11
+      RewardGold: 18500
+      RewardFood: 12000
+      RewardExp: 6000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv11_0
+          Id: 1
+          CustomName: Deep Sea Leviathan
+          Level: 20
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 4
+            skill_1: 1
+            skill_2: 2
+            skill_3: 3
+        item_1:
+          InsId: Monster_Adventure_Lv11_1
+          Id: 1
+          CustomName: Demon Vanguard
+          Level: 20
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 4
+            skill_1: 3
+            skill_2: 0
+            skill_3: 2
+        item_2:
+          InsId: Monster_Adventure_Lv11_2
+          Id: 1
+          CustomName: Nightfall Assassin
+          Level: 20
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 2
+            skill_1: 3
+            skill_2: 0
+            skill_3: 1
+    - Name: Level 12
+      RewardGold: 20000
+      RewardFood: 13000
+      RewardExp: 6500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv12_0
+          Id: 0
+          CustomName: Radiant Paladin
+          Level: 22
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 2
+            skill_2: 4
+            skill_3: 1
+        item_1:
+          InsId: Monster_Adventure_Lv12_1
+          Id: 2
+          CustomName: Abyssal Warlock
+          Level: 22
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 4
+            skill_2: 1
+            skill_3: 2
+        item_2:
+          InsId: Monster_Adventure_Lv12_2
+          Id: 0
+          CustomName: Flame Warlord
+          Level: 22
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 1
+            skill_1: 2
+            skill_2: 0
+            skill_3: 4
+    - Name: Level 13
+      RewardGold: 21500
+      RewardFood: 14000
+      RewardExp: 7000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv13_0
+          Id: 0
+          CustomName: God King
+          Level: 24
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 4
+            skill_1: 2
+            skill_2: 0
+            skill_3: 1
+        item_1:
+          InsId: Monster_Adventure_Lv13_1
+          Id: 2
+          CustomName: Fallen Seraph
+          Level: 24
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 0
+            skill_2: 4
+            skill_3: 2
+        item_2:
+          InsId: Monster_Adventure_Lv13_2
+          Id: 1
+          CustomName: Angel of Death
+          Level: 24
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 2
+            skill_1: 3
+            skill_2: 0
+            skill_3: 1
+    - Name: Level 14
+      RewardGold: 23000
+      RewardFood: 15000
+      RewardExp: 7500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv14_0
+          Id: 0
+          CustomName: Glacial Wyrm
+          Level: 26
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 1
+            skill_2: 0
+            skill_3: 4
+        item_1:
+          InsId: Monster_Adventure_Lv14_1
+          Id: 0
+          CustomName: Demon Sovereign
+          Level: 26
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 4
+            skill_1: 2
+            skill_2: 3
+            skill_3: 0
+        item_2:
+          InsId: Monster_Adventure_Lv14_2
+          Id: 1
+          CustomName: Earthbreaker Dragon
+          Level: 26
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 2
+            skill_2: 3
+            skill_3: 4
+    - Name: Level 15
+      RewardGold: 24500
+      RewardFood: 16000
+      RewardExp: 8000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv15_0
+          Id: 2
+          CustomName: Fiendish Spellsword
+          Level: 28
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 2
+            skill_2: 1
+            skill_3: 0
+        item_1:
+          InsId: Monster_Adventure_Lv15_1
+          Id: 0
+          CustomName: Nightfall Assassin
+          Level: 28
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 1
+            skill_2: 3
+            skill_3: 4
+        item_2:
+          InsId: Monster_Adventure_Lv15_2
+          Id: 1
+          CustomName: Moonlight Warden
+          Level: 28
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 4
+            skill_2: 0
+            skill_3: 1
+    - Name: Level 16
+      RewardGold: 26000
+      RewardFood: 17000
+      RewardExp: 8500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv16_0
+          Id: 2
+          CustomName: Soul Reaper
+          Level: 30
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 1
+            skill_2: 3
+            skill_3: 4
+        item_1:
+          InsId: Monster_Adventure_Lv16_1
+          Id: 1
+          CustomName: Earthbreaker Dragon
+          Level: 30
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 1
+            skill_2: 3
+            skill_3: 2
+        item_2:
+          InsId: Monster_Adventure_Lv16_2
+          Id: 0
+          CustomName: Unseen Stalker
+          Level: 30
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 1
+            skill_2: 0
+            skill_3: 2
+    - Name: Level 17
+      RewardGold: 27500
+      RewardFood: 18000
+      RewardExp: 9000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv17_0
+          Id: 1
+          CustomName: Ancient Behemoth
+          Level: 32
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 1
+            skill_2: 4
+            skill_3: 0
+        item_1:
+          InsId: Monster_Adventure_Lv17_1
+          Id: 2
+          CustomName: Nightfall Assassin
+          Level: 32
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 4
+            skill_2: 3
+            skill_3: 1
+        item_2:
+          InsId: Monster_Adventure_Lv17_2
+          Id: 2
+          CustomName: Arcane Magus
+          Level: 32
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 4
+            skill_1: 0
+            skill_2: 2
+            skill_3: 3
+    - Name: Level 18
+      RewardGold: 29000
+      RewardFood: 19000
+      RewardExp: 9500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv18_0
+          Id: 0
+          CustomName: Frost Fiend
+          Level: 34
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 2
+            skill_2: 1
+            skill_3: 3
+        item_1:
+          InsId: Monster_Adventure_Lv18_1
+          Id: 1
+          CustomName: Thor's Avatar
+          Level: 34
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 1
+            skill_1: 3
+            skill_2: 0
+            skill_3: 2
+        item_2:
+          InsId: Monster_Adventure_Lv18_2
+          Id: 1
+          CustomName: Void Phantom
+          Level: 34
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 1
+            skill_1: 4
+            skill_2: 0
+            skill_3: 3
+    - Name: Level 19
+      RewardGold: 30500
+      RewardFood: 20000
+      RewardExp: 10000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv19_0
+          Id: 1
+          CustomName: Soul Reaper
+          Level: 36
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 4
+            skill_2: 1
+            skill_3: 0
+        item_1:
+          InsId: Monster_Adventure_Lv19_1
+          Id: 2
+          CustomName: Flame Warlord
+          Level: 36
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 1
+            skill_1: 0
+            skill_2: 2
+            skill_3: 4
+        item_2:
+          InsId: Monster_Adventure_Lv19_2
+          Id: 1
+          CustomName: Nightfall Assassin
+          Level: 36
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 2
+            skill_2: 1
+            skill_3: 0
+    - Name: Level 20
+      RewardGold: 32000
+      RewardFood: 21000
+      RewardExp: 10500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv20_0
+          Id: 2
+          CustomName: Inferno Lord
+          Level: 38
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 0
+            skill_2: 4
+            skill_3: 1
+        item_1:
+          InsId: Monster_Adventure_Lv20_1
+          Id: 1
+          CustomName: Demon Sovereign
+          Level: 38
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 2
+            skill_2: 1
+            skill_3: 3
+        item_2:
+          InsId: Monster_Adventure_Lv20_2
+          Id: 1
+          CustomName: Hades' Emissary
+          Level: 38
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 3
+            skill_2: 4
+            skill_3: 1
+    - Name: Level 21
+      RewardGold: 33500
+      RewardFood: 22000
+      RewardExp: 11000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv21_0
+          Id: 2
+          CustomName: Arcane Magus
+          Level: 40
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 1
+            skill_2: 4
+            skill_3: 2
+        item_1:
+          InsId: Monster_Adventure_Lv21_1
+          Id: 1
+          CustomName: Unseen Stalker
+          Level: 40
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 4
+            skill_1: 2
+            skill_2: 0
+            skill_3: 1
+        item_2:
+          InsId: Monster_Adventure_Lv21_2
+          Id: 2
+          CustomName: Demon Vanguard
+          Level: 40
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 4
+            skill_2: 0
+            skill_3: 1
+    - Name: Level 22
+      RewardGold: 35000
+      RewardFood: 23000
+      RewardExp: 11500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv22_0
+          Id: 2
+          CustomName: Flame Warlord
+          Level: 42
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 2
+            skill_2: 1
+            skill_3: 0
+        item_1:
+          InsId: Monster_Adventure_Lv22_1
+          Id: 1
+          CustomName: Jungle Sovereign
+          Level: 42
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 4
+            skill_2: 2
+            skill_3: 3
+        item_2:
+          InsId: Monster_Adventure_Lv22_2
+          Id: 2
+          CustomName: Demon Sovereign
+          Level: 42
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 2
+            skill_2: 4
+            skill_3: 3
+    - Name: Level 23
+      RewardGold: 36500
+      RewardFood: 24000
+      RewardExp: 12000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv23_0
+          Id: 1
+          CustomName: Demon Vanguard
+          Level: 44
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 3
+            skill_2: 1
+            skill_3: 4
+        item_1:
+          InsId: Monster_Adventure_Lv23_1
+          Id: 1
+          CustomName: Nightfall Assassin
+          Level: 44
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 2
+            skill_1: 0
+            skill_2: 3
+            skill_3: 1
+        item_2:
+          InsId: Monster_Adventure_Lv23_2
+          Id: 0
+          CustomName: Frost Fiend
+          Level: 44
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 4
+            skill_1: 1
+            skill_2: 2
+            skill_3: 0
+    - Name: Level 24
+      RewardGold: 38000
+      RewardFood: 25000
+      RewardExp: 12500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv24_0
+          Id: 1
+          CustomName: Undying Warrior
+          Level: 46
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 2
+            skill_1: 3
+            skill_2: 1
+            skill_3: 4
+        item_1:
+          InsId: Monster_Adventure_Lv24_1
+          Id: 0
+          CustomName: Thunderclap Scourge
+          Level: 46
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 2
+            skill_1: 4
+            skill_2: 3
+            skill_3: 0
+        item_2:
+          InsId: Monster_Adventure_Lv24_2
+          Id: 2
+          CustomName: Demon Sovereign
+          Level: 46
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 3
+            skill_2: 4
+            skill_3: 1
+    - Name: Level 25
+      RewardGold: 39500
+      RewardFood: 26000
+      RewardExp: 13000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv25_0
+          Id: 1
+          CustomName: Soul Reaper
+          Level: 48
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 1
+            skill_1: 2
+            skill_2: 4
+            skill_3: 0
+        item_1:
+          InsId: Monster_Adventure_Lv25_1
+          Id: 0
+          CustomName: Hades' Emissary
+          Level: 48
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 4
+            skill_1: 3
+            skill_2: 1
+            skill_3: 2
+        item_2:
+          InsId: Monster_Adventure_Lv25_2
+          Id: 1
+          CustomName: Lightning Assassin
+          Level: 48
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 1
+            skill_2: 3
+            skill_3: 2
+    - Name: Level 26
+      RewardGold: 41000
+      RewardFood: 27000
+      RewardExp: 13500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv26_0
+          Id: 1
+          CustomName: Lightning Assassin
+          Level: 50
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 2
+            skill_2: 0
+            skill_3: 1
+        item_1:
+          InsId: Monster_Adventure_Lv26_1
+          Id: 0
+          CustomName: Hades' Emissary
+          Level: 50
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 1
+            skill_1: 3
+            skill_2: 2
+            skill_3: 0
+        item_2:
+          InsId: Monster_Adventure_Lv26_2
+          Id: 2
+          CustomName: Radiant Paladin
+          Level: 50
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 4
+            skill_1: 2
+            skill_2: 1
+            skill_3: 0
+    - Name: Level 27
+      RewardGold: 42500
+      RewardFood: 28000
+      RewardExp: 14000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv27_0
+          Id: 2
+          CustomName: Void Phantom
+          Level: 52
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 4
+            skill_1: 2
+            skill_2: 1
+            skill_3: 3
+        item_1:
+          InsId: Monster_Adventure_Lv27_1
+          Id: 0
+          CustomName: Demon Sovereign
+          Level: 52
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 4
+            skill_2: 1
+            skill_3: 2
+        item_2:
+          InsId: Monster_Adventure_Lv27_2
+          Id: 1
+          CustomName: Millennium Archfiend
+          Level: 52
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 4
+            skill_1: 2
+            skill_2: 0
+            skill_3: 3
+    - Name: Level 28
+      RewardGold: 44000
+      RewardFood: 29000
+      RewardExp: 14500
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv28_0
+          Id: 2
+          CustomName: Forest Predator
+          Level: 54
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 1
+            skill_2: 2
+            skill_3: 3
+        item_1:
+          InsId: Monster_Adventure_Lv28_1
+          Id: 0
+          CustomName: Hellish Wraith
+          Level: 54
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 1
+            skill_1: 0
+            skill_2: 2
+            skill_3: 4
+        item_2:
+          InsId: Monster_Adventure_Lv28_2
+          Id: 1
+          CustomName: Unseen Stalker
+          Level: 54
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 2
+            skill_2: 4
+            skill_3: 0
+    - Name: Level 29
+      RewardGold: 45500
+      RewardFood: 30000
+      RewardExp: 15000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv29_0
+          Id: 0
+          CustomName: Storm Bringer
+          Level: 56
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 1
+            skill_1: 4
+            skill_2: 2
+            skill_3: 3
+        item_1:
+          InsId: Monster_Adventure_Lv29_1
+          Id: 0
+          CustomName: Demon Vanguard
+          Level: 56
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 0
+            skill_1: 3
+            skill_2: 1
+            skill_3: 4
+        item_2:
+          InsId: Monster_Adventure_Lv29_2
+          Id: 2
+          CustomName: God King
+          Level: 56
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 2
+            skill_1: 0
+            skill_2: 4
+            skill_3: 3
+    - Name: Level 30
+      RewardGold: 50000
+      RewardFood: 35000
+      RewardExp: 20000
+      Monsters:
+        item_0:
+          InsId: Monster_Adventure_Lv30_0
+          Id: 1
+          CustomName: Forest Predator
+          Level: 60
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 4
+            skill_2: 2
+            skill_3: 0
+        item_1:
+          InsId: Monster_Adventure_Lv30_1
+          Id: 0
+          CustomName: Final Adjudicator
+          Level: 60
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 1
+            skill_1: 2
+            skill_2: 3
+            skill_3: 4
+        item_2:
+          InsId: Monster_Adventure_Lv30_2
+          Id: 0
+          CustomName: Demon Sovereign
+          Level: 60
+          Exp: 0
+          Habitat: 
+          SkillList:
+            skill_0: 3
+            skill_1: 1
+            skill_2: 2
+            skill_3: 4
     SellRatio_Monster: 0.7
     SellRatio_Building: 0.7
     Home_MonsterSpeed: 1

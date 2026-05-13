@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: NGDtuanh.MonsterLegendsLite::NGDtuanh.MonsterLegendsLite.FloatingTextManager
   prefabs:
-    _Keys: 000000000100000002000000030000000400000005000000
+    _Keys: 00000000010000000200000003000000040000000500000006000000
     _Values:
     - value: {fileID: 4335729901280923916, guid: 734e0e15fa5793548b3d76355707403b, type: 3}
     - value: {fileID: 4335729901280923916, guid: dcdbc11281bd9b94dbbbe436f8deb875, type: 3}
@@ -57,6 +57,7 @@ MonoBehaviour:
     - value: {fileID: 4335729901280923916, guid: dc83a5daae5a961488c1ea33985d298a, type: 3}
     - value: {fileID: 4335729901280923916, guid: c1b589c20c0fa5d4896bcaa6230a5388, type: 3}
     - value: {fileID: 4335729901280923916, guid: 14a114f4f045d514da68d2985ab5369d, type: 3}
+    - value: {fileID: 4335729901280923916, guid: 42625ec910cd5b245825ae839333b0fe, type: 3}
     _KeyNames:
     - FoodChange
     - GoldChange
@@ -64,4 +65,5 @@ MonoBehaviour:
     - ManaChange
     - TakeDamageNormal
     - EloChanged
+    - ExpChanged
     _IsKeyChanged: 0

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using MonsterLegendsLite.Data;
+﻿using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -50,14 +48,10 @@ namespace MonsterLegendsLite {
                     title: isWin ? "WIN" : "LOSE"
                   , content: isWin ? "You are win" : "You are lose"
                   , onDoneClose: () => onBattleEnd.Invoke(isWin: isWin))
-              , teamLeft: ToInsDataList(ally.ArenaTeamAttack)
-              , teamRight: ToInsDataList(enemy.ArenaTeamDefense));
+              , teamLeft: ally.GetArenaTeamAttackData()
+              , teamRight: enemy.GetArenaTeamDefenseData());
 
             SceneManager.LoadScene("BattleScene");
-        }
-
-        private List<MonsterInsData> ToInsDataList(MonsterTeamSlots<string> insIdList) {
-            return insIdList.Select(id => DataManager.Ins.UserInsData.Monsters.First(monster => monster.InsId == id)).ToList();
         }
 
         private static void CalculateEloAfterBattle(int winnerElo, int loserElo, out int winnerDeltaElo, out int loserDeltaElo) {

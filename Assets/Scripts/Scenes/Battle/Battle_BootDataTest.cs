@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
 using UnityEngine;
@@ -20,12 +19,8 @@ namespace MonsterLegendsLite {
                     title: isWin ? "WIN" : "LOSE"
                   , content: isWin ? "You are win" : "You are lose"
                   , onDoneClose: NavToHomeScene)
-              , teamLeft: ToInsDataList(teamLeftInsId)
-              , teamRight: ToInsDataList(teamRightInsId));
-        }
-
-        private List<MonsterInsData> ToInsDataList(List<string> insIdList) {
-            return insIdList.Select(id => DataManager.Ins.UserInsData.Monsters.First(monster => monster.InsId == id)).ToList();
+              , teamLeft: DataManager.Ins.UserInsData.GetTeamIns(teamLeftInsId)
+              , teamRight: DataManager.Ins.UserInsData.GetTeamIns(teamRightInsId));
         }
 
         private void NavToHomeScene() {

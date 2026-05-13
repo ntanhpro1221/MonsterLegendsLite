@@ -17,6 +17,14 @@ namespace NGDtuanh.MonsterLegendsLite {
             return (TList)this;
         }
 
+        public TList WithAll(IEnumerable<TValue> values) {
+            int id = 0;
+
+            foreach (var value in values) this[id++] = value;
+
+            return (TList)this;
+        }
+
         public bool IsAllEqual(TValue value) {
             foreach (var item in this)
                 if (!EqualityComparer<TValue>.Default.Equals(item, value))

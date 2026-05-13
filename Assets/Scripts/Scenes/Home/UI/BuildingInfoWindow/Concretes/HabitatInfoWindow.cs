@@ -16,9 +16,9 @@ namespace MonsterLegendsLite {
 
         public static HabitatInfoWindow Show(HabitatInsData target, HabitatInfoWindow prefab) {
             var window  = BuildingInfoWindow.Show(target, prefab);
-            var defData = DataManager.Ins.GameDefData.Habitat[target.To<HabitatInsData>().Id];
+            var defData = DataManager.Ins.GameDefData.Habitats[target.To<HabitatInsData>().Id];
 
-            window.elements.SetElements(DataManager.Ins.GameLocDefData.Element[defData.Element].ElementButton);
+            window.elements.SetElements(DataManager.Ins.GameLocDefData.Elements[defData.Element].ElementButton);
             window.capacity.SetText(defData.Capacity.ToString());
             window.maxGold.SetText(window.utils.ToStrResource(defData.MaxGold));
 
@@ -26,7 +26,7 @@ namespace MonsterLegendsLite {
         }
 
         protected override string GetBuildingName(BuildingInsData target) {
-            var defData = DataManager.Ins.GameDefData.Habitat[target.To<HabitatInsData>().Id];
+            var defData = DataManager.Ins.GameDefData.Habitats[target.To<HabitatInsData>().Id];
             return $"{defData.Name} Habitat";
         }
 

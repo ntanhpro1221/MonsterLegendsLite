@@ -2,8 +2,8 @@
 
 namespace MonsterLegendsLite {
     public class Arena_TeamDefense : Arena_MonsterList {
-        protected override MonsterTeamSlots<string> GetListData() {
-            return DataManager.Ins.UserInsData.ArenaTeamDefense;
+        protected override MonsterTeamSlots<MonsterInsData> GetListData() {
+            return DataManager.Ins.UserInsData.GetArenaTeamDefenseData();
         }
 
         protected override void OnListChanged() {

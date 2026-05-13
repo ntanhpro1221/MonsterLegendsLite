@@ -9,7 +9,7 @@ namespace MonsterLegendsLite {
 
         public static FarmInfoWindow Show(FarmInsData target, FarmInfoWindow prefab) {
             var window  = BuildingInfoWindow.Show(target, prefab);
-            var defData = DataManager.Ins.GameDefData.Farm[target.To<FarmInsData>().Id];
+            var defData = DataManager.Ins.GameDefData.Farms[target.To<FarmInsData>().Id];
 
             window.maxFood.SetText(window.utils.ToStrResource(defData.MaxFood));
 
@@ -17,7 +17,7 @@ namespace MonsterLegendsLite {
         }
 
         protected override string GetBuildingName(BuildingInsData target) {
-            var defData = DataManager.Ins.GameDefData.Farm[target.To<FarmInsData>().Id];
+            var defData = DataManager.Ins.GameDefData.Farms[target.To<FarmInsData>().Id];
             return $"{defData.Name} Farm";
         }
     }

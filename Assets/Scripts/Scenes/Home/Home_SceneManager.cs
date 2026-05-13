@@ -78,19 +78,19 @@ namespace MonsterLegendsLite {
             }
 
             static void StartBuyFarm(FarmId id) {
-                var ins = Instantiate(DataManager.Ins.GameLocDefData.Farm[id].PrefabHomeScene, Ins.buildingRoot);
+                var ins = Instantiate(DataManager.Ins.GameLocDefData.Farms[id].PrefabHomeScene, Ins.buildingRoot);
 
                 ins.Initialize(new FarmInsData(id), isBuySample: true);
             }
 
             static void StartBuyHabitat(ElementId id) {
-                var ins = Instantiate(DataManager.Ins.GameLocDefData.Habitat[id].PrefabHomeScene, Ins.buildingRoot);
+                var ins = Instantiate(DataManager.Ins.GameLocDefData.Habitats[id].PrefabHomeScene, Ins.buildingRoot);
 
                 ins.Initialize(new HabitatInsData(id), isBuySample: true);
             }
 
             static void StartBuyMonster(MonsterId id) {
-                var ins = Instantiate(DataManager.Ins.GameLocDefData.Monster[id].PrefabHomeScene);
+                var ins = Instantiate(DataManager.Ins.GameLocDefData.Monsters[id].PrefabHomeScene);
 
                 ins.Initialize(new MonsterInsData(id), isBuySample: true);
 
@@ -125,7 +125,7 @@ namespace MonsterLegendsLite {
             foreach (var farm in DataManager.Ins.UserInsData.Farms) {
                 if (farms.ContainsKey(farm.InsId)) continue;
                 
-                var ins = Instantiate(gameLocDef.Farm[farm.Id].PrefabHomeScene, buildingRoot);
+                var ins = Instantiate(gameLocDef.Farms[farm.Id].PrefabHomeScene, buildingRoot);
                 farms.Add(farm.InsId, ins);
 
                 ins.Initialize(farm, isBuySample: false);
@@ -147,7 +147,7 @@ namespace MonsterLegendsLite {
             foreach (var habitat in DataManager.Ins.UserInsData.Habitats) {
                 if (habitats.ContainsKey(habitat.InsId)) continue;
                 
-                var ins = Instantiate(gameLocDef.Habitat[habitat.Id].PrefabHomeScene, buildingRoot);
+                var ins = Instantiate(gameLocDef.Habitats[habitat.Id].PrefabHomeScene, buildingRoot);
                 habitats.Add(habitat.InsId, ins);
 
                 ins.Initialize(habitat, isBuySample: false);
@@ -175,7 +175,7 @@ namespace MonsterLegendsLite {
                 if (monsters.ContainsKey(monster.InsId)) continue;
                 
                 var habitat = habitats[monster.Habitat];
-                var ins     = Instantiate(gameLocDef.Monster[monster.Id].PrefabHomeScene);
+                var ins     = Instantiate(gameLocDef.Monsters[monster.Id].PrefabHomeScene);
                 monsters.Add(monster.InsId, ins);
 
                 ins.Initialize(monster, isBuySample: false);
