@@ -31,7 +31,7 @@ MonoBehaviour:
       - value:
           Icon: {fileID: 21300000, guid: 429d99e3cffd9b9418792f42fa215e26, type: 3}
           SkillButtonBG: {fileID: 21300000, guid: 004ccd9b74e602f40876495069e3407e, type: 3}
-          ElementButton: {fileID: 21300000, guid: 650e185755bc2634d9fb1e5e90fc1a3b, type: 3}
+          ElementButton: {fileID: 21300000, guid: dc4fb590afadeed409c30e45486cd6be, type: 3}
       _KeyNames:
       - Fire
       - Thunder
