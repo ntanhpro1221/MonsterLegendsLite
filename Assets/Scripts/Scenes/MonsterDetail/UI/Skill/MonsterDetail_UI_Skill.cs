@@ -38,23 +38,21 @@ namespace MonsterLegendsLite {
                 if (skill == null) {
                     tab.SetElement(null);
                     tab.SetName("None");
-                    tab.SetTurnOnCallback(() => {
-                        curSlotId = cachedSlotId;
-                        ToggleNoneSkillDetail(isNone: true);
-                    });
                 } else {
-
                     tab.SetElement(elementLocData[skill.Element].ElementButton);
                     tab.SetName(skill.Name);
-                    tab.SetTurnOnCallback(() => {
-                        curSlotId = cachedSlotId;
-                        ToggleNoneSkillDetail(isNone: false);
-                        skillDetail.SetAllData(skill, elementLocData[skill.Element].ElementButton);
-                    });
+                }
+                
+                tab.SetTurnOnCallback(OnTabTurnOn);
+                
+                if (tab.IsOn) OnTabTurnOn();
+                
+                void OnTabTurnOn() {
+                    curSlotId = cachedSlotId;
+                    ToggleNoneSkillDetail(isNone: false);
+                    if (skill != null) skillDetail.SetAllData(skill, elementLocData[skill.Element].ElementButton);
                 }
             }
-
-            tabs[curSlotId].TurnOn();
         }
 
         private void ToggleNoneSkillDetail(bool isNone) {

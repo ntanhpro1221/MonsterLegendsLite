@@ -18,15 +18,12 @@ namespace MonsterLegendsLite {
 
         private UnityAction turnOnCallback;
 
+        public bool IsOn => toggle.isOn;
+        
         private void Awake() {
             toggle.onValueChanged.AddListener(isOn => {
                 if (isOn) turnOnCallback?.Invoke();
             });
-        }
-
-        public void TurnOn() {
-            toggle.isOn = false;
-            toggle.isOn = true;
         }
 
         public void SetElement(Sprite element) {
