@@ -25,8 +25,8 @@ namespace MonsterLegendsLite {
         private MonsterSkillList<MonsterDetail_UI_SkillTab> tabs;
 
         public void SetAllData(MonsterInsData insData) {
-            var defData        = DataManager.Ins.GameDefData.Monsters[insData.Id];
-            var elementLocData = DataManager.Ins.GameLocDefData.Elements;
+            var defData        = DataManager.Ins.GameDef.Monsters[insData.Id];
+            var elementLocData = DataManager.Ins.GameLocDef.Elements;
 
             replaceSkillBtn.SetCallback(() => ReplaceSkillWindow.Show(replaceSkillWindowPrefab, curSlotId, insData));
 

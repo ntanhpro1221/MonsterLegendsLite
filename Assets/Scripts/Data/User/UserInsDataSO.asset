@@ -18,7 +18,7 @@ MonoBehaviour:
     Exp: 5721
     Elo: 0
     Gold: 1195422
-    Food: 1157247
+    Food: 1137183
     CurAdventureLevel: 3
     Music: 1
     Sound: 0
@@ -81,15 +81,15 @@ MonoBehaviour:
         skill_3: -1
     - InsId: Monster_5
       Id: 2
-      CustomName: 
-      Level: 1
-      Exp: 0
+      CustomName: Wukong
+      Level: 20
+      Exp: 19
       Habitat: Habitat_9319483a-c986-4468-859f-ba92188f1bad
       SkillList:
         skill_0: 0
-        skill_1: -1
-        skill_2: -1
-        skill_3: -1
+        skill_1: 3
+        skill_2: 2
+        skill_3: 1
     Habitats:
     - InsId: Test_Habitat_0
       Position: {x: -5, y: 0}
@@ -106,9 +106,9 @@ MonoBehaviour:
     - InsId: Habitat_9319483a-c986-4468-859f-ba92188f1bad
       Position: {x: -4, y: -4}
       Id: 2
-      CurGold: 0
+      CurGold: 20000
       LastGoldUpdate:
-        value: 1777894435
+        value: 1778761171
     - InsId: Habitat_202972fa-cf12-4439-8325-4ea1d76250b9
       Position: {x: -13, y: -4}
       Id: 3
@@ -136,12 +136,12 @@ MonoBehaviour:
         value: 1777783851
     ArenaTeamAttack:
       item_0: Monster_0
-      item_1: Monster_2
+      item_1: Monster_5
       item_2: Monster_4
     ArenaTeamDefense:
       item_0: Monster_1
       item_1: Monster_3
-      item_2: Monster_5
+      item_2: Monster_2
     AdventureTeam:
       item_0: Monster_0
       item_1: Monster_1

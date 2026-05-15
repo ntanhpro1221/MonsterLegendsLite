@@ -42,7 +42,7 @@ namespace MonsterLegendsLite {
 
         private void LoadBootDataThenDelete() {
             var bootData   = Battle_BootData.Ins;
-            var gameLocDef = DataManager.Ins.GameLocDefData;
+            var gameLocDef = DataManager.Ins.GameLocDef;
 
             exitBtn.onClick.AddListener(() => YesNoWindow.Show(
                 title: "EXIT BATTLE"

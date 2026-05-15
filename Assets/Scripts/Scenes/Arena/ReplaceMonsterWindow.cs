@@ -22,7 +22,7 @@ namespace MonsterLegendsLite {
         }
 
         public static ReplaceMonsterWindow Show(ReplaceMonsterWindow prefab, string title, UnityAction<MonsterInsData> onSelected, params IReadOnlyList<MonsterInsData>[] unavailableMonsters) {
-            var userMonsters   = DataManager.Ins.UserInsData.Monsters;
+            var userMonsters   = DataManager.Ins.User.Monsters;
             var window = PopupWindowPool.Ins.Show(
                 prefab: prefab
               , title: title

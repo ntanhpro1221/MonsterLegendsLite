@@ -21,8 +21,8 @@ namespace MonsterLegendsLite {
         }
 
         public static ReplaceSkillWindow Show(ReplaceSkillWindow prefab, int slotId, MonsterInsData insData) {
-            var defData        = DataManager.Ins.GameDefData.Monsters[insData.Id];
-            var elementLocData = DataManager.Ins.GameLocDefData.Elements;
+            var defData        = DataManager.Ins.GameDef.Monsters[insData.Id];
+            var elementLocData = DataManager.Ins.GameLocDef.Elements;
             var window = PopupWindowPool.Ins.Show(
                 prefab: prefab
               , title: (insData.GetSkill(slotId, defData) == null ? "SET" : "REPLACE") + " SKILL"

@@ -64,8 +64,8 @@ namespace MonsterLegendsLite {
 
                 usingMonsterBtns.Add(button);
                 
-                var monsterDefData    = DataManager.Ins.GameDefData.Monsters[monster.InsData.Id];
-                var monsterLocDefData = DataManager.Ins.GameLocDefData.Monsters[monster.InsData.Id];
+                var monsterDefData    = DataManager.Ins.GameDef.Monsters[monster.InsData.Id];
+                var monsterLocDefData = DataManager.Ins.GameLocDef.Monsters[monster.InsData.Id];
                 
                 button.SetCallback(() => Home_SceneManager.Ins.ViewMonsterDetail(monster.InsData.InsId));
                 button.SetIcon(monsterLocDefData.Avatar);

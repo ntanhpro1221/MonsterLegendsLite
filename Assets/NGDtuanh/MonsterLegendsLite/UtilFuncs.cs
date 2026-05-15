@@ -1,9 +1,11 @@
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace NGDtuanh.MonsterLegendsLite {
@@ -46,6 +48,13 @@ namespace NGDtuanh.MonsterLegendsLite {
             UnityEditor.AssetDatabase.SaveAssets();
 
             #endif
+        }
+
+        public void LogExceptionWithWindow(Exception e) {
+            Debug.LogException(e);
+            NotificationWindow.Show(
+                title: "SOME THING WENT WRONG"
+              , content: e.Message);
         }
     }
 }

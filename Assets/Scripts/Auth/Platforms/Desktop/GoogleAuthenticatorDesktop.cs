@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using Google;
-using Newtonsoft.Json;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace MonsterLegendsLite.Auth.Desktop {
     public class GoogleAuthenticatorDesktop : GoogleAuthenticatorBase {
@@ -16,7 +10,7 @@ namespace MonsterLegendsLite.Auth.Desktop {
         protected override async Task<GoogleAuthResult> AuthenticateAsync(GoogleAuthInput authInput) {
             if (GoogleSignIn.Configuration == null) {
                 GoogleSignIn.Configuration = new GoogleSignInConfiguration {
-                    ClientId    = authInput.AndroidClientId
+                    ClientId       = authInput.AndroidClientId
                   , RequestIdToken = true
                   , RequestEmail   = true
                   , AdditionalScopes = new[] {
@@ -74,35 +68,35 @@ namespace MonsterLegendsLite.Auth.Desktop {
         //         listener.Close();
         //     }
         // }
-
-        private async Task<GoogleAuthResult> ExchangeCodeAsync(string clientId, string clientSecret, string code, string verifier, string redirectUri) {
-            var form = new WWWForm();
-            form.AddField("grant_type", "authorization_code");
-            form.AddField("code", code);
-            form.AddField("redirect_uri", redirectUri);
-            form.AddField("client_id", clientId);
-            form.AddField("client_secret", clientSecret);
-            form.AddField("code_verifier", verifier);
-
-            using var request = UnityWebRequest.Post("https://oauth2.googleapis.com/token", form);
-            await request.SendWebRequest();
-
-            if (request.result != UnityWebRequest.Result.Success) throw new Exception($"Token Exchange Failed: {request.error}\nDetail: {request.downloadHandler?.text}");
-
-            return JsonConvert.DeserializeObject<GoogleAuthResult>(request.downloadHandler.text);
-        }
-
-        private string GeneratePkceVerifier() {
-            var bytes = new byte[32];
-            RandomNumberGenerator.Fill(bytes);
-            return Base64UrlEncode(bytes);
-        }
-
-        private string Base64UrlEncode(byte[] bytes) {
-            return Convert.ToBase64String(bytes)
-                .TrimEnd('=')
-                .Replace('+', '-')
-                .Replace('/', '_');
-        }
+        //
+        // private async Task<GoogleAuthResult> ExchangeCodeAsync(string clientId, string clientSecret, string code, string verifier, string redirectUri) {
+        //     var form = new WWWForm();
+        //     form.AddField("grant_type", "authorization_code");
+        //     form.AddField("code", code);
+        //     form.AddField("redirect_uri", redirectUri);
+        //     form.AddField("client_id", clientId);
+        //     form.AddField("client_secret", clientSecret);
+        //     form.AddField("code_verifier", verifier);
+        //
+        //     using var request = UnityWebRequest.Post("https://oauth2.googleapis.com/token", form);
+        //     await request.SendWebRequest();
+        //
+        //     if (request.result != UnityWebRequest.Result.Success) throw new Exception($"Token Exchange Failed: {request.error}\nDetail: {request.downloadHandler?.text}");
+        //
+        //     return JsonConvert.DeserializeObject<GoogleAuthResult>(request.downloadHandler.text);
+        // }
+        //
+        // private string GeneratePkceVerifier() {
+        //     var bytes = new byte[32];
+        //     RandomNumberGenerator.Fill(bytes);
+        //     return Base64UrlEncode(bytes);
+        // }
+        //
+        // private string Base64UrlEncode(byte[] bytes) {
+        //     return Convert.ToBase64String(bytes)
+        //         .TrimEnd('=')
+        //         .Replace('+', '-')
+        //         .Replace('/', '_');
+        // }
     }
 }

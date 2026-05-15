@@ -42,12 +42,12 @@ namespace MonsterLegendsLite {
         public IReadOnlyList<Battle_Skill> SkillList => skillList;
 
         public void Initialize(MonsterInsData insData, HorDirection faceDir) {
-            var defData        = DataManager.Ins.GameDefData.Monsters[insData.Id];
-            var elementLocData = DataManager.Ins.GameLocDefData.Elements;
+            var defData        = DataManager.Ins.GameDef.Monsters[insData.Id];
+            var elementLocData = DataManager.Ins.GameLocDef.Elements;
 
             this.insData = insData;
 
-            Avatar = DataManager.Ins.GameLocDefData.Monsters[insData.Id].Avatar;
+            Avatar = DataManager.Ins.GameLocDef.Monsters[insData.Id].Avatar;
 
             orgStats = defData.CalculateStats(insData);
 

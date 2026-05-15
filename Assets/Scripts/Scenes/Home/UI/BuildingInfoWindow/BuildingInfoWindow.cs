@@ -21,7 +21,7 @@ namespace MonsterLegendsLite {
               , content: defData.Description
               , onDoneClose: null);
 
-            var sellValue = (int)(defData.Cost * DataManager.Ins.GameDefData.SellRatio_Building);
+            var sellValue = (int)(defData.Cost * DataManager.Ins.GameDef.SellRatio_Building);
             window.utils.SetListener(window.SharedData_Building.SellBtn, () => {
                 if (!window.IsCanSell(target, out var blockReason)) {
                     NotificationWindow.Show(

@@ -8,9 +8,9 @@ namespace MonsterLegendsLite.Auth {
         where TAuthResult : AuthResultBase
         where TAuthInput : AuthInputBase {
         protected const RuntimeInitializeLoadType OnAuthenticatorInit = RuntimeInitializeLoadType.BeforeSceneLoad;
-        
+
         protected static void Init(AuthenticatorBase<TAuthResult, TAuthInput> authenticator, bool isFallback = false) {
-            AuthManager.onRegisterAuthenticator += () => AuthManager.Ins.RegisterAuthenticator(authenticator.Provider, authenticator, isFallback);
+            AuthManager.RegisterAuthenticator(authenticator.Provider, authenticator, isFallback);
         }
 
         public async Task<Credential> AuthenticateAsync(AllAuthInput allAuthInput) {

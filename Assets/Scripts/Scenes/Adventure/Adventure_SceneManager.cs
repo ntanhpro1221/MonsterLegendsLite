@@ -20,7 +20,7 @@ namespace MonsterLegendsLite {
         }
 
         private void LoadLevels() {
-            var levelDatas = DataManager.Ins.GameDefData.AdventureLevels;
+            var levelDatas = DataManager.Ins.GameDef.AdventureLevels;
 
             for (int i = 0; i < levelDatas.Count; ++i) levels[i].SetAllData(levelDatas[i], i);
         }

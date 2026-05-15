@@ -33,8 +33,8 @@ namespace MonsterLegendsLite {
         }
 
         private void RebuildAll() {
-            var data        = DataManager.Ins.UserInsData;
-            var requiredExp = DataManager.Ins.GameDefData.User.CalcExpCost(data.Level);
+            var data        = DataManager.Ins.User;
+            var requiredExp = DataManager.Ins.GameDef.User.CalcExpCost(data.Level);
 
             fillImg.fillAmount = (float)data.Exp / requiredExp;
             avatarImg.sprite   = avatarImg.sprite;

@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Google;
 using UnityEngine;
 
-namespace NGDtuanh.Auth.Android {
+namespace MonsterLegendsLite.Auth.Mobile {
     public class GoogleAuthenticatorMobile : GoogleAuthenticatorBase {
         [RuntimeInitializeOnLoadMethod(OnAuthenticatorInit)]
         private static void Init() => Init(new GoogleAuthenticatorMobile());
@@ -10,7 +10,7 @@ namespace NGDtuanh.Auth.Android {
         protected override async Task<GoogleAuthResult> AuthenticateAsync(GoogleAuthInput authInput) {
             if (GoogleSignIn.Configuration == null) {
                 GoogleSignIn.Configuration = new GoogleSignInConfiguration {
-                    ClientId    = authInput.WebClientId
+                    ClientId       = authInput.WebClientId
                   , RequestIdToken = true
                   , RequestEmail   = true
                   , AdditionalScopes = new[] {
@@ -18,7 +18,7 @@ namespace NGDtuanh.Auth.Android {
                       , "https://www.googleapis.com/auth/calendar.events.readonly"
                     }
                 };
-                
+
                 Debug.Log("Recreate configuration");
             }
 

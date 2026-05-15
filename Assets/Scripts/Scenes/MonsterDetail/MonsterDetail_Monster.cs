@@ -17,7 +17,7 @@ namespace MonsterLegendsLite {
 
         public void Initialize(MonsterInsData insData) {
             this.insData = insData;
-            this.defData = DataManager.Ins.GameDefData.Monsters[insData.Id];
+            this.defData = DataManager.Ins.GameDef.Monsters[insData.Id];
             
             EventDispatcher.RegisterEvent(EventId.MonsterLevelChangedInMonsterDetail, PlayLevelUpEffect, this);
         }

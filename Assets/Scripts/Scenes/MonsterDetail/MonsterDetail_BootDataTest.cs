@@ -10,8 +10,8 @@ namespace MonsterLegendsLite {
         protected override void Initialize() {
             base.Initialize();
 
-            var monster = DataManager.Ins.UserInsData.Monsters.FirstOrDefault(i => i.InsId == testMonsterInsId);
-            if (monster == null) monster = DataManager.Ins.UserInsData.Monsters[0];
+            var monster = DataManager.Ins.User.Monsters.FirstOrDefault(i => i.InsId == testMonsterInsId);
+            if (monster == null) monster = DataManager.Ins.User.Monsters[0];
             SetData(monster);
         }
     }

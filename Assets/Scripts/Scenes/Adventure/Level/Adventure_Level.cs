@@ -13,7 +13,7 @@ namespace MonsterLegendsLite {
         private UnityAction onClick;
 
         public virtual void SetAllData(AdventureLevelData levelData, int levelIndex) {
-            var userCurLevelIndex = DataManager.Ins.UserInsData.CurAdventureLevel;
+            var userCurLevelIndex = DataManager.Ins.User.CurAdventureLevel;
             
             var state =
                 userCurLevelIndex < levelIndex ? Adventure_LevelState.Locking :

@@ -67,15 +67,15 @@ namespace MonsterLegendsLite {
                             .ShowAtCenterScreen(FloatingTextId.FoodChange)
                             .SetTextChange(levelData.RewardFood));
 
-                        DataManager.Ins.UpdateData_DefeatBattleEnd(levelData, levelIndex, out bool levelUp);
+                        DataManager.Ins.UpdateData_WinAdventureLevel(levelData, levelIndex, out bool levelUp);
 
                         if (!levelUp) return;
 
                         NotificationWindow.Show(
                             title: "LEVEL UP"
-                          , content: $"Your current level: {DataManager.Ins.UserInsData.Level}");
+                          , content: $"Your current level: {DataManager.Ins.User.Level}");
                     }
-                  , teamLeft: DataManager.Ins.UserInsData.GetAdventureTeamData()
+                  , teamLeft: DataManager.Ins.User.GetAdventureTeamData()
                   , teamRight: levelData.Monsters);
 
                 SceneManager.LoadScene("BattleScene");

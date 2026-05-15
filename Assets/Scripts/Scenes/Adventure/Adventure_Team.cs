@@ -3,7 +3,7 @@
 namespace MonsterLegendsLite {
     public class Adventure_Team : Arena_MonsterList {
         protected override MonsterTeamSlots<MonsterInsData> GetListData() {
-            return DataManager.Ins.UserInsData.GetAdventureTeamData();
+            return DataManager.Ins.User.GetAdventureTeamData();
         }
 
         protected override void OnListChanged() {

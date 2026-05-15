@@ -37,12 +37,12 @@ namespace MonsterLegendsLite {
         }
 
         private void DestroyIfNotExistInDatabase() {
-            if (DataManager.Ins.UserInsData.Monsters.Contains(InsData)) return;
+            if (DataManager.Ins.User.Monsters.Contains(InsData)) return;
             Destroy(gameObject);
         }
 
         public int GetGPM() {
-            return DataManager.Ins.GameDefData.Monsters[InsData.Id].CalculateStat(InsData, MonsterStatId.GoldPerMin);
+            return DataManager.Ins.GameDef.Monsters[InsData.Id].CalculateStat(InsData, MonsterStatId.GoldPerMin);
         }
 
         public void StartLocalMove(Vector2Int size) {
@@ -84,7 +84,7 @@ namespace MonsterLegendsLite {
                 var habitatPos    = Home_MapManager.Ins.GetNearestTilePos(Home_SceneManager.Ins.Habitats[InsData.Habitat].TF.position);
                 var gloTarget     = Home_MapManager.Ins.RandomPointInHabitat(habitatPos, size);
                 var locTarget     = TF.parent.InverseTransformPoint(gloTarget);
-                var duration      = Vector2.Distance(TF.localPosition, locTarget) / DataManager.Ins.GameDefData.Home_MonsterSpeed;
+                var duration      = Vector2.Distance(TF.localPosition, locTarget) / DataManager.Ins.GameDef.Home_MonsterSpeed;
                 var habitatRangeY = Home_MapManager.Ins.GetHabitatRangeY(habitatPos, size);
                 var habitatLocRangeY = new Vector2(
                     TF.parent.InverseTransformPoint(new(0, habitatRangeY.x)).y
@@ -101,7 +101,7 @@ namespace MonsterLegendsLite {
 
                 model.Play(MonsterAnimId.Idle);
 
-                yield return WaitForSecondCache.Get(utils.RandomInside(DataManager.Ins.GameDefData.Home_MonsterIdleTime));
+                yield return WaitForSecondCache.Get(utils.RandomInside(DataManager.Ins.GameDef.Home_MonsterIdleTime));
 
                 void UpdateSortingOrderFromPosY() {
                     sortingGroup.sortingOrder = (int)Mathf.Lerp(short.MaxValue, short.MinValue

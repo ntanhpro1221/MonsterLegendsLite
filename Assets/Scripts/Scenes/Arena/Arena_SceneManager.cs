@@ -19,11 +19,11 @@ namespace MonsterLegendsLite {
             battle.Initialize();
             leaderboard.Initialize();
             
-            EventDispatcher.RegisterEvent(EventId.AnyUserEloChanged, leaderboard.Rebuild, this);
+            EventDispatcher.RegisterEvent(EventId.AnyUserEloChanged, leaderboard.TriggerRebuild, this);
         }
 
         private void OnDestroy() {
-            EventDispatcher.UnregisterEvent(EventId.AnyUserEloChanged, leaderboard.Rebuild, this);
+            EventDispatcher.UnregisterEvent(EventId.AnyUserEloChanged, leaderboard.TriggerRebuild, this);
         }
 
         private void Start() {

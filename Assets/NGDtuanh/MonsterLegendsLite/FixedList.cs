@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace NGDtuanh.MonsterLegendsLite {
+    [JsonObject(MemberSerialization.Fields)]
     public abstract class FixedList<TList, TValue> :
         IReadOnlyList<TValue>
         where TList : FixedList<TList, TValue> {

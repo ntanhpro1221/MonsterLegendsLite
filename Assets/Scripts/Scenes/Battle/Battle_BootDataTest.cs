@@ -19,8 +19,8 @@ namespace MonsterLegendsLite {
                     title: isWin ? "WIN" : "LOSE"
                   , content: isWin ? "You are win" : "You are lose"
                   , onDoneClose: NavToHomeScene)
-              , teamLeft: DataManager.Ins.UserInsData.GetTeamIns(teamLeftInsId)
-              , teamRight: DataManager.Ins.UserInsData.GetTeamIns(teamRightInsId));
+              , teamLeft: DataManager.Ins.User.GetTeamIns(teamLeftInsId)
+              , teamRight: DataManager.Ins.User.GetTeamIns(teamRightInsId));
         }
 
         private void NavToHomeScene() {

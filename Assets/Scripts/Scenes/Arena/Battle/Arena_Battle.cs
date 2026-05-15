@@ -1,9 +1,13 @@
-﻿using MonsterLegendsLite.Data;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace MonsterLegendsLite {
     public class Arena_Battle : MonoBehaviourExt {
@@ -19,39 +23,56 @@ namespace MonsterLegendsLite {
         public void Initialize() {
             teamAttack.Initialize();
             teamDefense.Initialize();
-            utils.SetListener(fightBtn, OnFight);
+            utils.SetListener(fightBtn, () => _ = OnFightAsync());
         }
 
-        private void OnFight() {
-            var ally  = DataManager.Ins.UserInsData;
-            var enemy = DataManager.Ins.GetUserListTest()[0];
+        private async Task OnFightAsync() {
+            try {
+                LoadingIcon.Ins.Show(blockInteract: true);
 
-            Battle_BootData.OnBattleEnd onBattleEnd = isWin => {
-                var (winner, loser) = (ally, enemy);
-                if (!isWin) new UtilFuncs().Swap(ref winner, ref loser);
+                var allUsers    = await DataManager.Ins.GetAllUsersAsync();
+                var randomId    = Random.Range(0, allUsers.Count);
+                var randomEnemy = allUsers.ElementAt(randomId);
 
-                CalculateEloAfterBattle(winner.Elo, loser.Elo, out var winnerDeltaElo, out var loserDeltaElo);
+                if (randomEnemy.Value == DataManager.Ins.User) {
+                    randomId    = (randomId + 1) % allUsers.Count;
+                    randomEnemy = allUsers.ElementAt(randomId);
+                }
 
-                DataManager.Ins.UpdateData_EloAfterBattleTest(winner, loser, winnerDeltaElo, loserDeltaElo);
-                
-                EventDispatcher.PostEvent(EventId.AnyUserEloChanged);
+                var ally  = DataManager.Ins.UserWithId;
+                var enemy = randomEnemy.Value.WithId(randomEnemy.Key);
 
-                Arena_BootData.InsAutoSpawn.SetData_EndBattleDeltaElo(isWin ? winnerDeltaElo : loserDeltaElo);
-                
-                SceneManager.LoadScene("ArenaScene");
-            };
+                Battle_BootData.OnBattleEnd onBattleEnd = isWin => {
+                    var (winner, loser) = (ally, enemy);
+                    if (!isWin) new UtilFuncs().Swap(ref winner, ref loser);
 
-            Battle_BootData.InsAutoSpawn.SetData(
-                exitWarning: "Are you sure you want to exit this battle?\nYou will lose the match and your ELO!"
-              , onExit: () => onBattleEnd.Invoke(isWin: false)
-              , onBattleEnd: isWin => NotificationWindow.Show(
-                    title: isWin ? "WIN" : "LOSE"
-                  , content: isWin ? "You are win" : "You are lose"
-                  , onDoneClose: () => onBattleEnd.Invoke(isWin: isWin))
-              , teamLeft: ally.GetArenaTeamAttackData()
-              , teamRight: enemy.GetArenaTeamDefenseData());
+                    CalculateEloAfterBattle(winner.Data.Elo, loser.Data.Elo, out var winnerDeltaElo, out var loserDeltaElo);
 
-            SceneManager.LoadScene("BattleScene");
+                    DataManager.Ins.UpdateData_EloAfterBattleTest(winner, loser, winnerDeltaElo, loserDeltaElo);
+
+                    EventDispatcher.PostEvent(EventId.AnyUserEloChanged);
+
+                    Arena_BootData.InsAutoSpawn.SetData_EndBattleDeltaElo(isWin ? winnerDeltaElo : loserDeltaElo);
+
+                    SceneManager.LoadScene("ArenaScene");
+                };
+
+                Battle_BootData.InsAutoSpawn.SetData(
+                    exitWarning: "Are you sure you want to exit this battle?\nYou will lose the match and your ELO!"
+                  , onExit: () => onBattleEnd.Invoke(isWin: false)
+                  , onBattleEnd: isWin => NotificationWindow.Show(
+                        title: isWin ? "WIN" : "LOSE"
+                      , content: isWin ? "You are win" : "You are lose"
+                      , onDoneClose: () => onBattleEnd.Invoke(isWin: isWin))
+                  , teamLeft: ally.Data.GetArenaTeamAttackData()
+                  , teamRight: enemy.Data.GetArenaTeamDefenseData());
+
+                SceneManager.LoadScene("BattleScene");
+            } catch (Exception e) {
+                utils.LogExceptionWithWindow(e);
+            } finally {
+                LoadingIcon.Ins.Hide();
+            }
         }
 
         private static void CalculateEloAfterBattle(int winnerElo, int loserElo, out int winnerDeltaElo, out int loserDeltaElo) {

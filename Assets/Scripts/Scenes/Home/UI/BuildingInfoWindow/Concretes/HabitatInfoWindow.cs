@@ -16,9 +16,9 @@ namespace MonsterLegendsLite {
 
         public static HabitatInfoWindow Show(HabitatInsData target, HabitatInfoWindow prefab) {
             var window  = BuildingInfoWindow.Show(target, prefab);
-            var defData = DataManager.Ins.GameDefData.Habitats[target.To<HabitatInsData>().Id];
+            var defData = DataManager.Ins.GameDef.Habitats[target.To<HabitatInsData>().Id];
 
-            window.elements.SetElements(DataManager.Ins.GameLocDefData.Elements[defData.Element].ElementButton);
+            window.elements.SetElements(DataManager.Ins.GameLocDef.Elements[defData.Element].ElementButton);
             window.capacity.SetText(defData.Capacity.ToString());
             window.maxGold.SetText(window.utils.ToStrResource(defData.MaxGold));
 
@@ -26,12 +26,12 @@ namespace MonsterLegendsLite {
         }
 
         protected override string GetBuildingName(BuildingInsData target) {
-            var defData = DataManager.Ins.GameDefData.Habitats[target.To<HabitatInsData>().Id];
+            var defData = DataManager.Ins.GameDef.Habitats[target.To<HabitatInsData>().Id];
             return $"{defData.Name} Habitat";
         }
 
         protected override bool IsCanSell(BuildingInsData target, out string blockReason) {
-            if (DataManager.Ins.UserInsData.Monsters.Count(i => i.Habitat == target.InsId) > 0) {
+            if (DataManager.Ins.User.Monsters.Count(i => i.Habitat == target.InsId) > 0) {
                 blockReason = $"{GetBuildingName(target)} can't be sold right now because it has monsters inside";
                 return false;
             }

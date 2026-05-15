@@ -41,7 +41,7 @@ namespace MonsterLegendsLite {
               , content: ""
               , onDoneClose: null);
 
-            window.SetAllData(DataManager.Ins.UserInsData);
+            window.SetAllData(DataManager.Ins.User);
 
             return window;
         }

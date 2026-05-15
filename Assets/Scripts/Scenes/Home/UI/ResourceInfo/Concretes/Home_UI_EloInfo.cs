@@ -5,7 +5,7 @@ namespace MonsterLegendsLite.UI {
         protected override void Initialize() { }
 
         protected override void Refresh() {
-            SharedData.SetValue(DataManager.Ins.UserInsData.Elo);
+            SharedData.SetValue(DataManager.Ins.User.Elo);
         }
     }
 }

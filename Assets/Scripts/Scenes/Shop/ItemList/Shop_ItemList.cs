@@ -33,7 +33,7 @@ namespace MonsterLegendsLite {
             item.SetTitle(data.Name);
             item.SetAvatar(locData.ShopAvatar);
             item.SetBuyBtn(data.Cost, () => {
-                if (DataManager.Ins.UserInsData.Gold < data.Cost) {
+                if (DataManager.Ins.User.Gold < data.Cost) {
                     NotificationWindow.Show(
                         title: item.GetFailBuyWindowTitle()
                       , content: $"You don't have enough gold to buy {data.Name} ({data.Cost} gold is missing)");

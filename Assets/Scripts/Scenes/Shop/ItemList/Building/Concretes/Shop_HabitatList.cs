@@ -5,13 +5,13 @@ using MonsterLegendsLite.Data;
 namespace MonsterLegendsLite {
     public class Shop_HabitatList : Shop_BuildingList {
         protected override IEnumerable<(IShopBuildingData, IShopBuildingLocData)> IEAllBuildingData() {
-            var datas    = DataManager.Ins.GameDefData.Habitats;
-            var locDatas = DataManager.Ins.GameLocDefData.Habitats;
+            var datas    = DataManager.Ins.GameDef.Habitats;
+            var locDatas = DataManager.Ins.GameLocDef.Habitats;
             foreach (var (id, data) in datas) yield return (data, locDatas[id]);
         }
 
         protected override void DoBuyLogic(IShopItemData data, IShopItemLocData locData) {
-            Home_BootData.InsAutoSpawn.SetData_BuyHabitat(DataManager.Ins.GameDefData.Habitats.First(i => i.Value == data).Key);
+            Home_BootData.InsAutoSpawn.SetData_BuyHabitat(DataManager.Ins.GameDef.Habitats.First(i => i.Value == data).Key);
             Shop_SceneManager.Ins.BackToHomeScene();
         }
     }

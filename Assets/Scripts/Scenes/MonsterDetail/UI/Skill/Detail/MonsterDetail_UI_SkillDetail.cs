@@ -32,7 +32,7 @@ namespace MonsterLegendsLite {
         }
 
         public void SetTarget(MonsterSkillTargetId target) {
-            SharedData.TargetTxt.text = DataManager.Ins.GameDefData.MonsterSkillTargets[target].Name;
+            SharedData.TargetTxt.text = DataManager.Ins.GameDef.MonsterSkillTargets[target].Name;
 
             SharedData.PowerIconEnemy.gameObject.SetActive(target.IsTargetEnemy());
             SharedData.PowerIconAlly.gameObject.SetActive(!target.IsTargetEnemy());

@@ -105,19 +105,19 @@ namespace MonsterLegendsLite {
             }
 
             static void StartBuyFarm(FarmId id) {
-                var ins = Instantiate(DataManager.Ins.GameLocDefData.Farms[id].PrefabHomeScene, Ins.buildingRoot);
+                var ins = Instantiate(DataManager.Ins.GameLocDef.Farms[id].PrefabHomeScene, Ins.buildingRoot);
 
                 ins.Initialize(new FarmInsData(id), isBuySample: true);
             }
 
             static void StartBuyHabitat(ElementId id) {
-                var ins = Instantiate(DataManager.Ins.GameLocDefData.Habitats[id].PrefabHomeScene, Ins.buildingRoot);
+                var ins = Instantiate(DataManager.Ins.GameLocDef.Habitats[id].PrefabHomeScene, Ins.buildingRoot);
 
                 ins.Initialize(new HabitatInsData(id), isBuySample: true);
             }
 
             static void StartBuyMonster(MonsterId id) {
-                var ins = Instantiate(DataManager.Ins.GameLocDefData.Monsters[id].PrefabHomeScene);
+                var ins = Instantiate(DataManager.Ins.GameLocDef.Monsters[id].PrefabHomeScene);
 
                 ins.Initialize(new MonsterInsData(id), isBuySample: true);
 
@@ -140,16 +140,16 @@ namespace MonsterLegendsLite {
         
         private void RebuildFarms() {
             var map        = Home_MapManager.Ins;
-            var gameLocDef = DataManager.Ins.GameLocDefData;
+            var gameLocDef = DataManager.Ins.GameLocDef;
             
             // Remove
             foreach (var (key, _) in farms.Where(static i =>
                 i.Value == null
-             || !DataManager.Ins.UserInsData.Farms.Contains(i.Value.InsDataWeak)).ToList())
+             || !DataManager.Ins.User.Farms.Contains(i.Value.InsDataWeak)).ToList())
                 farms.Remove(key);
 
             // Add
-            foreach (var farm in DataManager.Ins.UserInsData.Farms) {
+            foreach (var farm in DataManager.Ins.User.Farms) {
                 if (farms.ContainsKey(farm.InsId)) continue;
                 
                 var ins = Instantiate(gameLocDef.Farms[farm.Id].PrefabHomeScene, buildingRoot);
@@ -162,16 +162,16 @@ namespace MonsterLegendsLite {
         
         private void RebuildHabitats() {
             var map        = Home_MapManager.Ins;
-            var gameLocDef = DataManager.Ins.GameLocDefData;
+            var gameLocDef = DataManager.Ins.GameLocDef;
             
             // Remove
             foreach (var (key, _) in habitats.Where(static i =>
                 i.Value == null
-             || !DataManager.Ins.UserInsData.Habitats.Contains(i.Value.InsData)).ToList())
+             || !DataManager.Ins.User.Habitats.Contains(i.Value.InsData)).ToList())
                 habitats.Remove(key);
 
             // Add
-            foreach (var habitat in DataManager.Ins.UserInsData.Habitats) {
+            foreach (var habitat in DataManager.Ins.User.Habitats) {
                 if (habitats.ContainsKey(habitat.InsId)) continue;
                 
                 var ins = Instantiate(gameLocDef.Habitats[habitat.Id].PrefabHomeScene, buildingRoot);
@@ -189,16 +189,16 @@ namespace MonsterLegendsLite {
         }
         
         private void RebuildMonsters() {
-            var gameLocDef = DataManager.Ins.GameLocDefData;
+            var gameLocDef = DataManager.Ins.GameLocDef;
             
             // Remove
             foreach (var (key, _) in monsters.Where(static i =>
                 i.Value == null
-             || !DataManager.Ins.UserInsData.Monsters.Contains(i.Value.InsData)).ToList())
+             || !DataManager.Ins.User.Monsters.Contains(i.Value.InsData)).ToList())
                 monsters.Remove(key);
 
             // Add
-            foreach (var monster in DataManager.Ins.UserInsData.Monsters) {
+            foreach (var monster in DataManager.Ins.User.Monsters) {
                 if (monsters.ContainsKey(monster.InsId)) continue;
                 
                 var habitat = habitats[monster.Habitat];

@@ -53,7 +53,7 @@ namespace MonsterLegendsLite {
 
         private void LoadBootDataThenDelete() {
             var bootData   = MonsterDetail_BootData.Ins;
-            var gameLocDef = DataManager.Ins.GameLocDefData;
+            var gameLocDef = DataManager.Ins.GameLocDef;
 
             var ins = Instantiate(gameLocDef.Monsters[bootData.Monster.Id].PrefabMonsterDetailScene, monsterSlot);
             ins.Initialize(bootData.Monster);
@@ -69,13 +69,13 @@ namespace MonsterLegendsLite {
                 NewSkillAvailableWindow.Show(
                     newSkillAvailableWindowPrefab
                   , skill
-                  , DataManager.Ins.GameLocDefData.Elements[skill.Element].ElementButton);
+                  , DataManager.Ins.GameLocDef.Elements[skill.Element].ElementButton);
             }
         }
 
         private void UpdateUI_Info() {
             uiInfo.SetStats(monster.CalculateStats());
-            uiInfo.SetElements(monster.defData.Elements.Select(static i => DataManager.Ins.GameLocDefData.Elements[i].ElementButton).ToArray());
+            uiInfo.SetElements(monster.defData.Elements.Select(static i => DataManager.Ins.GameLocDef.Elements[i].ElementButton).ToArray());
             uiInfo.SetRevenue(monster.CalculateStat(MonsterStatId.GoldPerMin));
             uiInfo.SetDescription(monster.defData.Description);
             uiInfo.SetMoveBtnCallback(static () => {
@@ -90,7 +90,7 @@ namespace MonsterLegendsLite {
                 Ins.BackToHomeScene();
             });
             uiInfo.SetSellBtnCallback(static () => {
-                var sellValue = (int)(Ins.monster.defData.Cost * DataManager.Ins.GameDefData.SellRatio_Monster);
+                var sellValue = (int)(Ins.monster.defData.Cost * DataManager.Ins.GameDef.SellRatio_Monster);
 
                 YesNoWindow.Show(
                     title: "SELL MONSTER"
@@ -112,18 +112,18 @@ namespace MonsterLegendsLite {
         }
         
         private void UpdateUI_Monster() {
-            uiMonster.SetRankIcon(DataManager.Ins.GameLocDefData.MonsterRanks[monster.defData.Rank].Icon);
+            uiMonster.SetRankIcon(DataManager.Ins.GameLocDef.MonsterRanks[monster.defData.Rank].Icon);
             uiMonster.SetCustomName(monster.insData.CustomName);
             uiMonster.SetCustomNameChangedCallback(static newName => DataManager.Ins.UpdateData_MonsterCustomName(Ins.monster.insData, newName));
             uiMonster.SetName(monster.defData.Name);
-            uiMonster.SetLevel(monster.insData.Level, DataManager.Ins.GameDefData.MonsterRanks[monster.defData.Rank].MaxLevel);
+            uiMonster.SetLevel(monster.insData.Level, DataManager.Ins.GameDef.MonsterRanks[monster.defData.Rank].MaxLevel);
 
             var foodCost     = monster.CalculateStat(MonsterStatId.FoodCost);
             var foodCostDiv4 = Mathf.CeilToInt(foodCost / 4f);
             uiMonster.SetExp(monster.insData.Exp, foodCost);
             uiMonster.SetFeedAmount(foodCostDiv4);
             uiMonster.SetFeedCallback(() => {
-                if (DataManager.Ins.UserInsData.Food < foodCostDiv4) {
+                if (DataManager.Ins.User.Food < foodCostDiv4) {
                     NotificationWindow.Show(
                         title: "NOT ENOUGH FOOD"
                       , content: "Grow some food bro");
