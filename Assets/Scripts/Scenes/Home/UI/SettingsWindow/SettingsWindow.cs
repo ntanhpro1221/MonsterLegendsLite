@@ -1,4 +1,5 @@
-﻿using MonsterLegendsLite.Data;
+﻿using Firebase.Auth;
+using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
 using NGDtuanh.Types;
 using Sirenix.OdinInspector;
@@ -62,7 +63,8 @@ namespace MonsterLegendsLite {
                 title: "SIGN OUT"
               , content: "Are you sure you want to sign out of your current account?"
               , yesCallback: () => {
-                    Debug.LogError("Faking sign out");
+                    FirebaseAuth.DefaultInstance.SignOut();
+                    
                     SceneManager.LoadScene("SignInScene");
                 }));
         }

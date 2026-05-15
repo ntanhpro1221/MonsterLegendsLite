@@ -158,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.LoadingIcon
   blocker: {fileID: 432339367949031917}
   icon: {fileID: 3940524137232299363}
-  rotateSpeed: -128
+  rotateSpeed: -512
 --- !u!1 &4251154275534885245
 GameObject:
   m_ObjectHideFlags: 0

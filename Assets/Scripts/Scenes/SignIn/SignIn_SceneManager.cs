@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Firebase;
 using Firebase.Auth;
+using Firebase.Database;
 using MonsterLegendsLite.Auth;
 using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
@@ -41,8 +42,10 @@ namespace MonsterLegendsLite {
                     throw new Exception($"Could not resolve all Firebase dependencies. Status: [{dependencyState}]");
                 }
 
-                // // Force-initialize here to ensure firebase works properly, even though we reference it again below.
+                // Force-initialize here to ensure firebase works properly, even though we reference it again below.
                 _ = FirebaseAuth.DefaultInstance;
+                
+                FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
                 
                 LoadingIcon.Ins.Hide();
 

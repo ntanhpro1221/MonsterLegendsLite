@@ -30,7 +30,7 @@ namespace MonsterLegendsLite.Data {
         private DatabaseReference userDbRef;
         private UserInsData userInsDataRemote;
 
-        public UserInsData User => userInsDataRemote;
+        public UserInsData User { get => userInsDataRemote; private set => userInsDataRemote = value; }
         public UserInsDataWithId UserWithId => User.WithId(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
 
         [Button]
@@ -48,13 +48,15 @@ namespace MonsterLegendsLite.Data {
 
             if (snapshot.Exists) {
                 var json = snapshot.GetRawJsonValue();
-                userInsDataRemote = JsonConvert.DeserializeObject<UserInsData>(json);
+                User = JsonConvert.DeserializeObject<UserInsData>(json);
             } else {
-                userInsDataRemote = new UserInsData();
-                var json = JsonConvert.SerializeObject(userInsDataRemote);
+                User = new UserInsData();
+                var json = JsonConvert.SerializeObject(User);
                 await userDbRef.SetRawJsonValueAsync(json);
                 onProgressChanged?.Invoke(.9f);
             }
+
+            Debug.Log("Loaded user data: " + JsonConvert.SerializeObject(User, Formatting.Indented));
 
             onProgressChanged?.Invoke(1);
         }
