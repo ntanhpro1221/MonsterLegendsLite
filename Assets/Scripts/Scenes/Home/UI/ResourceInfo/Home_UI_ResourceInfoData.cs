@@ -18,7 +18,7 @@ namespace MonsterLegendsLite.UI {
         }
 
         public void SetValue(long value) {
-            text.text = utils.ToStrResource(value);
+            text.text = utils.ToStr_Resource(value);
         }
 
         public void SetCallback(UnityAction callback) {

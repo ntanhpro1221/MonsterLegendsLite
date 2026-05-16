@@ -30,6 +30,7 @@ namespace MonsterLegendsLite.Data {
         private DatabaseReference userDbRef;
         private UserInsData userInsDataRemote;
 
+        [ShowInInspector, ReadOnly]
         public UserInsData User { get => userInsDataRemote; private set => userInsDataRemote = value; }
         public UserInsDataWithId UserWithId => User.WithId(FirebaseAuth.DefaultInstance.CurrentUser.UserId);
 
@@ -85,8 +86,9 @@ namespace MonsterLegendsLite.Data {
 
         public BuildingDefData GetBuildingDefData(BuildingInsData insData) {
             return insData switch {
-                FarmInsData farm       => GameDef.Farms[farm.Id]
-              , HabitatInsData habitat => GameDef.Habitats[habitat.Id]
+                HabitatInsData habitat             => GameDef.Habitats[habitat.Id]
+              , FarmInsData farm                   => GameDef.Farms[farm.Id]
+              , BreedingPlaceInsData breedingPlace => GameDef.BreedingPlaces[breedingPlace.Id]
 
               , _ => throw new Exception($"Unknown {nameof(BuildingInsData)} type: {insData.GetType().Name}")
             };
@@ -96,8 +98,9 @@ namespace MonsterLegendsLite.Data {
             static (IList, IReadOnlyList<BuildingInsData>) ShortCut<T>(List<T> list) where T : BuildingInsData => (list, list);
 
             return item switch {
-                FarmInsData    => (ShortCut(User.Farms), nameof(User.Farms))
-              , HabitatInsData => (ShortCut(User.Habitats), nameof(User.Habitats))
+                HabitatInsData       => (ShortCut(User.Habitats), nameof(User.Habitats))
+              , FarmInsData          => (ShortCut(User.Farms), nameof(User.Farms))
+              , BreedingPlaceInsData => (ShortCut(User.BreedingPlaces), nameof(User.BreedingPlaces))
 
               , _ => throw new Exception($"Unknown {nameof(BuildingInsData)} type: {item.GetType().Name}")
             };
@@ -229,16 +232,15 @@ namespace MonsterLegendsLite.Data {
               , nameof(User.Gold));
         }
 
-        public void UpdateData_BuyMonster(MonsterId id, HabitatInsData habitat, out int cost, out string insId) {
-            UpdateData_HabitatLastGoldUpdate(habitat);
+        public void UpdateData_BuyHabitat(ElementId id, Vector2Int pos, out int cost, out string insId) {
+            var insData = new HabitatInsData(id);
+            insId                  = insData.InsId;
+            insData.Position       = pos;
+            insData.LastGoldUpdate = SerTimestamp.Now();
+            User.Habitats.Add(insData);
+            SaveUserData_List(User.Habitats, insData, nameof(User.Habitats));
 
-            var insData = new MonsterInsData(id);
-            insId           = insData.InsId;
-            insData.Habitat = habitat.InsId;
-            User.Monsters.Add(insData);
-            SaveUserData_List(User.Monsters, insData, nameof(User.Monsters));
-
-            cost = GameDef.Monsters[id].Cost;
+            cost = GameDef.Habitats[id].Cost;
             SaveUserData(User.Gold -= cost, nameof(User.Gold));
         }
 
@@ -254,16 +256,41 @@ namespace MonsterLegendsLite.Data {
             SaveUserData(User.Gold -= cost, nameof(User.Gold));
         }
 
-        public void UpdateData_BuyHabitat(ElementId id, Vector2Int pos, out int cost, out string insId) {
-            var insData = new HabitatInsData(id);
-            insId                  = insData.InsId;
-            insData.Position       = pos;
-            insData.LastGoldUpdate = SerTimestamp.Now();
-            User.Habitats.Add(insData);
-            SaveUserData_List(User.Habitats, insData, nameof(User.Habitats));
+        public void UpdateData_BuyBreedingPlace(BreedingPlaceId id, Vector2Int pos, out int cost, out string insId) {
+            var insData = new BreedingPlaceInsData(id);
+            insId            = insData.InsId;
+            insData.Position = pos;
+            User.BreedingPlaces.Add(insData);
+            SaveUserData_List(User.BreedingPlaces, insData, nameof(User.BreedingPlaces));
 
-            cost = GameDef.Habitats[id].Cost;
+            cost = GameDef.BreedingPlaces[id].Cost;
             SaveUserData(User.Gold -= cost, nameof(User.Gold));
+        }
+
+        public void UpdateData_BuyMonster(MonsterId id, HabitatInsData habitat, out int cost, out string insId) {
+            UpdateData_HabitatLastGoldUpdate(habitat);
+
+            var insData = new MonsterInsData(id);
+            insId           = insData.InsId;
+            insData.Habitat = habitat.InsId;
+            User.Monsters.Add(insData);
+            SaveUserData_List(User.Monsters, insData, nameof(User.Monsters));
+
+            cost = GameDef.Monsters[id].Cost;
+            SaveUserData(User.Gold -= cost, nameof(User.Gold));
+        }
+
+        public void UpdateData_HatchMonster(BreedingPlaceInsData breedingPlace, HabitatInsData habitat, out string insId) {
+            UpdateData_HabitatLastGoldUpdate(habitat);
+
+            var insData = new MonsterInsData(breedingPlace.CurBreeding.Output.Monster);
+            insId           = insData.InsId;
+            insData.Habitat = habitat.InsId;
+            User.Monsters.Add(insData);
+            SaveUserData_List(User.Monsters, insData, nameof(User.Monsters));
+
+            breedingPlace.CurBreeding = null;
+            SaveUserData_List(User.BreedingPlaces, breedingPlace, nameof(User.BreedingPlaces));
         }
 
         public void UpdateData_MonsterSkill(MonsterInsData monster, int slotId, int skillId) {
@@ -329,6 +356,18 @@ namespace MonsterLegendsLite.Data {
 
         public void UpdateData_UserVibrant(bool isOn) {
             SaveUserData(User.Vibrant = isOn, nameof(User.Vibrant));
+        }
+
+        public void UpdateData_StartBreed(BreedingPlaceInsData place, BreedingInputData input) {
+            var recipe = GameDef.BreedingPlaces[place.Id].Recipes.FirstOrDefault(i => i.Input == input);
+            recipe ??= new BreedingRecipeData {
+                Input                      = input
+              , DefaultOutputConfig_First  = new() { Duration = GameDef.DefaultBreedingDuration }
+              , DefaultOutputConfig_Second = new() { Duration = GameDef.DefaultBreedingDuration }
+            };
+            place.CurBreeding = new(input, recipe.RandomOutput());
+
+            SaveUserData_List(User.BreedingPlaces, place, nameof(User.BreedingPlaces));
         }
     }
 }

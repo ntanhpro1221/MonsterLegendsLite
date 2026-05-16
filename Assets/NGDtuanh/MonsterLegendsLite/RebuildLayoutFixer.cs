@@ -1,12 +1,18 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace NGDtuanh.MonsterLegendsLite {
     [RequireComponent(typeof(RectTransform))]
     public class RebuildLayoutFixer : MonoBehaviour {
         private void Update() {
-            LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
+            Fix();
             enabled = false;
+        }
+
+        [Button]
+        public void Fix() {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
         }
     }
 }

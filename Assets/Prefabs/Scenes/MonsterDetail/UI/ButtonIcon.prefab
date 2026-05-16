@@ -174,6 +174,7 @@ GameObject:
   - component: {fileID: 3007636887464600517}
   - component: {fileID: 4817694731706202667}
   - component: {fileID: 6435864180148554384}
+  - component: {fileID: 8492735061655180633}
   m_Layer: 5
   m_Name: ButtonIcon
   m_TagString: Untagged
@@ -352,6 +353,26 @@ MonoBehaviour:
   text: {fileID: 7958092012408331665}
   icon: {fileID: 2553518703999767742}
   iconRatio: {fileID: 8084382680124643004}
+--- !u!114 &8492735061655180633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4772153867830265997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 0
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &7372132070738157058
 GameObject:
   m_ObjectHideFlags: 0

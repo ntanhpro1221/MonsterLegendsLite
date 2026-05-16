@@ -22,7 +22,7 @@ namespace MonsterLegendsLite {
         }
 
         public Shop_Item SetBuyBtn(int value, UnityAction callback) {
-            SharedData.BuyBtn.SetText(utils.ToStrResource(value));
+            SharedData.BuyBtn.SetText(utils.ToStr_Resource(value));
             SharedData.BuyBtn.SetCallback(callback);
             return this;
         }

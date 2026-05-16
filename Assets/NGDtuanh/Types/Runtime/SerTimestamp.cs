@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace NGDtuanh.Types {
     [Serializable]
     public struct SerTimestamp {
         [SerializeField]
+        [JsonProperty]
         internal long value;
 
         [OnInspectorInit]

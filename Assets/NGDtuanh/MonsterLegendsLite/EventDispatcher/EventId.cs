@@ -13,5 +13,6 @@
       , MonsterSkillListChanged
       , AnyUserEloChanged
       , UserExpOrLevelChanged
+      , UserBreedingPlaceListChanged
     }
 }

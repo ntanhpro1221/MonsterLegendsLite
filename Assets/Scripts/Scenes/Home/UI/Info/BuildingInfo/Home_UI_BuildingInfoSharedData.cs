@@ -8,9 +8,12 @@ namespace MonsterLegendsLite {
         public Home_UI_InfoBtn infoBtn;
 
         [SerializeField, Required]
-        public FarmInfoWindow prefabInfoWindow_Farm;
-        
-        [SerializeField, Required]
         public HabitatInfoWindow prefabInfoWindow_Habitat;
+
+        [SerializeField, Required]
+        public FarmInfoWindow prefabInfoWindow_Farm;
+
+        [SerializeField, Required]
+        public BreedingPlaceInfoWindow prefabInfoWindow_BreedingPlace;
     }
 }

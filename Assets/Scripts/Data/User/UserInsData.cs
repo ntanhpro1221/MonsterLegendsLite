@@ -16,9 +16,10 @@ namespace MonsterLegendsLite.Data {
         public bool Music = true;
         public bool Sound = true;
         public bool Vibrant = true;
-        public List<MonsterInsData> Monsters = new();
         public List<HabitatInsData> Habitats = new();
         public List<FarmInsData> Farms = new();
+        public List<BreedingPlaceInsData> BreedingPlaces = new();
+        public List<MonsterInsData> Monsters = new();
         public MonsterTeamSlots<string> ArenaTeamAttack = new();
         public MonsterTeamSlots<string> ArenaTeamDefense = new();
         public MonsterTeamSlots<string> AdventureTeam = new();

@@ -14,13 +14,13 @@ namespace MonsterLegendsLite {
         [SerializeField, Required]
         private UI_SpecStat_TextIcon maxGold;
 
-        public static HabitatInfoWindow Show(HabitatInsData target, HabitatInfoWindow prefab) {
-            var window  = BuildingInfoWindow.Show(target, prefab);
+        public static HabitatInfoWindow Show(HabitatInfoWindow prefab, HabitatInsData target) {
+            var window  = BuildingInfoWindow.Show(prefab,target);
             var defData = DataManager.Ins.GameDef.Habitats[target.To<HabitatInsData>().Id];
 
             window.elements.SetElements(DataManager.Ins.GameLocDef.Elements[defData.Element].ElementButton);
             window.capacity.SetText(defData.Capacity.ToString());
-            window.maxGold.SetText(window.utils.ToStrResource(defData.MaxGold));
+            window.maxGold.SetText(window.utils.ToStr_Resource(defData.MaxGold));
 
             return window;
         }

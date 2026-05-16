@@ -11,12 +11,15 @@ namespace MonsterLegendsLite {
         
         [SerializeField, Required]
         private Home_UI_MoveMonsterInfo uiMoveMonster;
+
+        [SerializeField, Required]
+        private Home_UI_HabitatInfo uiHabitat;
         
         [SerializeField, Required]
         private Home_UI_FarmInfo uiFarm;
 
         [SerializeField, Required]
-        private Home_UI_HabitatInfo uiHabitat;
+        private Home_UI_BreedingPlaceInfo uiBreedingPlace;
 
         [SerializeField, FoldoutGroup("Show Anim")]
         private float posYOnDisable;
@@ -38,8 +41,9 @@ namespace MonsterLegendsLite {
         public void Initialize() {
             DisableInfo(uiMoveBuilding);
             DisableInfo(uiMoveMonster);
-            DisableInfo(uiFarm);
             DisableInfo(uiHabitat);
+            DisableInfo(uiFarm);
+            DisableInfo(uiBreedingPlace);
         }
 
         public void ShowBuildingInfoFor(Home_Building target, bool hideAllCurrentInfo) {
@@ -56,8 +60,9 @@ namespace MonsterLegendsLite {
             }
 
             curBuildingInfo = target switch {
-                Home_Farm    => uiFarm
-              , Home_Habitat => uiHabitat
+                Home_Habitat       => uiHabitat
+              , Home_Farm          => uiFarm
+              , Home_BreedingPlace => uiBreedingPlace
 
               , _ => null
             };
@@ -81,7 +86,7 @@ namespace MonsterLegendsLite {
         public void ShowMoveMonsterInfo(Home_Monster target) {
             if (uiMoveMonster.CurTarget == target) return;
             
-            // In design, this func is called only when bootData => so there is nothing to hide (it maybe change in the future)
+            TryHideInfo(curBuildingInfo, immediately: true);
             
             ShowInfo(uiMoveMonster, target);
         }

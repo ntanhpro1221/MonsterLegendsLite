@@ -11,11 +11,43 @@ using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 namespace NGDtuanh.MonsterLegendsLite {
     public class UtilFuncs : NGDtuanh.Utils.UtilFuncs {
         public static readonly UtilFuncs Ins = new();
+
+        private static readonly (long inSeconds, string symbol)[] timeUnits = {
+            (60 * 60 * 24 * 365, "y")
+          , (60 * 60 * 24 * 30, "mo")
+          , (60 * 60 * 24 * 7, "w")
+          , (60 * 60 * 24, "d")
+          , (60 * 60, "h")
+          , (60, "m")
+          , (1, "s")
+        };
         
         protected override WaitForSeconds GetWaitForSeconds(float second) => WaitForSecondCache.Get(second);
 
-        public string ToStrResource(long num) {
+        public string ToStr_Resource(long num) {
             return num.ToString("N0", CultureInfo.InvariantCulture);
+        }
+
+        public string ToStr_TimeAmount(long seconds) {
+            for (int i = 0; i < timeUnits.Length; ++i) {
+                var (inSeconds, symbol) = timeUnits[i];
+
+                if (seconds < inSeconds) continue;
+
+                var mainValue = seconds / inSeconds;
+                var result    = mainValue + symbol;
+
+                if (i + 1 == timeUnits.Length) return result;
+
+                var remainder = seconds % inSeconds;
+                if (remainder == 0) return result;
+
+                var nextUnit = timeUnits[i + 1];
+
+                return result + Math.Ceiling((double)remainder / nextUnit.inSeconds) + nextUnit.symbol;
+            }
+
+            return "0s";
         }
 
         public Vector2 GetPointerPos(int pointerId) {

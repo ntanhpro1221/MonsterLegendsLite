@@ -34,7 +34,9 @@ namespace MonsterLegendsLite {
             }
         }
 
-        private void OnDestroy() {
+        protected override void OnDestroy() {
+            base.OnDestroy();
+            
             EventDispatcher.UnregisterEvent(EventId.HomeMonsterPlaceChanged, RebuildMonsterList, this);
             EventDispatcher.UnregisterEvent(EventId.UserMonsterListChanged, RebuildMonsterList, this);
         }

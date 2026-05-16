@@ -39,77 +39,108 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    Elements:
+    Habitats:
       _Keys: 00000000010000000200000003000000
       _Values:
       - value:
           Name: Fire
-          Description: Breath of fire
+          Description: Fire habitat
+          Size: {x: 4, y: 4}
+          Cost: 2000
+          Element: 0
+          Capacity: 1
+          MaxGold: 2000
       - value:
           Name: Thunder
-          Description: Speed of lightning
+          Description: Thunder habitat
+          Size: {x: 4, y: 4}
+          Cost: 2000
+          Element: 1
+          Capacity: 1
+          MaxGold: 2000
       - value:
           Name: Dark
-          Description: Dark element
+          Description: Dark Habitat
+          Size: {x: 4, y: 4}
+          Cost: 3000
+          Element: 2
+          Capacity: 1
+          MaxGold: 20000
       - value:
           Name: Water
-          Description: Water element
+          Description: Water Habitat
+          Size: {x: 4, y: 4}
+          Cost: 4000
+          Element: 3
+          Capacity: 2
+          MaxGold: 50000
       _KeyNames:
       - Fire
       - Thunder
       - Dark
       - Water
       _IsKeyChanged: 0
-    MonsterRanks:
-      _Keys: 0000000001000000020000000300000004000000
+    Farms:
+      _Keys: 000000000100000002000000
       _Values:
       - value:
-          Name: Common
-          Description: Common Rank
-          MaxLevel: 60
+          Name: Apple
+          Description: Apple Farm
+          Size: {x: 4, y: 4}
+          Cost: 2000
+          MaxFood: 2000
+          FoodPerMin: 120
       - value:
-          Name: Uncommon
-          Description: Uncommon Rank
-          MaxLevel: 70
+          Name: Samsung
+          Description: Samsung Farm
+          Size: {x: 4, y: 4}
+          Cost: 2000
+          MaxFood: 2000
+          FoodPerMin: 120
       - value:
-          Name: Rare
-          Description: Rare Rank
-          MaxLevel: 80
-      - value:
-          Name: Epic
-          Description: Epic Rank
-          MaxLevel: 90
-      - value:
-          Name: Legendary
-          Description: Legendary Rank
-          MaxLevel: 100
+          Name: Sony
+          Description: Sony Farm
+          Size: {x: 4, y: 4}
+          Cost: 2000
+          MaxFood: 2000
+          FoodPerMin: 120
       _KeyNames:
-      - Common
-      - Uncommon
-      - Rare
-      - Epic
-      - Legendary
+      - Apple
+      - Samsung
+      - Sony
       _IsKeyChanged: 0
-    MonsterSkillTargets:
-      _Keys: 00000000010000000200000003000000
+    BreedingPlaces:
+      _Keys: 0000000001000000
       _Values:
       - value:
-          Name: Single Enemy
-          Description: Target Single Enemy
+          Name: Mountain
+          Description: Basic breeding place
+          Size: {x: 4, y: 4}
+          Cost: 10000
+          Recipes: []
       - value:
-          Name: Multiple Enemies
-          Description: Target Multiple Enemies
-      - value:
-          Name: Single Ally
-          Description: Target Single Ally
-      - value:
-          Name: Multiple Allies
-          Description: Target Multiple Allies
+          Name: Tree
+          Description: Advanced breeding place
+          Size: {x: 4, y: 4}
+          Cost: 100000
+          Recipes:
+          - Input:
+              First: 0
+              Second: 1
+            DefaultOutputConfig_First:
+              Weight: 1
+              Duration: 60
+            DefaultOutputConfig_Second:
+              Weight: 1
+              Duration: 60
+            Outputs:
+            - Monster: 2
+              Config:
+                Weight: 10
+                Duration: 600
       _KeyNames:
-      - SingleEnemy
-      - MultipleEnemies
-      - SingleAlly
-      - MultipleAllies
+      - Mountain
+      - Tree
       _IsKeyChanged: 0
     Monsters:
       _Keys: 000000000100000002000000
@@ -797,75 +828,77 @@ MonoBehaviour:
       - Bob
       - Monkey
       _IsKeyChanged: 0
-    Habitats:
+    Elements:
       _Keys: 00000000010000000200000003000000
       _Values:
       - value:
           Name: Fire
-          Description: Fire habitat
-          Size: {x: 4, y: 4}
-          Cost: 2000
-          Element: 0
-          Capacity: 1
-          MaxGold: 2000
+          Description: Breath of fire
       - value:
           Name: Thunder
-          Description: Thunder habitat
-          Size: {x: 4, y: 4}
-          Cost: 2000
-          Element: 1
-          Capacity: 1
-          MaxGold: 2000
+          Description: Speed of lightning
       - value:
           Name: Dark
-          Description: Dark Habitat
-          Size: {x: 4, y: 4}
-          Cost: 3000
-          Element: 2
-          Capacity: 1
-          MaxGold: 20000
+          Description: Dark element
       - value:
           Name: Water
-          Description: Water Habitat
-          Size: {x: 4, y: 4}
-          Cost: 4000
-          Element: 3
-          Capacity: 2
-          MaxGold: 50000
+          Description: Water element
       _KeyNames:
       - Fire
       - Thunder
       - Dark
       - Water
       _IsKeyChanged: 0
-    Farms:
-      _Keys: 000000000100000002000000
+    MonsterRanks:
+      _Keys: 0000000001000000020000000300000004000000
       _Values:
       - value:
-          Name: Apple
-          Description: Apple Farm
-          Size: {x: 4, y: 4}
-          Cost: 2000
-          MaxFood: 2000
-          FoodPerMin: 120
+          Name: Common
+          Description: Common Rank
+          MaxLevel: 60
       - value:
-          Name: Samsung
-          Description: Samsung Farm
-          Size: {x: 4, y: 4}
-          Cost: 2000
-          MaxFood: 2000
-          FoodPerMin: 120
+          Name: Uncommon
+          Description: Uncommon Rank
+          MaxLevel: 70
       - value:
-          Name: Sony
-          Description: Sony Farm
-          Size: {x: 4, y: 4}
-          Cost: 2000
-          MaxFood: 2000
-          FoodPerMin: 120
+          Name: Rare
+          Description: Rare Rank
+          MaxLevel: 80
+      - value:
+          Name: Epic
+          Description: Epic Rank
+          MaxLevel: 90
+      - value:
+          Name: Legendary
+          Description: Legendary Rank
+          MaxLevel: 100
       _KeyNames:
-      - Apple
-      - Samsung
-      - Sony
+      - Common
+      - Uncommon
+      - Rare
+      - Epic
+      - Legendary
+      _IsKeyChanged: 0
+    MonsterSkillTargets:
+      _Keys: 00000000010000000200000003000000
+      _Values:
+      - value:
+          Name: Single Enemy
+          Description: Target Single Enemy
+      - value:
+          Name: Multiple Enemies
+          Description: Target Multiple Enemies
+      - value:
+          Name: Single Ally
+          Description: Target Single Ally
+      - value:
+          Name: Multiple Allies
+          Description: Target Multiple Allies
+      _KeyNames:
+      - SingleEnemy
+      - MultipleEnemies
+      - SingleAlly
+      - MultipleAllies
       _IsKeyChanged: 0
     AdventureLevels:
     - Name: Level 1
@@ -2102,3 +2135,4 @@ MonoBehaviour:
     SellRatio_Building: 0.7
     Home_MonsterSpeed: 1
     Home_MonsterIdleTime: {x: 0.5, y: 5}
+    DefaultBreedingDuration: 30

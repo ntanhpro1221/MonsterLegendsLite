@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using DG.Tweening;
 using MonsterLegendsLite.Data;
 using NGDtuanh.MonsterLegendsLite;
@@ -8,6 +9,12 @@ using UnityEngine.Rendering;
 
 namespace MonsterLegendsLite {
     public class Home_Monster : MonoBehaviourExt {
+        public enum Type {
+            Normal
+          , BuySample
+          , HatchSample
+        }
+
         [ShowInInspector, ReadOnly, PropertyOrder(-100)]
         public MonsterInsData InsData { get; private set; }
 
@@ -17,16 +24,26 @@ namespace MonsterLegendsLite {
         [SerializeField, Required]
         private SortingGroup sortingGroup;
 
-        private bool isBuySample;
+        private Type type;
 
-        public void Initialize(MonsterInsData insData, bool isBuySample) {
-            InsData          = insData;
-            this.isBuySample = isBuySample;
+        public void Initialize(MonsterInsData insData, Type type) {
+            InsData   = insData;
+            this.type = type;
 
-            if (isBuySample) {
-                gameObject.SetActive(false);
-            } else {
-                EventDispatcher.RegisterEvent(EventId.UserMonsterListChanged, DestroyIfNotExistInDatabase, this);
+            switch (type) {
+                case Type.Normal:
+                    EventDispatcher.RegisterEvent(EventId.UserMonsterListChanged, DestroyIfNotExistInDatabase, this);
+                    break;
+
+                case Type.BuySample:
+                    gameObject.SetActive(false);
+                    break;
+
+                case Type.HatchSample:
+                    gameObject.SetActive(false);
+                    break;
+
+                default: throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -50,33 +67,61 @@ namespace MonsterLegendsLite {
             StartCoroutine(IELocalMove(size));
         }
 
-        public void OnMoveDiscarded() {
-            if (isBuySample) {
-                gameObject.SetActive(false); // Something bad is going to happen if destroy this
-            } else { }
-
-            Home_SceneManager.Ins.TryHideMoveMonsterInfo();
+        public void OnMoveDiscarded(Home_BreedingPlace fromBreedingPlace) {
+            switch (type) {
+                case Type.Normal: 
+                    Home_SceneManager.Ins.TryHideMoveMonsterInfo();
+                    break;
+                
+                case Type.BuySample: 
+                    Home_SceneManager.Ins.TryHideMoveMonsterInfo();
+            
+                    // Something bad is going to happen if destroy this :))
+                    break;
+                
+                case Type.HatchSample: 
+                    Home_SceneManager.Ins.ForceShowBuildingInfo(fromBreedingPlace);
+                    
+                    // Something bad is going to happen if destroy this :))
+                    break;
+                
+                default: throw new ArgumentOutOfRangeException();
+            }
         }
 
-        public void OnMoveConfirmed(Home_Habitat toHabitat) {
-            if (isBuySample) {
-                DataManager.Ins.UpdateData_BuyMonster(InsData.Id, toHabitat.InsData, out var cost, out _);
+        public void OnMoveConfirmed(Home_Habitat toHabitat, Home_BreedingPlace fromBreedingPlace) {
+            switch (type) {
+                case Type.Normal: 
+                    DataManager.Ins.UpdateData_MoveMonster(InsData, toHabitat.InsData);
 
-                FloatingTextPool.Ins.ShowAtCenterScreen(FloatingTextId.GoldChange).SetTextChange(-cost);
+                    EventDispatcher.PostEvent(EventId.HomeMonsterPlaceChanged);
+                    break;
+                
+                case Type.BuySample: 
+                    DataManager.Ins.UpdateData_BuyMonster(InsData.Id, toHabitat.InsData, out var cost, out _);
 
-                EventDispatcher.PostEvent(EventId.UserMonsterListChanged);
-                EventDispatcher.PostEvent(EventId.UserGoldChanged);
+                    FloatingTextPool.Ins.ShowAtCenterScreen(FloatingTextId.GoldChange).SetTextChange(-cost);
 
-                gameObject.SetActive(false); // Something bad is going to happen if destroy this
-
-                Home_SceneManager.Ins.TryHideMoveMonsterInfo();
-            } else {
-                DataManager.Ins.UpdateData_MoveMonster(InsData, toHabitat.InsData);
-
-                EventDispatcher.PostEvent(EventId.HomeMonsterPlaceChanged);
-
-                Home_SceneManager.Ins.ForceShowBuildingInfo(toHabitat);
+                    EventDispatcher.PostEvent(EventId.UserMonsterListChanged);
+                    EventDispatcher.PostEvent(EventId.UserGoldChanged);
+                    
+                    // Something bad is going to happen if destroy this :))
+                    break;
+                
+                case Type.HatchSample:
+                    DataManager.Ins.UpdateData_HatchMonster(fromBreedingPlace.InsData, toHabitat.InsData, out _);
+                    
+                    fromBreedingPlace.ChangeState(Home_BreedingPlace.State.Normal);
+                    
+                    EventDispatcher.PostEvent(EventId.UserMonsterListChanged);
+                    
+                    // Something bad is going to happen if destroy this :))
+                    break;
+                
+                default: throw new ArgumentOutOfRangeException();
             }
+
+            Home_SceneManager.Ins.ForceShowBuildingInfo(toHabitat);
         }
 
         private IEnumerator IELocalMove(Vector2Int size) {

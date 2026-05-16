@@ -7,10 +7,10 @@ namespace MonsterLegendsLite {
     public abstract class BuildingInfoWindow : PopupWindow {
         [field: SerializeField, Required]
         protected BuildingInfoWindowSharedData SharedData_Building { get; private set; }
-        
+
         protected static TBuildingInfoWindow Show<TBuildingInfoWindow>(
-            BuildingInsData target
-          , TBuildingInfoWindow prefab) 
+            TBuildingInfoWindow prefab
+          , BuildingInsData target)
             where TBuildingInfoWindow : BuildingInfoWindow {
             var defData        = DataManager.Ins.GetBuildingDefData(target);
             var buildingName   = prefab.GetBuildingName(target);
@@ -39,7 +39,7 @@ namespace MonsterLegendsLite {
                         EventDispatcher.PostEvent(EventId.UserGoldChanged);
                         EventDispatcher.PostEvent(EventId.UserBuildingListChanged);
                         EventDispatcher.PostEvent(EventId.HomeMapChanged);
-                        
+
                         FloatingTextPool.Ins.ShowAtCenterScreen(FloatingTextId.GoldChange).SetTextChange(sellValue);
 
                         window.Close(null);

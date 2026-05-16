@@ -37,7 +37,7 @@ namespace MonsterLegendsLite {
         }
 
         private void UpdateTotalFood() {
-            collectBtn.SetInfo(utils.ToStrResource(CurTarget.To<Home_Farm>().CalculateCurTotalFood()));
+            collectBtn.SetInfo(utils.ToStr_Resource(CurTarget.To<Home_Farm>().CalculateCurTotalFood()));
         }
     }
 }

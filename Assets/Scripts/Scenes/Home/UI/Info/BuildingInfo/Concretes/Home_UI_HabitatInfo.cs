@@ -70,7 +70,7 @@ namespace MonsterLegendsLite {
                 button.SetCallback(() => Home_SceneManager.Ins.ViewMonsterDetail(monster.InsData.InsId));
                 button.SetIcon(monsterLocDefData.Avatar);
                 button.SetTitle(LimitNameLength(monsterDefData.GetCustomNameIfPossible(monster.InsData)));
-                button.SetInfo(utils.ToStrResource(monster.InsData.Level));
+                button.SetInfo(utils.ToStr_Resource(monster.InsData.Level));
             }
         }
 
@@ -85,7 +85,7 @@ namespace MonsterLegendsLite {
         }
 
         private void UpdateTotalGold() {
-            collectBtn.SetInfo(utils.ToStrResource(CurTarget.To<Home_Habitat>().CalculateCurTotalGold()));
+            collectBtn.SetInfo(utils.ToStr_Resource(CurTarget.To<Home_Habitat>().CalculateCurTotalGold()));
         }
     }
 }

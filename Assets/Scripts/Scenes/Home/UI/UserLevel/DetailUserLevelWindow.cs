@@ -33,7 +33,7 @@ namespace MonsterLegendsLite {
         }
 
         public void SetExp(int curExp, int requiredExp) {
-            pointToNextLevelTxt.text = $"{utils.ToStrResource(curExp)}/{utils.ToStrResource(requiredExp)}";
+            pointToNextLevelTxt.text = $"{utils.ToStr_Resource(curExp)}/{utils.ToStr_Resource(requiredExp)}";
             expFillImg.fillAmount    = (float)curExp / requiredExp;
         }
 

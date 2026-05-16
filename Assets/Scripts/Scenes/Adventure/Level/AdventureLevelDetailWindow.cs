@@ -30,9 +30,9 @@ namespace MonsterLegendsLite {
         }
 
         private void SetAllData(AdventureLevelData levelData, int levelIndex) {
-            expTxt.text  = UtilFuncs.Ins.ToStrResource(levelData.RewardExp);
-            goldTxt.text = UtilFuncs.Ins.ToStrResource(levelData.RewardGold);
-            foodTxt.text = UtilFuncs.Ins.ToStrResource(levelData.RewardFood);
+            expTxt.text  = UtilFuncs.Ins.ToStr_Resource(levelData.RewardExp);
+            goldTxt.text = UtilFuncs.Ins.ToStr_Resource(levelData.RewardGold);
+            foodTxt.text = UtilFuncs.Ins.ToStr_Resource(levelData.RewardFood);
 
             for (int i = 0; i < monsters.Count; ++i) monsters[i].SetAllData(levelData.Monsters[i]);
 
@@ -47,9 +47,9 @@ namespace MonsterLegendsLite {
                             title: isWin ? "WIN" : "LOSE"
                           , content: isWin
                                 ? ($"You defeated level {levelData.Name}, you received:"
-                                  + $"\n- {UtilFuncs.Ins.ToStrResource(levelData.RewardExp)} exp"
-                                  + $"\n- {UtilFuncs.Ins.ToStrResource(levelData.RewardGold)} gold"
-                                  + $"\n- {UtilFuncs.Ins.ToStrResource(levelData.RewardFood)} food")
+                                  + $"\n- {UtilFuncs.Ins.ToStr_Resource(levelData.RewardExp)} exp"
+                                  + $"\n- {UtilFuncs.Ins.ToStr_Resource(levelData.RewardGold)} gold"
+                                  + $"\n- {UtilFuncs.Ins.ToStr_Resource(levelData.RewardFood)} food")
                                 : "You are lose"
                           , onDoneClose: () => onBattleEnd.Invoke(isWin: isWin));
 

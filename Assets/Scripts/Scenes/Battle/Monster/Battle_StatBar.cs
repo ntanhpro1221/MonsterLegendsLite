@@ -65,8 +65,8 @@ namespace MonsterLegendsLite {
             SetRatio(loss, lossRatio);
         }
 
-        private void SetRatio(Component target, float value) {
-            target.transform.localScale = utils.With(target.transform.localScale, UtilFuncs.VecAxis.X, value);
+        private void SetRatio(SpriteRendererAnchorer target, float value) {
+            target.TF.localScale = utils.With(target.TF.localScale, UtilFuncs.VecAxis.X, value);
             UpdateAllAnchor();
         }
 

@@ -61,7 +61,7 @@ namespace MonsterLegendsLite {
         }
 
         public void SetFeedAmount(int feedAmount) {
-            feedBtnTxt.text = $"FEED {utils.ToStrResource(feedAmount)}";
+            feedBtnTxt.text = $"FEED {utils.ToStr_Resource(feedAmount)}";
         }
 
         public void SetFeedCallback(UnityAction callback) {

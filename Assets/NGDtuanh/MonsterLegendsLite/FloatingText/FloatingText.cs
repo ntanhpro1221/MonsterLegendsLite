@@ -38,7 +38,7 @@ namespace NGDtuanh.MonsterLegendsLite {
         }
 
         public void SetTextChange(long changeAmount) {
-            SetText($"{(changeAmount > 0 ? "+" : "")}{utils.ToStrResource(changeAmount)}");
+            SetText($"{(changeAmount > 0 ? "+" : "")}{utils.ToStr_Resource(changeAmount)}");
         }
 
         [Button]

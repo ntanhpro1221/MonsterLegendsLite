@@ -68,7 +68,7 @@ namespace MonsterLegendsLite {
             }
         }
 
-        private void OnDestroy() {
+        protected virtual void OnDestroy() {
             EventDispatcher.UnregisterEvent(EventId.UserBuildingListChanged, DestroyIfNotExistInDatabase, this);
         }
 
@@ -161,7 +161,7 @@ namespace MonsterLegendsLite {
 
         public void OnMoveDiscarded() {
             if (isBuySample) {
-                gameObject.SetActive(false);
+                gameObject.SetActive(false); // Something bad is going to happen if destroy this :))
 
                 Home_SceneManager.Ins.TryHideMoveBuildingInfo();
             } else {
@@ -173,7 +173,7 @@ namespace MonsterLegendsLite {
 
         public void OnMoveConfirmed() {
             if (isBuySample) {
-                gameObject.SetActive(false);
+                gameObject.SetActive(false); // Something bad is going to happen if destroy this :))
                 
                 UpdateData_BuyBuilding(Home_MapManager.Ins.GetNearestTilePos(TF.position), out int cost, out string insId);
                 

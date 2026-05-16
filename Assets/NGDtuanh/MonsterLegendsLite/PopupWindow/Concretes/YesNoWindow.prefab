@@ -680,6 +680,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 977956602504663185, guid: 47f8819869b9d0144ba6f21a7d5e9bf3, type: 3}
+      propertyPath: m_Spacing
+      value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 977956602504663185, guid: 47f8819869b9d0144ba6f21a7d5e9bf3, type: 3}
+      propertyPath: m_ChildControlWidth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3022981656538249222, guid: 47f8819869b9d0144ba6f21a7d5e9bf3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

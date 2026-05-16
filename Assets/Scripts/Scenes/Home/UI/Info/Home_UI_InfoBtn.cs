@@ -1,4 +1,5 @@
-﻿using NGDtuanh.MonsterLegendsLite;
+﻿using System.Collections;
+using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
@@ -25,8 +26,16 @@ namespace MonsterLegendsLite {
         [SerializeField, Required]
         private TextMeshProUGUI infoTxt;
 
+        private UnityAction updateCallback;
+
+        private void OnEnable() {
+            if (updateCallback != null) SetUpdate(updateCallback);
+        }
+
         public void SetCallback(UnityAction callback) {
             utils.SetListener(button, callback);
+
+            if (callback == null) button.enabled = false;
         }
 
         public void SetInteractable(bool interactable) {
@@ -44,6 +53,22 @@ namespace MonsterLegendsLite {
 
         public void SetInfo(string info) {
             infoTxt.text = info;
+        }
+
+        public void SetUpdate(UnityAction updateCallback) {
+            this.updateCallback = updateCallback;
+
+            if (gameObject.activeInHierarchy) {
+                StopCoroutine(nameof(IEUpdate));
+                StartCoroutine(nameof(IEUpdate));
+            }
+        }
+
+        private IEnumerator IEUpdate() {
+            while (updateCallback != null) {
+                updateCallback.Invoke();
+                yield return null;
+            }
         }
     }
 }

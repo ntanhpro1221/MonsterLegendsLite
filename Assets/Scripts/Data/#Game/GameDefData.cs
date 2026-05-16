@@ -8,12 +8,13 @@ namespace MonsterLegendsLite.Data {
     [Serializable]
     public class GameDefData {
         public UserDefData User;
+        public EnumMap<ElementId, HabitatDefData> Habitats;
+        public EnumMap<FarmId, FarmDefData> Farms;
+        public EnumMap<BreedingPlaceId, BreedingPlaceDefData> BreedingPlaces;
+        public EnumMap<MonsterId, MonsterDefData> Monsters;
         public EnumMap<ElementId, ElementData> Elements;
         public EnumMap<MonsterRankId, MonsterRankData> MonsterRanks;
         public EnumMap<MonsterSkillTargetId, MonsterSkillTargetData> MonsterSkillTargets;
-        public EnumMap<MonsterId, MonsterDefData> Monsters;
-        public EnumMap<ElementId, HabitatDefData> Habitats;
-        public EnumMap<FarmId, FarmDefData> Farms;
         public List<AdventureLevelData> AdventureLevels;
 
         [FoldoutGroup("Constants")]
@@ -27,5 +28,8 @@ namespace MonsterLegendsLite.Data {
 
         [FoldoutGroup("Constants")]
         public Vector2 Home_MonsterIdleTime;
+        
+        [FoldoutGroup("Constants"), MinValue(0)]
+        public long DefaultBreedingDuration;
     }
 }

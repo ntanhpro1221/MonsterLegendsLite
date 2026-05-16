@@ -14,13 +14,14 @@ namespace MonsterLegendsLite {
 
             shared.infoBtn.SetCallback(() => {
                 switch (building) {
-                    case Home_Farm farm:       FarmInfoWindow.Show(farm.InsData, shared.prefabInfoWindow_Farm); break;
-                    case Home_Habitat habitat: HabitatInfoWindow.Show(habitat.InsData, shared.prefabInfoWindow_Habitat); break;
+                    case Home_Habitat habitat:             HabitatInfoWindow.Show(shared.prefabInfoWindow_Habitat, habitat.InsData); break;
+                    case Home_Farm farm:                   FarmInfoWindow.Show(shared.prefabInfoWindow_Farm, farm.InsData); break;
+                    case Home_BreedingPlace breedingPlace: BreedingPlaceInfoWindow.Show(shared.prefabInfoWindow_BreedingPlace, breedingPlace.InsData); break;
 
                     default: throw new Exception($"Fail to show info window for {building.GetType().Name}");
                 }
             });
-            
+
             EventDispatcher.RegisterEvent(EventId.UserBuildingListChanged, HideIfTargetNotInDatabase, this);
         }
 
