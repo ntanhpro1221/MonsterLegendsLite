@@ -28,6 +28,9 @@ namespace MonsterLegendsLite.Data {
 
         [FoldoutGroup("Constants")]
         public Vector2 Home_MonsterIdleTime;
+
+        [FoldoutGroup("Constants"), Range(0, 1)]
+        public float Home_ShowCollectResourceBtnThreshold;
         
         [FoldoutGroup("Constants"), MinValue(0)]
         public long DefaultBreedingDuration;

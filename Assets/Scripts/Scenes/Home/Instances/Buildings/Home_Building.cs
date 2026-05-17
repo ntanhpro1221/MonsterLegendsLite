@@ -38,6 +38,8 @@ namespace MonsterLegendsLite {
         private Vector2 pntDownOffset;
         private int idleSortingOrder;
 
+        private bool isActiveCollectBtn;
+
         public event Action<bool> onPlaceableChanged;
 
         public T To<T>() where T : Home_Building {
@@ -57,6 +59,8 @@ namespace MonsterLegendsLite {
             SharedData.selectWrapper.gameObject.SetActive(false);
 
             SetVisibleValidPlace(false);
+            
+            CheckAndUpdateCollectBtnActive();
 
             if (isBuySample) {
                 OnSelect();
@@ -64,12 +68,20 @@ namespace MonsterLegendsLite {
                 Home_SceneManager.Ins.OnMove_Building(this);
                 StartCoroutine(IEMoveWithPointer());
             } else {
+                SharedData.collectBtn.onPointerClickRaw += OnPointerClick;
+                
                 EventDispatcher.RegisterEvent(EventId.UserBuildingListChanged, DestroyIfNotExistInDatabase, this);
             }
         }
 
         protected virtual void OnDestroy() {
+            SharedData.collectBtn.onPointerClickRaw -= OnPointerClick;
+            
             EventDispatcher.UnregisterEvent(EventId.UserBuildingListChanged, DestroyIfNotExistInDatabase, this);
+        }
+
+        protected virtual void Update() {
+            CheckAndUpdateCollectBtnActive();
         }
 
         private void DestroyIfNotExistInDatabase() {
@@ -99,11 +111,23 @@ namespace MonsterLegendsLite {
             TF.position = utils.With(TF.position, UtilFuncs.VecAxis.Z, 0);
         }
 
+        private void CheckAndUpdateCollectBtnActive() {
+            isActiveCollectBtn = IsShouldCollectBtnActive(out var sprite);
+            SharedData.collectBtn.SetActive(isActiveCollectBtn);
+            if (sprite != null) SharedData.collectBtn.SetIcon(sprite);
+        }
+
         public void OnPointerClick(PointerEventData eventData) {
             var deltaPos = Vector2.Distance(eventData.pressPosition, eventData.position);
             if (deltaPos > EventSystem.current.pixelDragThreshold) return;
+            
+            CheckAndUpdateCollectBtnActive();
+            Home_SceneManager.Ins.OnClicked_Building(this, isActiveCollectBtn, out var isClickCollectBtn);
 
-            Home_SceneManager.Ins.OnClicked_Building(this);
+            if (isClickCollectBtn) {
+                DoClickCollectBtn();
+                CheckAndUpdateCollectBtnActive();
+            }
         }
 
         public void OnPointerDown(PointerEventData eventData) {
@@ -201,5 +225,7 @@ namespace MonsterLegendsLite {
 
         protected abstract void UpdateData_BuyBuilding(Vector2Int pos, out int cost, out string insId);
         protected abstract Home_Building GetBuildingFromInsId(string insId);
+        protected abstract bool IsShouldCollectBtnActive(out Sprite sprite);
+        protected abstract void DoClickCollectBtn();
     }
 }

@@ -1,6 +1,4 @@
-﻿using MonsterLegendsLite.Data;
-using NGDtuanh.MonsterLegendsLite;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MonsterLegendsLite {
     public class Home_UI_FarmInfo : Home_UI_BuildingInfo {
@@ -19,16 +17,9 @@ namespace MonsterLegendsLite {
             UpdateTotalFood();
             
             collectBtn.SetCallback(() => {
-                var food = farm.CalculateCurTotalFood();
-                if (food <= 0) return;
-                
-                DataManager.Ins.UpdateData_CollectFood(farm.InsData);
-
-                FloatingTextPool.Ins.ShowAtWorld(FloatingTextId.FoodChange, farm.TF.position).SetTextChange(food);
+                Home_Farm.DoCollectFood(farm);
                 
                 UpdateTotalFood();
-                
-                EventDispatcher.PostEvent(EventId.UserFoodChanged);
             });
         }
         

@@ -90,5 +90,30 @@ namespace MonsterLegendsLite {
         protected override Home_Building GetBuildingFromInsId(string insId) {
             return Home_SceneManager.Ins.Habitats[insId];
         }
+
+        protected override bool IsShouldCollectBtnActive(out Sprite sprite) {
+            sprite = null;
+            
+            float minToShowCollectBtn = 
+                DataManager.Ins.GameDef.Home_ShowCollectResourceBtnThreshold
+              * DataManager.Ins.GameDef.Habitats[InsData.Id].MaxGold;
+
+            return CalculateCurTotalGold() >= minToShowCollectBtn;
+        }
+        
+        protected override void DoClickCollectBtn() {
+            DoCollectGold(this);
+        }
+
+        public static void DoCollectGold(Home_Habitat habitat) {
+            var gold = habitat.CalculateCurTotalGold();
+            if (gold <= 0) return;
+                
+            DataManager.Ins.UpdateData_CollectGold(habitat.InsData);
+
+            FloatingTextPool.Ins.ShowAtWorld(FloatingTextId.GoldChange, habitat.TF.position).SetTextChange(gold);
+                
+            EventDispatcher.PostEvent(EventId.UserGoldChanged);
+        }
     }
 }

@@ -2135,4 +2135,5 @@ MonoBehaviour:
     SellRatio_Building: 0.7
     Home_MonsterSpeed: 1
     Home_MonsterIdleTime: {x: 0.5, y: 5}
+    Home_ShowCollectResourceBtnThreshold: 0.75
     DefaultBreedingDuration: 30

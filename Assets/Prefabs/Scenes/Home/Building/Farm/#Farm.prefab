@@ -48,9 +48,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 960623643424111863, guid: fd5b39e2f5c89c345b809a498ea97df7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 960623643424111863, guid: fd5b39e2f5c89c345b809a498ea97df7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 960623643424111863, guid: fd5b39e2f5c89c345b809a498ea97df7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 3699273875761588251, guid: fd5b39e2f5c89c345b809a498ea97df7, type: 3}
       propertyPath: m_Name
       value: '#Farm'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001208824971327939, guid: fd5b39e2f5c89c345b809a498ea97df7, type: 3}
+      propertyPath: m_Size.x
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001208824971327939, guid: fd5b39e2f5c89c345b809a498ea97df7, type: 3}
+      propertyPath: m_Size.y
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6001208824971327939, guid: fd5b39e2f5c89c345b809a498ea97df7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c7207d5b146539b43955230cf57c19a1, type: 3}
+    - target: {fileID: 6001208824971327939, guid: fd5b39e2f5c89c345b809a498ea97df7, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

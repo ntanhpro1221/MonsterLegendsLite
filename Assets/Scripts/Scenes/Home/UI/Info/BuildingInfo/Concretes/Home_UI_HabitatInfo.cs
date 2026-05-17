@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using MonsterLegendsLite.Data;
-using NGDtuanh.MonsterLegendsLite;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,16 +33,9 @@ namespace MonsterLegendsLite {
             UpdateTotalGold();
             
             collectBtn.SetCallback(() => {
-                var gold = habitat.CalculateCurTotalGold();
-                if (gold <= 0) return;
-                
-                DataManager.Ins.UpdateData_CollectGold(habitat.InsData);
-
-                FloatingTextPool.Ins.ShowAtWorld(FloatingTextId.GoldChange, habitat.TF.position).SetTextChange(gold);
+                Home_Habitat.DoCollectGold(habitat);
                 
                 UpdateTotalGold();
-                
-                EventDispatcher.PostEvent(EventId.UserGoldChanged);
             });
         }
 

@@ -15,6 +15,9 @@ namespace MonsterLegendsLite {
 
         [ShowInInspector, ReadOnly, PropertyOrder(-99)]
         public State CurState { get; private set; }
+        
+        [SerializeField, Required]
+        private HatchWindow prefabHatchWindow;
 
         [SerializeField, Required]
         private Home_ProgressBar progressBar;
@@ -65,11 +68,13 @@ namespace MonsterLegendsLite {
             onStateChanged?.Invoke(newState);
         }
 
-        private void Update() {
+        protected override void Update() {
             if (CurState is State.Breeding) {
                 if (IsDoneBreed(out var elapsed)) ChangeState(State.DoneBreed);
                 else progressBar.SetProgress_Time(InsData.CurBreeding.Output.Config.Duration, elapsed);
             }
+            
+            base.Update();
         }
 
         public bool IsDoneBreed(out long elapsed) {
@@ -83,6 +88,18 @@ namespace MonsterLegendsLite {
 
         protected override Home_Building GetBuildingFromInsId(string insId) {
             return Home_SceneManager.Ins.BreedingPlaces[insId];
+        }
+
+        protected override bool IsShouldCollectBtnActive(out Sprite sprite) {
+            sprite = null;
+
+            return CurState is State.DoneBreed;
+        }
+
+        protected override void DoClickCollectBtn() {
+            HatchWindow.Show(
+                prefab: prefabHatchWindow
+              , place: this);
         }
     }
 }

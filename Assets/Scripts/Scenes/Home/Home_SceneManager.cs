@@ -207,11 +207,15 @@ namespace MonsterLegendsLite {
         }
 
         private void SortAllBuildings() {
-            var order = short.MinValue;
-            foreach (var building in IEBuildings().OrderBy(static i => -i.TF.position.y))
+            var order     = short.MinValue; // For visual order
+            var zPos      = 1f;             // For click cast order
+            var zPosDelta = 1f / IEBuildings().Count();
+            foreach (var building in IEBuildings().OrderBy(static i => -i.TF.position.y)) {
                 building.SetIdleSortingOrder(order++);
+                utils.SetPosition(building.TF, UtilFuncs.VecAxis.Z, zPos -= zPosDelta);
+            }
         }
-        
+
         private void RebuildMonsters() {
             var gameLocDef = DataManager.Ins.GameLocDef;
             
@@ -246,12 +250,15 @@ namespace MonsterLegendsLite {
             uiInfo.ShowMoveMonsterInfo(target);
         }
 
-        public void OnClicked_Building(Home_Building building) {
+        public void OnClicked_Building(Home_Building building, bool isActiveCollectBtn, out bool isClickCollectBtn) {
+            isClickCollectBtn = false;
+
             if (movingMonster != null) {
                 if (building is Home_Habitat habitat
                  && habitat.IsCanAcceptNewMonster(movingMonster))
                     ConfirmMoveMonster(habitat);
-            } else uiInfo.ShowBuildingInfoFor(building, hideAllCurrentInfo: false);
+            } else if (isActiveCollectBtn) isClickCollectBtn = true;
+            else uiInfo.ShowBuildingInfoFor(building, hideAllCurrentInfo: false);
         }
 
         public void ConfirmMoveMonster(Home_Habitat toHabitat) {

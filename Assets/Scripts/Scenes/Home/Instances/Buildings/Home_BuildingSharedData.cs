@@ -20,5 +20,8 @@ namespace MonsterLegendsLite {
 
         [SerializeField, Required]
         public SpriteRenderer validPlaceSpr, invalidPlaceSpr;
+
+        [SerializeField, Required]
+        public Home_BuildingCollectBtn collectBtn;
     }
 }
