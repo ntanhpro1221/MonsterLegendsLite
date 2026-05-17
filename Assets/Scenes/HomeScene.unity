@@ -3958,6 +3958,7 @@ GameObject:
   - component: {fileID: 223847057}
   - component: {fileID: 223847060}
   - component: {fileID: 223847061}
+  - component: {fileID: 223847062}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4099,6 +4100,30 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!114 &223847062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223847056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d51fd6880cb4a9b907394b9927cf12e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.CameraController
+  isControlEnabled: 1
+  mapBounds:
+    serializedVersion: 2
+    x: -15
+    y: -15
+    width: 30
+    height: 30
+  minZoom: 2
+  maxZoom: 10
+  mouseZoomSensitivity: 1
+  inertiaFriction: 5
+  maxVelocity: 50
 --- !u!1001 &245406599
 PrefabInstance:
   m_ObjectHideFlags: 0

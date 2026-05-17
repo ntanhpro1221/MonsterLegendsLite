@@ -45,6 +45,9 @@ namespace MonsterLegendsLite {
         }
 
         public void OnPointerClick(PointerEventData eventData) {
+            var deltaPos = Vector2.Distance(eventData.pressPosition, eventData.position);
+            if (deltaPos > EventSystem.current.pixelDragThreshold) return;
+            
             onClick?.Invoke();
         }
     }
