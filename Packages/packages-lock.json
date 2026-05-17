@@ -15,7 +15,7 @@
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.google.external-dependency-manager": "1.2.175"
       },
-      "hash": "6a613b15756ee83e391348c9299aa8789194f6af"
+      "hash": "243a07de9eb41832a557fe00b2cc0700f32b0d90"
     },
     "com.unity.2d.animation": {
       "version": "14.0.3",

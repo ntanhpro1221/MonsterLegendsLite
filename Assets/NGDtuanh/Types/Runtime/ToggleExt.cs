@@ -57,6 +57,8 @@ namespace NGDtuanh.Types {
             }
         }
 
+        #if UNITY_EDITOR
+        
         protected override void Reset() {
             base.Reset();
 
@@ -66,5 +68,7 @@ namespace NGDtuanh.Types {
 
             utils.MarkDirty(this);
         }
+        
+        #endif
     }
 }
