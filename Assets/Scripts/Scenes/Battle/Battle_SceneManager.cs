@@ -30,14 +30,16 @@ namespace MonsterLegendsLite {
 
         protected override void Initialize() {
             base.Initialize();
-            
+
             LoadBootDataThenDelete();
 
             uiTurnManager.Initialize(teamLeft, teamRight);
             userSkillSelector.Initialize(teamLeft, teamRight);
             botSkillSelector.Initialize(teamRight, teamLeft);
 
-            ExecuteBattleLoop();
+            if (!CheckOnBattleEndAndExecute()) {
+                ExecuteBattleLoop();
+            }
         }
 
         private void LoadBootDataThenDelete() {
@@ -61,11 +63,16 @@ namespace MonsterLegendsLite {
               , IReadOnlyList<Transform> slots
               , Dictionary<string, Battle_Monster> resultHolder
               , HorDirection faceDir) {
-                for (int i = 0; i < insData.Count && i < slots.Count; i++) {
-                    var ins = Instantiate(gameLocDef.Monsters[insData[i].Id].PrefabBattleScene, slots[i]);
-                    resultHolder.Add(insData[i].InsId, ins);
+                var slotId = 0;
+                foreach (var monster in insData) {
+                    if (monster == null) continue;
 
-                    ins.Initialize(insData[i], faceDir);
+                    var ins = Instantiate(gameLocDef.Monsters[monster.Id].PrefabBattleScene, slots[slotId]);
+                    resultHolder.Add(monster.InsId, ins);
+
+                    ins.Initialize(monster, faceDir);
+
+                    ++slotId;
                 }
             }
         }
@@ -81,24 +88,32 @@ namespace MonsterLegendsLite {
                 foreach (var item in curMonster.SkillList) item?.DecreaseCooldown();
                 
                 curMonster.ApplyTurn(isRecharge, skill, targets, dieMonsters => {
-                    if (RemoveAllMonsters(teamLeft, dieMonsters)) {
-                        onBattleEnd?.Invoke(isWin: false);
-                        return;
-                    }
+                    RemoveAllMonsters(teamLeft, dieMonsters);
+                    RemoveAllMonsters(teamRight, dieMonsters);
 
-                    if (RemoveAllMonsters(teamRight, dieMonsters)) {
-                        onBattleEnd?.Invoke(isWin: true);
-                        return;
-                    }
+                    if (CheckOnBattleEndAndExecute()) return;
 
                     uiTurnManager.NextTurn(dieMonsters, ExecuteBattleLoop);
                 });
             });
         }
 
-        private bool RemoveAllMonsters(Dictionary<string, Battle_Monster> dict, List<Battle_Monster> targets) {
+        private bool CheckOnBattleEndAndExecute() {
+            if (teamLeft.Count == 0) {
+                onBattleEnd?.Invoke(isWin: false);
+                return true;
+            }
+
+            if (teamRight.Count == 0) {
+                onBattleEnd?.Invoke(isWin: true);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void RemoveAllMonsters(Dictionary<string, Battle_Monster> dict, List<Battle_Monster> targets) {
             foreach (var (key, _) in dict.Where(i => targets.Contains(i.Value)).ToList()) dict.Remove(key);
-            return dict.Count == 0;
         }
     }
 }

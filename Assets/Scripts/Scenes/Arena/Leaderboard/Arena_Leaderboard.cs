@@ -47,16 +47,18 @@ namespace MonsterLegendsLite {
 
                 if (gameObject == null) return;
 
-                var eloSortedUsers = allUsers.Values.OrderByDescending(static i => i.Elo).ToList();
-                var userData       = DataManager.Ins.User;
+                var eloSortedUsers = allUsers.OrderByDescending(static i => i.Value.Elo).ToList();
+                var userData       = DataManager.Ins.UserWithId;
 
                 for (int i = 0; i < maxLength; ++i) {
                     bool validId = i < eloSortedUsers.Count;
                     items[i].gameObject.SetActive(validId);
-                    if (validId) items[i].SetAllData(eloSortedUsers[i], i);
-                }
 
-                userItem.SetAllData(userData, eloSortedUsers.IndexOf(userData));
+                    if (!validId) continue;
+                    
+                    items[i].SetAllData(eloSortedUsers[i].Value, i);
+                    if (userData.Id == eloSortedUsers[i].Key) userItem.SetAllData(userData.Data, i);
+                }
             } catch (Exception e) {
                 utils.LogExceptionWithWindow(e);
             } finally {

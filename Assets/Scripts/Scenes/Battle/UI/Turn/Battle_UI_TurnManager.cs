@@ -134,6 +134,12 @@ namespace MonsterLegendsLite {
         }
 
         private void RebuildUILogic() {
+            if (turnCycle.Count == 0) {
+                var rootItem = offsetLayer;
+                rootItem.gameObject.SetActive(true);
+                return;
+            }
+
             int id = turnId;
             foreach (var item in items) {
                 var data = turnCycle[id];

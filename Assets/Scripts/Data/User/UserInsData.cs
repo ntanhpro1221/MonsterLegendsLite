@@ -10,7 +10,7 @@ namespace MonsterLegendsLite.Data {
         public int Level = 1;
         public int Exp;
         public int Elo;
-        public long Gold;
+        public long Gold = 5000;
         public long Food;
         public int CurAdventureLevel;
         public bool Music = true;

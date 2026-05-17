@@ -30,17 +30,18 @@ namespace MonsterLegendsLite {
             try {
                 LoadingIcon.Ins.Show(blockInteract: true);
 
+                var ally        = DataManager.Ins.UserWithId;
                 var allUsers    = await DataManager.Ins.GetAllUsersAsync();
                 var randomId    = Random.Range(0, allUsers.Count);
                 var randomEnemy = allUsers.ElementAt(randomId);
-
-                if (randomEnemy.Value == DataManager.Ins.User) {
+                if (randomEnemy.Key == ally.Id) {
                     randomId    = (randomId + 1) % allUsers.Count;
                     randomEnemy = allUsers.ElementAt(randomId);
                 }
 
-                var ally  = DataManager.Ins.UserWithId;
                 var enemy = randomEnemy.Value.WithId(randomEnemy.Key);
+
+                Debug.Log($"Start arena: {ally.Data.Name} vs {enemy.Data.Name}");
 
                 Battle_BootData.OnBattleEnd onBattleEnd = isWin => {
                     var (winner, loser) = (ally, enemy);

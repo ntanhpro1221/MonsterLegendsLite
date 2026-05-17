@@ -12,6 +12,12 @@ namespace MonsterLegendsLite {
         private OnSelected onSelected;
         private Battle_Skill selectingSkill;
 
+        public override void Initialize(IReadOnlyDictionary<string, Battle_Monster> allies, IReadOnlyDictionary<string, Battle_Monster> enemies) {
+            base.Initialize(allies, enemies);
+
+            uiSkill.Hide();
+        }
+
         public override void SelectSkill(Battle_Monster monster, OnSelected onSelected) {
             this.curMonster     = monster;
             this.onSelected     = onSelected;
