@@ -53,10 +53,11 @@ namespace MonsterLegendsLite {
                     title: "SELL MONSTER"
                   , content: $"Are you sure you want to sell {monsterDef.GetCustomNameIfPossible(monsterIns)} for {sellValue} gold?"
                   , yesCallback: () => {
-                        DataManager.Ins.UpdateData_SellMonster(monsterIns);
+                        DataManager.Ins.UpdateData_SellMonster_BreedingPlace(monsterIns, place.InsData);
 
                         EventDispatcher.PostEvent(EventId.UserGoldChanged);
-                        EventDispatcher.PostEvent(EventId.UserMonsterListChanged);
+
+                        FloatingTextPool.Ins.ShowAtCenterScreen(FloatingTextId.GoldChange).SetTextChange(sellValue);
                         
                         place.ChangeState(Home_BreedingPlace.State.Normal);
 

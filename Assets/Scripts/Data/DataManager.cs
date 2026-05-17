@@ -211,7 +211,7 @@ namespace MonsterLegendsLite.Data {
             SaveUserData_List(User.Monsters, monster, nameof(User.Monsters));
         }
 
-        public void UpdateData_SellMonster(MonsterInsData monster) {
+        public void UpdateData_SellMonster_Habitat(MonsterInsData monster) {
             UpdateData_HabitatLastGoldUpdate(User.Habitats.Find(i => i.InsId == monster.Habitat));
 
             User.Monsters.Remove(monster);
@@ -220,6 +220,15 @@ namespace MonsterLegendsLite.Data {
             SaveUserData(
                 User.Gold += (int)(GameDef.Monsters[monster.Id].Cost * Ins.GameDef.SellRatio_Monster)
               , nameof(User.Gold));
+        }
+
+        public void UpdateData_SellMonster_BreedingPlace(MonsterInsData monster, BreedingPlaceInsData breedingPlace) {
+            SaveUserData(
+                User.Gold += (int)(GameDef.Monsters[monster.Id].Cost * Ins.GameDef.SellRatio_Monster)
+              , nameof(User.Gold));
+
+            breedingPlace.CurBreeding = null;
+            SaveUserData_List(User.BreedingPlaces, breedingPlace, nameof(User.BreedingPlaces));
         }
 
         public void UpdateData_SellBuilding(BuildingInsData building) {

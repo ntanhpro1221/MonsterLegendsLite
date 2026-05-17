@@ -96,7 +96,7 @@ namespace MonsterLegendsLite {
                     title: "SELL MONSTER"
                   , content: $"Are you sure you want to sell {Ins.monster.defData.GetCustomNameIfPossible(Ins.monster.insData)} for {sellValue} gold?"
                   , yesCallback: () => {
-                        DataManager.Ins.UpdateData_SellMonster(Ins.monster.insData);
+                        DataManager.Ins.UpdateData_SellMonster_Habitat(Ins.monster.insData);
 
                         EventDispatcher.PostEvent(EventId.UserGoldChanged);
                         EventDispatcher.PostEvent(EventId.UserMonsterListChanged);
