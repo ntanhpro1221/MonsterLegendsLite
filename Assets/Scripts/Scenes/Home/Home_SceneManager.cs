@@ -207,10 +207,27 @@ namespace MonsterLegendsLite {
         }
 
         private void SortAllBuildings() {
-            var order     = short.MinValue; // For visual order
-            var zPos      = 1f;             // For click cast order
-            var zPosDelta = 1f / IEBuildings().Count();
-            foreach (var building in IEBuildings().OrderBy(static i => -i.TF.position.y)) {
+            var order        = short.MinValue; // For visual order
+            var zPos         = 1f;             // For click cast order
+            var allBuildings = IEBuildings().ToList();
+            var zPosDelta    = 1f / allBuildings.Count;
+
+            allBuildings.Sort(static (a, b) => {
+                var pA = a.InsDataWeak.Position;
+                var pB = b.InsDataWeak.Position;
+                var sA = DataManager.Ins.GetBuildingDefData(a.InsDataWeak).Size;
+                var sB = DataManager.Ins.GetBuildingDefData(b.InsDataWeak).Size;
+
+                bool aInFront = pA.x + sA.x <= pB.x || pA.y + sA.y <= pB.y;
+                bool bInFront = pB.x + sB.x <= pA.x || pB.y + sB.y <= pA.y;
+
+                if (aInFront && !bInFront) return 1;
+                if (bInFront && !aInFront) return -1;
+
+                return pB.x.CompareTo(pA.x);
+            });
+
+            foreach (var building in allBuildings) {
                 building.SetIdleSortingOrder(order++);
                 utils.SetPosition(building.TF, UtilFuncs.VecAxis.Z, zPos -= zPosDelta);
             }

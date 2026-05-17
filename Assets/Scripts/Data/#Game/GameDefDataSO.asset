@@ -96,14 +96,14 @@ MonoBehaviour:
           Size: {x: 4, y: 4}
           Cost: 2000
           MaxFood: 2000
-          FoodPerMin: 120
+          FoodPerMin: 150
       - value:
           Name: Sony
           Description: Sony Farm
           Size: {x: 4, y: 4}
           Cost: 2000
           MaxFood: 2000
-          FoodPerMin: 120
+          FoodPerMin: 200
       _KeyNames:
       - Apple
       - Samsung

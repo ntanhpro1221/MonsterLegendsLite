@@ -60,8 +60,6 @@ namespace MonsterLegendsLite {
 
             SetVisibleValidPlace(false);
             
-            CheckAndUpdateCollectBtnActive();
-
             if (isBuySample) {
                 OnSelect();
                 isPntMoved = true;
@@ -112,7 +110,8 @@ namespace MonsterLegendsLite {
         }
 
         private void CheckAndUpdateCollectBtnActive() {
-            isActiveCollectBtn = IsShouldCollectBtnActive(out var sprite);
+            var sprite = default(Sprite);
+            isActiveCollectBtn = isBuySample ? false : IsShouldCollectBtnActive(out sprite);
             SharedData.collectBtn.SetActive(isActiveCollectBtn);
             if (sprite != null) SharedData.collectBtn.SetIcon(sprite);
         }
