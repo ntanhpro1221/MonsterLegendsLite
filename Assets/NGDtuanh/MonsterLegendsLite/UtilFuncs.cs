@@ -88,5 +88,12 @@ namespace NGDtuanh.MonsterLegendsLite {
                 title: "SOME THING WENT WRONG"
               , content: e.Message);
         }
+
+        public int LerpSortingOrder(Vector2 range, float value, uint padding = 0) {
+            return (int)Mathf.Lerp(
+                short.MaxValue - padding
+              , short.MinValue + padding
+              , Mathf.InverseLerp(range.x, range.y, value));
+        }
     }
 }

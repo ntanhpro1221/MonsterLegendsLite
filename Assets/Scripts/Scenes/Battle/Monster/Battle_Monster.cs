@@ -8,6 +8,7 @@ using NGDtuanh.MonsterLegendsLite;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 
 namespace MonsterLegendsLite {
     public class Battle_Monster : MonoBehaviourExt, IPointerClickHandler {
@@ -21,6 +22,9 @@ namespace MonsterLegendsLite {
 
         [SerializeField, Required]
         private MonsterModel model;
+        
+        [SerializeField, Required]
+        private SortingGroup sortingGroup;
 
         [SerializeField, Required]
         private GameObject turnIndicator;
@@ -70,6 +74,14 @@ namespace MonsterLegendsLite {
             moveTask?.Kill();
         }
 
+        private void LateUpdate() {
+            const uint MOVE_BONUS_ORDER = 1;
+
+            sortingGroup.sortingOrder =
+                (int)(moveTask != null ? MOVE_BONUS_ORDER : 0)
+              + utils.LerpSortingOrder(Battle_SceneManager.Ins.MonsterSlotsRangeY, TF.position.y, padding: MOVE_BONUS_ORDER);
+        }
+
         public void OnPointerClick(PointerEventData eventData) {
             onClick?.Invoke(this);
         }
@@ -98,7 +110,6 @@ namespace MonsterLegendsLite {
             const float atkTouchPoint = .7f;
 
             var mainTarget   = targets.First();
-            var orgParent    = TF.parent;
             var orgPos       = TF.position;
             var orgDir       = model.CurDir;
             var moveDuration = Vector2.Distance(TF.position, mainTarget.TF.position) / atkMoveSpeed;
@@ -110,10 +121,7 @@ namespace MonsterLegendsLite {
                 model.LookAt(mainTarget.TF.position.x);
                 model.Play(MonsterAnimId.Walk);
                 moveTask = TF.DOMove(mainTarget.model.AttackPos, moveDuration).SetEase(Ease.Linear);
-                yield return WaitForSecondCache.Get(moveDuration / 2);
-
-                TF.SetParent(mainTarget.TF.parent);
-                yield return WaitForSecondCache.Get(moveDuration / 2);
+                yield return WaitForSecondCache.Get(moveDuration);
             }
 
             model.Play(MonsterAnimId.Attack, out var atkDuration);
@@ -135,11 +143,10 @@ namespace MonsterLegendsLite {
                 model.CurDir = model.CurDir.Flip();
                 model.Play(MonsterAnimId.Walk);
                 moveTask = TF.DOMove(orgPos, moveDuration).SetEase(Ease.Linear);
-                yield return WaitForSecondCache.Get(moveDuration / 2);
-
-                TF.SetParent(orgParent);
-                yield return WaitForSecondCache.Get(moveDuration / 2);
+                yield return WaitForSecondCache.Get(moveDuration);
             }
+
+            moveTask = null;
 
             model.CurDir = orgDir;
             model.Play(MonsterAnimId.Idle);

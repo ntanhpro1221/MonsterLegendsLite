@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MonsterLegendsLite.Home_Monster
   model: {fileID: 1065088894828065787}
+  sortingGroup: {fileID: 5267951383405264144}
   turnIndicator: {fileID: 5748790587248012741}
   hpBar: {fileID: 1084324754889476232}
   mpBar: {fileID: 2998073642727041819}

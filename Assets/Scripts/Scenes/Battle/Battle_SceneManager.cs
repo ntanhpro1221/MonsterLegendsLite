@@ -25,11 +25,17 @@ namespace MonsterLegendsLite {
         private List<Transform> slotsLeft, slotsRight;
 
         private Battle_BootData.OnBattleEnd onBattleEnd;
+        
+        public Vector2 MonsterSlotsRangeY { get; private set; }
 
         private readonly Dictionary<string, Battle_Monster> teamLeft = new(), teamRight = new();
 
         protected override void Initialize() {
             base.Initialize();
+
+            MonsterSlotsRangeY = new Vector2(
+                slotsLeft.Concat(slotsRight).Min(static i => i.transform.position.y)
+              , slotsLeft.Concat(slotsRight).Max(static i => i.transform.position.y));
 
             LoadBootDataThenDelete();
 

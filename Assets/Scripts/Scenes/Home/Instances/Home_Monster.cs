@@ -141,17 +141,12 @@ namespace MonsterLegendsLite {
                 yield return TF
                     .DOLocalMove(locTarget, duration)
                     .SetEase(Ease.Linear)
-                    .OnUpdate(UpdateSortingOrderFromPosY)
+                    .OnUpdate(() => sortingGroup.sortingOrder = utils.LerpSortingOrder(habitatLocRangeY, TF.localPosition.y))
                     .WaitForCompletion();
 
                 model.Play(MonsterAnimId.Idle);
 
                 yield return WaitForSecondCache.Get(utils.RandomInside(DataManager.Ins.GameDef.Home_MonsterIdleTime));
-
-                void UpdateSortingOrderFromPosY() {
-                    sortingGroup.sortingOrder = (int)Mathf.Lerp(short.MaxValue, short.MinValue
-                      , Mathf.InverseLerp(habitatLocRangeY.x, habitatLocRangeY.y, TF.localPosition.y));
-                }
             }
         }
     }
